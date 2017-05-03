@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.system.SystemUserMapper">
+	<resultMap id="BaseResultMap" type="com.yks.bi.dto.system.SystemUser">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="group_id" jdbcType="INTEGER" property="groupId" />
+		<result column="account" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="act_status" jdbcType="VARCHAR" property="actStatus" />
+		<result column="crt_time" jdbcType="TIMESTAMP" property="crtTime" />
+		<result column="salt" jdbcType="TIMESTAMP" property="salt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, group_id, account, password, act_status, crt_time,salt
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_account
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectSystemUser" parameterType="com.yks.bi.dto.system.SystemUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from system_account
+		<where>
+			<if test="groupId != null">
+				and group_id = #{groupId,jdbcType=INTEGER}
+			</if>
+			<if test="username != null">
+				and account = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null">
+				and password = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="actStatus != null">
+				and act_status = #{actStatus,jdbcType=VARCHAR}
+			</if>
+			<if test="salt != null">
+				and salt = #{salt,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from system_account
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.yks.bi.dto.system.SystemUser">
+		insert into system_account (id, group_id, account,
+		password, act_status, crt_time,salt
+		)
+		values (#{id,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER},
+		#{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{actStatus,jdbcType=VARCHAR}, #{crtTime,jdbcType=TIMESTAMP}, #{salt,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.yks.bi.dto.system.SystemUser">
+		insert into system_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="groupId != null">
+				group_id,
+			</if>
+			<if test="username != null">
+				account,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="actStatus != null">
+				act_status,
+			</if>
+			<if test="crtTime != null">
+				crt_time,
+			</if>
+			<if test="salt != null">
+				salt,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="groupId != null">
+				#{groupId,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="actStatus != null">
+				#{actStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="crtTime != null">
+				#{crtTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="salt != null">
+				#{salt,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.system.SystemUser">
+		update system_account
+		<set>
+			<if test="groupId != null">
+				group_id = #{groupId,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				account = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="actStatus != null">
+				act_status = #{actStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="crtTime != null">
+				crt_time = #{crtTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="salt != null">
+				salt = #{salt,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.system.SystemUser">
+		update system_account
+		set group_id = #{groupId,jdbcType=INTEGER},
+		account = #{username,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		act_status = #{actStatus,jdbcType=VARCHAR},
+		crt_time = #{crtTime,jdbcType=TIMESTAMP},
+		salt = #{salt,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
