@@ -3,3 +3,124 @@ http://www.jq22.com/jquery-plugins%E5%9B%BE%E8%A1%A8-1-jq
 https://das.base.shuju.aliyun.com/product/index1.htm
 yksggy@163.com
 JaZ26lzRzvdKml
+
+
+http://localhost/yksbi/src/main/webapp/html/
+
+
+
+
+
+
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '混合图表'
+        },
+        xAxis: {
+            categories: ['20170428', '20170429', '20170430', '20170501', '20170502', '20170503', '20170504']
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        labels: {
+            items: [{
+                html: '水果消耗',
+                style: {
+                    left: '100px',
+                    top: '10px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: '发货单数',
+            data: [65787, 63424, 63188, 23533, 85760, 67126, 47279]
+        }, {
+            type: 'column',
+            name: '发货收入',
+            data: [3095329, 3179233, 2840083, 1272159, 3861061, 3245648, 2043625]
+        }, {
+            type: 'column',
+            name: '税前综合净利',
+            data: [157252, 92216, 66257, 25896, 287631, 130804, 150233]
+        }, {
+            type: 'spline',
+            name: '税前综合利润率',
+            data: [0.050803, 0.029006, 0.023329, 0.020356, 0.074495, 0.040302, 0.073513],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: '总的消耗',
+            data: [{
+                name: '小张',
+                y: 13,
+                color: Highcharts.getOptions().colors[0] // Jane's color
+            }, {
+                name: '小潘',
+                y: 23,
+                color: Highcharts.getOptions().colors[1] // John's color
+            }, {
+                name: '小王',
+                y: 19,
+                color: Highcharts.getOptions().colors[2] // Joe's color
+            }],
+            center: [100, 80],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
