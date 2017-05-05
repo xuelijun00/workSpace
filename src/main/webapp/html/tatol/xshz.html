@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YKSUI框架 - 需求管理</title>
+    <style>
+        #datatable {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 12px;
+        }
+
+        td, th {
+            border: 1px solid #ccc;
+            padding: 4px 20px;
+        }
+    </style>
+    <script src="../jsLoad/code/load.js?20170503" include="../toph.html"></script>
+    <!--加css-->
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="ibox-title"><h5>表格</h5></div>
+    <div class="ibox-content">
+    <form class="form-inline">
+            <div class="form-group">
+                <label>报关状态</label>
+                <select class="form-control w120" name="">
+                    <option>待发货</option>
+                    <option>已发货</option>
+                    <option>报关材料已生成</option>
+                    <option>已申报</option>
+                    <option>报关成功</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>公司主体</label>
+                <select class="form-control w120" name="">
+                    <option>深圳市有棵树科技股份有限公司</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <option>选项 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>仓库</label>
+                <select class="form-control w120" name="">
+                    <option>选项 1</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <option>选项 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">查询</button>
+            </div>
+        </form>
+        <div class="hr-line-dashed"></div>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <p>数据表格</p>
+        <table id="datatable" class="table table-border"><colgroup><col width="150"><col width="150"><col 
+        width="150"><col width="150"></colgroup>
+             <tbody>
+               <tr data-index="0">
+                 <td align="left">&nbsp;</td>
+                 <td align="left">&nbsp;</td>
+                 <td align="left">销量</td>
+                 <td align="left">订单</td>
+               </tr>
+             <tr data-index="0"><td align="left">20170505</td><td align="left">a_ll</td><td align="left">6947.23</td><td 
+             align="left">813.0</td></tr><tr data-index="1"><td align="left">20170504</td><td align="left">a_ll</td><td 
+             align="left">593846.81</td><td align="left">56152.0</td></tr><tr data-index="2"><td 
+             align="left">20170503</td><td align="left">a_ll</td><td align="left">786632.06</td><td 
+             align="left">73940.0</td></tr><tr data-index="3"><td align="left">20170502</td><td 
+             align="left">a_ll</td><td align="left">800507.75</td><td align="left">71815.0</td></tr><tr 
+             data-index="4"><td align="left">20170501</td><td align="left">a_ll</td><td align="left">816483.06</td><td 
+             align="left">72699.0</td></tr><tr data-index="5"><td align="left">20170430</td><td 
+             align="left">a_ll</td><td align="left">677956.62</td><td align="left">62428.0</td></tr><tr 
+             data-index="6"><td align="left">20170429</td><td align="left">a_ll</td><td align="left">593769.31</td><td 
+             align="left">50987.0</td></tr><tr data-index="7"><td align="left">20170428</td><td 
+             align="left">a_ll</td><td align="left">671219.06</td><td align="left">55184.0</td></tr><tr 
+             data-index="8"><td align="left">20170427</td><td align="left">a_ll</td><td align="left">713812.12</td><td 
+             align="left">58460.0</td></tr><tr data-index="9"><td align="left">20170426</td><td 
+             align="left">a_ll</td><td align="left">753592.12</td><td align="left">62188.0</td></tr><tr 
+             data-index="10"><td align="left">20170425</td><td align="left">a_ll</td><td align="left">836179.0</td><td 
+             align="left">73767.0</td></tr><tr data-index="11"><td align="left">20170424</td><td 
+             align="left">a_ll</td><td align="left">818789.06</td><td align="left">72854.0</td></tr></tbody>
+</table>
+
+
+        
+    </div>
+
+</div>
+<script src="../jsLoad/code/load.js?20170503" include="../jsh.html"></script>
+
+<!--加本页面 的js文件与js代码-->
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: '销售业绩报表'
+        },
+        subtitle: {
+            text: '数据来源:'
+        },
+        xAxis: [{
+            categories: ['20170424', '20170425', '20170426', '20170427', '20170428', '20170429',
+                         '20170430', '20170501', '20170502', '20170503', '20170504', '20170505'],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}万',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: '订单数',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            }
+        }, { // Secondary yAxis
+            title: {
+                text: '销售额',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value} 万',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: '销售额',
+            type: 'column',
+            yAxis: 1,
+            data: 
+            [818789.06,836179.0,753592.12,713812.12,671219.06,593769.31,677956.62,816483.06,800507.75,786632.06,593846.8
+            1,6947.23],
+            tooltip: {
+                valueSuffix: ' 万'
+            }
+        }, {
+            name: '订单数',
+            type: 'spline',
+            data: [72854.0,73767.0,62188.0,58460.0,55184.0,50987.0,62428.0,72699.0,71815.0,73940.0,56152.0,813.0],
+            tooltip: {
+                valueSuffix: '万'
+            }
+        }]
+    });
+});
+</script>
+</body>
+</html>
