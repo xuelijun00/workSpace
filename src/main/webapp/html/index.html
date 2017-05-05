@@ -2,15 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title __html=" ">YKSUI框架 - 主页</title>
+    <title>YKSUI框架 - 主页</title>
     <script src="jsLoad/code/load.js" include="../top.html"></script>
     <!--加css-->
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" _href="OF_URL . '/addin/oFileManager/style/oDialogDiv.css'">
 </head>
-
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
     <!--左侧导航开始-->
@@ -18,11 +16,11 @@
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
         <div class="sidebar-collapse">
-            <div class="logo-element nav-header"><img src="img/logo.png"><span
-                    class="logotitle" __html="of::config('_of.view.title')">系统</span></div>
+            <div class="logo-element nav-header"><img src="img/logo.png">
+            <span class="logotitle" >YKSBI系统</span></div>
             <ul class="nav" id="side-menu">
                 <li>
-                    <a _href="/" href="#">
+                    <a href="#">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
@@ -70,6 +68,171 @@
                         <li><a class="J_menuItem" href="echarts/highcharts.html">echarts 百度</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">jqGird表格</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/data.html">从HTML表格中提取数据并生成图表</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">销售业绩整体报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">各平台销售业绩报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">国内仓发货汇总数据</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">国内仓各平台发货数据</a>
+                        </li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">目标完成率</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">各平台业绩完成率</a>
+                        </li>
+                    </ul>
+                </li>
+                 <li>
+                    <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">eBay每日销售额</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">eBay业务线管理员业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">eBay组长站点发货业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">美英德仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">美英德仓各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-amazon"></i> <span class="nav-label">Amazon业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Amazon销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Amazon各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">SMT业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">SMT销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">SMT各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Wish业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Wish销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Wish各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Lazada业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Lazada销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">Lazada各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新平台业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">新平台销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">新平台各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台 SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台品类销售报表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">沃尔玛销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">沃尔玛业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">沃尔玛各账号业绩</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新蛋业务线</span><span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">新蛋销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">新蛋各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新蛋 SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新蛋品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -224,7 +387,7 @@
     </div>
     <!--右侧边栏结束-->
 </div>
-<script __del src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/jquery.min.js?v=2.1.4"></script>
 <script src="js/bootstrap.min.js?v=3.3.6"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
