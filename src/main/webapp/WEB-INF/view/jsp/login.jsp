@@ -59,12 +59,12 @@
                 <p class="ptext">通过最新的分布式scala网络爬虫，实时监控Ebay平台全网产品分类下的卖家信息，实时获取优质帐号的产品数据，去其糟粕，汇集优质产品。</p>
             </div>
             <div class="col-xs-6 col-md-4 p40 boxright boxbottom">
-                <p class="text-center"><img src="../img/login_13.jpg" height="89"></p>
+                <p class="text-center"><img src="img/login_13.jpg" height="89"></p>
                 <h2 class="text-center h2text">数据存储</h2>
                 <p class="ptext">强大的云存储，由阿里团队研发的海量存储中间件Cobar，进化为分布式数据存储方案Mycat，保障了数据的安全、稳定。</p>
             </div>
             <div class="col-xs-6 col-md-4 p40 boxbottom">
-                <p class="text-center"><img src="../img/login_10.jpg" height="89"></p>
+                <p class="text-center"><img src="img/login_10.jpg" height="89"></p>
                 <h2 class="text-center h2text">数据处理</h2>
                 <p class="ptext">数据处理采用行内先进的Spark分布式计算框架和分布式消息中间件。 处理方式采用工业化流水线方式对数据进行流程化加工。采用Spark Streaming和分布式消息队列进行实时并行过滤、分析进行数据上下文交换。</p>
             </div>
