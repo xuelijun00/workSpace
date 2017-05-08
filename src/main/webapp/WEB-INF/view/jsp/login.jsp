@@ -45,7 +45,7 @@
                     <button class="btn btn-primary login-button"  id="login-button" type="button" >登入</button>
                 </div>
             </div>
-             <div id="error"  color="#FF0000"></div>
+             <div id="error"  class="yanshi"></div>
         </form>
     </div>
             </div>
