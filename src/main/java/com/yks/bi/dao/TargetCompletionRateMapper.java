@@ -1,6 +1,10 @@
 package com.yks.bi.dao;
 
 import com.yks.bi.dto.report.TargetCompletionRate;
+import com.yks.bi.dto.report.TargetCompletionRateVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TargetCompletionRateMapper {
 
@@ -11,6 +15,12 @@ public interface TargetCompletionRateMapper {
     int insertSelective(TargetCompletionRate record);
 
     TargetCompletionRate selectByPrimaryKey(String platform);
+
+    /**
+     * 查询所有数据
+     * @return
+     */
+    List<TargetCompletionRateVo> selectAll(@Param("month") String month,@Param("platform") String platform);
 
     int updateByPrimaryKeySelective(TargetCompletionRate record);
 
