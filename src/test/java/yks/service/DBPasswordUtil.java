@@ -2,7 +2,7 @@ package yks.service;
 
 import com.alibaba.druid.filter.config.ConfigTools;
 
-public class Test {
+public class DBPasswordUtil {
 	
 	public static void main(String[] args) throws Exception {
 		String password = "tSa6M4Qd";

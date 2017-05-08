@@ -1,4 +1,3 @@
-
 (function(){
 	$('#login-button').click(function(event) {
 		$.ajax({  
@@ -9,13 +8,8 @@
             data:$(".form").serializeArray(),
             success:function(data){
             	$("#error").text("");
-            	if(data.status === 200){
-            		event.preventDefault();
-            		$('form').fadeOut(500);
-            		$('.wrapper').addClass('form-success');
-            		setTimeout("thirdStep()", 5000);
-            	}else{
-            		$("#error").text(data.message);
+            	if(data.status !== 200){
+                    $("#error").text(data.message);
             	}
             }  
         });  

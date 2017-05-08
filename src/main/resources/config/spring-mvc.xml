@@ -51,8 +51,8 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:config/spring-mybatis.xml" />
-		<property name="mapperLocations" value="classpath*:com/yks/bi/dao/*/mapper/*Mapper.xml" />
-		<property name="typeAliasesPackage" value="yks.dto" />
+		<property name="mapperLocations" value="classpath*:mapper/*Mapper.xml" />
+		<property name="typeAliasesPackage" value="com.yks.bi.dao" />
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
@@ -77,8 +77,7 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!--注解事物处理 -->

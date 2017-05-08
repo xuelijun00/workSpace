@@ -1,15 +1,17 @@
 package com.yks.bi.dto.report;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 public class TargetCompletionRate {
-    private String platform;
+    private String platform;//平台
 
-    private String name;
+    private String name;//平台显示名称
 
-    private Date reportDate;
+    private Date reportDate;//报表时间
 
-    private Integer month1;
+    private Integer month1;//1月份业绩目标
 
     private Integer month2;
 
@@ -33,7 +35,7 @@ public class TargetCompletionRate {
 
     private Integer month12;
 
-    private Integer quarter1;
+    private Integer quarter1;//1季度业绩目标
 
     private Integer quarter2;
 
@@ -41,7 +43,7 @@ public class TargetCompletionRate {
 
     private Integer quarter4;
 
-    private Integer month1sales;
+    private Integer month1sales;//1月份销售额
 
     private Integer month2sales;
 
@@ -65,7 +67,7 @@ public class TargetCompletionRate {
 
     private Integer month12sales;
 
-    private Integer quarter1sales;
+    private Integer quarter1sales;//1季度销售额
 
     private Integer quarter2sales;
 
@@ -73,7 +75,7 @@ public class TargetCompletionRate {
 
     private Integer quarter4sales;
 
-    private Integer month1estimatesales;
+    private Integer month1estimatesales;//1月份预计销售额
 
     private Integer month2estimatesales;
 
@@ -672,4 +674,5 @@ public class TargetCompletionRate {
     public void setQuarter4percent(Integer quarter4percent) {
         this.quarter4percent = quarter4percent;
     }
+
 }
