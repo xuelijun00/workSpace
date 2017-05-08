@@ -26,7 +26,7 @@ public class SystemController {
     private SystemUserService systemUserService;
 
     @RequestMapping("/")
-    public String index(ModelMap model){
+    public String index(){
         return "login";
     }
 
