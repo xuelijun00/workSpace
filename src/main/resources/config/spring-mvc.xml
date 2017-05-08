@@ -107,15 +107,15 @@
 
 	<!-- 视图解析器:定义跳转的文件的前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/html/" />
+		<property name="prefix" value="/WEB-INF/view/jsp/" />
 		<!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- 对静态资源文件的访问，交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
 	<!--对静态资源文件的访问 -->
-	<mvc:resources location="/WEB-INF/html/img/" mapping="/img/**" />
-	<mvc:resources location="/WEB-INF/html/js/" mapping="/js/**" />
-	<mvc:resources location="/WEB-INF/html/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/view/img/" mapping="/img/**" />
+	<mvc:resources location="/WEB-INF/view/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/view/css/" mapping="/css/**" />
 
 </beans>

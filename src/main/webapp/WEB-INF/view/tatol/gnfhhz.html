@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YKSUI框架 - 需求管理</title>
+    <script src="../jsLoad/code/load.js?20170503" include="../toph.html"></script>
+    <!--加css-->
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="ibox-title"><h5>销售业绩整体报表</h5></div>
+    <div class="ibox-content">
+    <form class="form-inline">
+            <div class="form-group">
+              <label>开始时间</label>
+              <input type="text" id="start_date" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+              <label>结束时间</label>
+              <input type="text" id="end_date" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">查询</button>
+            </div>
+        </form>
+        <div class="hr-line-dashed"></div>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div class="hr-line-dashed"></div>
+        <h2>数据报表</h3>
+        <table id="datatable" class="table table-bordered">
+  <colgroup>
+  <col width="32">
+  <col width="125">
+  <col width="128">
+  <col width="125">
+  <col width="125">
+  <col width="165">
+  <col width="191">
+  <col width="80">
+  </colgroup>
+  <tbody>
+    <tr style="display: none;">
+      <td width="125" height="1"></td>
+      <td width="128" height="1"></td>
+      <td width="125" height="1"></td>
+      <td width="125" height="1"></td>
+      <td width="165" height="1"></td>
+      <td width="191" height="1"></td>
+    </tr>
+    <tr class="header">
+      <td id="cell_A1" style="text-align: center;">平台<i></i></td>
+      <td id="cell_B1" style="text-align: center;">日期(day)<i></i></td>
+      <td id="cell_C1" style="text-align: center;">发货单数<i></i></td>
+      <td id="cell_D1" style="text-align: center;">发货收入<i></i></td>
+      <td id="cell_E1" style="text-align: center;">税前综合净利<i></i></td>
+      <td id="cell_F1" style="text-align: center;">税前综合利润率<i></i></td>
+    </tr>
+    <tr>
+      <td id="cell_A2">a_ll</td>
+      <td id="cell_B2">20170428</td>
+      <td id="cell_C2" style="text-align: right;">65787</td>
+      <td id="cell_D2" style="text-align: right;">3095329</td>
+      <td id="cell_E2" style="text-align: right;">157252</td>
+      <td id="cell_F2" style="text-align: right;">0.050803</td>
+    </tr>
+    <tr>
+      <td id="cell_A3">a_ll</td>
+      <td id="cell_B3">20170429</td>
+      <td id="cell_C3" style="text-align: right;">63424</td>
+      <td id="cell_D3" style="text-align: right;">3179233</td>
+      <td id="cell_E3" style="text-align: right;">92216</td>
+      <td id="cell_F3" style="text-align: right;">0.029006</td>
+    </tr>
+    <tr>
+      <td id="cell_A4">a_ll</td>
+      <td id="cell_B4">20170430</td>
+      <td id="cell_C4" style="text-align: right;">63188</td>
+      <td id="cell_D4" style="text-align: right;">2840083</td>
+      <td id="cell_E4" style="text-align: right;">66257</td>
+      <td id="cell_F4" style="text-align: right;">0.023329</td>
+    </tr>
+    <tr>
+      <td id="cell_A5">a_ll</td>
+      <td id="cell_B5">20170501</td>
+      <td id="cell_C5" style="text-align: right;">23533</td>
+      <td id="cell_D5" style="text-align: right;">1272159</td>
+      <td id="cell_E5" style="text-align: right;">25896</td>
+      <td id="cell_F5" style="text-align: right;">0.020356</td>
+    </tr>
+    <tr>
+      <td id="cell_A6">a_ll</td>
+      <td id="cell_B6">20170502</td>
+      <td id="cell_C6" style="text-align: right;">85760</td>
+      <td id="cell_D6" style="text-align: right;">3861061</td>
+      <td id="cell_E6" style="text-align: right;">287631</td>
+      <td id="cell_F6" style="text-align: right;">0.074495</td>
+    </tr>
+    <tr>
+      <td id="cell_A7">a_ll</td>
+      <td id="cell_B7">20170503</td>
+      <td id="cell_C7" style="text-align: right;">67126</td>
+      <td id="cell_D7" style="text-align: right;">3245648</td>
+      <td id="cell_E7" style="text-align: right;">130804</td>
+      <td id="cell_F7" style="text-align: right;">0.040302</td>
+    </tr>
+    <tr>
+      <td id="cell_A8">a_ll</td>
+      <td id="cell_B8">20170504</td>
+      <td id="cell_C8" style="text-align: right;">47279</td>
+      <td id="cell_D8" style="text-align: right;">2043625</td>
+      <td id="cell_E8" style="text-align: right;">150233</td>
+      <td id="cell_F8" style="text-align: right;">0.073513</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+<script src="../jsLoad/code/load.js?20170503" include="../jsh.html"></script>
+
+<!--加本页面 的js文件与js代码-->
+<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: '国内仓各平台每日发货汇总数据'
+        },
+        subtitle: {
+            // text: '数据来源: WorldClimate.com'
+        },
+        xAxis: [{
+            categories: ['20170428', '20170429', '20170430', '20170501', '20170502', '20170503', '20170504'],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            title: {
+                text: '利润率',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            opposite: true
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: '订单数',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value} 万',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            }
+        }, { // Tertiary yAxis
+            gridLineWidth: 0,
+            title: {
+                text: '税前综合净利',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            labels: {
+                format: '{value} 万',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 80,
+            verticalAlign: 'top',
+            y: 55,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: '发货单数',
+            type: 'spline',
+            yAxis: 1,
+            data: [65787, 63424, 63188, 23533, 85760, 67126, 47279],
+            tooltip: {
+                valueSuffix: ' 万'
+            }
+        }, {
+            name: '税前综合净利',
+            type: 'spline',
+            yAxis: 2,
+            data: [157252, 92216, 66257, 25896, 287631, 130804, 150233],
+            marker: {
+                enabled: false
+            },
+            dashStyle: 'shortdot',
+            tooltip: {
+                valueSuffix: ' 万'
+            }
+        }, {
+            name: '发货收入',
+            type: 'spline',
+            yAxis: 2,
+            data: [3095329, 3179233, 2840083, 1272159, 3861061, 3245648, 2043625],
+            tooltip: {
+                valueSuffix: ' 万'
+            }
+        }, {
+            name: '税前综合利润率',
+            type: 'spline',
+            data:  [5.0803, 2.9006, 2.3329, 2.0356, 7.4495, 4.0302, 7.3513],
+            tooltip: {
+                valueSuffix: ' %'
+            }
+        }]
+    });
+});
+</script>
+
+</body>
+</html>

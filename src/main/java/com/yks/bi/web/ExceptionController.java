@@ -11,6 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExceptionController implements HandlerExceptionResolver  {
 	
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object arg2,Exception ex) {
-		return new ModelAndView("error/500", "message", ex.getMessage());
+		return new ModelAndView("error/500", "message", ex.getLocalizedMessage());
 	} 
 }
