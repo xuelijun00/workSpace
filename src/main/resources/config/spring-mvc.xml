@@ -106,8 +106,6 @@
 	<context:component-scan base-package="com.yks.bi.service" />
 	<context:component-scan base-package="com.yks.bi.web" />
 
-	<!-- 完成请求和注解dto的映射 -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
 	<!-- 视图解析器:定义跳转的文件的前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/" />

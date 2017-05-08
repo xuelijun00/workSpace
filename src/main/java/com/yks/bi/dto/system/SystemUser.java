@@ -3,6 +3,7 @@ package com.yks.bi.dto.system;
 import java.util.Date;
 
 public class SystemUser {
+
     private Integer id;
 
     private Integer groupId;
