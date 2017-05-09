@@ -2,7 +2,7 @@
 	$('#login-button').click(function(event) {
 		$.ajax({  
             type:'POST',  
-            url:contentPath + '/login',  
+            url:contextPath + '/login',  
             async: false ,  
             dataType:'json',
             data:$(".form").serializeArray(),
@@ -10,6 +10,8 @@
             	$("#error").text("");
             	if(data.status !== 200){
                     $("#error").text(data.message);
+            	}else{
+            		window.location.href = contextPath + '/index';
             	}
             }  
         });  

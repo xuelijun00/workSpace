@@ -17,13 +17,18 @@ public class TargetCompletionRateServiceImpl implements ITargetCompletionRateSer
 
     @Autowired
     private TargetCompletionRateMapper targetCompletionRateMapper;
+    /**
+     * 表格数据
+     */
     @Override
     public List<TargetCompletionRateVo> selectAll(String month, String platform) {
         return targetCompletionRateMapper.selectAll(month,platform);
     }
-
+    /**
+     * 柱状图
+     */
     @Override
-    public TargetCompletionRate selectByPrimaryKey(String platform) {
+    public List<TargetCompletionRate> selectByPrimaryKey(String platform) {
         return targetCompletionRateMapper.selectByPrimaryKey(platform);
     }
 }

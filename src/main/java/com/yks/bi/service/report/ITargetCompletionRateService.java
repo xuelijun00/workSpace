@@ -11,5 +11,5 @@ import java.util.List;
 public interface ITargetCompletionRateService {
     List<TargetCompletionRateVo> selectAll(String month, String platform);
 
-    TargetCompletionRate selectByPrimaryKey(String platform);
+    List<TargetCompletionRate> selectByPrimaryKey(String platform);
 }

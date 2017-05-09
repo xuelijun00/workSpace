@@ -58,6 +58,7 @@ public class SystemUserService {
             user = new SystemUser();
             user.setId(jsonNode.get("user").asInt());
             user.setUsername(jsonNode.get("nike").asText());
+            log.info("登入成功：" + jsonNode.get("nike").asText());
         }else{
             log.info("登入失败：" + jsonNode.get("msg").asText());
         }

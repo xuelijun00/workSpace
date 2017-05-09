@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="include/common.jsp" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,9 +12,6 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/base.css" rel="stylesheet" type="text/css">
     <link href="css/login.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-	    var contentPath = '${pageContext.request.contextPath}';
-	</script>
 </head>
 <body>
 
@@ -29,16 +27,16 @@
             <div class="admin_login">
     <div class="login">
         <p class="b20">账户登录</p>
-        <form class="form">
+        <form class="form" id="loginform" method="post">
          <div >
                 <div >
                     <ul  class="input-group">
                         <li class="row1">用户名：</li>
-                        <li class="row2"><input class="input" name="username" size="30" type="text" checkfor="not_empty" alertfor="ä¸è½ä¸ºç©º"></li>
+                        <li class="row2"><input class="input" name="username" size="30" type="text" checkfor="not_empty" alertfor="用户名"></li>
                     </ul>
                     <ul class="input-group">
                         <li class="row1">密码：</li>
-                        <li class="row2"><input class="input" name="password" size="30" type="password" checkfor="not_empty" alertfor="ä¸è½ä¸ºç©º"></li>
+                        <li class="row2"><input class="input" name="password" size="30" type="password" checkfor="not_empty" alertfor="密码"></li>
                     </ul>
                 </div>
              &nbsp;&nbsp;&nbsp;&nbsp;   <div class="operation">

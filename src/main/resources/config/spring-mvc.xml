@@ -117,5 +117,9 @@
 	<mvc:resources location="/WEB-INF/view/img/" mapping="/img/**" />
 	<mvc:resources location="/WEB-INF/view/js/" mapping="/js/**" />
 	<mvc:resources location="/WEB-INF/view/css/" mapping="/css/**" />
-
+	<mvc:resources location="/WEB-INF/view/echarts/" mapping="/echarts/**" />
+	<mvc:resources location="/WEB-INF/view/jsLoad/" mapping="/jsLoad/**" />
+	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/view/tatol/" mapping="/tatol/**" />
+	
 </beans>

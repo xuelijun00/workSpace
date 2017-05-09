@@ -26,8 +26,18 @@ public class SystemController {
     private SystemUserService systemUserService;
 
     @RequestMapping("/")
-    public String index(){
+    public String root(){
         return "login";
+    }
+    
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
+    
+    @RequestMapping("/common")
+    public String index(String path){
+        return path;
     }
 
     @ResponseBody
@@ -45,6 +55,5 @@ public class SystemController {
             return new MessageVo(200,"登入成功");
         }
     }
-
-
+    
 }

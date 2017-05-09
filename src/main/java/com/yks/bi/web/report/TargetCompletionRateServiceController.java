@@ -15,16 +15,31 @@ import java.util.List;
  * Created by Administrator on 2017/5/8.
  */
 @Controller
+@ResponseBody
 @RequestMapping("/report")
 public class TargetCompletionRateServiceController {
 
     @Autowired
     ITargetCompletionRateService targetCompletionRateService;
-
-    @ResponseBody
-    @RequestMapping(value = "/targetcompletioncrate" ,method = RequestMethod.GET)
+    /**
+     * 表格数据
+     * @param month
+     * @param platform
+     * @return
+     */
+    @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
     public List<TargetCompletionRateVo> targetCompletionRate(String month,String platform){
         return targetCompletionRateService.selectAll(month,platform);
+    }
+    /**
+     * 柱状图
+     * @param month
+     * @param platform
+     * @return
+     */
+    @RequestMapping(value = "/targetcompletioncrate/histogram" ,method = RequestMethod.GET)
+    public List<TargetCompletionRate> targetCompletionRate1(String platform){
+        return targetCompletionRateService.selectByPrimaryKey(platform);
     }
 
 }

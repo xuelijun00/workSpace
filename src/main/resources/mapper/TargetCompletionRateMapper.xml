@@ -105,7 +105,9 @@
     select
     <include refid="Base_Column_List" />
     from configplatformgoal
-    where platform = #{platform,jdbcType=VARCHAR}
+    <if test="platform != null">
+    	where platform = #{platform,jdbcType=VARCHAR}
+    </if>
   </select>
 
   <select id="selectAll" resultMap="BaseResultMapVO" >
@@ -121,6 +123,18 @@
     select '5',platform, name, report_date, month5, quarter2,month5sales, quarter2sales,month5estimatesales, quarter2estimatesales, month5percent, quarter2percent from configplatformgoal
     union
     select '6',platform, name, report_date, month6, quarter2,month6sales, quarter2sales,month6estimatesales, quarter2estimatesales, month6percent, quarter2percent from configplatformgoal
+    union
+    select '7',platform, name, report_date, month7, quarter3,month7sales, quarter3sales,month7estimatesales, quarter3estimatesales, month7percent, quarter3percent from configplatformgoal
+    union
+    select '8',platform, name, report_date, month8, quarter3,month8sales, quarter3sales,month8estimatesales, quarter3estimatesales, month8percent, quarter3percent from configplatformgoal
+    union
+    select '9',platform, name, report_date, month9, quarter3,month9sales, quarter3sales,month9estimatesales, quarter3estimatesales, month9percent, quarter3percent from configplatformgoal
+    union
+    select '10',platform, name, report_date, month10, quarter4,month10sales, quarter4sales,month10estimatesales, quarter4estimatesales, month10percent, quarter4percent from configplatformgoal
+    union
+    select '11',platform, name, report_date, month11, quarter4,month11sales, quarter4sales,month11estimatesales, quarter4estimatesales, month11percent, quarter4percent from configplatformgoal
+    union
+    select '12',platform, name, report_date, month12, quarter4,month12sales, quarter4sales,month12estimatesales, quarter4estimatesales, month12percent, quarter4percent from configplatformgoal
     ) a
     where month = #{month,jdbcType=VARCHAR}
     <if test="platform != null">
