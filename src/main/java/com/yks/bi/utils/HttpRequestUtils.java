@@ -45,7 +45,7 @@ public class HttpRequestUtils {
                 httpGet.setHeaders(header);
             }
             CloseableHttpResponse response = httpClients.execute(httpGet);
-            int statusCode = response.getStatusLine().getStatusCode();
+            int statusCode = response.getStatusLine().getStatusCode();   //获取状态码
             responseData.setStatusCode(statusCode);
             if(statusCode == 200){
                 log.info("get请求成功！");

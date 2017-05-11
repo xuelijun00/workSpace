@@ -15,7 +15,7 @@
                 }
             },
             labels: {
-                format: '{value} 万',
+                format: '{value}',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -87,7 +87,7 @@
 						if(i == 3 || i==7){
 							series = { name: title[i],type: 'spline',yAxis: 1,data: array1,tooltip: {valueSuffix: '%'}};
 						}else{
-							series = {name: title[i],type: 'column',data:array1,tooltip: {valueSuffix: ' 万' }};
+							series = {name: title[i],type: 'column',data:array1,tooltip: {valueSuffix: '' }};
 						}
 						chart.addSeries(series);
 					}
