@@ -13,7 +13,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.cglib.core.ReflectUtils;
 
-import com.yks.bi.utils.HttpRequestUtils;
 import com.yks.bi.web.vo.MessageVo;
 
 
@@ -78,8 +77,7 @@ public class ExeclDownLoad {
 		while (it.hasNext()) {
 			Object bean = it.next();
 			for(int i=0;i<titleList.size();i++){
-				Object value = getMethodByName(titleList.get(i))
-						.invoke(bean, null);
+				Object value = getMethodByName(titleList.get(i)).invoke(bean, null);
 				value = value== null?"":value;
 				if(i!=(titleList.size()-1)){
 					sb.append(value);

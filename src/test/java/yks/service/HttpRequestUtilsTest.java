@@ -2,9 +2,10 @@ package yks.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yks.bi.utils.MD5Util;
-import com.yks.bi.utils.ResponseData;
-import com.yks.bi.utils.HttpRequestUtils;
+import com.yks.bi.common.HttpRequestUtils;
+import com.yks.bi.common.MD5Util;
+import com.yks.bi.common.ResponseData;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 

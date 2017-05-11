@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.ISalespPerformanceService;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,6 @@ public class SalespPerformanceServiceController {
      */
     @RequestMapping(value = "/salespoerformance/grid" ,method = RequestMethod.GET)
     public List<SalesPerformance> salesMethod(String month,Date platform){
-    	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         //过去15天
         c.setTime(new Date());

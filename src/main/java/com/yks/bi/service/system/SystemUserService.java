@@ -2,10 +2,10 @@ package com.yks.bi.service.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yks.bi.common.HttpRequestUtils;
+import com.yks.bi.common.MD5Util;
+import com.yks.bi.common.ResponseData;
 import com.yks.bi.dto.system.SystemUser;
-import com.yks.bi.utils.HttpRequestUtils;
-import com.yks.bi.utils.MD5Util;
-import com.yks.bi.utils.ResponseData;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
