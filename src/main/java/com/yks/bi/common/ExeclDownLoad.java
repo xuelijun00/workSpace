@@ -80,8 +80,9 @@ public class ExeclDownLoad {
 			for(int i=0;i<titleList.size();i++){
 				Object value = getMethodByName(titleList.get(i))
 						.invoke(bean, null);
+				value = value== null?"":value;
 				if(i!=(titleList.size()-1)){
-					sb.append(value.toString());
+					sb.append(value);
 					sb.append(delimiter);
 				}else{
 					sb.append(value);
@@ -159,7 +160,7 @@ public class ExeclDownLoad {
 		ExeclDownLoad down = new ExeclDownLoad();
 		ArrayList<MessageVo> list = new ArrayList<MessageVo>();
 		MessageVo vo = new MessageVo(1,"erro");
-		MessageVo vo2 = new MessageVo(2,"erro");
+		MessageVo vo2 = new MessageVo(2,null);
 		list.add(vo);
 		list.add(vo2);
 		down.createExcel(list);
