@@ -80,7 +80,7 @@
                     <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/SalespPerformance">销售业绩整体报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=sales_performance/SalespPerformance">销售业绩整体报表</a>
                         </li>
                         <li><a class="J_menuItem" href="tatol/gpthz.html">各平台销售业绩报表</a>
                         </li>
