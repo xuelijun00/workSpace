@@ -14,5 +14,6 @@ public interface ISalespPerformanceService {
 	 /**
      *  销售业绩整体报表 
      */
-	List<SalesPerformance> selectAll(Date platform);
+	List<SalesPerformance> selectAll(String business);
+
 }

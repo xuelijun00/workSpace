@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailysalescategoryreportsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.Dailysalescategoryreports" >
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <id column="business" property="business" jdbcType="VARCHAR" />
+    <id column="category" property="category" jdbcType="VARCHAR" />
+    <result column="sku_old" property="skuOld" jdbcType="VARCHAR" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    report_date, business, category, sku_old, orders, quantity, sales
+  </sql>
+  
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalescategoryreports
+     where business = #{business,jdbcType=VARCHAR}
+    <if test="start_date != null">
+    	and report_date >= #{start_date,jdbcType=DATE}
+    </if>
+	 <if test="end_date != null">
+	    and report_date >= #{end_date,jdbcType=DATE}
+	    </if>
+    <if test="category != null">
+    	and  category = #{category,jdbcType=VARCHAR}
+    </if>
+    <if test="sku_old != null">
+    	and sku_old = #{sku_old,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalescategoryreports
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and category = #{category,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
+    delete from dailysalescategoryreports
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and category = #{category,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.report.Dailysalescategoryreports" >
+    insert into dailysalescategoryreports (report_date, business, category, 
+      sku_old, orders, quantity, 
+      sales)
+    values (#{reportDate,jdbcType=DATE}, #{business,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{skuOld,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, 
+      #{sales,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.Dailysalescategoryreports" >
+    insert into dailysalescategoryreports
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="business != null" >
+        business,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="skuOld != null" >
+        sku_old,
+      </if>
+      <if test="orders != null" >
+        orders,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="business != null" >
+        #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="skuOld != null" >
+        #{skuOld,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.Dailysalescategoryreports" >
+    update dailysalescategoryreports
+    <set >
+      <if test="skuOld != null" >
+        sku_old = #{skuOld,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=REAL},
+      </if>
+    </set>
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and category = #{category,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.Dailysalescategoryreports" >
+    update dailysalescategoryreports
+    set sku_old = #{skuOld,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=REAL}
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and category = #{category,jdbcType=VARCHAR}
+  </update>
+</mapper>

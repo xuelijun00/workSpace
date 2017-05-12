@@ -80,7 +80,7 @@
                     <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=sales_performance/SalespPerformance">销售业绩整体报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a>
                         </li>
                         <li><a class="J_menuItem" href="tatol/gpthz.html">各平台销售业绩报表</a>
                         </li>
@@ -101,7 +101,7 @@
                     <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">eBay每日销售额</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySales">eBay每日销售额</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">eBay业务线管理员业绩</a>
                         </li>
@@ -109,9 +109,9 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">各账号业绩</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebaySkuSales">SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayCategorySales">品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -119,15 +119,35 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">美英德仓销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓业绩完成率</a>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美仓业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">美英德仓各账号业绩</a>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">美仓各账号业绩</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美英德仓品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
+                        
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">英仓业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">英仓各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
+                        
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">德仓业绩完成率</a>
+                        </li>
+                        <li><a class="J_menuItem" href="echarts/highcharts.html">德仓各账号业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a>
                         </li>
                     </ul>
                 </li>

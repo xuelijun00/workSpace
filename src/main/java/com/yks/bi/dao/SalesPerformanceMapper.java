@@ -17,9 +17,13 @@ public interface SalesPerformanceMapper {
 
     SalesPerformance selectByPrimaryKey(SalesPerformanceKey key);
 
-    List<SalesPerformance> selectAll(@Param("reportDate")Date platform2,@Param("business")String business);
+    List<SalesPerformance> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
     
     int updateByPrimaryKeySelective(SalesPerformance record);
 
     int updateByPrimaryKey(SalesPerformance record);
+
+	
+
+	
 }

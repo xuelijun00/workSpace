@@ -1,7 +1,7 @@
 $(function () {
 	
 	$.ajax({
-		url : contextPath + '/report/salespoerformance/grid',
+		url : contextPath + '/report/deebay/grid',
 		success : function(data) {
 			
 			  var rpdate = [];
@@ -19,7 +19,7 @@ $(function () {
 			            zoomType: 'xy'
 			        },
 			        title: {
-			            text: 'a_ll销售业绩报表'
+			            text: '	销售业绩报表'
 			        },
 			        subtitle: {
 			            text: '数据来源:'
@@ -92,7 +92,7 @@ $(function () {
 	// 创建jqGrid组件
 	jQuery("#list2").jqGrid(
 			{
-				url : contextPath + '/report/salespoerformance/grid',//组件创建完成之后请求数据的url
+				url : contextPath + '/report/deebay/grid',//组件创建完成之后请求数据的url
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
 				colNames : [ '报表时间', '平台名称', '销售额', '订单数'],//jqGrid的列显示名字
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
