@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.ISalespPerformanceService;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,12 +33,32 @@ public class SalespPerformanceController {
      */
     @RequestMapping(value = "/salespoerformance/grid" ,method = RequestMethod.GET)
     public List<SalesPerformance> salesMethod(String month,Date platform){
-        Calendar c = Calendar.getInstance();
-        //过去15天
-        c.setTime(new Date());
-        c.add(Calendar.DATE, - 14);
-        Date d = c.getTime();
-        return isale.selectAll(d);
+      
+        return isale.selectAll("a_ll");
+    }
+    
+    @RequestMapping(value = "/ebaydomestic/grid" ,method = RequestMethod.GET)
+    public List<SalesPerformance> ebayMethod(String month,Date platform){
+     
+        return isale.selectAll("ebay");
+    }
+    
+    @RequestMapping(value = "/deebay/grid" ,method = RequestMethod.GET)
+    public List<SalesPerformance> deebayMethod(String month,Date platform){
+     
+        return isale.selectAll("Ebay_PO");
+    }
+    
+    @RequestMapping(value = "/ukebay/grid" ,method = RequestMethod.GET)
+    public List<SalesPerformance> ukebayMethod(String month,Date platform){
+     
+        return isale.selectAll("Ebay_UK");
+    }
+    
+    @RequestMapping(value = "/usebay/grid" ,method = RequestMethod.GET)
+    public List<SalesPerformance> usebayMethod(String month,Date platform){
+     
+        return isale.selectAll("Ebay_US");
     }
   
 
