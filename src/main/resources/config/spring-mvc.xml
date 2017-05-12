@@ -105,12 +105,14 @@
 	<context:component-scan base-package="com.yks.bi.service" />
 	<context:component-scan base-package="com.yks.bi.web" />
 	
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class=""/>
+			<mvc:mapping path="/index" />
+			<mvc:mapping path="/common" />
+			<mvc:mapping path="/report/**" />
+			<bean class="com.yks.bi.web.interceptors.LoginInterceptor"/>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 
 	<!-- 视图解析器:定义跳转的文件的前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

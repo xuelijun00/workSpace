@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>YKSUI框架 - 主页</title>
+    <title>YKSBI系统 - 主页</title>
     <script src="jsLoad/code/load.js" include="../top.html"></script>
     <!--加css-->
     <!--[if lt IE 9]>
@@ -93,7 +93,7 @@
                  <li>
                     <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">目标完成率</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台一月业绩完成率 </a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台各月业绩完成率 </a>
                         </li>
                     </ul>
                 </li>
@@ -286,7 +286,7 @@
                             <i class="fa fa-tasks"></i> 主题
                         </a>
                     </li>
-                    <li><a _href="/?c=aide_main&a=logout"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
+                    <li><a _href="/logout?userId=${sessionScope.systemUser.id }"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
                 </ul>
             </nav>
         </div>

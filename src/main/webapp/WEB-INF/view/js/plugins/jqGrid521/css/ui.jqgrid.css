@@ -35,6 +35,7 @@
 
 .ui-jqgrid .ui-jqgrid-caption {
     text-align: left;
+    height:30px;
 }
 
 .ui-jqgrid .ui-jqgrid-title {

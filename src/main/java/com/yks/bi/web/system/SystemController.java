@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Vector;
 
 /**
  * Created by Administrator on 2017/5/7.
@@ -50,9 +51,29 @@ public class SystemController {
             return new MessageVo(400,"用户名或密码错误");
         }else{
             HttpSession session = request.getSession();
+            Object obj = session.getAttribute("systemUser");
+            Vector<SystemUser> vector = obj != null?(Vector<SystemUser>)obj:null;
+            if(vector != null && !vector.contains(loginuser)){
+            	vector.add(loginuser);
+            }else{
+            	vector = new Vector<SystemUser>();
+            	vector.add(loginuser);
+            }
             session.setAttribute("systemUser",loginuser);
             return new MessageVo(200,"登入成功");
         }
+    }
+    /**
+     * 登出
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logout(String userId ,HttpServletRequest request){
+    	HttpSession session = request.getSession();
+    	session.removeAttribute(userId);
+    	
+    	return "login";
     }
     
 }

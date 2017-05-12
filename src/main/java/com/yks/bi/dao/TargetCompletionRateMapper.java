@@ -14,7 +14,7 @@ public interface TargetCompletionRateMapper {
 
     int insertSelective(TargetCompletionRate record);
 
-    List<TargetCompletionRate> selectByPrimaryKey(String platform);
+    List<TargetCompletionRate> selectByPrimaryKey(@Param("platform")String platform);
 
     /**
      * 查询所有数据
