@@ -1,6 +1,5 @@
 package com.yks.bi.web.interceptors;
 
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,8 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.yks.bi.dto.system.SystemUser;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
@@ -32,7 +29,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("systemUser");
 		if(obj == null){
-			Vector<SystemUser> vector = (Vector<SystemUser>)obj;
 			request.getRequestDispatcher("/WEB-INF/view/jsp/login.jsp").forward(request, response); 
 			return false;
 		}

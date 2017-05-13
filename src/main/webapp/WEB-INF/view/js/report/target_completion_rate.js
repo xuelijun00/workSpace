@@ -127,6 +127,11 @@ var targetCompletionRate = {
 		targetCompletionRate.loadData(platform);
 		targetCompletionRate.gridData(platform);
 	}
+	,exportData:function(){
+		var fileName = $(".ui-jqgrid-title").text() + new Date().getTime() + ".csv";
+		var title = ['平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比', '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比']
+		exportDataToCSV('#list2',title,null,fileName);
+	}
 };
 (function(){
 	$(document).on("change",'#month',function(){

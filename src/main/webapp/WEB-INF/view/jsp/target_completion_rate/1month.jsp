@@ -53,6 +53,9 @@
             <div class="form-group">
                 <button type="button" id="platform_query" onclick="targetCompletionRate.refreshData('platform')" class="btn btn-primary">查询</button>
             </div>
+            <div class="form-group">
+                <button type="button" id="export" onclick="targetCompletionRate.exportData()" class="btn btn-primary">导出</button>
+            </div>
         </form>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
@@ -65,8 +68,8 @@
 	<script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
 	<script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
-	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
 	<script type="text/javascript" src="js/self.js"></script>
+	<script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
 	
 	<script type="text/javascript" src="js/report/target_completion_rate.js" ></script>
 	<!--加本页面 的js文件与js代码-->
