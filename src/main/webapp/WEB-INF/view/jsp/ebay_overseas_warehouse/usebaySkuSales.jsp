@@ -38,14 +38,24 @@
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">查询</button>
+             <label>SKU</label>
+                        <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku"
+                               _value=""/>
+            </div>
+            <div class="form-group">
+            <label>原始SKU</label>
+                        <input type="text" class="form-control" placeholder="请输入内容" id="oldsku" name="oldsku"
+                               _value=""/>
+            </div>
+            <div class="form-group">
+               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
             </div>
         </form>
        
 			<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
-			<table id="list_sku_us" class="tablegrid"></table>
+			<table id="list2" class="tablegrid"></table>
 			<div id="pager_sku_us"></div>
 		</div>
         
@@ -64,7 +74,7 @@
 	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
 	<script type="text/javascript" src="js/self.js"></script>
 	
-	<script type="text/javascript" src="js/report/usebaysku.js" ></script>
+	<script type="text/javascript" src="js/report/ebayOverseas/usebaysku.js" ></script>
 	<!--加本页面 的js文件与js代码-->
 </body>
 </html>

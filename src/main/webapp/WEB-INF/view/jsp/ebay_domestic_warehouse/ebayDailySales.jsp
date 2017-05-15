@@ -38,7 +38,7 @@
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
             </div>
         </form>
         <div class="hr-line-dashed"></div>
@@ -66,7 +66,7 @@
 	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
 	<script type="text/javascript" src="js/self.js"></script>
 	
-	<script type="text/javascript" src="js/report/ebaydomerstic.js" ></script>
+	<script type="text/javascript" src="js/report/ebayDomestic/ebaydomerstic.js" ></script>
 	<!--加本页面 的js文件与js代码-->
 </body>
 </html>

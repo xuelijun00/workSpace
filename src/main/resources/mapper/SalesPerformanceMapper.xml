@@ -27,7 +27,7 @@
     	and report_date >= #{start_date,jdbcType=DATE}
     </if>
 	 <if test="end_date != null">
-	    and report_date >= #{end_date,jdbcType=DATE}
+	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
 	    </if>
   </select>
   

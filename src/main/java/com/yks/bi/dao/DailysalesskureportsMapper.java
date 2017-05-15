@@ -17,7 +17,7 @@ public interface DailysalesskureportsMapper {
 
     Dailysalesskureports selectByPrimaryKey(DailysalesskureportsKey key);  
 
-    List<Dailysalesskureports> selectAll(@Param("business")String business,@Param("sku")String sku,@Param("sku_old")String sku_old,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    List<Dailysalesskureports> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
     
     int updateByPrimaryKeySelective(Dailysalesskureports record);
 

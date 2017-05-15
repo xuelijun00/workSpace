@@ -23,14 +23,15 @@
     	and report_date >= #{start_date,jdbcType=DATE}
     </if>
 	 <if test="end_date != null">
-	    and report_date >= #{end_date,jdbcType=DATE}
+	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
 	    </if>
-    <if test="category != null">
+    <if test="category != null and category.length() > 0">
     	and  category = #{category,jdbcType=VARCHAR}
     </if>
-    <if test="sku_old != null">
+    <if test="sku_old != null and sku_old.length() > 0">
     	and sku_old = #{sku_old,jdbcType=VARCHAR}
     </if>
+     ORDER BY  report_date desc
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >

@@ -123,7 +123,7 @@ var targetCompletionRate = {
 		$('#list2').jqGrid('clearGridData');
 		$('#list2').jqGrid('setGridParam', {url: url}).trigger('reloadGrid');
 	}
-	,refreshData:function(platform){
+	,refreshData:function(platform){  //重
 		targetCompletionRate.loadData(platform);
 		targetCompletionRate.gridData(platform);
 	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.ISalespPerformanceService;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,41 +26,29 @@ public class SalespPerformanceController {
 
     @Autowired
     ISalespPerformanceService isale;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  
     /**
      * 表格数据  柱状图
      * @param month
      * @param platform
      * @return
-     */
-    @RequestMapping(value = "/salespoerformance/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> salesMethod(String month,Date platform){
-      
-        return isale.selectAll("a_ll");
-    }
-    
-    @RequestMapping(value = "/ebaydomestic/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> ebayMethod(String month,Date platform){
+     * @throws ParseException 
+     */                          
+    @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
+    public List<SalesPerformance> dailysalesMethod(String business,String st,String et) throws ParseException{
      
-        return isale.selectAll("ebay");
+    	Date starttime = null;
+    	if(st !=null&& st.trim().length()>0){
+    		 String stt = st+" 00:00:00";
+    		 starttime= sdf.parse(stt);
+    	}
+       
+    	Date endtime = null;
+    	if(et !=null&& et.trim().length()>0){
+    		 String ett = et+" 00:00:00";
+    		 endtime= sdf.parse(ett);
+    	}
+        return isale.selectAll(business,starttime,endtime);
     }
-    
-    @RequestMapping(value = "/deebay/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> deebayMethod(String month,Date platform){
-     
-        return isale.selectAll("Ebay_PO");
-    }
-    
-    @RequestMapping(value = "/ukebay/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> ukebayMethod(String month,Date platform){
-     
-        return isale.selectAll("Ebay_UK");
-    }
-    
-    @RequestMapping(value = "/usebay/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> usebayMethod(String month,Date platform){
-     
-        return isale.selectAll("Ebay_US");
-    }
-  
 
 }

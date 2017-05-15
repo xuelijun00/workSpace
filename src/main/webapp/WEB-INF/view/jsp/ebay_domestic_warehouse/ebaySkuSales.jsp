@@ -26,7 +26,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Ebay业务线每日销售数据</h5></div>
+    <div class="ibox-title"><h5>德仓sku销售报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -40,12 +40,25 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">查询</button>
             </div>
+              <div class="form-group">
+             <label>分类</label>
+                        <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
+                               _value=""/>
+            </div>
+            <div class="form-group">
+            <label>原始SKU</label>
+                        <input type="text" class="form-control" placeholder="请输入内容" id="oldsku" name="oldsku"
+                               _value=""/>
+            </div>
+            <div class="form-group">
+               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+            </div>
         </form>
        
 			<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
-			<table id="list_sku" class="tablegrid"></table>
+			<table id="list2" class="tablegrid"></table>
 			<div id="pager_sku"></div>
 		</div>
         
@@ -64,7 +77,7 @@
 	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
 	<script type="text/javascript" src="js/self.js"></script>
 	
-	<script type="text/javascript" src="js/report/ebaysku.js" ></script>
+	<script type="text/javascript" src="js/report/ebayDomestic/ebaysku.js" ></script>
 	<!--加本页面 的js文件与js代码-->
 </body>
 </html>
