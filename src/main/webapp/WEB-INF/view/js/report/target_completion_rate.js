@@ -8,6 +8,7 @@ var targetCompletionRate = {
 	    yAxis: [{ 
 	        title: {text: '销售额',style: { color: Highcharts.getOptions().colors[1]}},
 	        labels: { format: '{value}',style: {color: Highcharts.getOptions().colors[1] }},
+	        crosshair: true
 	    },{ 
 	        labels: {format: '{value} %',style: {color: Highcharts.getOptions().colors[0]}},
 	        title: { text: '预计百分比',style: {color: Highcharts.getOptions().colors[0]}},
@@ -108,7 +109,6 @@ var targetCompletionRate = {
 					for(var i=0;i<data.length;i++){
 						$("#form select[name='platform']").append("<option value='"+ data[i].platform +"'>"+ data[i].name +"</option>");
 					}
-					
 				}
 			}
 		});

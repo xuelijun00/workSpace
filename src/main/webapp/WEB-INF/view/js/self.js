@@ -28,17 +28,17 @@ window.L.open('wDate', {
 });
 */
 
-    jeDate({
-      dateCell:"#start_date",
-      format:"YYYY-MM-DD",
-      //isinitVal:true,
-      //isTime:true, //isClear:false,
-      minDate:"2014-09-19 00:00:00"
-    });
-    jeDate({
-      dateCell:"#end_date",
-      format:"YYYY-MM-DD",
-      //isinitVal:true,
-      //isTime:true, //isClear:false,
-      minDate:"2014-09-19 00:00:00"
-    });
+jeDate({
+  dateCell:"#start_date",
+  format:"YYYY-MM-DD",
+  //isinitVal:true,
+  //isTime:true, //isClear:false,
+  minDate:"2014-09-19 00:00:00"
+});
+jeDate({
+  dateCell:"#end_date",
+  format:"YYYY-MM-DD",
+  //isinitVal:true,
+  //isTime:true, //isClear:false,
+  minDate:"2014-09-19 00:00:00"
+});

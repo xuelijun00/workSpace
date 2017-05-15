@@ -68,9 +68,7 @@
 	<script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
 	<script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
-	<script type="text/javascript" src="js/self.js"></script>
 	<script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
-	
 	<script type="text/javascript" src="js/report/target_completion_rate.js" ></script>
 	<!--加本页面 的js文件与js代码-->
 </body>
