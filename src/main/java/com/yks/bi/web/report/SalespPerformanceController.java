@@ -1,6 +1,8 @@
 package com.yks.bi.web.report;
 
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.ISalespPerformanceService;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -25,30 +26,33 @@ import java.util.List;
 public class SalespPerformanceController {
 
     @Autowired
-    ISalespPerformanceService isale;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  
+    private ISalespPerformanceService isale;
+    private static final String YYYYMMDD = "yyyy-MM-dd";
     /**
      * 表格数据  柱状图
      * @param month
      * @param platform
      * @return
      * @throws ParseException 
+     * @throws UnsupportedEncodingException 
      */                          
     @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> dailysalesMethod(String business,String st,String et) throws ParseException{
-     
+    public List<SalesPerformance> dailysalesMethod(String business,String st,String et) throws ParseException, UnsupportedEncodingException{
+    	business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
     	Date starttime = null;
-    	if(st !=null&& st.trim().length()>0){
-    		 String stt = st+" 00:00:00";
-    		 starttime= sdf.parse(stt);
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
     	}
-       
     	Date endtime = null;
-    	if(et !=null&& et.trim().length()>0){
-    		 String ett = et+" 00:00:00";
-    		 endtime= sdf.parse(ett);
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
         return isale.selectAll(business,starttime,endtime);
+    }
+    
+    @RequestMapping(value = "/dailysales/platforms" ,method = RequestMethod.GET)
+    public List<String> platforms(){
+        return isale.selectPlatforms();
     }
 
 }

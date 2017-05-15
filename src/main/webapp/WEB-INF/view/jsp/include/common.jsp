@@ -13,7 +13,8 @@
 <script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.min.js"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
-<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
+<!-- <script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script> -->
+<script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/export-csv.js"></script>
 <script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="include/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +81,7 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="tatol/gpthz.html">各平台销售业绩报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_salesp_performance">各平台销售业绩报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_hipment">国内仓发货汇总数据</a>
                         </li>

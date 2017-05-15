@@ -4,8 +4,9 @@ var common = {
 				credits:{enabled:false},//去除版权信息
 			    chart: {zoomType: 'xy' },
 			    title: operation.title,
-			    xAxis: [{categories: operation.categories,crosshair: true}],
+			    xAxis: [{categories: operation.categories,crosshair: true,min:0, max:14,}],
 			    yAxis: operation.y,
+			    scrollbar: { enabled: true },//设置滚动条    
 			    tooltip: {shared: true},
 			    legend: {
 			    	layout: 'horizontal',align: 'left',x: 120,verticalAlign: 'top',y: 25,floating: true,
@@ -23,9 +24,9 @@ var common = {
 				//colNames : [ '平台名称', '报表时间', targetCompletionRate.month+'月份业绩目标', targetCompletionRate.month+'月份销售额', targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比', targetCompletionRate.month+'季度业绩目标' , targetCompletionRate.month+'季度销售额', targetCompletionRate.month+'季度预计销售额', targetCompletionRate.month+'季度预计百分比'],//jqGrid的列显示名字
 				colNames : opation.colNames,
 				colModel : opation.colModel,
-				rowNum : 10,//一页显示多少条
+				rowNum : 30,//一页显示多少条
 				rowList : [ 30, 50, 100 ],//可供用户选择一页显示多少条
-				pager: "#jqGridPager",//表格页脚的占位符(一般是div)的id
+				pager: "#pager2",//表格页脚的占位符(一般是div)的id
 				sortname : opation.sortname,//初始化的时候排序的字段
 				sortorder : opation.sortorder,//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
@@ -35,7 +36,7 @@ var common = {
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
-			jQuery("#list2").jqGrid('navGrid', '#jqGridPager', {edit : false,add : false,del : false});
+			jQuery("#list2").jqGrid('navGrid', '#pager2', {edit : false,add : false,del : false});
 		},
 		refreshData:function(gridUrl,chart,operation){
 			if(chart != null && operation != null){
@@ -50,5 +51,5 @@ var common = {
 			}
 			$('#list2').jqGrid('clearGridData');
 			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');
-		}
+		},
 };

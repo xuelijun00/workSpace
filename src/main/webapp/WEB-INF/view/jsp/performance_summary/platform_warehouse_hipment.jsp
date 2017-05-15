@@ -33,7 +33,7 @@
         <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
-			<div id="jqGridPager"></div>
+			<div id="pager2"></div>
 		</div>
 </div>
 </div>

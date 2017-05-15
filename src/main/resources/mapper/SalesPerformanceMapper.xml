@@ -17,18 +17,26 @@
     where report_date = #{reportDate,jdbcType=DATE}
       and business = #{business,jdbcType=VARCHAR}
   </select>
+  <!--查询所有平台  -->
+  <select id="selectPlatforms" resultType="String">
+    select distinct business from dailysalesreports order by business 
+  </select>
   
-   <select id="selectAll" parameterType="com.yks.bi.dto.report.SalesPerformance" resultMap="BaseResultMap">
+   <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from dailysalesreports
-    where  business = #{business,jdbcType=VARCHAR}
+    where 1=1
+    <if test="business != null">
+    	and business = #{business,jdbcType=VARCHAR}
+    </if>
      <if test="start_date != null">
     	and report_date >= #{start_date,jdbcType=DATE}
     </if>
 	 <if test="end_date != null">
 	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    </if>
+	 </if>
+	 order by business,report_date 
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">

@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>销售业绩整体报表</h5></div>
+    <div class="ibox-title"><h5>各平台每日销售报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -24,6 +24,11 @@
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>平台：</label>
+                <select class="form-control w120" id="platform">
+                </select>
             </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
@@ -52,14 +57,18 @@ var domesticData = [];
 function queryData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate;
+	var platform = $("#platform").val();
+	var chartUrl =  contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate;
+	if(platform !== 'all'){
+		chartUrl += "&business=" + platform; 
+	}
 	var operation = getChartData(chartUrl);
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "销售业绩整体报表" + startDate +"-"+ endDate + ".csv";
+	var fileName = "各平台每日销售报表" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
 	var column = ['orders','sales','reportDate1','business'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -68,7 +77,6 @@ function getChartData(chartUrl){
 	var reportDate = [];
 	var salesAmount = [];
 	var orders = [];
-	var categories = [];
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -78,7 +86,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate1);
+				  reportDate.push(data[i].reportDate1 + "<br/>" + data[i].business);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -88,7 +96,7 @@ function getChartData(chartUrl){
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
 	return {
-		title:{text:"销售业绩整体报表"}
+		title:{text:"各平台每日销售报表"}
 		,categories:reportDate
 		,y:y
 		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
@@ -98,16 +106,31 @@ function getChartData(chartUrl){
 (function(){
 	jeDate({dateCell:"#start_date",format:"YYYY-MM-DD", isinitVal:true,});
 	jeDate({dateCell:"#end_date",format:"YYYY-MM-DD", isinitVal:true,});
+	$.ajax({
+		url : contextPath + "/report/dailysales/platforms",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#platform").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#platform").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
+	});
+	
 	
 	var date = new Date();
 	var date1 = new Date(date.getTime() - 14*24*60*60*1000);//一个星期
 	var startDate = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-"  + date1.getDate();
 	var endDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"  + date.getDate();
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate;
+	var chartUrl =  contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate;
 	var series = [];
 	chart = common.chart(getChartData(chartUrl));//chart
 	common.grid({
-		title:"销售业绩整体报表"
+		title:"各平台每日销售报表"
 		,url:chartUrl
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
