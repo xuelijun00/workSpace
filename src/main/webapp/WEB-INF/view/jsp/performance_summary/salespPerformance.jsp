@@ -96,8 +96,21 @@ function getChartData(chartUrl){
 	};
 }
 (function(){
-	jeDate({dateCell:"#start_date",format:"YYYY-MM-DD", isinitVal:true,});
-	jeDate({dateCell:"#end_date",format:"YYYY-MM-DD", isinitVal:true,});
+	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-14"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
 	
 	var date = new Date();
 	var date1 = new Date(date.getTime() - 14*24*60*60*1000);//一个星期

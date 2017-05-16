@@ -104,8 +104,21 @@ function getChartData(chartUrl){
 	};
 }
 (function(){
-	jeDate({dateCell:"#start_date",format:"YYYY-MM-DD", isinitVal:true,});
-	jeDate({dateCell:"#end_date",format:"YYYY-MM-DD", isinitVal:true,});
+	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-7"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
 	$.ajax({
 		url : contextPath + "/report/dailysales/platforms",
 		cache : false,

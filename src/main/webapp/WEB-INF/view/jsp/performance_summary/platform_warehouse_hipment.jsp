@@ -72,7 +72,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				platformData = data;
 				for(var i=0;i<data.length;i++){
-					categories.push(data[i].reportDate1+"-"+ data[i].platform);
+					categories.push(data[i].reportDate1+"<br/>"+ data[i].platform);
 					netProfit.push(data[i].netProfit);
 					netProfitMargin.push(data[i].netProfitMargin);
 					orderNum.push(data[i].orderNum);
@@ -100,13 +100,13 @@ function getChartData(chartUrl){
 	};
 }
 (function(){
-	jeDate({
-	  dateCell:"#start_date",
-	  format:"YYYY-MM-DD",
-	  isinitVal:true,
-	  initAddVal:{DD:"-8"},
-	  minDate:"2017-01-01"
-	});
+	$("#start_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
 	
 	var date = new Date();
 	var startDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"  + date.getDate();

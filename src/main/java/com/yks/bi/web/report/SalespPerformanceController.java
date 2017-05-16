@@ -38,7 +38,9 @@ public class SalespPerformanceController {
      */                          
     @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
     public List<SalesPerformance> dailysalesMethod(String business,String st,String et) throws ParseException, UnsupportedEncodingException{
-    	business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
+    	if(StringUtils.isNotEmpty(business)){
+    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
+    	}
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);

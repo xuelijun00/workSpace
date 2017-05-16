@@ -8,6 +8,9 @@
 <link href="css/self.css?20170302" rel="stylesheet">
 <!-- jqGrid组件基础样式包-必要 -->
 <link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="js/plugins/jeDate/jedate/skin/jedate.css" />
+
+
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript" src="js/jquery.min.js?v=2.1.4"></script>
 <script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
@@ -17,7 +20,7 @@
 <script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/export-csv.js"></script>
-<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
+<script type="text/javascript" src="js/plugins/jeDate/jedate/jquery.jedate.min.js"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
 <script type="text/javascript" src="js/common/common.js" ></script>
 <script type="text/javascript">
