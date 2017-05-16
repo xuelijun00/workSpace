@@ -13,7 +13,6 @@ public class GridModel {
 	private int page;
 	private long records;
 	private List<?> rows;
-	private static ObjectMapper objectMapper = new ObjectMapper();
 	
 	public GridModel(PageInfo<?> pageInfo){
 		this.setPage(pageInfo.getPageNum());
@@ -22,15 +21,6 @@ public class GridModel {
 		this.setRows(pageInfo.getList());
 	}
 	
-	public String toString(){
-		try {
-			return new String(objectMapper.writeValueAsString(this).getBytes(),"UTF-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	public int getTotal() {
 		return total;
 	}
