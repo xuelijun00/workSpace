@@ -10,26 +10,38 @@
 <head>
 <meta charset="utf-8">
 <title>YKSUI框架 - 需求管理</title>
+<link rel="shortcut icon" href="./favicon.ico">
+<link href="css/bootstrap.min14ed.css?20170108" rel="stylesheet">
+<link href="css/font-awesome.min93e3.css?20170108" rel="stylesheet">
+<link href="css/style.min862f.css?20170108" rel="stylesheet">
+<link href="css/self.css?20170302" rel="stylesheet">
+<!-- jqGrid组件基础样式包-必要 -->
+<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="js/plugins/jqGrid521/css/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript">
+	var contextPath = '${pageContext.request.contextPath}';
+</script>
+<!--加css-->
 </head>
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>销售业绩整体报表</h5></div>
+    <div class="ibox-title"><h5>Ebay业务线每日销售数据</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date"class="form-control" placeholder="">
+              <input type="text" id="start_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
-                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+                <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
             </div>
-            <div class="form-group">
-                <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
+             <div class="form-group">
+                <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
         </form>
         <div class="hr-line-dashed"></div>
@@ -41,6 +53,7 @@
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
 		</div>
+        
 </div>
 
 </div>
@@ -49,23 +62,17 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
-function getUrl(type){//拼接url
+function queryData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	if(type === 1){
-		return contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate;
-	}else{
-		return contextPath + '/report/dailysales/chart?business=a_ll&st=' + startDate + "&et=" + endDate;
-	}
-}
-function queryData(){
-	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	var chartUrl =  contextPath + '/report/dailysales/grid?business=new_newegg&st=' + startDate + "&et=" + endDate;
+	var operation = getChartData(chartUrl);
+	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "销售业绩整体报表" + startDate +"-"+ endDate + ".csv";
+	var fileName = "newegg业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
 	var column = ['orders','sales','reportDate1','business'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -74,6 +81,7 @@ function getChartData(chartUrl){
 	var reportDate = [];
 	var salesAmount = [];
 	var orders = [];
+	var categories = [];
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -92,8 +100,11 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {title:{text:"销售业绩整体报表"},categories:reportDate,y:y
-			,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
+	return {
+		title:{text:"newegg业务线每日销售数据"}
+		,categories:reportDate
+		,y:y
+		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
@@ -113,10 +124,13 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	chart = common.chart(getChartData(getUrl()));//chart
+	
+	var chartUrl =  contextPath + '/report/dailysales/grid?business=new_newegg&st=' + startDate + "&et=" + endDate;
+	var series = [];
+	chart = common.chart(getChartData(chartUrl));//chart
 	common.grid({
-		title:"销售业绩整体报表"
-		,url:getUrl(1)
+		title:"newegg业务线每日销售数据"
+		,url:chartUrl
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
@@ -131,3 +145,4 @@ function getChartData(chartUrl){
 </script>
 </body>
 </html>
+

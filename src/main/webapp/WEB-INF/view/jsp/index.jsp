@@ -138,13 +138,13 @@
                     <a href="#"><i class="fa fa-amazon"></i> <span class="nav-label">Amazon业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Amazon销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySales">Amazon销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonSkuSales">Amazon SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -152,13 +152,13 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">SMT业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">SMT销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/amazonDailySales">SMT销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtCategorySales">SMT品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -166,13 +166,13 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Wish业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Wish销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySales">Wish销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishSkuSales">Wish SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -180,13 +180,13 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Lazada业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Lazada销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySales">Lazada销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaSkuSales">Lazada SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaCategorySales">Lazada品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -194,13 +194,13 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新平台业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">新平台销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySales">新平台销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台 SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformSkuSales">新平台 SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a>
                         </li>
                     </ul>
                 </li>
@@ -208,7 +208,7 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">沃尔玛销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">沃尔玛业绩完成率</a>
                         </li>
@@ -218,11 +218,11 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新蛋业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">新蛋销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySales">新蛋销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新蛋 SKU销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggSkuSales">新蛋 SKU销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新蛋品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggCategorySales">新蛋品类销售报表</a>
                         </li>
                     </ul>
                 </li>
