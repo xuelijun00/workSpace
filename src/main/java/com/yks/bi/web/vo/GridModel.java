@@ -2,7 +2,8 @@ package com.yks.bi.web.vo;
 
 import java.util.List;
 
-import com.github.pagehelper.Page;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 
 public class GridModel {
 	/**
@@ -12,21 +13,22 @@ public class GridModel {
 	private int page;
 	private long records;
 	private List<?> rows;
-	/**
-	 * 过滤属性
-	 */
-	private String sidx;
-	private String sord;
-	private String[] searchField;
-	private String[] searchString;
-	private String[] searchOper;
-
-	public GridModel getGridModel(Page<?> page){
-		this.setPage(page.getPageNum());
-		this.setRecords(page.getTotal());
-		this.setTotal(page.getPages());
-		this.setRows(page.getResult());
-		return this;
+	private static ObjectMapper objectMapper = new ObjectMapper();
+	
+	public GridModel(PageInfo<?> pageInfo){
+		this.setPage(pageInfo.getPageNum());
+		this.setRecords(pageInfo.getTotal());
+		this.setTotal(pageInfo.getPages());
+		this.setRows(pageInfo.getList());
+	}
+	
+	public String toString(){
+		try {
+			return new String(objectMapper.writeValueAsString(this).getBytes(),"UTF-8");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public int getTotal() {
@@ -59,46 +61,6 @@ public class GridModel {
 
 	public void setRows(List<?> rows) {
 		this.rows = rows;
-	}
-
-	public String getSidx() {
-		return sidx;
-	}
-
-	public void setSidx(String sidx) {
-		this.sidx = sidx;
-	}
-
-	public String getSord() {
-		return sord;
-	}
-
-	public void setSord(String sord) {
-		this.sord = sord;
-	}
-
-	public String[] getSearchField() {
-		return searchField;
-	}
-
-	public void setSearchField(String[] searchField) {
-		this.searchField = searchField;
-	}
-
-	public String[] getSearchString() {
-		return searchString;
-	}
-
-	public void setSearchString(String[] searchString) {
-		this.searchString = searchString;
-	}
-
-	public String[] getSearchOper() {
-		return searchOper;
-	}
-
-	public void setSearchOper(String[] searchOper) {
-		this.searchOper = searchOper;
 	}
 
 }

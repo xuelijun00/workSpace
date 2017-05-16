@@ -54,16 +54,24 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
-function queryData(){
+function getUrl(type){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
-	var chartUrl =  contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate;
-	if(platform !== 'all'){
-		chartUrl += "&business=" + platform; 
+	var url = "";
+	if(type === 1){
+		url = contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate;
+	}else{
+		url = contextPath + '/report/dailysales/chart?st=' + startDate + "&et=" + endDate;
 	}
-	var operation = getChartData(chartUrl);
-	common.refreshData(chartUrl,chart,operation);
+	if(platform !== 'all'){
+		url += "&business=" + platform;
+	}
+	return url;
+}
+function queryData(){
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -133,25 +141,15 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	
-	
-	var date = new Date();
-	var date1 = new Date(date.getTime() - 14*24*60*60*1000);//一个星期
-	var startDate = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-"  + date1.getDate();
-	var endDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"  + date.getDate();
-	var chartUrl =  contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate;
-	var series = [];
-	chart = common.chart(getChartData(chartUrl));//chart
+	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"各平台每日销售报表"
-		,url:chartUrl
+		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
-		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
+		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205}
-		           ]
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205}]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 	});

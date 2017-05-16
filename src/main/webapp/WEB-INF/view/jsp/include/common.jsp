@@ -8,6 +8,8 @@
 <link href="css/self.css?20170302" rel="stylesheet">
 <!-- jqGrid组件基础样式包-必要 -->
 <link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid-bootstrap.css" />
+<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid-bootstrap-ui.css" />
 <link rel="stylesheet" href="js/plugins/jeDate/jedate/skin/jedate.css" />
 
 

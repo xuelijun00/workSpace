@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.ISalespPerformanceService;
+import com.yks.bi.web.vo.FilterDto;
+import com.yks.bi.web.vo.GridModel;
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
@@ -35,9 +41,10 @@ public class SalespPerformanceController {
      * @return
      * @throws ParseException 
      * @throws UnsupportedEncodingException 
+     * @throws JsonProcessingException 
      */                          
     @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
-    public List<SalesPerformance> dailysalesMethod(String business,String st,String et) throws ParseException, UnsupportedEncodingException{
+    public GridModel dailysalesMethod(String business,String st,String et,FilterDto filter) throws Exception{
     	if(StringUtils.isNotEmpty(business)){
     		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
     	}
@@ -49,7 +56,25 @@ public class SalespPerformanceController {
     	if(StringUtils.isNotEmpty(et)){
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
-        return isale.selectAll(business,starttime,endtime);
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	List<SalesPerformance> list = isale.selectAll(business,starttime,endtime);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+    }
+    @RequestMapping(value = "/dailysales/chart" ,method = RequestMethod.GET)
+    public List<SalesPerformance> chart(String business,String st,String et) throws Exception{
+    	if(StringUtils.isNotEmpty(business)){
+    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
+    	}
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	return isale.selectAll(business,starttime,endtime);
     }
     
     @RequestMapping(value = "/dailysales/platforms" ,method = RequestMethod.GET)

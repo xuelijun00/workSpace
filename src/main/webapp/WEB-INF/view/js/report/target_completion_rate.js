@@ -158,15 +158,15 @@ var targetCompletionRate = {
 				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',sortable : "true",width : 105} ,
 				             {name : 'quarterlyEstimatedPercent',index : 'quarterlyEstimatedPercent',sortable : "true",width : 105}
 				           ],
-				rowNum : 20,//一页显示多少条
-				rowList : [ 10, 20, 30 ],//可供用户选择一页显示多少条
+				rowNum : 10,//一页显示多少条
+				rowList : [ 10, 30, 50 ],//可供用户选择一页显示多少条
 				pager : '#pager2',//表格页脚的占位符(一般是div)的id
 				sortname : 'name',//初始化的时候排序的字段
 				sortorder : "asc",//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				//height:"200px",
-				caption : "各平台1月份业绩目标及完成率"//表格的标题名字
+				//caption : "各平台1月份业绩目标及完成率"//表格的标题名字
 			});
 	/*创建jqGrid的操作按钮容器*/
 	/*可以控制界面上增删改查的按钮是否显示*/

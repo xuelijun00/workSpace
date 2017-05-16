@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.DailyOutReports;
 import com.yks.bi.dto.report.DailyOutReportsKey;
 import com.yks.bi.service.report.IDailyOutReportsService;
+import com.yks.bi.web.vo.FilterDto;
+import com.yks.bi.web.vo.GridModel;
 
 @Controller
 @ResponseBody
@@ -23,13 +27,35 @@ public class DailyOutReportsController {
 	@Autowired
 	IDailyOutReportsService dailyOutReportsService;
 	
-	@RequestMapping(value="/warehouse_shipment/domesticsum",method=RequestMethod.GET)
-	public List<DailyOutReports> selectSumDomesticWarehouseShipment(String startDate,String endDate){
+	@RequestMapping(value="/warehouse_shipment/domesticsum/grid",method=RequestMethod.GET)
+	public GridModel selectSumDomesticWarehouseShipment(String startDate,String endDate,FilterDto filter){
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	List<DailyOutReports> list = dailyOutReportsService.selectSumDomesticWarehouseShipment(startDate, endDate);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+	}
+	@RequestMapping(value="/warehouse_shipment/domesticsum/chart",method=RequestMethod.GET)
+	public List<DailyOutReports> selectSumDomesticWarehouseShipmentChart(String startDate,String endDate){
 		return dailyOutReportsService.selectSumDomesticWarehouseShipment(startDate, endDate);
 	}
 	
-	@RequestMapping(value="/warehouse_shipment/platformsum",method=RequestMethod.GET)
-	public List<DailyOutReports> selectPlatformDomesticWarehouseShipment(String date){
+	@RequestMapping(value="/warehouse_shipment/platformsum/grid",method=RequestMethod.GET)
+	public GridModel selectPlatformDomesticWarehouseShipment(String date,FilterDto filter){
+		DailyOutReportsKey key = new DailyOutReportsKey();
+		if(StringUtils.isNotEmpty(date)){
+			try {
+				key.setReportDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	List<DailyOutReports> list = dailyOutReportsService.selectPlatformDomesticWarehouseShipment(key);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+	}
+	@RequestMapping(value="/warehouse_shipment/platformsum/chart",method=RequestMethod.GET)
+	public List<DailyOutReports> selectPlatformDomesticWarehouseShipmentChart(String date){
 		DailyOutReportsKey key = new DailyOutReportsKey();
 		if(StringUtils.isNotEmpty(date)){
 			try {

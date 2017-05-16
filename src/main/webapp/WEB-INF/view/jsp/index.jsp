@@ -285,7 +285,7 @@
                             <i class="fa fa-tasks"></i> 主题
                         </a>
                     </li>
-                    <li><a _href="/logout?userId=${sessionScope.systemUser.id }"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
+                    <li><a href="${pageContext.request.contextPath}/logout?userId=${sessionScope.systemUser.id }"><i class="glyphicon glyphicon-log-out"></i> 退出</a>
                 </ul>
             </nav>
         </div>

@@ -49,12 +49,18 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
-function queryData(){
+function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate;
-	var operation = getChartData(chartUrl);
-	common.refreshData(chartUrl,chart,operation);
+	if(type === 1){
+		return contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate + "&isGrid=1";
+	}else{
+		return contextPath + '/report/dailysales/chart?business=a_ll&st=' + startDate + "&et=" + endDate;
+	}
+}
+function queryData(){
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -68,7 +74,6 @@ function getChartData(chartUrl){
 	var reportDate = [];
 	var salesAmount = [];
 	var orders = [];
-	var categories = [];
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -87,11 +92,8 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {
-		title:{text:"销售业绩整体报表"}
-		,categories:reportDate
-		,y:y
-		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
+	return {title:{text:"销售业绩整体报表"},categories:reportDate,y:y
+			,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
@@ -111,17 +113,10 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	
-	var date = new Date();
-	var date1 = new Date(date.getTime() - 14*24*60*60*1000);//一个星期
-	var startDate = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-"  + date1.getDate();
-	var endDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"  + date.getDate();
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=a_ll&st=' + startDate + "&et=" + endDate;
-	var series = [];
-	chart = common.chart(getChartData(chartUrl));//chart
+	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"销售业绩整体报表"
-		,url:chartUrl
+		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 

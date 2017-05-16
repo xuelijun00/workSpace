@@ -63,7 +63,7 @@ public class SystemController {
     public String logout(String userId ,HttpServletRequest request){
     	HttpSession session = request.getSession();
     	session.removeAttribute("systemUser");
-    	return "login";
+    	return "redirect:/";
     }
     
 }

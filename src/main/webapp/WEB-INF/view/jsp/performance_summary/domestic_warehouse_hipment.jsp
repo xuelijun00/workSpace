@@ -45,12 +45,19 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
+function getUrl(type){
+	if(type === 1){
+		return chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum/grid?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();	
+	}else{
+		return chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum/chart?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();
+	}
+	
+}
 function queryData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum?startDate=' + startDate + "&endDate=" + endDate;
-	var operation = getChartData(chartUrl);
-	common.refreshData(chartUrl,chart,operation);
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -119,26 +126,18 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	
-	var date = new Date();
-	var date1 = new Date(date.getTime() - 7*24*60*60*1000);//一个星期
-	var startDate = date1.getFullYear() + "-" + (date1.getMonth() + 1) + "-"  + date1.getDate();
-	var endDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"  + (date.getDate() - 1);
-	var chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum?startDate=' + startDate + "&endDate=" + endDate;
-	//var chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum?startDate=2017-01-02&endDate=2017-01-10';
-	var series = [];
-	
-	chart = common.chart(getChartData(chartUrl));//chart
+	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"国内仓发货汇总数据"
-		,url:chartUrl
+		,url:getUrl(1)
 		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税前综合净利', '税前综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'platform',index : 'platform',width : 155}, 
+		             {name : 'platform',index : 'platform',width : 80}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
 		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105}, 
 		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105}, 
-		             {name : 'netProfit',index : 'netProfit',align : "right",width : 105}, 
-		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 105}
+		             {name : 'netProfit',index : 'netProfit',align : "right",width : 120}, 
+		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 130}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
