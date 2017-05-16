@@ -25,7 +25,7 @@ var common = {
 				colNames : opation.colNames,
 				colModel : opation.colModel,
 				rowNum : opation.rowNum,//一页显示多少条
-				rowList : [10, 30, 50 ],//可供用户选择一页显示多少条
+				rowList : [20, 60, 100 ],//可供用户选择一页显示多少条
 				pager: "#pager2",//表格页脚的占位符(一般是div)的id
 				//sortname : opation.sortname,//初始化的时候排序的字段
 				//sortorder : opation.sortorder,//排序方式,可选desc,asc

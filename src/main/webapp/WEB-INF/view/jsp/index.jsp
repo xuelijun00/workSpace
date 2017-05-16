@@ -110,23 +110,17 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美仓业绩完成率</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
                         
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">英仓业绩完成率</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
                         
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">德仓业绩完成率</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a>
                         </li>
@@ -140,8 +134,6 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySales">Amazon销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon业绩完成率</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonSkuSales">Amazon SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a>
@@ -153,8 +145,6 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/amazonDailySales">SMT销售报表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT业绩完成率</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a>
                         </li>
@@ -168,8 +158,6 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySales">Wish销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish业绩完成率</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishSkuSales">Wish SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a>
@@ -181,8 +169,6 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySales">Lazada销售报表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada业绩完成率</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaSkuSales">Lazada SKU销售报表</a>
                         </li>
@@ -196,8 +182,6 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySales">新平台销售报表</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台业绩完成率</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformSkuSales">新平台 SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a>
@@ -209,8 +193,6 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">沃尔玛业绩完成率</a>
                         </li>
                     </ul>
                 </li>
