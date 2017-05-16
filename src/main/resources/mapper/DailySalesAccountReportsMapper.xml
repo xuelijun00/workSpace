@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailySalesAccountReportsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailySalesAccountReports" >
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <id column="business" property="business" jdbcType="VARCHAR" />
+    <id column="account" property="account" jdbcType="VARCHAR" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    report_date, business, account, orders, sales
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesAccountReportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalesaccountreports
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and account = #{account,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesAccountReportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalesaccountreports
+    where 1=1
+    <if test="reportDate != null">
+    	and report_date = #{reportDate,jdbcType=DATE}
+    </if>
+    <if test="business != null and business.length() > 0">
+    	and business = #{business,jdbcType=VARCHAR}
+    </if>
+    <if test="account != null and account.length() > 0">
+    	and account = #{account,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!--查询平台  -->
+  <select id="selectPlatform" resultType="String" >
+    select distinct business from dailysalesaccountreports
+  </select>
+  <!--根据平台 级联查询  -->
+  <select id="selectAccount" resultType="String" parameterType="String" >
+    select distinct account from dailysalesaccountreports
+    where business = #{business,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.DailySalesAccountReportsKey" >
+    delete from dailysalesaccountreports
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and account = #{account,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.report.DailySalesAccountReports" >
+    insert into dailysalesaccountreports (report_date, business, account, 
+      orders, sales)
+    values (#{reportDate,jdbcType=DATE}, #{business,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{orders,jdbcType=INTEGER}, #{sales,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.DailySalesAccountReports" >
+    insert into dailysalesaccountreports
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="business != null" >
+        business,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="orders != null" >
+        orders,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="business != null" >
+        #{business,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="orders != null" >
+        #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.DailySalesAccountReports" >
+    update dailysalesaccountreports
+    <set >
+      <if test="orders != null" >
+        orders = #{orders,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=REAL},
+      </if>
+    </set>
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and account = #{account,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.DailySalesAccountReports" >
+    update dailysalesaccountreports
+    set orders = #{orders,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=REAL}
+    where report_date = #{reportDate,jdbcType=DATE}
+      and business = #{business,jdbcType=VARCHAR}
+      and account = #{account,jdbcType=VARCHAR}
+  </update>
+</mapper>

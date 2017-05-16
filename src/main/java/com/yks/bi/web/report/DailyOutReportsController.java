@@ -30,6 +30,7 @@ public class DailyOutReportsController {
 	@RequestMapping(value="/warehouse_shipment/domesticsum/grid",method=RequestMethod.GET)
 	public GridModel selectSumDomesticWarehouseShipment(String startDate,String endDate,FilterDto filter){
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailyOutReports> list = dailyOutReportsService.selectSumDomesticWarehouseShipment(startDate, endDate);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
@@ -50,6 +51,7 @@ public class DailyOutReportsController {
 			}
 		}
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailyOutReports> list = dailyOutReportsService.selectPlatformDomesticWarehouseShipment(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);

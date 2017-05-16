@@ -57,6 +57,7 @@ public class SalespPerformanceController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<SalesPerformance> list = isale.selectAll(business,starttime,endtime);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);

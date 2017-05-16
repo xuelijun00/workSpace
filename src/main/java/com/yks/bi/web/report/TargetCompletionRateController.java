@@ -8,6 +8,7 @@ import com.yks.bi.service.report.ITargetCompletionRateService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,16 +34,17 @@ public class TargetCompletionRateController {
      * @return
      */
     @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
-    public String targetCompletionRate(String month,String platform,FilterDto filter){
+    public GridModel targetCompletionRate(String month,String platform,FilterDto filter){
     	if(filter == null){
     		filter = new FilterDto();
     		filter.setPage(1);
     		filter.setRows(3);
     	}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<TargetCompletionRateVo> list = targetCompletionRateService.selectAll(month,platform);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo).toString();
+        return new GridModel(pageInfo);
     }
     /**
      * 柱状图

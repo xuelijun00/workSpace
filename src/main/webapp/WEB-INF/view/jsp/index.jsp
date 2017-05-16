@@ -76,8 +76,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span
-                            class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a>
                         </li>
@@ -89,16 +88,9 @@
                         </li>
                     </ul>
                 </li>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台各月业绩完成率 </a>
                  <li>
-                    <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">目标完成率</span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台各月业绩完成率 </a>
-                        </li>
-                    </ul>
-                </li>
-                 <li>
-                    <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span
-                            class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySales">eBay每日销售额</a>
                         </li>
@@ -106,23 +98,19 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/highcharts.html">eBay组长站点发货业绩</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/jqgirddemo.html">各账号业绩</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebaySkuSales">SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayCategorySales">品类销售报表</a>
                         </li>
                     </ul>
                 </li>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement">各平台各账号业绩</a>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span
-                            class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">美仓业绩完成率</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">美仓各账号业绩</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a>
                         </li>
@@ -132,8 +120,6 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">英仓业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">英仓各账号业绩</a>
-                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
@@ -141,8 +127,6 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">德仓业绩完成率</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">德仓各账号业绩</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a>
                         </li>
@@ -158,8 +142,6 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Amazon各账号业绩</a>
-                        </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Amazon品类销售报表</a>
@@ -173,8 +155,6 @@
                         <li><a class="J_menuItem" href="echarts/highcharts.html">SMT销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT业绩完成率</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">SMT各账号业绩</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">SMT SKU销售报表</a>
                         </li>
@@ -190,8 +170,6 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Wish各账号业绩</a>
-                        </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Wish品类销售报表</a>
@@ -205,8 +183,6 @@
                         <li><a class="J_menuItem" href="echarts/highcharts.html">Lazada销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada业绩完成率</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">Lazada各账号业绩</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">Lazada SKU销售报表</a>
                         </li>
@@ -222,8 +198,6 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">新平台各账号业绩</a>
-                        </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台 SKU销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新平台品类销售报表</a>
@@ -238,8 +212,6 @@
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">沃尔玛业绩完成率</a>
                         </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">沃尔玛各账号业绩</a>
-                        </li>
                     </ul>
                 </li>
                 <li>
@@ -247,8 +219,6 @@
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="echarts/highcharts.html">新蛋销售报表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="echarts/highcharts.html">新蛋各账号业绩</a>
                         </li>
                         <li><a class="J_menuItem" href="echarts/jqgirddemo.html">新蛋 SKU销售报表</a>
                         </li>
