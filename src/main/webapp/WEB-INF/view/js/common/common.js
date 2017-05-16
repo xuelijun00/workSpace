@@ -31,10 +31,8 @@ var common = {
 				//sortorder : opation.sortorder,//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
-				emptyrecords: "Nothing to display",
-				caption : opation.title,//表格的标题名字
+				//caption : opation.title,//表格的标题名字
 				height : opation.height//表格的大小
-
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
