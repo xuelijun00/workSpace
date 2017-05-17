@@ -10,23 +10,10 @@
 <head>
 <meta charset="utf-8">
 <title>YKSUI框架 - 需求管理</title>
-<link rel="shortcut icon" href="./favicon.ico">
-<link href="css/bootstrap.min14ed.css?20170108" rel="stylesheet">
-<link href="css/font-awesome.min93e3.css?20170108" rel="stylesheet">
-<link href="css/style.min862f.css?20170108" rel="stylesheet">
-<link href="css/self.css?20170302" rel="stylesheet">
-<!-- jqGrid组件基础样式包-必要 -->
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/jquery-ui-1.8.16.custom.css" />
-<script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-</script>
-<!--加css-->
 </head>
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>德仓sku销售报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -41,8 +28,8 @@
                 <button type="submit" class="btn btn-primary">查询</button>
             </div>
               <div class="form-group">
-             <label>分类</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
+             <label>SKU</label>
+                        <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku"
                                _value=""/>
             </div>
             <div class="form-group">
@@ -51,7 +38,7 @@
                                _value=""/>
             </div>
             <div class="form-group">
-               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+               <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -68,19 +55,88 @@
 </div>
 
 </div>
-<!-- <script src="../jsLoad/code/load.js?20170503" include="../jsh.html"></script> -->
-
+<%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
-	<script type="text/javascript" src="js/jquery.min.js?v=2.1.4"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.min.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
-	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
-	<script type="text/javascript" src="js/self.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
-	<script type="text/javascript" src="js/report/lazada/lazadasku.js" ></script>
-	<!--加本页面 的js文件与js代码-->
+<script type="text/javascript">
+var chart;
+var operation;
+var domesticData = [];
+function queryData(){
+	var sku = $('#sku').val().trim();
+	var oldsku = $('#oldsku').val().trim();
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var chartUrl =  contextPath + '/report/ebayoverseassku/grid?business=lazada&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
+	common.refreshData(chartUrl,chart,operation);
+}
+function exportData(){
+	var sku = $('#sku').val();
+	var oldsku = $('#oldsku').val();
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var fileName = "lazada业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
+	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
+	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
+	
+	var chartUrl =  contextPath + '/report/ebayoverseassku/grid?business=lazada&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
+
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+			}
+		}
+	});
+	exportDataToCSV('#list2',title,domesticData,fileName,column);
+}
+
+(function(){
+	
+	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-7"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	
+	var sku = $('#sku').val();
+	var oldsku = $('#oldsku').val();
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var chartUrl =  contextPath + '/report/ebayoverseassku/grid?business=lazada&st=' + startDate + "&et=" + endDate;
+	var series = [];
+	
+	common.grid({
+		title:"lazada业务线每日sku销售数据"
+		,url:chartUrl
+		,colNames:[ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+			{name : 'sku',index : 'sku',width : 255}, 
+            {name : 'skuOld',index : 'skuOld',width : 205}, 
+            {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
+            {name : 'orders',index : 'orders',sortable : "true",width : 205},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 205},
+            {name : 'sales',index : 'sales',sortable : "true",width : 205}
+		           ]
+		,sortname:"reportDate1"
+		,sortorder:"asc"
+		,height  : "400"
+	});
+})();
+</script>
 </body>
 </html>
+

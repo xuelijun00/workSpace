@@ -15,7 +15,6 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Ebay业务线每日销售数据</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">

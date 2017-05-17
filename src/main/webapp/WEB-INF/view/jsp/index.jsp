@@ -144,7 +144,7 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">SMT业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/amazonDailySales">SMT销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySales">SMT销售报表</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a>
                         </li>

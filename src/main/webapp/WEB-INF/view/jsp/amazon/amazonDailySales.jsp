@@ -10,23 +10,10 @@
 <head>
 <meta charset="utf-8">
 <title>YKSUI框架 - 需求管理</title>
-<link rel="shortcut icon" href="./favicon.ico">
-<link href="css/bootstrap.min14ed.css?20170108" rel="stylesheet">
-<link href="css/font-awesome.min93e3.css?20170108" rel="stylesheet">
-<link href="css/style.min862f.css?20170108" rel="stylesheet">
-<link href="css/self.css?20170302" rel="stylesheet">
-<!-- jqGrid组件基础样式包-必要 -->
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/jquery-ui-1.8.16.custom.css" />
-<script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-</script>
-<!--加css-->
 </head>
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Ebay业务线每日销售数据</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -38,7 +25,7 @@
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
-                <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -57,19 +44,94 @@
 </div>
 
 </div>
-<!-- <script src="../jsLoad/code/load.js?20170503" include="../jsh.html"></script> -->
-
+<%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
-	<script type="text/javascript" src="js/jquery.min.js?v=2.1.4"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.min.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
-	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
-	<script type="text/javascript" src="js/self.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
-	<script type="text/javascript" src="js/report/amazon/amazondomerstic.js" ></script>
-	<!--加本页面 的js文件与js代码-->
+<script type="text/javascript">
+var chart;
+var domesticData = [];
+function getUrl(type){//拼接url
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	if(type === 1){
+		return contextPath + '/report/dailysales/grid?business=amazon&st=' + startDate + "&et=" + endDate;
+	}else{
+		return contextPath + '/report/dailysales/chart?business=amazon&st=' + startDate + "&et=" + endDate;
+	}
+}
+function queryData(){
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
+}
+function exportData(){
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var fileName = "Amazon业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
+	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
+	var column = ['orders','sales','reportDate1','business'];
+	exportDataToCSV('#list2',title,domesticData,fileName,column);
+}
+function getChartData(chartUrl){
+	var reportDate = [];
+	var salesAmount = [];
+	var orders = [];
+	var categories = [];
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+				for(var i=0;i<data.length;i++){
+				  reportDate.push(data[i].reportDate1);
+            	  salesAmount.push(data[i].sales);
+            	  orders.push(data[i].orders);
+	            }
+			}
+		}
+	});
+	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
+	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
+	return {
+		title:{text:"Amazon业务线每日销售数据"}
+		,categories:reportDate
+		,y:y
+		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
+		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
+	};
+}
+(function(){
+	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-14"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	chart = common.chart(getChartData(getUrl()));//chart
+	common.grid({
+		title:"Amazon业务线每日销售数据"
+		,url:getUrl(1)
+		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
+		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
+		             {name : 'business',index : 'business',width : 205}, 
+		             {name : 'sales',index : 'sales',width : 205}, 
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205}
+		           ]
+		,sortname:"reportDate1"
+		,sortorder:"asc"
+	});
+})();
+</script>
 </body>
 </html>

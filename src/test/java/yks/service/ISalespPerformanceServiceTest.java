@@ -1,5 +1,6 @@
 package yks.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,8 +14,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.yks.bi.dto.report.Dailysalescategoryreports;
+import com.yks.bi.dto.report.Dailysalesskureports;
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.dto.report.TargetCompletionRateVo;
+import com.yks.bi.service.report.IEbayDomesticService;
 import com.yks.bi.service.report.ISalespPerformanceService;
 import com.yks.bi.service.report.ITargetCompletionRateService;
 
@@ -24,19 +28,21 @@ import com.yks.bi.service.report.ITargetCompletionRateService;
 public class ISalespPerformanceServiceTest {
 
 	@Autowired
-	ISalespPerformanceService salespPerformanceService;
+	IEbayDomesticService test;
 	
 	@Test
-	public void selectAll() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        //过去15天
-        c.setTime(new Date());
-        c.add(Calendar.DATE, - 14);
-        Date d = c.getTime();
-        String day = format.format(d);
-        /*List<SalesPerformance> list = salespPerformanceService.selectAll(d);
-        Assert.assertEquals(15, list.size());*/
+	public void selectAll() throws ParseException {
+		
+		String strDate = "2017-05-09 00:00:00";
+		String etrDate = "2017-05-12 00:00:00";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(strDate);
+		Date date1 = sdf.parse(etrDate);
+		
+        List<Dailysalesskureports> list = test.selectskuAll("Ebay_US", date, date1, null, null);
+        for (int i = 0; i < list.size(); i++) {  
+            System.out.println(list.get(i));  
+        }  
 	}
 
 }

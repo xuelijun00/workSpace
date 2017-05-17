@@ -14,7 +14,6 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>lazada业务线每日销售数据</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -50,12 +49,18 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
-function queryData(){
+function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=lazada&st=' + startDate + "&et=" + endDate;
-	var operation = getChartData(chartUrl);
-	common.refreshData(chartUrl,chart,operation);
+	if(type === 1){
+		return contextPath + '/report/dailysales/grid?business=lazada&st=' + startDate + "&et=" + endDate;
+	}else{
+		return contextPath + '/report/dailysales/chart?business=lazada&st=' + startDate + "&et=" + endDate;
+	}
+}
+function queryData(){
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -112,13 +117,10 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	
-	var chartUrl =  contextPath + '/report/dailysales/grid?business=lazada&st=' + startDate + "&et=" + endDate;
-	var series = [];
-	chart = common.chart(getChartData(chartUrl));//chart
+	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"lazada业务线每日销售数据"
-		,url:chartUrl
+		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
@@ -133,4 +135,3 @@ function getChartData(chartUrl){
 </script>
 </body>
 </html>
-

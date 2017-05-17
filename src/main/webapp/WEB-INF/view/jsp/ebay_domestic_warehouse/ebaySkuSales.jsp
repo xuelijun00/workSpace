@@ -14,7 +14,6 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>德仓sku销售报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
