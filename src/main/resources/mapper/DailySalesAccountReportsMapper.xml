@@ -21,18 +21,20 @@
   </select>
   
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesAccountReportsKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from dailysalesaccountreports
-    where 1=1
-    <if test="reportDate != null">
-    	and report_date = #{reportDate,jdbcType=DATE}
+  	select report_date, business, account, orders, sales 
+  	from dailysalesaccountreports
+	where 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate}
     </if>
-    <if test="business != null and business.length() > 0">
-    	and business = #{business,jdbcType=VARCHAR}
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate}]]>
     </if>
-    <if test="account != null and account.length() > 0">
-    	and account = #{account,jdbcType=VARCHAR}
+    <if test="business != null and business.length() > 0" >
+       and business = #{business,jdbcType=VARCHAR}
+    </if>
+    <if test="account != null and account.length() > 0" >
+       and account = #{account,jdbcType=VARCHAR}
     </if>
   </select>
   <!--查询平台  -->

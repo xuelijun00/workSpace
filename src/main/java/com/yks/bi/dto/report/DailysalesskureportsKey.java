@@ -1,12 +1,10 @@
 package com.yks.bi.dto.report;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.aspectj.apache.bcel.generic.NEW;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 public class DailysalesskureportsKey {
-	private static final SimpleDateFormat DATEFORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private Date reportDate;
 
     private String business;
@@ -15,8 +13,7 @@ public class DailysalesskureportsKey {
     private String reportDate1;
     
     public String getReportDate1() {
-    	reportDate1 = DATEFORMAT.format(reportDate);
-    	return reportDate1;
+    	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
 	}
     
     public Date getReportDate() {

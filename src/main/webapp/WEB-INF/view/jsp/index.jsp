@@ -105,6 +105,7 @@
                     </ul>
                 </li>
                 <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement">各平台各账号业绩</a>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/manager_account_achievement">各平台各账号管理员业绩</a>
                 <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

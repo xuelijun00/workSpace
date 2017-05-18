@@ -27,7 +27,7 @@ import com.yks.bi.web.vo.MessageVo;
  */
 public class ExeclDownLoad {
 	
-	 private static Logger log = Logger.getLogger(HttpRequestUtils.class);
+	private static Logger log = Logger.getLogger(HttpRequestUtils.class);
 
 	/**
 	 * 默认的格式

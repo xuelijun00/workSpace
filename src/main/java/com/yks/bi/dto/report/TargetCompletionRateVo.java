@@ -1,7 +1,8 @@
 package com.yks.bi.dto.report;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 public class TargetCompletionRateVo {
 
@@ -14,8 +15,7 @@ public class TargetCompletionRateVo {
     private String reportDate1;//报表时间
     
     public String getReportDate1(){
-    	reportDate1 = new SimpleDateFormat("yyyy-MM-dd").format(reportDate);
-    	return reportDate1;
+    	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
     }
 
     private Integer performanceTarget;//1月份业绩目标

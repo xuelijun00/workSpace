@@ -1,21 +1,21 @@
 package com.yks.bi.dto.report;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.commons.lang3.time.DateUtils;
 
 public class DailySalesAccountReportsKey {
-    private Date reportDate;
-    private String reportDate1;
-    public String getReportDate1(){
-    	return DateFormatUtils.format(reportDate, "yyyy-MM-dd");
-    }
+	
+	private Date reportDate;
 
     private String business;
 
     private String account;
+    
+    private String startDate;
+    private String endDate;
+    
+    public DailySalesAccountReportsKey(){}
 
     public Date getReportDate() {
         return reportDate;
@@ -40,4 +40,21 @@ public class DailySalesAccountReportsKey {
     public void setAccount(String account) {
         this.account = account == null ? null : account.trim();
     }
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
 }

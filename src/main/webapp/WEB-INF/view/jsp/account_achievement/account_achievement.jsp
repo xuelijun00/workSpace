@@ -22,6 +22,10 @@
               <input type="text" id="start_date"class="form-control" placeholder="">
             </div>
             <div class="form-group">
+              <label>结束时间</label>
+              <input type="text" id="end_date" class="form-control" placeholder="">
+            </div>
+            <div class="form-group">
                 <label>平台：</label>
                 <select class="form-control w120" id="platform" >
                 </select>
@@ -55,13 +59,14 @@ var chart;
 var domesticData = [];
 function getUrl(type){
 	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
 	var account = $("#account_input").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/account_achievement/grid?date=' + startDate;
+		url = contextPath + '/report/account_achievement/grid?startDate=' + startDate + '&endDate=' + endDate;
 	}else{
-		url = contextPath + '/report/account_achievement/chart?date=' + startDate;
+		url = contextPath + '/report/account_achievement/chart?startDate=' + startDate + '&endDate=' + endDate;
 	}
 	if(platform !== 'all'){url += "&business=" + platform;}
 	if(account !== 'all' && account.length > 0){url += "&account=" + account;}
@@ -100,6 +105,14 @@ function getChartData(chartUrl){
 }
 (function(){
 	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-15"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
         isinitVal: true,
         isTime:false,
         ishmsVal: false,

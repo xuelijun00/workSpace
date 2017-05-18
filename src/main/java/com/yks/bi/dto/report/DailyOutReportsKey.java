@@ -13,7 +13,7 @@ public class DailyOutReportsKey {
     private Date reportDate1;
     
     public String getReportDate1() {
-        return DateFormatUtils.format(reportDate, "yyyy-MM-dd");
+    	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
     }
     
     private String startDate;

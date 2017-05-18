@@ -27,10 +27,7 @@ public class AccountAchievementController {
 	private IAccountAchievementService accountAchievementService;
 	
 	@RequestMapping(value="/account_achievement/grid")
-	public GridModel selectAccountAchievementServiceGrid(DailySalesAccountReportsKey key,String date,FilterDto filter) throws ParseException {
-		if(StringUtils.isNotEmpty(date)){
-			key.setReportDate(DateUtils.parseDate(date, "yyyy-MM-dd"));
-		}
+	public GridModel selectAccountAchievementServiceGrid(DailySalesAccountReportsKey key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailySalesAccountReports> list = accountAchievementService.selectAccountAchievementService(key);
@@ -38,10 +35,7 @@ public class AccountAchievementController {
         return new GridModel(pageInfo);
 	}
 	@RequestMapping(value="/account_achievement/chart")
-	public List<DailySalesAccountReports> selectAccountAchievementServiceChart(DailySalesAccountReportsKey key,String date) throws ParseException {
-		if(StringUtils.isNotEmpty(date)){
-			key.setReportDate(DateUtils.parseDate(date, "yyyy-MM-dd"));
-		}
+	public List<DailySalesAccountReports> selectAccountAchievementServiceChart(DailySalesAccountReportsKey key) throws ParseException {
 		return accountAchievementService.selectAccountAchievementService(key);
 	}
 	
