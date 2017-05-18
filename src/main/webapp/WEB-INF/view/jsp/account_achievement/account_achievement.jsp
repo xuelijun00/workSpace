@@ -86,7 +86,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].account);
+				  reportDate.push(data[i].account + "<br/>" + data[i].reportDate1);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
