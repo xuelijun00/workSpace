@@ -28,6 +28,9 @@ public class AccountAchievementController {
 	
 	@RequestMapping(value="/account_achievement/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailySalesAccountReportsKey key,FilterDto filter) throws ParseException {
+		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailySalesAccountReports> list = accountAchievementService.selectAccountAchievementService(key);

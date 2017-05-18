@@ -35,11 +35,9 @@ public class TargetCompletionRateController {
      */
     @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
     public GridModel targetCompletionRate(String month,String platform,FilterDto filter){
-    	if(filter == null){
-    		filter = new FilterDto();
-    		filter.setPage(1);
-    		filter.setRows(3);
-    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<TargetCompletionRateVo> list = targetCompletionRateService.selectAll(month,platform);

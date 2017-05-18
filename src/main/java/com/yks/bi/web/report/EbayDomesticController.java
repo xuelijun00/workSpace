@@ -3,7 +3,6 @@ package com.yks.bi.web.report;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +13,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.Dailysalescategoryreports;
 import com.yks.bi.dto.report.Dailysalesskureports;
-import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.IEbayDomesticService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +51,9 @@ public class EbayDomesticController {
     	if(StringUtils.isNotEmpty(et)){
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalesskureports> list = isale.selectskuAll(business, starttime, endtime, sku, oldsku);
@@ -77,7 +77,9 @@ public class EbayDomesticController {
     	if(StringUtils.isNotEmpty(et)){
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
-    	
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalescategoryreports> list = isale.selectcategoryAll(business, starttime, endtime, oldsku, category);
