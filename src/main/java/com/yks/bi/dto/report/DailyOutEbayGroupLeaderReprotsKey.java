@@ -8,6 +8,9 @@ public class DailyOutEbayGroupLeaderReprotsKey {
     private Date reportDate;
 
     private String groupleader;
+    
+    private String startDate;
+    private String endDate;
 
     public String getZhandian() {
         return zhandian;
@@ -32,4 +35,20 @@ public class DailyOutEbayGroupLeaderReprotsKey {
     public void setGroupleader(String groupleader) {
         this.groupleader = groupleader == null ? null : groupleader.trim();
     }
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 }

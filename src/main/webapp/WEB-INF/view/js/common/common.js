@@ -27,8 +27,8 @@ var common = {
 				rowNum : opation.rowNum,//一页显示多少条
 				rowList : [20, 60, 100 ],//可供用户选择一页显示多少条
 				pager: opation.pager?opation.pager:"#pager2",//表格页脚的占位符(一般是div)的id
-				//sortname : opation.sortname,//初始化的时候排序的字段
-				//sortorder : opation.sortorder,//排序方式,可选desc,asc
+				sortname : opation.sortname,//初始化的时候排序的字段
+				sortorder : opation.sortorder,//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				//caption : opation.title,//表格的标题名字

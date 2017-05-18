@@ -1,4 +1,4 @@
-function exportDataToCSV(id,title,dataArray,filename,ignoreColumn){
+function exportDataToCSV(id,title,dataArray,filename,column){
 	var gridid 		= jQuery(id).getDataIDs(); // Get all the ids in array
 	var label 		= jQuery(id).getRowData(gridid[0]); // Get First row to get the labels
 	/*var selRowIds 	= jQuery(id).jqGrid ('getGridParam', 'selarrrow');	
@@ -17,9 +17,9 @@ function exportDataToCSV(id,title,dataArray,filename,ignoreColumn){
 		items:dataArray==null?jQuery(id).jqGrid ('getRowData'):dataArray
 	};
 	var json = JSON.stringify(obj);
-	JSONToCSVConvertor(json, "csv", 1,filename,ignoreColumn);
+	JSONToCSVConvertor(json, 1,filename,column);
 }
-function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel,filename,column) {     
+function JSONToCSVConvertor(JSONData, ShowLabel,filename,column) {     
 	//If JSONData is not an object then JSON.parse will parse the JSON string in an Object
 	var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
 	var CSV = '';    
@@ -42,14 +42,14 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel,filename,column) {
 	for (var i = 0; i < arrData.items.length; i++) {
 	    var row = "";
 	    //2nd loop will extract each column and convert it in string comma-seprated
-	    for (var index in arrData.items[i]) {
-	    	if(!column){
-	    		row += '"' + (arrData.items[i][index]+"").replace(/(<([^>]+)>)/ig, '') + '",';
-	    	}else{
-	    		if(column && column != null && column.indexOf(index) > -1){
-		    		row += '"' + (arrData.items[i][index]+"").replace(/(<([^>]+)>)/ig, '') + '",';
-		    	}
-	    	}
+	    if(column && column != null && column.length > 0){
+	    	for (var j = 0; j < column.length; j++) {
+		    	row += '"' + (arrData.items[i][column[j]]+"").replace(/(<([^>]+)>)/ig, '') + '",';
+		    }
+	    }else{
+	    	for (var index in arrData.items[i]) {
+		    	row += '"' + (arrData.items[i][index]+"").replace(/(<([^>]+)>)/ig, '') + '",';
+		    }
 	    }
 	    row.slice(0, row.length - 1);
 	    //add a line break after each row

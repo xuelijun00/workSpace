@@ -36,6 +36,53 @@
       and report_date = #{reportDate,jdbcType=DATE}
       and groupleader = #{groupleader,jdbcType=VARCHAR}
   </select>
+  <!-- 根据条件查询 -->
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutebaygroupleaderreprots
+    where 1=1
+    <if test="zhandian != null">
+    	and zhandian = #{zhandian,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="groupleader != null and groupleader.length() > 0">
+    	and groupleader = #{groupleader,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!-- 根据条件查询组长每周业绩 -->
+  <select id="selectLeaderDailyOutByWeek" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
+    select YEARWEEK(report_date,1) startDate,groupleader,zhandian,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny)product_total_cny,sum(net_profit)net_profit
+	from dailyoutebaygroupleaderreprots
+	where 1=1
+    <if test="zhandian != null">
+    	and zhandian = #{zhandian,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
+    <if test="groupleader != null and groupleader.length() > 0">
+    	and groupleader = #{groupleader,jdbcType=VARCHAR}
+    </if>
+    GROUP BY startDate,groupleader,zhandian
+  </select>
+  <!--查询站点  -->
+  <select id="selectSite" resultType="String">
+  	select distinct zhandian from dailyoutebaygroupleaderreprots
+  </select>
+  <!--查询组长  -->
+  <select id="selectLeader" resultType="String">
+  	select distinct groupleader from dailyoutebaygroupleaderreprots
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
     delete from dailyoutebaygroupleaderreprots
     where zhandian = #{zhandian,jdbcType=VARCHAR}

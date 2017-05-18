@@ -44,14 +44,17 @@
     <if test="platform != null">
     	and platform = #{platform,jdbcType=VARCHAR}
     </if>
-    <if test="startDate != null and endDate != null">
-    	and report_date between #{startDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
     </if>
     <if test="manager != null and manager.length() > 0">
     	and manager = #{manager,jdbcType=VARCHAR}
     </if>
   </select>
-  <!-- 根据条件查询 -->
+  <!-- 根据条件查询每周业绩 -->
   <select id="selectManagerAchievementByWeek" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutManagerSumReprotsKey" >
     select manager,YEARWEEK(report_date,1) startDate,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny)product_total_cny,sum(net_profit)net_profit
 	from dailyoutmanagerhuizongreprots  
