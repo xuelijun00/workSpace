@@ -14,7 +14,48 @@
     <result column="quarterlySales" property="quarterlySales" jdbcType="INTEGER" />
     <result column="quarterlyEstimatedSales" property="quarterlyEstimatedSales" jdbcType="INTEGER" />
     <result column="quarterlyEstimatedPercent" property="quarterlyEstimatedPercent" jdbcType="INTEGER" />
+    <result column="targetprofit" property="targetprofit" jdbcType="INTEGER" />
+    <result column="actualprofit" property="actualprofit" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="selectPlatform" resultType="String">
+  	select distinct platform from configplatformgoal;
+  </select>
+  <select id="selectAll" resultMap="BaseResultMapVO" >
+    select * from (
+    SELECT 1 month,platform, name, report_date, month1 as performanceTarget, quarter1 as quarterlySalesTarget,month1sales as monthSales, quarter1sales as quarterlySales,month1estimatesales as estimatedSales, quarter1estimatesales as quarterlyEstimatedSales, month1percent as estimatedPercent, quarter1percent as quarterlyEstimatedPercent,targetprofit1 as targetprofit,actualprofit1 as actualprofit FROM `configplatformgoal`
+    union
+    select 2,platform, name, report_date, month2, quarter1,month2sales, quarter1sales,month2estimatesales, quarter1estimatesales, month2percent, quarter1percent,targetprofit2,actualprofit2 FROM `configplatformgoal`
+    union
+    select  3,platform, name, report_date, month3, quarter1,month3sales, quarter1sales, month3estimatesales, quarter1estimatesales, month3percent, quarter1percent,targetprofit3,actualprofit3  from configplatformgoal
+    union
+    select 4,platform, name, report_date, month4, quarter2,month4sales, quarter2sales,month4estimatesales, quarter2estimatesales, month4percent, quarter2percent,targetprofit4,actualprofit4 from configplatformgoal
+    union
+    select 5,platform, name, report_date, month5, quarter2,month5sales, quarter2sales,month5estimatesales, quarter2estimatesales, month5percent, quarter2percent,targetprofit5,actualprofit5 from configplatformgoal
+    union
+    select 6,platform, name, report_date, month6, quarter2,month6sales, quarter2sales,month6estimatesales, quarter2estimatesales, month6percent, quarter2percent,targetprofit6,actualprofit6 from configplatformgoal
+    union
+    select 7,platform, name, report_date, month7, quarter3,month7sales, quarter3sales,month7estimatesales, quarter3estimatesales, month7percent, quarter3percent,targetprofit7,actualprofit7 from configplatformgoal
+    union
+    select 8,platform, name, report_date, month8, quarter3,month8sales, quarter3sales,month8estimatesales, quarter3estimatesales, month8percent, quarter3percent,targetprofit8,actualprofit8 from configplatformgoal
+    union
+    select 9,platform, name, report_date, month9, quarter3,month9sales, quarter3sales,month9estimatesales, quarter3estimatesales, month9percent, quarter3percent,targetprofit9,actualprofit9 from configplatformgoal
+    union
+    select 10,platform, name, report_date, month10, quarter4,month10sales, quarter4sales,month10estimatesales, quarter4estimatesales, month10percent, quarter4percent,targetprofit10,actualprofit10 from configplatformgoal
+    union
+    select 11,platform, name, report_date, month11, quarter4,month11sales, quarter4sales,month11estimatesales, quarter4estimatesales, month11percent, quarter4percent,targetprofit11,actualprofit11 from configplatformgoal
+    union
+    select 12,platform, name, report_date, month12, quarter4,month12sales, quarter4sales,month12estimatesales, quarter4estimatesales, month12percent, quarter4percent,targetprofit12,actualprofit12 from configplatformgoal
+    ) a
+    where 1=1
+    <if test="month != null">
+    	and month = #{month,jdbcType=VARCHAR}
+    </if>
+    <if test="platform != null">
+      and platform = #{platform,jdbcType=VARCHAR}
+    </if>
+  </select>
 
   <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.TargetCompletionRate" >
     <id column="platform" property="platform" jdbcType="VARCHAR" />
@@ -84,6 +125,33 @@
     <result column="quarter2percent" property="quarter2percent" jdbcType="INTEGER" />
     <result column="quarter3percent" property="quarter3percent" jdbcType="INTEGER" />
     <result column="quarter4percent" property="quarter4percent" jdbcType="INTEGER" />
+    
+    <!-- <result column="targetprofit1" property="targetprofit1" jdbcType="INTEGER" />
+    <result column="targetprofit2" property="targetprofit2" jdbcType="INTEGER" />
+    <result column="targetprofit3" property="targetprofit3" jdbcType="INTEGER" />
+    <result column="targetprofit4" property="targetprofit4" jdbcType="INTEGER" />
+    <result column="targetprofit5" property="targetprofit5" jdbcType="INTEGER" />
+    <result column="targetprofit6" property="targetprofit6" jdbcType="INTEGER" />
+    <result column="targetprofit7" property="targetprofit7" jdbcType="INTEGER" />
+    <result column="targetprofit8" property="targetprofit8" jdbcType="INTEGER" />
+    <result column="targetprofit9" property="targetprofit9" jdbcType="INTEGER" />
+    <result column="targetprofit10" property="targetprofit10" jdbcType="INTEGER" />
+    <result column="targetprofit11" property="targetprofit11" jdbcType="INTEGER" />
+    <result column="targetprofit12" property="targetprofit12" jdbcType="INTEGER" />
+    
+    <result column="actualprofit1" property="actualprofit1" jdbcType="INTEGER" />
+    <result column="actualprofit2" property="actualprofit2" jdbcType="INTEGER" />
+    <result column="actualprofit3" property="actualprofit3" jdbcType="INTEGER" />
+    <result column="actualprofit4" property="actualprofit4" jdbcType="INTEGER" />
+    <result column="actualprofit5" property="actualprofit5" jdbcType="INTEGER" />
+    <result column="actualprofit6" property="actualprofit6" jdbcType="INTEGER" />
+    <result column="actualprofit7" property="actualprofit7" jdbcType="INTEGER" />
+    <result column="actualprofit8" property="actualprofit8" jdbcType="INTEGER" />
+    <result column="actualprofit9" property="actualprofit9" jdbcType="INTEGER" />
+    <result column="actualprofit10" property="actualprofit10" jdbcType="INTEGER" />
+    <result column="actualprofit11" property="actualprofit11" jdbcType="INTEGER" />
+    <result column="actualprofit12" property="actualprofit12" jdbcType="INTEGER" /> -->
+    
   </resultMap>
 
   <sql id="Base_Column_List" >
@@ -98,7 +166,10 @@
     quarter3estimatesales, quarter4estimatesales, month1percent, month2percent, month3percent, 
     month4percent, month5percent, month6percent, month7percent, month8percent, month9percent, 
     month10percent, month11percent, month12percent, quarter1percent, quarter2percent, 
-    quarter3percent, quarter4percent
+    quarter3percent, quarter4percent,targetprofit1,targetprofit2,targetprofit3,targetprofit4,
+    targetprofit5,targetprofit6,targetprofit7,targetprofit8,targetprofit9,targetprofit10,targetprofit11,targetprofit12,
+    actualprofit1,actualprofit2,actualprofit3,actualprofit4,actualprofit5,actualprofit6,actualprofit7,actualprofit8,actualprofit9,
+    actualprofit10,actualprofit11,actualprofit12
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -110,40 +181,7 @@
     </if>
   </select>
 
-  <select id="selectAll" resultMap="BaseResultMapVO" >
-    select * from (
-    SELECT '1' month,platform, name, report_date, month1 as performanceTarget, quarter1 as quarterlySalesTarget,month1sales as monthSales, quarter1sales as quarterlySales,month1estimatesales as estimatedSales, quarter1estimatesales as quarterlyEstimatedSales, month1percent as estimatedPercent, quarter1percent as quarterlyEstimatedPercent FROM `configplatformgoal`
-    union
-    select '2',platform, name, report_date, month2, quarter1,month2sales, quarter1sales,month2estimatesales, quarter1estimatesales, month2percent, quarter1percent FROM `configplatformgoal`
-    union
-    select  '3',platform, name, report_date, month3, quarter1,month3sales, quarter1sales, month3estimatesales, quarter1estimatesales, month3percent, quarter1percent from configplatformgoal
-    union
-    select '4',platform, name, report_date, month4, quarter2,month4sales, quarter2sales,month4estimatesales, quarter2estimatesales, month4percent, quarter2percent from configplatformgoal
-    union
-    select '5',platform, name, report_date, month5, quarter2,month5sales, quarter2sales,month5estimatesales, quarter2estimatesales, month5percent, quarter2percent from configplatformgoal
-    union
-    select '6',platform, name, report_date, month6, quarter2,month6sales, quarter2sales,month6estimatesales, quarter2estimatesales, month6percent, quarter2percent from configplatformgoal
-    union
-    select '7',platform, name, report_date, month7, quarter3,month7sales, quarter3sales,month7estimatesales, quarter3estimatesales, month7percent, quarter3percent from configplatformgoal
-    union
-    select '8',platform, name, report_date, month8, quarter3,month8sales, quarter3sales,month8estimatesales, quarter3estimatesales, month8percent, quarter3percent from configplatformgoal
-    union
-    select '9',platform, name, report_date, month9, quarter3,month9sales, quarter3sales,month9estimatesales, quarter3estimatesales, month9percent, quarter3percent from configplatformgoal
-    union
-    select '10',platform, name, report_date, month10, quarter4,month10sales, quarter4sales,month10estimatesales, quarter4estimatesales, month10percent, quarter4percent from configplatformgoal
-    union
-    select '11',platform, name, report_date, month11, quarter4,month11sales, quarter4sales,month11estimatesales, quarter4estimatesales, month11percent, quarter4percent from configplatformgoal
-    union
-    select '12',platform, name, report_date, month12, quarter4,month12sales, quarter4sales,month12estimatesales, quarter4estimatesales, month12percent, quarter4percent from configplatformgoal
-    ) a
-    where month = #{month,jdbcType=VARCHAR}
-    <if test="platform != null">
-      and platform = #{platform,jdbcType=VARCHAR}
-    </if>
-
-  </select>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from configplatformgoal
     where platform = #{platform,jdbcType=VARCHAR}
   </delete>
@@ -198,417 +236,95 @@
       #{month9percent,jdbcType=INTEGER}, #{month10percent,jdbcType=INTEGER}, #{month11percent,jdbcType=INTEGER}, 
       #{month12percent,jdbcType=INTEGER}, #{quarter1percent,jdbcType=INTEGER}, #{quarter2percent,jdbcType=INTEGER}, 
       #{quarter3percent,jdbcType=INTEGER}, #{quarter4percent,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.TargetCompletionRate" >
-    insert into configplatformgoal
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="platform != null" >
-        platform,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="reportDate != null" >
-        report_date,
-      </if>
-      <if test="month1 != null" >
-        month1,
-      </if>
-      <if test="month2 != null" >
-        month2,
-      </if>
-      <if test="month3 != null" >
-        month3,
-      </if>
-      <if test="month4 != null" >
-        month4,
-      </if>
-      <if test="month5 != null" >
-        month5,
-      </if>
-      <if test="month6 != null" >
-        month6,
-      </if>
-      <if test="month7 != null" >
-        month7,
-      </if>
-      <if test="month8 != null" >
-        month8,
-      </if>
-      <if test="month9 != null" >
-        month9,
-      </if>
-      <if test="month10 != null" >
-        month10,
-      </if>
-      <if test="month11 != null" >
-        month11,
-      </if>
-      <if test="month12 != null" >
-        month12,
-      </if>
-      <if test="quarter1 != null" >
-        quarter1,
-      </if>
-      <if test="quarter2 != null" >
-        quarter2,
-      </if>
-      <if test="quarter3 != null" >
-        quarter3,
-      </if>
-      <if test="quarter4 != null" >
-        quarter4,
-      </if>
-      <if test="month1sales != null" >
-        month1sales,
-      </if>
-      <if test="month2sales != null" >
-        month2sales,
-      </if>
-      <if test="month3sales != null" >
-        month3sales,
-      </if>
-      <if test="month4sales != null" >
-        month4sales,
-      </if>
-      <if test="month5sales != null" >
-        month5sales,
-      </if>
-      <if test="month6sales != null" >
-        month6sales,
-      </if>
-      <if test="month7sales != null" >
-        month7sales,
-      </if>
-      <if test="month8sales != null" >
-        month8sales,
-      </if>
-      <if test="month9sales != null" >
-        month9sales,
-      </if>
-      <if test="month10sales != null" >
-        month10sales,
-      </if>
-      <if test="month11sales != null" >
-        month11sales,
-      </if>
-      <if test="month12sales != null" >
-        month12sales,
-      </if>
-      <if test="quarter1sales != null" >
-        quarter1sales,
-      </if>
-      <if test="quarter2sales != null" >
-        quarter2sales,
-      </if>
-      <if test="quarter3sales != null" >
-        quarter3sales,
-      </if>
-      <if test="quarter4sales != null" >
-        quarter4sales,
-      </if>
-      <if test="month1estimatesales != null" >
-        month1estimatesales,
-      </if>
-      <if test="month2estimatesales != null" >
-        month2estimatesales,
-      </if>
-      <if test="month3estimatesales != null" >
-        month3estimatesales,
-      </if>
-      <if test="month4estimatesales != null" >
-        month4estimatesales,
-      </if>
-      <if test="month5estimatesales != null" >
-        month5estimatesales,
-      </if>
-      <if test="month6estimatesales != null" >
-        month6estimatesales,
-      </if>
-      <if test="month7estimatesales != null" >
-        month7estimatesales,
-      </if>
-      <if test="month8estimatesales != null" >
-        month8estimatesales,
-      </if>
-      <if test="month9estimatesales != null" >
-        month9estimatesales,
-      </if>
-      <if test="month10estimatesales != null" >
-        month10estimatesales,
-      </if>
-      <if test="month11estimatesales != null" >
-        month11estimatesales,
-      </if>
-      <if test="month12estimatesales != null" >
-        month12estimatesales,
-      </if>
-      <if test="quarter1estimatesales != null" >
-        quarter1estimatesales,
-      </if>
-      <if test="quarter2estimatesales != null" >
-        quarter2estimatesales,
-      </if>
-      <if test="quarter3estimatesales != null" >
-        quarter3estimatesales,
-      </if>
-      <if test="quarter4estimatesales != null" >
-        quarter4estimatesales,
-      </if>
-      <if test="month1percent != null" >
-        month1percent,
-      </if>
-      <if test="month2percent != null" >
-        month2percent,
-      </if>
-      <if test="month3percent != null" >
-        month3percent,
-      </if>
-      <if test="month4percent != null" >
-        month4percent,
-      </if>
-      <if test="month5percent != null" >
-        month5percent,
-      </if>
-      <if test="month6percent != null" >
-        month6percent,
-      </if>
-      <if test="month7percent != null" >
-        month7percent,
-      </if>
-      <if test="month8percent != null" >
-        month8percent,
-      </if>
-      <if test="month9percent != null" >
-        month9percent,
-      </if>
-      <if test="month10percent != null" >
-        month10percent,
-      </if>
-      <if test="month11percent != null" >
-        month11percent,
-      </if>
-      <if test="month12percent != null" >
-        month12percent,
-      </if>
-      <if test="quarter1percent != null" >
-        quarter1percent,
-      </if>
-      <if test="quarter2percent != null" >
-        quarter2percent,
-      </if>
-      <if test="quarter3percent != null" >
-        quarter3percent,
-      </if>
-      <if test="quarter4percent != null" >
-        quarter4percent,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="platform != null" >
-        #{platform,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="reportDate != null" >
-        #{reportDate,jdbcType=DATE},
-      </if>
-      <if test="month1 != null" >
-        #{month1,jdbcType=INTEGER},
-      </if>
-      <if test="month2 != null" >
-        #{month2,jdbcType=INTEGER},
-      </if>
-      <if test="month3 != null" >
-        #{month3,jdbcType=INTEGER},
-      </if>
-      <if test="month4 != null" >
-        #{month4,jdbcType=INTEGER},
-      </if>
-      <if test="month5 != null" >
-        #{month5,jdbcType=INTEGER},
-      </if>
-      <if test="month6 != null" >
-        #{month6,jdbcType=INTEGER},
-      </if>
-      <if test="month7 != null" >
-        #{month7,jdbcType=INTEGER},
-      </if>
-      <if test="month8 != null" >
-        #{month8,jdbcType=INTEGER},
-      </if>
-      <if test="month9 != null" >
-        #{month9,jdbcType=INTEGER},
-      </if>
-      <if test="month10 != null" >
-        #{month10,jdbcType=INTEGER},
-      </if>
-      <if test="month11 != null" >
-        #{month11,jdbcType=INTEGER},
-      </if>
-      <if test="month12 != null" >
-        #{month12,jdbcType=INTEGER},
-      </if>
-      <if test="quarter1 != null" >
-        #{quarter1,jdbcType=INTEGER},
-      </if>
-      <if test="quarter2 != null" >
-        #{quarter2,jdbcType=INTEGER},
-      </if>
-      <if test="quarter3 != null" >
-        #{quarter3,jdbcType=INTEGER},
-      </if>
-      <if test="quarter4 != null" >
-        #{quarter4,jdbcType=INTEGER},
-      </if>
-      <if test="month1sales != null" >
-        #{month1sales,jdbcType=INTEGER},
-      </if>
-      <if test="month2sales != null" >
-        #{month2sales,jdbcType=INTEGER},
-      </if>
-      <if test="month3sales != null" >
-        #{month3sales,jdbcType=INTEGER},
-      </if>
-      <if test="month4sales != null" >
-        #{month4sales,jdbcType=INTEGER},
-      </if>
-      <if test="month5sales != null" >
-        #{month5sales,jdbcType=INTEGER},
-      </if>
-      <if test="month6sales != null" >
-        #{month6sales,jdbcType=INTEGER},
-      </if>
-      <if test="month7sales != null" >
-        #{month7sales,jdbcType=INTEGER},
-      </if>
-      <if test="month8sales != null" >
-        #{month8sales,jdbcType=INTEGER},
-      </if>
-      <if test="month9sales != null" >
-        #{month9sales,jdbcType=INTEGER},
-      </if>
-      <if test="month10sales != null" >
-        #{month10sales,jdbcType=INTEGER},
-      </if>
-      <if test="month11sales != null" >
-        #{month11sales,jdbcType=INTEGER},
-      </if>
-      <if test="month12sales != null" >
-        #{month12sales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter1sales != null" >
-        #{quarter1sales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter2sales != null" >
-        #{quarter2sales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter3sales != null" >
-        #{quarter3sales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter4sales != null" >
-        #{quarter4sales,jdbcType=INTEGER},
-      </if>
-      <if test="month1estimatesales != null" >
-        #{month1estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month2estimatesales != null" >
-        #{month2estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month3estimatesales != null" >
-        #{month3estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month4estimatesales != null" >
-        #{month4estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month5estimatesales != null" >
-        #{month5estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month6estimatesales != null" >
-        #{month6estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month7estimatesales != null" >
-        #{month7estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month8estimatesales != null" >
-        #{month8estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month9estimatesales != null" >
-        #{month9estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month10estimatesales != null" >
-        #{month10estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month11estimatesales != null" >
-        #{month11estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month12estimatesales != null" >
-        #{month12estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter1estimatesales != null" >
-        #{quarter1estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter2estimatesales != null" >
-        #{quarter2estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter3estimatesales != null" >
-        #{quarter3estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="quarter4estimatesales != null" >
-        #{quarter4estimatesales,jdbcType=INTEGER},
-      </if>
-      <if test="month1percent != null" >
-        #{month1percent,jdbcType=INTEGER},
-      </if>
-      <if test="month2percent != null" >
-        #{month2percent,jdbcType=INTEGER},
-      </if>
-      <if test="month3percent != null" >
-        #{month3percent,jdbcType=INTEGER},
-      </if>
-      <if test="month4percent != null" >
-        #{month4percent,jdbcType=INTEGER},
-      </if>
-      <if test="month5percent != null" >
-        #{month5percent,jdbcType=INTEGER},
-      </if>
-      <if test="month6percent != null" >
-        #{month6percent,jdbcType=INTEGER},
-      </if>
-      <if test="month7percent != null" >
-        #{month7percent,jdbcType=INTEGER},
-      </if>
-      <if test="month8percent != null" >
-        #{month8percent,jdbcType=INTEGER},
-      </if>
-      <if test="month9percent != null" >
-        #{month9percent,jdbcType=INTEGER},
-      </if>
-      <if test="month10percent != null" >
-        #{month10percent,jdbcType=INTEGER},
-      </if>
-      <if test="month11percent != null" >
-        #{month11percent,jdbcType=INTEGER},
-      </if>
-      <if test="month12percent != null" >
-        #{month12percent,jdbcType=INTEGER},
-      </if>
-      <if test="quarter1percent != null" >
-        #{quarter1percent,jdbcType=INTEGER},
-      </if>
-      <if test="quarter2percent != null" >
-        #{quarter2percent,jdbcType=INTEGER},
-      </if>
-      <if test="quarter3percent != null" >
-        #{quarter3percent,jdbcType=INTEGER},
-      </if>
-      <if test="quarter4percent != null" >
-        #{quarter4percent,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.TargetCompletionRate" >
+  </insert> -->
+  <update id="updateSelective" parameterType="com.yks.bi.dto.report.TargetCompletionRateVo" >
+    update configplatformgoal
+      <if test=" month == 1" >
+	      set month1 = #{performanceTarget,jdbcType=VARCHAR},
+	      month1sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit1 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit1 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 2" >
+        set month2 = #{performanceTarget,jdbcType=VARCHAR},
+	      month2sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit2 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit2 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 3" >
+        set month3 = #{performanceTarget,jdbcType=VARCHAR},
+	      month3sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit3 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit3 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 4" >
+        set month4 = #{performanceTarget,jdbcType=VARCHAR},
+	      month4sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit4 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit4 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 5" >
+        set month5 = #{performanceTarget,jdbcType=VARCHAR},
+	      month5sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit5 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit5 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 6" >
+        set month6 = #{performanceTarget,jdbcType=VARCHAR},
+	      month6sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit6 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit6 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 7" >
+        set month7 = #{performanceTarget,jdbcType=VARCHAR},
+	      month7sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit7 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit7 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 8" >
+        set month8 = #{performanceTarget,jdbcType=VARCHAR},
+	      month8sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit8 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit8 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 9" >
+        set month9 = #{performanceTarget,jdbcType=VARCHAR},
+	      month9sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit9 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit9 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 10" >
+        set month10 = #{performanceTarget,jdbcType=VARCHAR},
+	      month10sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit10 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit10 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 11" >
+        set month11 = #{performanceTarget,jdbcType=VARCHAR},
+	      month11sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit11 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit11 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+      <if test=" month == 12" >
+        set month12 = #{performanceTarget,jdbcType=VARCHAR},
+	      month12sales = #{monthSales,jdbcType=VARCHAR},
+	      targetprofit12 = #{targetprofit,jdbcType=VARCHAR},
+	      actualprofit12 = #{actualprofit,jdbcType=VARCHAR} 
+	      where platform = #{platform,jdbcType=VARCHAR} 
+      </if>
+  </update>
+  <!-- <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.TargetCompletionRate" >
     update configplatformgoal
     <set >
       <if test="name != null" >
@@ -811,8 +527,8 @@
       </if>
     </set>
     where platform = #{platform,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.TargetCompletionRate" >
+  </update> -->
+  <!-- <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.TargetCompletionRate" >
     update configplatformgoal
     set name = #{name,jdbcType=VARCHAR},
       report_date = #{reportDate,jdbcType=DATE},
@@ -881,5 +597,5 @@
       quarter3percent = #{quarter3percent,jdbcType=INTEGER},
       quarter4percent = #{quarter4percent,jdbcType=INTEGER}
     where platform = #{platform,jdbcType=VARCHAR}
-  </update>
+  </update> -->
 </mapper>

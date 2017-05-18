@@ -8,11 +8,12 @@ import java.util.List;
 
 public interface TargetCompletionRateMapper {
 
-    int deleteByPrimaryKey(String platform);
+    /*int deleteByPrimaryKey(String platform);
 
     int insert(TargetCompletionRate record);
 
     int insertSelective(TargetCompletionRate record);
+    int updateByPrimaryKey(TargetCompletionRate record);*/
 
     List<TargetCompletionRate> selectByPrimaryKey(@Param("platform")String platform);
 
@@ -22,7 +23,7 @@ public interface TargetCompletionRateMapper {
      */
     List<TargetCompletionRateVo> selectAll(@Param("month") String month,@Param("platform") String platform);
 
-    int updateByPrimaryKeySelective(TargetCompletionRate record);
+    int updateSelective(TargetCompletionRateVo record);
 
-    int updateByPrimaryKey(TargetCompletionRate record);
+	List<String> selectPlatform();
 }

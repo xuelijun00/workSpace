@@ -7,6 +7,7 @@ import com.yks.bi.dto.report.TargetCompletionRateVo;
 import com.yks.bi.service.report.ITargetCompletionRateService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
+import com.yks.bi.web.vo.MessageVo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,21 @@ public class TargetCompletionRateController {
     @RequestMapping(value = "/targetcompletioncrate/histogram" ,method = RequestMethod.GET)
     public List<TargetCompletionRate> targetCompletionRate1(String platform,FilterDto filter){
         return targetCompletionRateService.selectByPrimaryKey(platform);
+    }
+    
+    @RequestMapping(value = "/targetcompletioncrate/platform" ,method = RequestMethod.GET)
+    public List<String> selectPlatform(){
+    	return targetCompletionRateService.selectPlatform();
+    }
+    
+    @RequestMapping(value = "/targetcompletioncrate/update" ,method = RequestMethod.POST)
+    public MessageVo update(TargetCompletionRateVo record){
+    	int i = targetCompletionRateService.updateSelective(record);
+    	if(i > 0){
+    		return new MessageVo(200, "新增成功");
+    	}else{
+    		return new MessageVo(500, "新增失败");
+    	}
     }
 
 }

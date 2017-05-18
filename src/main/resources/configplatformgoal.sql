@@ -1,0 +1,26 @@
+use bi;
+alter table configplatformgoal add targetprofit1 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit2 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit3 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit4 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit5 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit6 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit7 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit8 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit9 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit10 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add targetprofit11 int(11) not NULL DEFAULT 0;
+alter table configplatformgoal add targetprofit12 int(11) not NULL DEFAULT 0;  
+
+alter table configplatformgoal add actualprofit1 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit2 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit3 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit4 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit5 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit6 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit7 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit8 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit9 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit10 int(11) not NULL DEFAULT 0; 
+alter table configplatformgoal add actualprofit11 int(11) not NULL DEFAULT 0;
+alter table configplatformgoal add actualprofit12 int(11) not NULL DEFAULT 0;  

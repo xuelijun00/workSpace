@@ -130,7 +130,20 @@ var targetCompletionRate = {
 	,exportData:function(){
 		var fileName = $(".ui-jqgrid-title").text() + new Date().getTime() + ".csv";
 		var title = ['平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比', '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比']
-		exportDataToCSV('#list2',title,null,fileName);
+		var tableData;
+		$.ajax({
+			url : contextPath + '/report/targetcompletioncrate/grid?month=1',
+			cache : false,
+			type:"get",
+			async: false,
+			success : function(data) {
+				if(data != null && data.rows.length > 0){
+					tableData = data.rows;
+				}
+			}
+		});
+		var cloumn = ['name','reportDate1','performanceTarget','monthSales','estimatedSales','estimatedPercent','quarterlySalesTarget','quarterlySales','quarterlyEstimatedSales','quarterlyEstimatedPercent'];
+		exportDataToCSV('#list2',title,tableData,fileName,cloumn);
 	}
 };
 (function(){

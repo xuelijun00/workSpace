@@ -88,7 +88,13 @@
                         </li>
                     </ul>
                 </li>
-                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month"><i class="fa  fa-area-chart"></i>各平台各月业绩完成率 </a>
+                <li>
+                    <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">目标完成率</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台各月业绩完成率 </a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/target_managerment">各平台目标管理</a></li>
+                    </ul>
+                </li>
                  <li>
                     <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

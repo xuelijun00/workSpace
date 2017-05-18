@@ -12,4 +12,8 @@ public interface ITargetCompletionRateService {
     List<TargetCompletionRateVo> selectAll(String month, String platform);
 
     List<TargetCompletionRate> selectByPrimaryKey(String platform);
+
+	List<String> selectPlatform();
+	
+	int updateSelective(TargetCompletionRateVo record);
 }

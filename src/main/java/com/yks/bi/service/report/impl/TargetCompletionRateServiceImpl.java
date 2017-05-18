@@ -31,4 +31,12 @@ public class TargetCompletionRateServiceImpl implements ITargetCompletionRateSer
     public List<TargetCompletionRate> selectByPrimaryKey(String platform) {
         return targetCompletionRateMapper.selectByPrimaryKey(platform);
     }
+	@Override
+	public List<String> selectPlatform() {
+		return targetCompletionRateMapper.selectPlatform();
+	}
+	@Override
+	public int updateSelective(TargetCompletionRateVo record) {
+		return targetCompletionRateMapper.updateSelective(record);
+	}
 }

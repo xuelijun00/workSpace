@@ -33,6 +33,10 @@ public class TargetCompletionRateVo {
     private Integer quarterlyEstimatedSales;//季度预计销售额
 
     private Integer quarterlyEstimatedPercent;//预计百分比
+    
+    private Integer targetprofit;//目标利润
+    private Integer actualprofit;//实际利润
+    private Integer month;//月份
 
     public String getPlatform() {
         return platform;
@@ -121,5 +125,29 @@ public class TargetCompletionRateVo {
     public void setQuarterlyEstimatedPercent(Integer quarterlyEstimatedPercent) {
         this.quarterlyEstimatedPercent = quarterlyEstimatedPercent;
     }
+
+	public Integer getTargetprofit() {
+		return targetprofit;
+	}
+
+	public void setTargetprofit(Integer targetprofit) {
+		this.targetprofit = targetprofit;
+	}
+
+	public Integer getActualprofit() {
+		return actualprofit;
+	}
+
+	public void setActualprofit(Integer actualprofit) {
+		this.actualprofit = actualprofit;
+	}
+
+	public Integer getMonth() {
+		return month;
+	}
+
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
 
 }

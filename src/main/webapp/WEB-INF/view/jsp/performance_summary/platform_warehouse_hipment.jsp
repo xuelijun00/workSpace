@@ -59,7 +59,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税前综合净利', '税前综合利润率'];
-	var column = ['netProfit','netProfitMargin','orderNum','platform','reportDate1','productTotalCny'];
+	var column = ['platform','reportDate1','orderNum','productTotalCny','netProfit','netProfitMargin'];
 	exportDataToCSV('#list2',title,platformData,fileName,column);
 }
 function getChartData(chartUrl){

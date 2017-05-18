@@ -25,14 +25,14 @@ public class ModifyParamters extends HttpServletRequestWrapper {
 		if(StringUtils.isNotEmpty(sidx)){
 			return CamelToUnderlineUtil.camelToUnderline(sidx);
 		}
-		if(this.request.getParameter(name) != null){
+		if(this.request.getParameter(name) != null && !"UTF-8".equals(this.request.getCharacterEncoding()) ){
 			try {
 				return new String(this.request.getParameter(name).getBytes("ISO8859-1"),Charset.forName("UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return this.request.getParameter(name);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class ModifyParamters extends HttpServletRequestWrapper {
 			return new String[]{CamelToUnderlineUtil.camelToUnderline(this.request.getParameter(name))};
 		}
 		String[] str = this.request.getParameterValues(name);
-		if(str != null && str.length > 0){
+		if(str != null && str.length > 0 && !"UTF-8".equals(this.request.getCharacterEncoding())){
 			for (int i = 0; i < str.length; i++) {
 				try {
 					str[i] = new String(str[i].getBytes("ISO8859-1"),Charset.forName("UTF-8"));

@@ -162,7 +162,7 @@ function getChartData(chartUrl){
 		var platform = $("#platform").val();
 		var fileName = "各平台各账号业绩" + startDate +"-" +platform + ".csv";
 		var title = [ '报表时间', '平台名称','账号', '销售额', '订单数'];
-		var column = ['orders','sales','reportDate1','business','account'];
+		var column = ['reportDate1','business','account','sales','orders'];
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
 	

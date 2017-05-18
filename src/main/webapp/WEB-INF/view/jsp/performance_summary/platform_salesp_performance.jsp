@@ -78,7 +78,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "各平台每日销售报表" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
-	var column = ['orders','sales','reportDate1','business'];
+	var column = ['reportDate1','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
