@@ -17,8 +17,8 @@
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
         <div class="sidebar-collapse">
-            <div class="logo-element nav-header"><img src="img/logo.png">
-            <span class="logotitle" >YKSBI系统</span></div>
+            <div class="logo-element nav-header">
+            <span class="logotitle" ><i class="glyphicon glyphicon-tree-conifer"></i>YKSBI系统</span></div>
             <ul class="nav" id="side-menu">
                 <li>
                     <a href="#">
@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month">各平台各月业绩完成率 </a>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month"><i class="fa  fa-area-chart"></i>各平台各月业绩完成率 </a>
                  <li>
                     <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -102,8 +102,8 @@
                         </li>
                     </ul>
                 </li>
-                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement">各平台各账号业绩</a>
-                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/manager_account_achievement">各平台各账号管理员业绩</a>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement"><i class="fa fa-pie-chart"></i>各平台各账号业绩</a>
+                <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/manager_account_achievement"><i class="fa fa-bar-chart"></i>各平台各账号管理员业绩</a>
                 <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

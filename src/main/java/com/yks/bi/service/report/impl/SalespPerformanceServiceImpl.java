@@ -25,9 +25,19 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
     public List<SalesPerformance> selectAll(String business,Date startDate,Date endDate) {
     	return isales.selectAll(business,startDate,endDate);
     }
+     
+	 @Override
+	 public List<SalesPerformance> selectnewAll(String business,Date startDate,Date endDate) {
+	 	return isales.selectnewAll(business,startDate,endDate);
+	 }
 	@Override
 	public List<String> selectPlatforms() {
 		return isales.selectPlatforms();
+	}
+	 
+	@Override
+	public List<String> selectnewPlatforms() {
+		return isales.selectnewPlatforms();
 	}
 
 }

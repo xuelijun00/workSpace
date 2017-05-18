@@ -19,4 +19,14 @@ public interface IEbayDomesticService {
 	
 	List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku);
 
+	
+	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String oldsku,String category);
+
+	List<String> selectnewPlatforms();
+	
+	
+	List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku);
+
+	List<String> selectskuPlatforms();
+	
 }

@@ -18,12 +18,16 @@ public interface SalesPerformanceMapper {
 
     SalesPerformance selectByPrimaryKey(SalesPerformanceKey key);
 
+    List<SalesPerformance> selectnewAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    
     List<SalesPerformance> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
     /**
      * 查询所有平台
      * @return
      */
     List<String> selectPlatforms();
+     
+    List<String> selectnewPlatforms();
     
     int updateByPrimaryKeySelective(SalesPerformance record);
 

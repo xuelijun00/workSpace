@@ -19,6 +19,12 @@ public interface DailysalescategoryreportsMapper {
     
     List<Dailysalescategoryreports> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku_old")String sku_old,@Param("category")String category);
 
+    List<Dailysalescategoryreports> selectnewAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku_old")String sku_old,@Param("category")String category);
+    
+    
+    
+    List<String> selectnewPlatforms();
+    
     int updateByPrimaryKeySelective(Dailysalescategoryreports record);
 
     int updateByPrimaryKey(Dailysalescategoryreports record);

@@ -27,34 +27,44 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
     /**
      *  ebay国内仓每日销售额  表格数据, 柱状图
      */
-    @Override
+   @Override
     public List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String oldsku,String category) {
-    	if(st == null){
-      		 Calendar c = Calendar.getInstance();
-               //过去15天
-               c.setTime(new Date());
-               c.add(Calendar.DATE, - 3);
-               Date st1= c.getTime();
-               return isalescategory.selectAll(business, st1, et, oldsku, category);
-      	}
-      	 
+       	 
            return isalescategory.selectAll(business, st, et, oldsku, category);
         }
+    
+    @Override
+    public List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String oldsku,String category) {
+    	
+           return isalescategory.selectnewAll(business, st, et, oldsku, category);
+        }  
     
    
     @Override
     public List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku) {
-    	
-    	if(st == null){
-   		 Calendar c = Calendar.getInstance();
-            //过去15天
-            c.setTime(new Date());
-            c.add(Calendar.DATE, - 3);
-            Date st1= c.getTime();
-            return isalessku.selectAll(business, st1, et, sku, oldsku);
-   	}
-   	 
+    
         return isalessku.selectAll(business, st, et, sku, oldsku);
     }
+    
+    
+    @Override
+    public List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku) {
+    
+        return isalessku.selectskuAll(business, st, et, sku, oldsku);
+    }
+    
+    
+	@Override
+	public List<String> selectnewPlatforms() {
+		return isalescategory.selectnewPlatforms();
+	}
 
+	  
+	@Override
+	public List<String> selectskuPlatforms() {
+		return isalessku.selectskuPlatforms();
+	}
+
+	
+	
 }

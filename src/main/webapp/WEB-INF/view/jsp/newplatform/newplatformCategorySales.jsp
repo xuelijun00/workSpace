@@ -10,54 +10,49 @@
 <head>
 <meta charset="utf-8">
 <title>YKSUI框架 - 需求管理</title>
-<link rel="shortcut icon" href="./favicon.ico">
-<link href="css/bootstrap.min14ed.css?20170108" rel="stylesheet">
-<link href="css/font-awesome.min93e3.css?20170108" rel="stylesheet">
-<link href="css/style.min862f.css?20170108" rel="stylesheet">
-<link href="css/self.css?20170302" rel="stylesheet">
-<!-- jqGrid组件基础样式包-必要 -->
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/ui.jqgrid.css" />
-<link rel="stylesheet" href="js/plugins/jqGrid521/css/jquery-ui-1.8.16.custom.css" />
-<script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-</script>
-<!--加css-->
 </head>
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>品类销售报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date" class="form-control" placeholder="">
+              <input type="text" id="start_date"class="form-control" placeholder="">
             </div>
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">查询</button>
+                <label>平台：</label>
+                <select class="form-control w120" id="platform" name="platform">
+                </select>
             </div>
-              <div class="form-group">
-             <label>分类</label>
+             <div class="form-group">
+            <label>分类</label>
                         <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
                                _value=""/>
             </div>
-            <div class="form-group">
+             <div class="form-group">
             <label>原始SKU</label>
                         <input type="text" class="form-control" placeholder="请输入内容" id="oldsku" name="oldsku"
                                _value=""/>
             </div>
+           <!--  <div class="form-group">
+                <label>账号：</label>
+                <input id="account_input" list="account" />
+				<datalist id="account"></datalist>
+            </div> -->
+            
             <div class="form-group">
-               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+                <button type="button" id="query"  class="btn btn-primary">查询</button>
             </div>
-             <div class="form-group">
-                <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
+            <div class="form-group">
+                <button type="button"  id="export" class="btn btn-primary">导出</button>
             </div>
         </form>
-			<h5>表格</h5>
+	<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
@@ -67,19 +62,101 @@
 </div>
 
 </div>
-<!-- <script src="../jsLoad/code/load.js?20170503" include="../jsh.html"></script> -->
-
+<%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
-	<script type="text/javascript" src="js/jquery.min.js?v=2.1.4"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.min.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script>
-	<script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
-	<script type="text/javascript" src="js/plugins/date/jedate.min.js"></script>
-	<script type="text/javascript" src="js/self.js"></script>
-	<script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
-	<script type="text/javascript" src="js/report/newPlatform/newplatformcategory.js" ></script>
-	<!--加本页面 的js文件与js代码-->
+<script type="text/javascript">
+var chart;
+var operation;
+var domesticData = [];
+var chartUrl;
+
+function getUrl(){	
+	var category = $("#category").val();
+	var oldsku = $("#oldsku").val();
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var platform = $("#platform").val();
+	var chartUrl = contextPath + '/report/ebayoverseascategorynew/grid?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&category=" + category;
+	if(platform !== 'all'){chartUrl += "&business=" + platform;}
+	return chartUrl;
+}
+
+
+(function(){
+	$("#start_date").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-14"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	
+	
+	$.ajax({
+		url : contextPath + "/report/xueplatforms/platformnew",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#platform").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#platform").append("<option value='"+ data[i].business +"'>"+ data[i].business +"</option>");
+				}
+			}
+		}
+	});
+	
+	$("#query").bind("click",function(){
+		common.refreshData(getUrl(),chart,operation);
+	});
+	$("#export").bind("click",function(){
+		chartUrl = getUrl(); 
+		$.ajax({
+			url : chartUrl,
+			cache : false,
+			type:"get",
+			async: false,
+			success : function(data) {
+				if(data != null && data.length > 0){
+					domesticData = data;
+				}
+			}
+		});
+		
+		var fileName = "新平台业务线每日分类销售数据" + startDate +"-"+ endDate + ".csv";
+		var title = [ '分类','业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
+		var column = ['category','business','skuOld','reportDate1','orders','quantity','sales'];
+		
+		exportDataToCSV('#list2',title,domesticData,fileName,column);
+	});
+	
+	common.grid({
+		title:"新平台业务线每日分类销售数据"
+		,url:getUrl()
+		,colNames:[ '分类','业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+			{name : 'category',index : 'category',width : 215}, 
+			{name : 'business',index : 'business',width : 175}, 
+            {name : 'skuOld',index : 'skuOld',width : 175}, 
+            {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
+            {name : 'orders',index : 'orders',sortable : "true",width : 145},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 145},
+            {name : 'sales',index : 'sales',sortable : "true",width : 155}
+		           ]
+		,sortname:"reportDate1"
+		,sortorder:"asc"
+		,height  : "400"
+	});
+})();
+</script>
 </body>
 </html>

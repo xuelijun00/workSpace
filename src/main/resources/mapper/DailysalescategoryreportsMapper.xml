@@ -34,6 +34,36 @@
      ORDER BY  report_date desc
   </select>
   
+  
+      <select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalescategoryreports
+     where business like 'new%' and business != 'new_newegg'
+      <if test="business != null">
+    	and business = #{business,jdbcType=VARCHAR}
+    </if>
+    <if test="start_date != null">
+    	and report_date >= #{start_date,jdbcType=DATE}
+    </if>
+	 <if test="end_date != null">
+	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+	    </if>
+    <if test="category != null and category.length() > 0">
+    	and  category = #{category,jdbcType=VARCHAR}
+    </if>
+    <if test="sku_old != null and sku_old.length() > 0">
+    	and sku_old = #{sku_old,jdbcType=VARCHAR}
+    </if>
+     ORDER BY  report_date desc
+  </select>
+  
+      <!--查询平台  -->
+  <select id="selectnewPlatforms" resultMap="BaseResultMap" >
+    SELECT business FROM dailysalescategoryreports WHERE business like 'new%' and business != 'newegg' GROUP by  business
+  </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
     select 
     <include refid="Base_Column_List" />

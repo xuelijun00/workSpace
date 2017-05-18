@@ -20,7 +20,8 @@ and open the template in the editor.
 	height:29px;
 	border-color: inherit;
 }
-
+ /*修改列名的字体大小*/  
+.ui-jqgrid-sortable {font-size:13px;}
 .ui-jqdialog-content input.FormElement {
     padding: 0.25em;
 }

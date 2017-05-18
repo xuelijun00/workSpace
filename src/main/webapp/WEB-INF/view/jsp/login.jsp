@@ -18,7 +18,7 @@
 <div >
     <div class="container">
         <div class="row">
-            <div class="col-md-6"><img src="./img/yksbi.png" width="600" height="48"></div>
+            <div class="col-md-6"><img src="./img/yksbi.png"></div>
             <div class="col-md-6"><P class="t_data text-right">抓取账号：<span class="t_bluedata"> 3,638,934 </span>个；  抓取商品：<span class="t_bluedata"> 67,270,862</span> 个。</P></div>
         </div>
     </div>

@@ -15,10 +15,14 @@ public interface ISalespPerformanceService {
      *  销售业绩整体报表 
      */
 	List<SalesPerformance> selectAll(String business,Date st,Date et);
+	
+	List<SalesPerformance> selectnewAll(String business,Date st,Date et);
 	/**
 	 * 查询平台
 	 * @return
 	 */
 	List<String> selectPlatforms();
+	
+	List<String> selectnewPlatforms();
 
 }

@@ -85,5 +85,55 @@ public class SalespPerformanceController {
     public List<String> platforms(){
         return isale.selectPlatforms();
     }
+    
+    
+    
+    @RequestMapping(value = "/dailysalesnew/grid" ,method = RequestMethod.GET)
+    public GridModel dailysalesnewMethod(String business,String st,String et,FilterDto filter) throws Exception{
+    	if(StringUtils.isNotEmpty(business)){
+    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
+    	}
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+    		filter.setSidx("report_date");
+    	}
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<SalesPerformance> list = isale.selectnewAll(business,starttime,endtime);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+    }
+    
+    
+    
+    @RequestMapping(value = "/dailysalesnew/chart" ,method = RequestMethod.GET)
+    public List<SalesPerformance> newchart(String business,String st,String et) throws Exception{
+    	if(StringUtils.isNotEmpty(business)){
+    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
+    	}
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	return isale.selectnewAll(business,starttime,endtime);
+    }
+    
+    
+    
+    @RequestMapping(value = "/dailysalesnew/platformnew" ,method = RequestMethod.GET)
+    public List<String> newplatforms(){
+        return isale.selectnewPlatforms();
+    }
 
 }
