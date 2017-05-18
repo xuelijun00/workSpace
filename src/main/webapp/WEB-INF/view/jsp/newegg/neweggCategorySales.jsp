@@ -24,9 +24,6 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="">
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">查询</button>
-            </div>
               <div class="form-group">
              <label>分类</label>
                         <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"

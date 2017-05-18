@@ -5,15 +5,15 @@ public class FilterDto {
 	/**
 	 * 过滤属性
 	 */
-	private String sidx;
-	private String sord;
+	private String sidx;  //字段
+	private String sord;   // 正序或倒序
 	private String[] searchField;
 	private String[] searchString;
 	private String[] searchOper;
 	private boolean _search;
-	private int rows;
-	private int page;
-	private int isGrid;
+	private int rows;    // 一页行数
+	private int page;  //页数
+	private int isGrid;  
 	
 	public String getSidx() {
 		return sidx;

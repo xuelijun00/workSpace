@@ -76,7 +76,6 @@ public class EbayDomesticController {
     	Date endtime = null;
     	if(StringUtils.isNotEmpty(et)){
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	
     	}
     	
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
