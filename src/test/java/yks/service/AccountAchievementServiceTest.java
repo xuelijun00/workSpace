@@ -10,7 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.github.pagehelper.PageHelper;
@@ -23,7 +25,8 @@ import com.yks.bi.service.report.IAccountAchievementService;
 @WebAppConfiguration(value = "src/main/webapp")
 @ContextConfiguration(value = "classpath*:config/spring-mvc.xml")
 public class AccountAchievementServiceTest {
-	
+	//AbstractTransactionalJUnit4SpringContextTests
+	//AbstractTransactionalTestNGSpringContextTests
 	@Autowired
 	private IAccountAchievementService accountAchievementService;
 	

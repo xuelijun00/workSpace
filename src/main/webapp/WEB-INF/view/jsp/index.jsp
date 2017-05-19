@@ -9,6 +9,13 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
+    <!-- <script type="text/javascript">
+    debugger;
+	    var user = "${sessionScore.systemUser.id }";
+	    if(!user || user.length <=0 ){
+	    	window.location.href="${pageContext.request.contextPath}/";
+	    }
+    </script> -->
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
@@ -21,7 +28,7 @@
             <span class="logotitle" ><i class="glyphicon glyphicon-tree-conifer"></i>YKSBI系统</span></div>
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#">
+                    <a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month" >
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
@@ -62,7 +69,7 @@
                         </li>
                     </ul>
                 </li> -->
-                <li>
+                <!-- <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">BI图表实例 </span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -74,7 +81,7 @@
                         </li>
                         
                     </ul>
-                </li>
+                </li> -->
                 <li>
                     <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -238,7 +245,7 @@
                                                       </span>
                     </li>
                     <li class="dropdown hidden-xs">
-                        <a class="right-sidebar-toggle" aria-expanded="false">
+                        <a class="right-sidebar-toggle" aria-expanded="false" data-id="1month">
                             <i class="fa fa-tasks"></i> 主题
                         </a>
                     </li>
@@ -251,7 +258,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    <a href="javascript:void(0);" class="active J_menuTab" data-id="1month">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -273,11 +280,11 @@
                     class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${pageContext.request.contextPath}/common?path=index_v2" frameborder="0"
-                    data-id="index_v2.html" seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${pageContext.request.contextPath }/common?path=target_completion_rate/1month" frameborder="0"
+                    data-id="1month" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2014-2017
+            <div class="pull-right">&copy; 2017-05
             </div>
         </div>
     </div>

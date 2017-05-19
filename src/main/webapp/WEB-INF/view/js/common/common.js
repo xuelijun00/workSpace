@@ -2,6 +2,7 @@ var common = {
 		chart:function(operation){
 			var chart1 = new Highcharts.Chart('container',{
 				credits:{enabled:false},//去除版权信息
+				exporting:{enabled:false},
 			    chart: {zoomType: 'xy' },
 			    title: operation.title,
 			    xAxis: [{categories: operation.categories,crosshair: true,min:0, max:14,}],
@@ -32,10 +33,12 @@ var common = {
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				caption : opation.title,//表格的标题名字
-				height : opation.height//表格的大小
+				height : opation.height,//表格的大小
+				//gridComplete:function(){doResize()},
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
+			$(opation.id?opation.id:"#list2").setGridWidth(document.body.clientWidth*0.90);
 			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false});
 		},
 		refreshData:function(gridUrl,chart,operation){
@@ -53,3 +56,12 @@ var common = {
 			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');
 		},
 };
+
+$(function(){
+    $(window).resize(function(){
+    	$("#list2").setGridWidth(document.body.clientWidth*0.90);
+    });
+    $(window).resize(function(){
+    	$("#list1").setGridWidth(document.body.clientWidth*0.90);
+    });
+});

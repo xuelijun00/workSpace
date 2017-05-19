@@ -3,6 +3,7 @@ var targetCompletionRate = {
 	chart:Highcharts.chart('container',{
 		credits:{enabled:false},//去除版权信息
 	    chart: {zoomType: 'xy' },
+	    exporting:{enabled:false},
 	    title: {},
 	    xAxis: [{categories: [],crosshair: true}],
 	    yAxis: [{ 
@@ -35,75 +36,34 @@ var targetCompletionRate = {
 			type:"get",
 			success : function(data) {
 				if(data && data != null && data.length > 0){
-					var title = [targetCompletionRate.month + '月份业绩目标',targetCompletionRate.month+'月份销售额',targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比',targetCompletionRate.month+'季度业绩目标',targetCompletionRate.month+'季度销售额',targetCompletionRate.month+'季度预计销售额',targetCompletionRate.month+'季度预计百分比'];
+					var title = [targetCompletionRate.month + '月份业绩目标',targetCompletionRate.month+'月份销售额',targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度业绩目标',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度销售额',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度预计销售额',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度预计百分比'];
 					var categories = [];
-					var array1 = [];
+					var array1 = [[],[],[],[],[],[],[],[]];
 					while(targetCompletionRate.chart.series.length > 0) {  
 						targetCompletionRate.chart.series[0].remove();  
 	                }
+					for(var j=0;j<data.length;j++){
+						categories.push(data[j].name);
+						array1[0].push(data[j]["month" + targetCompletionRate.month]);
+						array1[1].push(data[j]["month" + targetCompletionRate.month+"sales"]);
+						array1[2].push(data[j]["month" + targetCompletionRate.month+"estimatesales"]);
+						array1[3].push(data[j]["month" + targetCompletionRate.month+"percent"]);
+						array1[4].push(data[j]["quarter"+Math.ceil(parseInt(targetCompletionRate.month)*1/3)] );
+						array1[5].push(data[j]["quarter"+Math.ceil(parseInt(targetCompletionRate.month)*1/3)+"sales"]);
+						array1[6].push(data[j]["quarter"+Math.ceil(parseInt(targetCompletionRate.month)*1/3)+"estimatesales"]);
+						array1[7].push(data[j]["quarter"+Math.ceil(parseInt(targetCompletionRate.month)*1/3)+"percent"]);
+					}
 					for(var i=0;i<title.length;i++){
-						for(var j=0;j<data.length;j++){
-							categories[j] = data[j].name;
-							if(i == 0){
-								array1[j] = data[j]["month" + targetCompletionRate.month];
-							}else if(i == 1){
-								array1[j] = data[j]["month" + targetCompletionRate.month+"sales"];
-							}else if(i == 2){
-								array1[j] = data[j]["month" + targetCompletionRate.month+"estimatesales"];
-							}else if(i == 3){
-								array1[j] = data[j]["month" + targetCompletionRate.month+"percent"];
-							}else if(i == 4){
-								if(targetCompletionRate.month === '1' || targetCompletionRate.month === '2' || targetCompletionRate.month === '3'){
-									array1[j] = data[j].quarter1;
-								}else if(targetCompletionRate.month === '4' || targetCompletionRate.month === '5' || targetCompletionRate.month === '6'){
-									array1[j] = data[j].quarter2;
-								}else if(targetCompletionRate.month === '7' || targetCompletionRate.month === '8' || targetCompletionRate.month === '9'){
-									array1[j] = data[j].quarter3;
-								}else if(targetCompletionRate.month === '10' || targetCompletionRate.month === '11' || targetCompletionRate.month === '12'){
-									array1[j] = data[j].quarter4;
-								}
-							}else if(i == 5){
-								if(targetCompletionRate.month === '1' || targetCompletionRate.month === '2' || targetCompletionRate.month === '3'){
-									array1[j] = data[j].quarter1sales;
-								}else if(targetCompletionRate.month === '4' || targetCompletionRate.month === '5' || targetCompletionRate.month === '6'){
-									array1[j] = data[j].quarter2sales;
-								}else if(targetCompletionRate.month === '7' || targetCompletionRate.month === '8' || targetCompletionRate.month === '9'){
-									array1[j] = data[j].quarter3sales;
-								}else if(targetCompletionRate.month === '10' || targetCompletionRate.month === '11' || targetCompletionRate.month === '12'){
-									array1[j] = data[j].quarter4sales;
-								}
-							}else if(i == 6){
-								if(targetCompletionRate.month === '1' || targetCompletionRate.month === '2' || targetCompletionRate.month === '3'){
-									array1[j] = data[j].quarter1estimatesales;
-								}else if(targetCompletionRate.month === '4' || targetCompletionRate.month === '5' || targetCompletionRate.month === '6'){
-									array1[j] = data[j].quarter2estimatesales;
-								}else if(targetCompletionRate.month === '7' || targetCompletionRate.month === '8' || targetCompletionRate.month === '9'){
-									array1[j] = data[j].quarter3estimatesales;
-								}else if(targetCompletionRate.month === '10' || targetCompletionRate.month === '11' || targetCompletionRate.month === '12'){
-									array1[j] = data[j].quarter4estimatesales;
-								}
-							}else if(i == 7){
-								if(targetCompletionRate.month === '1' || targetCompletionRate.month === '2' || targetCompletionRate.month === '3'){
-									array1[j] = data[j].quarter1percent;
-								}else if(targetCompletionRate.month === '4' || targetCompletionRate.month === '5' || targetCompletionRate.month === '6'){
-									array1[j] = data[j].quarter2percent;
-								}else if(targetCompletionRate.month === '7' || targetCompletionRate.month === '8' || targetCompletionRate.month === '9'){
-									array1[j] = data[j].quarter3percent;
-								}else if(targetCompletionRate.month === '10' || targetCompletionRate.month === '11' || targetCompletionRate.month === '12'){
-									array1[j] = data[j].quarter4percent;
-								}
-							}
-						}
-						targetCompletionRate.chart.xAxis[0].setCategories(categories,true);
 						var series = {};
 						if(i == 3 || i==7){
-							series = { name: title[i],type: 'spline',yAxis: 1,data: array1,tooltip: {valueSuffix: '%'}};
+							series = { name: title[i],type: 'spline',yAxis: 1,data: array1[i],tooltip: {valueSuffix: '%'}};
 						}else{
-							series = {name: title[i],type: 'column',data:array1,tooltip: {valueSuffix: '' }};
+							series = {name: title[i],type: 'column',data:array1[i],tooltip: {valueSuffix: '' }};
 						}
 						targetCompletionRate.chart.addSeries(series);
-						targetCompletionRate.chart.redraw();//重新渲染数据
 					}
+					targetCompletionRate.chart.xAxis[0].setCategories(categories,true);
+					targetCompletionRate.chart.redraw();//重新渲染数据
 					//生成平台下拉框数据
 					$("#form select[name='platform']").append("<option value='all'>全部</option>");
 					for(var i=0;i<data.length;i++){
@@ -128,7 +88,7 @@ var targetCompletionRate = {
 		targetCompletionRate.gridData(platform);
 	}
 	,exportData:function(){
-		var fileName = $(".ui-jqgrid-title").text() + new Date().getTime() + ".csv";
+		var fileName ="各平台"+ targetCompletionRate.month +"月份业绩目标及完成率" + new Date().getTime() + ".csv";
 		var title = ['平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比', '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比']
 		var tableData;
 		$.ajax({
@@ -153,8 +113,7 @@ var targetCompletionRate = {
 	targetCompletionRate.chart.title.textSetter('各平台'+ targetCompletionRate.month +'月份业绩目标及完成率');
 	targetCompletionRate.loadData(null);
 	// 创建jqGrid组件
-	jQuery("#list2").jqGrid(
-			{
+	jQuery("#list2").jqGrid({
 				url : contextPath + '/report/targetcompletioncrate/grid?month=1',//组件创建完成之后请求数据的url
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
 				//colNames : [ '平台名称', '报表时间', targetCompletionRate.month+'月份业绩目标', targetCompletionRate.month+'月份销售额', targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比', targetCompletionRate.month+'季度业绩目标' , targetCompletionRate.month+'季度销售额', targetCompletionRate.month+'季度预计销售额', targetCompletionRate.month+'季度预计百分比'],//jqGrid的列显示名字
