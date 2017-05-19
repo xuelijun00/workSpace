@@ -56,7 +56,6 @@
 <script type="text/javascript">
 var chart;
 var operation;
-var domesticData = [];
 function queryData(){
 	var category = $('#category').val().trim();
 	var oldsku = $('#oldsku').val().trim();
@@ -66,6 +65,7 @@ function queryData(){
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
+	var domesticData = [];
 	var category = $('#category').val();
 	var oldsku = $('#oldsku').val();
 	var startDate = $("#start_date").val();
@@ -82,7 +82,7 @@ function exportData(){
 		type:"get",
 		async: false,
 		success : function(data) {
-			if(data != null && data.length > 0){
+			if(data != null && data.rows.length > 0){
 				domesticData = data;
 			}
 		}

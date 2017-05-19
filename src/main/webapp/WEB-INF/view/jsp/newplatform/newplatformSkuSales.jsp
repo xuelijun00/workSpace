@@ -126,13 +126,13 @@ function getUrl(){
 			type:"get",
 			async: false,
 			success : function(data) {
-				if(data != null && data.length > 0){
-					domesticData = data;
+				if(data != null && data.rows.length > 0){
+					domesticData = data.rows;
 				}
 			}
 		});
 		
-		var fileName = "新平台业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
+		var fileName = "新平台业务线每日sku销售数据.csv";
 		var title = [ '分类','业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 		var column = ['category','business','skuOld','reportDate1','orders','quantity','sales'];
 		

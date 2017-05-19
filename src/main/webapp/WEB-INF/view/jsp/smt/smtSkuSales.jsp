@@ -83,8 +83,8 @@ function exportData(){
 		type:"get",
 		async: false,
 		success : function(data) {
-			if(data != null && data.length > 0){
-				domesticData = data;
+			if(data != null && data.rows.length > 0){
+				domesticData = data.rows;
 			}
 		}
 	});

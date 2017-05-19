@@ -57,7 +57,7 @@
 <script type="text/javascript">
 var chart;
 var operation;
-var domesticData = [];
+
 function queryData(){
 	var sku = $('#sku').val().trim();
 	var oldsku = $('#oldsku').val().trim();
@@ -67,6 +67,7 @@ function queryData(){
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
+	var domesticData = [];
 	var sku = $('#sku').val();
 	var oldsku = $('#oldsku').val();
 	var startDate = $("#start_date").val();
@@ -74,20 +75,19 @@ function exportData(){
 	var fileName = "Ebay业务线美仓每日sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
-	
 	var chartUrl =  contextPath + '/report/ebayoverseassku/grid?business=Ebay_US&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
-
 	$.ajax({
 		url : chartUrl,
 		cache : false,
 		type:"get",
 		async: false,
 		success : function(data) {
-			if(data != null && data.length > 0){
-				domesticData = data;
+			if(data != null && data.rows.length > 0){
+				domesticData = data.rows;
 			}
 		}
 	});
+	//debugger;
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
