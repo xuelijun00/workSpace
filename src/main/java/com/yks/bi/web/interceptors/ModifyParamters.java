@@ -1,7 +1,5 @@
 package com.yks.bi.web.interceptors;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.Map;
 
@@ -9,10 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.yks.bi.common.CamelToUnderlineUtil;
+import com.yks.bi.common.ChineseGarbled;
 
 public class ModifyParamters extends HttpServletRequestWrapper {
+	
+	private static Logger log = Logger.getLogger(ModifyParamters.class);
+	
 	private HttpServletRequest request;
 	public ModifyParamters(HttpServletRequest request) {
 		super(request);
@@ -25,14 +28,9 @@ public class ModifyParamters extends HttpServletRequestWrapper {
 		if(StringUtils.isNotEmpty(sidx)){
 			return CamelToUnderlineUtil.camelToUnderline(sidx);
 		}
-		if(this.request.getParameter(name) != null && !"UTF-8".equals(this.request.getCharacterEncoding()) ){
-			try {
-				return new String(this.request.getParameter(name).getBytes("ISO8859-1"),Charset.forName("UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		return this.request.getParameter(name);
+		String value = ChineseGarbled.chineseGarbled(this.request.getParameter(name));
+		log.info(String.format("参数-name:%s,value:%s",name,value));
+		return value;
 	}
 
 	@Override
@@ -51,15 +49,11 @@ public class ModifyParamters extends HttpServletRequestWrapper {
 			return new String[]{CamelToUnderlineUtil.camelToUnderline(this.request.getParameter(name))};
 		}
 		String[] str = this.request.getParameterValues(name);
-		if(str != null && str.length > 0 && !"UTF-8".equals(this.request.getCharacterEncoding())){
-			for (int i = 0; i < str.length; i++) {
-				try {
-					str[i] = new String(str[i].getBytes("ISO8859-1"),Charset.forName("UTF-8"));
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
-			}
+		for (int i = 0; str != null && i < str.length; i++) {
+			str[i] = ChineseGarbled.chineseGarbled(str[i]);
 		}
+		if(!"password".equals(name))
+			log.info(String.format("参数-name:%s,value:%s",name,str!=null?str[0]:"null"));
 		return str;
 	}
 

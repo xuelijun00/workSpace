@@ -20,8 +20,8 @@ public class ParametersFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
-		arg0.setCharacterEncoding("utf-8");
-		arg1.setCharacterEncoding("utf-8");
+		arg0.setCharacterEncoding("UTF-8");
+		arg1.setCharacterEncoding("UTF-8");
 		arg2.doFilter(new ModifyParamters((HttpServletRequest)arg0), arg1);
 	}
 
