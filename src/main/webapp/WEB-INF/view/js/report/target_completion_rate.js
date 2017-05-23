@@ -64,11 +64,6 @@ var targetCompletionRate = {
 					}
 					targetCompletionRate.chart.xAxis[0].setCategories(categories,true);
 					targetCompletionRate.chart.redraw();//重新渲染数据
-					//生成平台下拉框数据
-					$("#form select[name='platform']").append("<option value='all'>全部</option>");
-					for(var i=0;i<data.length;i++){
-						$("#form select[name='platform']").append("<option value='"+ data[i].platform +"'>"+ data[i].name +"</option>");
-					}
 				}
 			}
 		});
@@ -109,6 +104,21 @@ var targetCompletionRate = {
 (function(){
 	$(document).on("change",'#month',function(){
 		targetCompletionRate.month = $(this).val();
+	});
+	$.ajax({
+		url : contextPath + "/report/targetcompletioncrate/platform",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				//生成平台下拉框数据
+				$("#form select[name='platform']").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#form select[name='platform']").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
 	});
 	targetCompletionRate.chart.title.textSetter('各平台'+ targetCompletionRate.month +'月份业绩目标及完成率');
 	targetCompletionRate.loadData(null);
