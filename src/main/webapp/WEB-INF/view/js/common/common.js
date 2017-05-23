@@ -59,7 +59,7 @@ var common = {
 
 $(function(){
     $(window).resize(function(){
-    	$("#list2").setGridWidth(document.body.clientWidth*0.90);
+    	try{$("#list2").setGridWidth(document.body.clientWidth*0.90);}catch(e){}
     });
     $(window).resize(function(){
     	$("#list1").setGridWidth(document.body.clientWidth*0.90);
