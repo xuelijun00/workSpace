@@ -39,7 +39,7 @@ var common = {
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
 			$(opation.id?opation.id:"#list2").setGridWidth(document.body.clientWidth*0.90);
-			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false});
+			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false,search:false});
 		},
 		refreshData:function(gridUrl,chart,operation){
 			if(chart != null && operation != null){

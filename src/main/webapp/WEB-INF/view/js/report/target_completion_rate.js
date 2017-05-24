@@ -152,5 +152,5 @@ var targetCompletionRate = {
 			});
 	/*创建jqGrid的操作按钮容器*/
 	/*可以控制界面上增删改查的按钮是否显示*/
-	jQuery("#list2").jqGrid('navGrid', '#pager2', {edit : false,add : false,del : false});
+	jQuery("#list2").jqGrid('navGrid', '#pager2', {edit : false,add : false,del : false,search:false});
 })();
