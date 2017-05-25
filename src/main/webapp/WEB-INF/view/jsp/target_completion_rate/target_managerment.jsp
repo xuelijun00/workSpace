@@ -7,13 +7,26 @@
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>国内仓各平台发货数据</h5></div>
+    <div class="ibox-title"><h5>各平台目标管理</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
        <div class="form-group">
-          <label>日期：</label>
-          <input type="text" id="date"class="form-control" placeholder="" readonly="readonly">
-        </div>
+                <label>月份：</label>
+                <select class="form-control w120" name="month" id="date">
+                    <option value='1'>一月</option>
+                    <option value='2'>二月</option>
+                    <option value='3'>三月</option>
+                    <option value='4'>四月</option>
+                    <option value='5'>五月</option>
+                    <option value='6'>六月</option>
+                    <option value='7'>七月</option>
+                    <option value='8'>八月</option>
+                    <option value='9'>九月</option>
+                    <option value='10'>十月</option>
+                    <option value='11'>十一月</option>
+                    <option value='12'>十二月</option>
+                </select>
+            </div>
         <!-- <div class="form-group">
             <button type="button" class="btn btn-primary add-space" id="query">查询</button>
         </div> -->
@@ -45,9 +58,22 @@
     <form class="form-inline" id="form1">
         <div class="modal-body">
             <div class="form-group">
-	         <label>日期：</label>
-	         <input type="text" id="date1"class="form-control" placeholder="">
-	        </div>
+                <label>月份：</label>
+                <select class="form-control w120" name="month" id="date1">
+                    <option value='1'>一月</option>
+                    <option value='2'>二月</option>
+                    <option value='3'>三月</option>
+                    <option value='4'>四月</option>
+                    <option value='5'>五月</option>
+                    <option value='6'>六月</option>
+                    <option value='7'>七月</option>
+                    <option value='8'>八月</option>
+                    <option value='9'>九月</option>
+                    <option value='10'>十月</option>
+                    <option value='11'>十一月</option>
+                    <option value='12'>十二月</option>
+                </select>
+            </div>
             <table class="table table-bordered top20">
                 <thead>
                 <tr>
@@ -83,54 +109,6 @@
   </div>
 </div>
 
-<!-- modify -->
-<div class="modal fade modifyreport"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新增目标</h4>
-    </div>
-    <form class="form-inline" id="form1">
-        <div class="modal-body">
-            <div class="form-group">
-	         <label>日期：</label>
-	         <input type="text" id="date1"class="form-control" placeholder="">
-	        </div>
-            <table class="table table-bordered top20">
-                <thead>
-                <tr>
-                    <th>平台</th>
-                    <th>目标销售额</th>
-                    <th>目标利润</th>
-                    <th>实际销售额</th>
-                    <th>实际利润</th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                <tr class="tr">
-                    <td><div class="form-group">
-                        <select class="form-control platform" name="platform" data-placeholder="请选择" >
-                        </select>
-                        </div>
-                    </td>
-                    <td><input type="text" name="performanceTarget" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="targetprofit" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="monthSales" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="actualprofit" class="form-control w80" placeholder=""></td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="mbottom"> <a href="javascript:void(0);" id="insertRecord"><i class="fa fa-plus"></i>新增</a>
-            <a href="javascript:void(0);" id="deleteRecord"><i class="fa fa-plus"></i>删除</a></div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="inster">新增</button>
-        </div>
-    </form>
-    </div>
-  </div>
-</div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <script type="text/javascript" src="js/plugins/layer/layer.js"></script>
 <script type="text/javascript">
@@ -171,30 +149,15 @@ function Modify(platform)
 	  
 }
 
-
-
-
 (function(){
-	$("#date").jeDate({
-        isinitVal: true,
-        isTime:false,
-        ishmsVal: false,
-        format: "YYYY-MM",
-        zIndex:3000,
-        choosefun: function(elem,datas){
-        	common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + (new Date(datas).getMonth() + 1));
-        },
-        okfun:function (elem,datas) {
-        	common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + (new Date(datas).getMonth() + 1));
-        }
-    });
-	$("#date1").jeDate({
-        isinitVal: true,
-        isTime:false,
-        ishmsVal: false,
-        format: "YYYY-MM",
-        zIndex:3000
-    });
+	$("#date").val(new Date().getMonth() + 1);
+	$("#date1").val(new Date().getMonth() + 1);
+	$("#date").on("change",function(){
+		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $(this).val());
+	});
+	$("#date1").on("change",function(){
+		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $(this).val());
+	});
 	$.ajax({
 		url : contextPath + "/report/targetcompletioncrate/platform",
 		cache : false,
