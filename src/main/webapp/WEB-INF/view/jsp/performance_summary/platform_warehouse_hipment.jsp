@@ -120,10 +120,10 @@ function getChartData(chartUrl){
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'platform',index : 'platform',width : 155}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
-		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105}, 
-		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105}, 
-		             {name : 'netProfit',index : 'netProfit',align : "right",width : 105}, 
-		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 120}
+		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'netProfit',index : 'netProfit',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

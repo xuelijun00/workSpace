@@ -59,16 +59,16 @@ var chart;
 var operation;
 var domesticData = [];
 function queryData(){
-	var sku = $('#sku').val().trim();
-	var oldsku = $('#oldsku').val().trim();
+	var sku = encodeURIComponent($('#sku').val().trim());
+	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebayoverseassku/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
-	var sku = $('#sku').val();
-	var oldsku = $('#oldsku').val();
+	var encodeURIComponent(sku = $('#sku').val());
+	var encodeURIComponent(oldsku = $('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Amazon业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
@@ -124,9 +124,9 @@ function exportData(){
 			{name : 'sku',index : 'sku',width : 255}, 
             {name : 'skuOld',index : 'skuOld',width : 205}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 205},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 205},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205}
+            {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

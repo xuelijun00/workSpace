@@ -72,7 +72,7 @@ var chartUrl;
 
 function getUrl(){	
 	var category = $("#category").val();
-	var oldsku = $("#oldsku").val();
+	var oldsku = encodeURIComponent($("#oldsku").val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
@@ -148,9 +148,9 @@ function getUrl(){
 			{name : 'business',index : 'business',width : 175}, 
             {name : 'skuOld',index : 'skuOld',width : 175}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 145},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 145},
-            {name : 'sales',index : 'sales',sortable : "true",width : 155}
+            {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

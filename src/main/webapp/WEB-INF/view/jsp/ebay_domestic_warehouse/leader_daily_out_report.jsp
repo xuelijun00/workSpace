@@ -178,11 +178,11 @@ function exportGridData(type){
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120,formatter:function(cellvalue, options, row){return new Date(cellvalue).toLocaleDateString()}}, 
 		            {name : 'groupleader',index : 'groupleader',width : 100}, 
 		            {name : 'zhandian',index : 'zhandian',width : 100},
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120},
-		             {name : 'netProfit',index : 'netProfit',width : 120},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,pager:"pager1"
@@ -197,11 +197,11 @@ function exportGridData(type){
 		,colModel:[ {name : 'startDate',index : 'startDate',width : 120,}, 
 		            {name : 'groupleader',index : 'groupleader',width : 100}, 
 		            {name : 'zhandian',index : 'zhandian',width : 100}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120},
-		             {name : 'netProfit',index : 'netProfit',width : 120},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,pager:"pager2"

@@ -58,16 +58,17 @@ var chart;
 var operation;
 function queryData(){
 	var category = $('#category').val().trim();
-	var oldsku = $('#oldsku').val().trim();
+	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=Ebay_US&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&category=" + category;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
+	debugger;
 	var domesticData = [];
 	var category = $('#category').val();
-	var oldsku = $('#oldsku').val();
+	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Ebay业务线美仓每日品类销售数据" + startDate +"-"+ endDate + ".csv";
@@ -83,7 +84,7 @@ function exportData(){
 		async: false,
 		success : function(data) {
 			if(data != null && data.rows.length > 0){
-				domesticData = data;
+				domesticData = data.rows;
 			}
 		}
 	});
@@ -123,9 +124,9 @@ function exportData(){
 			{name : 'category',index : 'category',width : 255}, 
             {name : 'skuOld',index : 'skuOld',width : 205}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 205},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 205},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205}
+            {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

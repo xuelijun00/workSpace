@@ -126,7 +126,7 @@ function query(type){
 	$('#list' + type).jqGrid('setGridParam', {url: getUrl(type)}).trigger('reloadGrid');
 }
 function exportGridData(type){
-	debugger;
+	//debugger;
 	var fileName = "各平台各账号管理员业绩" + new Date().getTime() + ".csv";
 	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利'];
 	var column;
@@ -179,11 +179,11 @@ function exportGridData(type){
 		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
 		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 120}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120},
-		             {name : 'netProfit',index : 'netProfit',width : 120},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 		,pager:"pager1"
@@ -197,11 +197,11 @@ function exportGridData(type){
 		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
 		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
 		             {name : 'startDate',index : 'startDate',width : 120}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120},
-		             {name : 'netProfit',index : 'netProfit',width : 120},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
 		,sortname:"startDate"
 		,sortorder:"asc"
 		,pager:"pager2"

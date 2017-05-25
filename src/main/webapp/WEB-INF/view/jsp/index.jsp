@@ -92,6 +92,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_hipment">国内仓发货汇总数据</a>
                         </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_hipment">国内仓各平台发货数据</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=net_profit_details/netProfitDetails">净利导出明细</a>
                         </li>
                     </ul>
                 </li>

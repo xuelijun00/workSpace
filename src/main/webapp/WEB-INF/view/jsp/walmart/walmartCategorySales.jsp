@@ -60,7 +60,7 @@ var operation;
 var domesticData = [];
 function queryData(){
 	var category = $('#category').val().trim();
-	var oldsku = $('#oldsku').val().trim();
+	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=walmart&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&category=" + category;	
@@ -68,7 +68,7 @@ function queryData(){
 }
 function exportData(){
 	var category = $('#category').val();
-	var oldsku = $('#oldsku').val();
+	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "沃尔玛业务线每日品类销售数据" + startDate +"-"+ endDate + ".csv";
@@ -124,9 +124,9 @@ function exportData(){
 			{name : 'category',index : 'category',width : 255}, 
             {name : 'skuOld',index : 'skuOld',width : 205}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 205},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 205},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205}
+            {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

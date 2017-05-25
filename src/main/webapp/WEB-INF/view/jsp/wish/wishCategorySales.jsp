@@ -35,7 +35,7 @@
                                _value=""/>
             </div>
             <div class="form-group">
-               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+               <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -59,15 +59,16 @@ var operation;
 var domesticData = [];
 function queryData(){
 	var category = $('#category').val().trim();
-	var oldsku = $('#oldsku').val().trim();
+	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=wish&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&category=" + category;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
+	
 	var category = $('#category').val();
-	var oldsku = $('#oldsku').val();
+	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "wish业务线每日品类销售数据" + startDate +"-"+ endDate + ".csv";
@@ -123,9 +124,9 @@ function exportData(){
 			{name : 'category',index : 'category',width : 255}, 
             {name : 'skuOld',index : 'skuOld',width : 205}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 205},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 205},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205}
+            {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

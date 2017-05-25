@@ -67,7 +67,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "沃尔玛业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
-	var column = ['orders','sales','reportDate1','business'];
+	var column = ['reportDate1','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -125,8 +125,8 @@ function getChartData(chartUrl){
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'sales',index : 'sales',width : 205}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205}
+		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

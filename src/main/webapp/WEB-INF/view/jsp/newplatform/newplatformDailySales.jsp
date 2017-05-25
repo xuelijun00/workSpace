@@ -139,7 +139,7 @@ function getChartData(chartUrl){
 		var platform = $("#platform").val();
 		var fileName = "新平台业务线每日销售数据" + startDate +"-" +platform + ".csv";
 		var title = [ '报表时间', '平台名称','销售额', '订单数'];
-		var column = ['orders','sales','reportDate1','business'];
+		var column = ['reportDate1','business','sales','orders'];
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
 	
@@ -150,8 +150,8 @@ function getChartData(chartUrl){
 		,colNames:[ '报表时间', '平台名称', '订单数', '销售额']
 		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205},
-		             {name : 'sales',index : 'sales',width : 205}, ]
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 	});

@@ -148,8 +148,8 @@ function getChartData(chartUrl){
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'sales',index : 'sales',width : 205}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205}]
+		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 	});
