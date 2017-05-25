@@ -20,7 +20,7 @@
     <form class="form-inline">
             <div class="form-group">
               <label>日期：</label>
-              <input type="text" id="start_date" class="form-control" placeholder="">
+              <input type="text" id="start_date" class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-primary" onclick="queryData()">查询</button>

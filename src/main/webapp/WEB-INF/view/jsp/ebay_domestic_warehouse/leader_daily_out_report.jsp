@@ -17,12 +17,12 @@
     <div class="ibox-content">
     	<form class="form-inline">
            <div class="form-group">
-             <label>开始时间</label>
-             <input type="text" id="start_date1"class="form-control" placeholder="">
+             <label>开始时间</label> 
+             <input type="text" id="start_date1"class="form-control" placeholder=""  readonly="readonly">
            </div>
            <div class="form-group">
              <label>结束时间</label>
-             <input type="text" id="end_date1" class="form-control" placeholder="">
+             <input type="text" id="end_date1" class="form-control" placeholder=""  readonly="readonly">
            </div>
            <div class="form-group">
                <label>站点：</label>
@@ -51,11 +51,11 @@
     	<form class="form-inline">
            <div class="form-group">
              <label>开始时间</label>
-             <input type="text" id="start_date2"class="form-control" placeholder="">
+             <input type="text" id="start_date2"class="form-control" placeholder="" readonly="readonly">
            </div>
            <div class="form-group">
              <label>结束时间</label>
-             <input type="text" id="end_date2" class="form-control" placeholder="">
+             <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
            </div>
            <div class="form-group">
                <label>平台：</label>

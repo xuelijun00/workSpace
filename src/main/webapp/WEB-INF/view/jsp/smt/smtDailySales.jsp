@@ -18,11 +18,11 @@
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date" class="form-control" placeholder="">
+              <input type="text" id="start_date" class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
               <label>结束时间</label>
-              <input type="text" id="end_date" class="form-control" placeholder="">
+              <input type="text" id="end_date" class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>

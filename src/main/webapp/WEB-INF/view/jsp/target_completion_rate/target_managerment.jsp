@@ -12,7 +12,7 @@
     <form class="form-inline">
        <div class="form-group">
           <label>日期：</label>
-          <input type="text" id="date"class="form-control" placeholder="">
+          <input type="text" id="date"class="form-control" placeholder="" readonly="readonly">
         </div>
         <!-- <div class="form-group">
             <button type="button" class="btn btn-primary add-space" id="query">查询</button>
