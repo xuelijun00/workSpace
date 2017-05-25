@@ -44,7 +44,7 @@
 		  	`unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
 		  	 `product_shipping`, `platform_cost`, `material_cost`,
 		  	 `order_execution_fee`, `operating_cost`, `profit_margin`, `net_profit`
-  	from dailyoutskureprots
+  	from dailyoutskureprots_new
 	where 1=1
 	<if test="startDate != null and startDate.length() > 0" >
        and report_date >= #{startDate}
@@ -66,21 +66,21 @@
   
   
   <select id="selectPlatform" resultType="String" >
-    SELECT `platform` FROM `dailyoutskureprots` WHERE 1 GROUP by `platform`
+    SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
   </select>
   
   
    <select id="selectAccount" resultType="String" >
-    SELECT `sales_account` FROM `dailyoutskureprots` WHERE 1 GROUP by `sales_account`
+    SELECT `sales_account` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `sales_account`
   </select>
   
   
    <select id="selectSku" resultType="String" >
-    SELECT `sku` FROM `dailyoutskureprots` WHERE 1 GROUP BY`sku`
+    SELECT `sku` FROM `dailyoutskureprots_new` WHERE 1 GROUP BY`sku`
   </select>
   
   <insert id="insertSelective" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-    insert into dailyoutskureprots
+    insert into dailyoutskureprots_new
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="platform != null" >
         platform,
