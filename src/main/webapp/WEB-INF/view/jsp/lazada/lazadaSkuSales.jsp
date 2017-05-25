@@ -67,7 +67,7 @@ function queryData(){
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
-	var sku = $('#sku').val();
+	var sku = encodeURIComponent($('#sku').val());
 	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();

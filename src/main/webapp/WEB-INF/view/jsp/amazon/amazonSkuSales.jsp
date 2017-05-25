@@ -67,11 +67,11 @@ function queryData(){
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
-	var encodeURIComponent(sku = $('#sku').val());
-	var encodeURIComponent(oldsku = $('#oldsku').val());
+	var sku = encodeURIComponent($('#sku').val());
+	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "Amazon业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "amazon业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
 	
@@ -117,7 +117,7 @@ function exportData(){
 	var series = [];
 	
 	common.grid({
-		title:"Amazon业务线每日sku销售数据"
+		title:"amazon业务线每日sku销售数据"
 		,url:chartUrl
 		,colNames:[ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
