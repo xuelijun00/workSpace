@@ -103,6 +103,7 @@ function getChartData(chartUrl){
 (function(){
 	$("#start_date").jeDate({
         isinitVal: true,
+        initAddVal:{DD:"-1"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
