@@ -30,6 +30,10 @@ public class NetProfitDetailsController {
 	@RequestMapping(value="/profit_details/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 	
+		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
+		
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailyOutSkuReprots> list = NetProfit.selectAll(key);

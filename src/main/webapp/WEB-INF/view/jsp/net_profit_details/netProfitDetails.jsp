@@ -107,7 +107,7 @@ function exportData(){
 	
 	var fileName = "净利导出明细.csv";
 	var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货单数','客单价','发货收入','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税前综合净利'];
-	var column = ['reportDate','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit'];
+	var column = ['reportDate1','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -163,7 +163,7 @@ function exportData(){
 		title:"净利导出明细"
 		,url:getUrl()
 		,colNames:[ '报表时间', '平台名称', '账号', 'sku','管理员','发货单数','客单价','发货收入','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税前综合净利']
-		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 255,formatter:function(cellvalue, options, row){return new Date(cellvalue).toLocaleDateString()}}, 
+		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'platform',index : 'platform',width : 205}, 
 		             {name : 'salesAccount',index : 'sales_account',width : 205}, 
 		             {name : 'sku',index : 'sku',sortable : "true",width : 205},
@@ -183,7 +183,7 @@ function exportData(){
 		             {name : 'netProfit',index : 'netProfit',sortable : "true",width : 300,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		         
 		             ]	      
-		,sortname:"reportDate"
+		,sortname:"reportDate1"
 		,sortorder:"asc"
 		,height  : "400"
 	});

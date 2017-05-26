@@ -2,6 +2,8 @@ package com.yks.bi.dto.report;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 public class DailyOutSkuReprots {
     private String platform;
 
@@ -41,6 +43,16 @@ public class DailyOutSkuReprots {
 
     private String startDate;
     private String endDate;
+    
+	private String reportDate1;
+
+	public String getReportDate1() {
+		if(this.getReportDate() != null){
+			return DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
+		}
+        return null;
+    }
+    
     
     public String getStartDate() {
 		return startDate;
