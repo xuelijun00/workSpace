@@ -131,14 +131,14 @@ var targetCompletionRate = {
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 				             {name : 'name',index : 'name',width : 155}, 
 				             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
-				             {name : 'performanceTarget',index : 'performanceTarget',align : "right",width : 105}, 
-				             {name : 'monthSales',index : 'monthSales',align : "right",width : 105}, 
-				             {name : 'estimatedSales',index : 'estimatedSales',align : "right",width : 105}, 
-				             {name : 'estimatedPercent',index : 'estimatedPercent',sortable : "true",width : 105} ,
-				             {name : 'quarterlySalesTarget',index : 'quarterlySalesTarget',sortable : "true",width : 105} ,
-				             {name : 'quarterlySales',index : 'quarterlySales',sortable : "true",width : 105} ,
-				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',sortable : "true",width : 105} ,
-				             {name : 'quarterlyEstimatedPercent',index : 'quarterlyEstimatedPercent',sortable : "true",width : 105}
+				             {name : 'performanceTarget',index : 'performanceTarget',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+				             {name : 'monthSales',index : 'monthSales',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+				             {name : 'estimatedSales',index : 'estimatedSales',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+				             {name : 'estimatedPercent',index : 'estimatedPercent',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
+				             {name : 'quarterlySalesTarget',index : 'quarterlySalesTarget',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
+				             {name : 'quarterlySales',index : 'quarterlySales',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
+				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
+				             {name : 'quarterlyEstimatedPercent',index : 'quarterlyEstimatedPercent',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 				           ],
 				rowNum : 10,//一页显示多少条
 				rowList : [ 10, 30, 50 ],//可供用户选择一页显示多少条
