@@ -52,7 +52,6 @@
                 <button type="button"  id="export" class="btn btn-primary">导出</button>
             </div>
         </form>
-	<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
@@ -148,13 +147,12 @@ function getUrl(){
 			{name : 'business',index : 'business',width : 175}, 
             {name : 'skuOld',index : 'skuOld',width : 175}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-            {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
+            {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+            {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+            {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
-		,height  : "400"
 	});
 })();
 </script>

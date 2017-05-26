@@ -32,14 +32,18 @@ var common = {
 				sortorder : opation.sortorder,//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
+				//shrinkToFit:false,
+                //autoScroll: false,
 				caption : opation.title,//表格的标题名字
-				height : opation.height,//表格的大小
+				height : opation.height?opation.height:"520px",//表格的大小
 				//gridComplete:function(){doResize()},
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
 			$(opation.id?opation.id:"#list2").setGridWidth(document.body.clientWidth*0.90);
 			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false,search:false});
+			$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
+			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
 		},
 		refreshData:function(gridUrl,chart,operation){
 			if(chart != null && operation != null){
@@ -54,6 +58,8 @@ var common = {
 			}
 			$('#list2').jqGrid('clearGridData');
 			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');
+			$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
+			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
 		},
 };
 

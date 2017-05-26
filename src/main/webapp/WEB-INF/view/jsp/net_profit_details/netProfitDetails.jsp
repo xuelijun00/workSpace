@@ -25,6 +25,7 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
+            <br/>
             <div class="form-group">
                 <label>平台：</label>
                 <select class="form-control w120" id="platform" >
@@ -49,7 +50,6 @@
                 <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
         </form> 
-			<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
@@ -168,24 +168,23 @@ function exportData(){
 		             {name : 'salesAccount',index : 'sales_account',width : 205}, 
 		             {name : 'sku',index : 'sku',sortable : "true",width : 205},
 		             {name : 'manager',index : 'manager',sortable : "true",width : 205},
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productRefund',index : 'productRefund',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'grossProfit',index : 'grossProfit',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productShipping',index : 'productShipping',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'platformCost',index : 'platformCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'materialCost',index : 'materialCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'netProfit',index : 'netProfit',sortable : "true",width : 300,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'productRefund',index : 'productRefund',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'grossProfit',index : 'grossProfit',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'productShipping',index : 'productShipping',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'platformCost',index : 'platformCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'materialCost',index : 'materialCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'netProfit',index : 'netProfit',sortable : "true",width : 300,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		         
 		             ]	      
 		,sortname:"reportDate1"
 		,sortorder:"asc"
-		,height  : "400"
 	});
 })();
 </script>

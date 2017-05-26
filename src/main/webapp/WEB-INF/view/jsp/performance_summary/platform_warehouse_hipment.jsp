@@ -22,9 +22,9 @@
               <label>日期：</label>
               <input type="text" id="start_date" class="form-control" placeholder=""  readonly="readonly">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <button type="button" class="btn btn-primary" onclick="queryData()">查询</button>
-            </div>
+            </div> -->
             <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
@@ -49,10 +49,6 @@ function getUrl(type){
 	}else{
 		return contextPath + '/report/warehouse_shipment/platformsum/chart?date=' + $("#start_date").val();
 	}
-}
-function queryData(){
-	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -110,8 +106,17 @@ function getChartData(chartUrl){
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
-        zIndex:3000
+        zIndex:3000,
+        choosefun:function(elem, val, date) {
+        	var operation = getChartData(getUrl());
+        	common.refreshData(getUrl(1),chart,operation);
+        },
+        okfun:function(elem, val, date) {
+        	var operation = getChartData(getUrl());
+        	common.refreshData(getUrl(1),chart,operation);
+        },
     });
+	
 	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"各平台每日发货数据"
@@ -120,10 +125,10 @@ function getChartData(chartUrl){
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'platform',index : 'platform',width : 155}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
-		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'netProfit',index : 'netProfit',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
+		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'netProfit',index : 'netProfit',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

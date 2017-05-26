@@ -187,10 +187,10 @@ function Modify(platform)
 		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标利润','实际利润']  //
 		,colModel:[ {name : 'month',index : 'month',width : 120}, 
 		             {name : 'platform',index : 'platform',width : 120}, 
-		             {name : 'performanceTarget',index : 'performanceTarget',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'monthSales',index : 'monthSales' ,width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'targetprofit',index : 'targetprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'actualprofit',index : 'actualprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
+		             {name : 'performanceTarget',index : 'performanceTarget',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'monthSales',index : 'monthSales' ,width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'targetprofit',index : 'targetprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'actualprofit',index : 'actualprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		             /* {name:'Modify',index:'platform',width:80,align:"center",formatter:function(cellvalue, options, rowObject){
 		            	 return "<a href='#' style='color:#f60'  onclick='Modify(\""+ rowObject.platform +"\")'>修改</a>";
 		             },sortable:false} */

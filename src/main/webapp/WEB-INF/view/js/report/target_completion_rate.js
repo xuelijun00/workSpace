@@ -131,23 +131,23 @@ var targetCompletionRate = {
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 				             {name : 'name',index : 'name',width : 155}, 
 				             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
-				             {name : 'performanceTarget',index : 'performanceTarget',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-				             {name : 'monthSales',index : 'monthSales',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-				             {name : 'estimatedSales',index : 'estimatedSales',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-				             {name : 'estimatedPercent',index : 'estimatedPercent',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
-				             {name : 'quarterlySalesTarget',index : 'quarterlySalesTarget',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
-				             {name : 'quarterlySales',index : 'quarterlySales',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
-				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}} ,
-				             {name : 'quarterlyEstimatedPercent',index : 'quarterlyEstimatedPercent',sortable : "true",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','}}
+				             {name : 'performanceTarget',index : 'performanceTarget',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+				             {name : 'monthSales',index : 'monthSales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+				             {name : 'estimatedSales',index : 'estimatedSales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+				             {name : 'estimatedPercent',index : 'estimatedPercent',width : 105,formatter:'integer',align:"right"} ,
+				             {name : 'quarterlySalesTarget',index : 'quarterlySalesTarget',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"} ,
+				             {name : 'quarterlySales',index : 'quarterlySales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"} ,
+				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"} ,
+				             {name : 'quarterlyEstimatedPercent',index : 'quarterlyEstimatedPercent',width : 105,formatter:'integer',align:"right"}
 				           ],
-				rowNum : 10,//一页显示多少条
-				rowList : [ 10, 30, 50 ],//可供用户选择一页显示多少条
+				rowNum : 20,//一页显示多少条
+				rowList : [ 20, 40, 50 ],//可供用户选择一页显示多少条
 				pager : '#pager2',//表格页脚的占位符(一般是div)的id
 				sortname : 'name',//初始化的时候排序的字段
 				sortorder : "asc",//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
-				//height:"200px",
+				height:"450px",
 				//caption : "各平台1月份业绩目标及完成率"//表格的标题名字
 			});
 	/*创建jqGrid的操作按钮容器*/

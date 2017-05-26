@@ -174,8 +174,8 @@ function getChartData(chartUrl){
 		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'account',index : 'account',width : 205}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, ]
+		             {name : 'orders',index : 'orders',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 	});

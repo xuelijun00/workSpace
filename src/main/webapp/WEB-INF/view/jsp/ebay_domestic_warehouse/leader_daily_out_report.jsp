@@ -197,15 +197,14 @@ function exportGridData(type){
 		,colModel:[ {name : 'startDate',index : 'startDate',width : 120,}, 
 		            {name : 'groupleader',index : 'groupleader',width : 100}, 
 		            {name : 'zhandian',index : 'zhandian',width : 100}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,pager:"pager2"
-		,height:"520px"
 	});
 })();
 </script>
