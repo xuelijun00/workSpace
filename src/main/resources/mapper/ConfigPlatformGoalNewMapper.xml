@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.ConfigPlatformGoalNewMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="report_month" property="reportMonth" jdbcType="VARCHAR" />
+    <result column="performance_targets" property="performanceTargets" jdbcType="INTEGER" />
+    <result column="quarterly_performance_targets" property="quarterlyPerformanceTargets" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="INTEGER" />
+    <result column="quarterly_sales" property="quarterlySales" jdbcType="INTEGER" />
+    <result column="estimated_sales" property="estimatedSales" jdbcType="INTEGER" />
+    <result column="quarterly_estimated_sales" property="quarterlyEstimatedSales" jdbcType="INTEGER" />
+    <result column="estimated_percentage" property="estimatedPercentage" jdbcType="INTEGER" />
+    <result column="quarterly_estimated_percentage" property="quarterlyEstimatedPercentage" jdbcType="INTEGER" />
+    <result column="target_profit" property="targetProfit" jdbcType="INTEGER" />
+    <result column="actual_profit" property="actualProfit" jdbcType="INTEGER" />
+    <result column="net_profit_target" property="netProfitTarget" jdbcType="INTEGER" />
+    <result column="net_profit_completion_rate" property="netProfitCompletionRate" jdbcType="INTEGER" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform, name, report_date, report_month, performance_targets, quarterly_performance_targets, 
+    sales, quarterly_sales, estimated_sales, quarterly_estimated_sales, estimated_percentage, 
+    quarterly_estimated_percentage, target_profit, actual_profit, net_profit_target, 
+    net_profit_completion_rate, modify_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from configplatformgoal_new
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from configplatformgoal_new
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
+    insert into configplatformgoal_new (id, platform, name, 
+      report_date, report_month, performance_targets, 
+      quarterly_performance_targets, sales, quarterly_sales, 
+      estimated_sales, quarterly_estimated_sales, 
+      estimated_percentage, quarterly_estimated_percentage, 
+      target_profit, actual_profit, net_profit_target, 
+      net_profit_completion_rate, modify_date)
+    values (#{id,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{reportDate,jdbcType=DATE}, #{reportMonth,jdbcType=VARCHAR}, #{performanceTargets,jdbcType=INTEGER}, 
+      #{quarterlyPerformanceTargets,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{quarterlySales,jdbcType=INTEGER}, 
+      #{estimatedSales,jdbcType=INTEGER}, #{quarterlyEstimatedSales,jdbcType=INTEGER}, 
+      #{estimatedPercentage,jdbcType=INTEGER}, #{quarterlyEstimatedPercentage,jdbcType=INTEGER}, 
+      #{targetProfit,jdbcType=INTEGER}, #{actualProfit,jdbcType=INTEGER}, #{netProfitTarget,jdbcType=INTEGER}, 
+      #{netProfitCompletionRate,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
+    insert into configplatformgoal_new
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="reportMonth != null" >
+        report_month,
+      </if>
+      <if test="performanceTargets != null" >
+        performance_targets,
+      </if>
+      <if test="quarterlyPerformanceTargets != null" >
+        quarterly_performance_targets,
+      </if>
+      <if test="sales != null" >
+        sales,
+      </if>
+      <if test="quarterlySales != null" >
+        quarterly_sales,
+      </if>
+      <if test="estimatedSales != null" >
+        estimated_sales,
+      </if>
+      <if test="quarterlyEstimatedSales != null" >
+        quarterly_estimated_sales,
+      </if>
+      <if test="estimatedPercentage != null" >
+        estimated_percentage,
+      </if>
+      <if test="quarterlyEstimatedPercentage != null" >
+        quarterly_estimated_percentage,
+      </if>
+      <if test="targetProfit != null" >
+        target_profit,
+      </if>
+      <if test="actualProfit != null" >
+        actual_profit,
+      </if>
+      <if test="netProfitTarget != null" >
+        net_profit_target,
+      </if>
+      <if test="netProfitCompletionRate != null" >
+        net_profit_completion_rate,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="reportMonth != null" >
+        #{reportMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceTargets != null" >
+        #{performanceTargets,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyPerformanceTargets != null" >
+        #{quarterlyPerformanceTargets,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlySales != null" >
+        #{quarterlySales,jdbcType=INTEGER},
+      </if>
+      <if test="estimatedSales != null" >
+        #{estimatedSales,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyEstimatedSales != null" >
+        #{quarterlyEstimatedSales,jdbcType=INTEGER},
+      </if>
+      <if test="estimatedPercentage != null" >
+        #{estimatedPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyEstimatedPercentage != null" >
+        #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="targetProfit != null" >
+        #{targetProfit,jdbcType=INTEGER},
+      </if>
+      <if test="actualProfit != null" >
+        #{actualProfit,jdbcType=INTEGER},
+      </if>
+      <if test="netProfitTarget != null" >
+        #{netProfitTarget,jdbcType=INTEGER},
+      </if>
+      <if test="netProfitCompletionRate != null" >
+        #{netProfitCompletionRate,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
+    update configplatformgoal_new
+    <set >
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="reportMonth != null" >
+        report_month = #{reportMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="performanceTargets != null" >
+        performance_targets = #{performanceTargets,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyPerformanceTargets != null" >
+        quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=INTEGER},
+      </if>
+      <if test="sales != null" >
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlySales != null" >
+        quarterly_sales = #{quarterlySales,jdbcType=INTEGER},
+      </if>
+      <if test="estimatedSales != null" >
+        estimated_sales = #{estimatedSales,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyEstimatedSales != null" >
+        quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=INTEGER},
+      </if>
+      <if test="estimatedPercentage != null" >
+        estimated_percentage = #{estimatedPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="quarterlyEstimatedPercentage != null" >
+        quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
+      </if>
+      <if test="targetProfit != null" >
+        target_profit = #{targetProfit,jdbcType=INTEGER},
+      </if>
+      <if test="actualProfit != null" >
+        actual_profit = #{actualProfit,jdbcType=INTEGER},
+      </if>
+      <if test="netProfitTarget != null" >
+        net_profit_target = #{netProfitTarget,jdbcType=INTEGER},
+      </if>
+      <if test="netProfitCompletionRate != null" >
+        net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
+    update configplatformgoal_new
+    set platform = #{platform,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      report_date = #{reportDate,jdbcType=DATE},
+      report_month = #{reportMonth,jdbcType=VARCHAR},
+      performance_targets = #{performanceTargets,jdbcType=INTEGER},
+      quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
+      quarterly_sales = #{quarterlySales,jdbcType=INTEGER},
+      estimated_sales = #{estimatedSales,jdbcType=INTEGER},
+      quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=INTEGER},
+      estimated_percentage = #{estimatedPercentage,jdbcType=INTEGER},
+      quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
+      target_profit = #{targetProfit,jdbcType=INTEGER},
+      actual_profit = #{actualProfit,jdbcType=INTEGER},
+      net_profit_target = #{netProfitTarget,jdbcType=INTEGER},
+      net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=INTEGER},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
