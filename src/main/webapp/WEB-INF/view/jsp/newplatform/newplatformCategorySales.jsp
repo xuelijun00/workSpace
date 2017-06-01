@@ -34,17 +34,6 @@
                         <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
                                _value=""/>
             </div>
-             <div class="form-group">
-            <label>原始SKU</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="oldsku" name="oldsku"
-                               _value=""/>
-            </div>
-           <!--  <div class="form-group">
-                <label>账号：</label>
-                <input id="account_input" list="account" />
-				<datalist id="account"></datalist>
-            </div> -->
-            
             <div class="form-group">
                 <button type="button" id="query"  class="btn btn-primary">查询</button>
             </div>
@@ -71,15 +60,13 @@ var chartUrl;
 
 function getUrl(){	
 	var category = $("#category").val();
-	var oldsku = encodeURIComponent($("#oldsku").val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
-	var chartUrl = contextPath + '/report/ebayoverseascategorynew/grid?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&category=" + category;
+	var chartUrl = contextPath + '/report/ebayoverseascategorynew/grid?st=' + startDate + '&et=' + endDate+ "&category=" + category;
 	if(platform !== 'all'){chartUrl += "&business=" + platform;}
 	return chartUrl;
 }
-
 
 (function(){
 	$("#start_date").jeDate({
@@ -97,8 +84,7 @@ function getUrl(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	
-	
+		
 	$.ajax({
 		url : contextPath + "/report/xueplatforms/platformnew",
 		cache : false,
@@ -132,8 +118,8 @@ function getUrl(){
 		});
 		
 		var fileName = "新平台业务线每日分类销售数据.csv";
-		var title = [ '分类','业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-		var column = ['category','business','skuOld','reportDate1','orders','quantity','sales'];
+		var title = [ '分类','业务线', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
+		var column = ['category','business','reportDate1','orders','quantity','sales'];
 		
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
@@ -141,15 +127,14 @@ function getUrl(){
 	common.grid({
 		title:"新平台业务线每日分类销售数据"
 		,url:getUrl()
-		,colNames:[ '分类','业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colNames:[ '分类','业务线', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 215}, 
 			{name : 'business',index : 'business',width : 175}, 
-            {name : 'skuOld',index : 'skuOld',width : 175}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
             {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-            {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
+            {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"

@@ -179,11 +179,11 @@ function exportGridData(type){
 		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
 		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 120}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
 		,pager:"pager1"
@@ -199,9 +199,9 @@ function exportGridData(type){
 		             {name : 'startDate',index : 'startDate',width : 120}, 
 		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
 		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},]
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},]
 		,sortname:"startDate"
 		,sortorder:"asc"
 		,pager:"pager2"

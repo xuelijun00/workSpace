@@ -15,12 +15,12 @@ public interface IEbayDomesticService {
 	 /**
      *  销售业绩整体报表 
      */
-	List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String oldsku,String category);
+	List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String category);
 	
 	List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku);
 
 	
-	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String oldsku,String category);
+	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category);
 
 	List<String> selectnewPlatforms();
 	

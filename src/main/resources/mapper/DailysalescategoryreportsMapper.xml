@@ -11,7 +11,7 @@
     <result column="sales" property="sales" jdbcType="REAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    report_date, business, category, sku_old, orders, quantity, sales
+    report_date, business, category, orders, quantity, sales
   </sql>
   
     <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
@@ -28,12 +28,8 @@
     <if test="category != null and category.length() > 0">
     	and  category = #{category,jdbcType=VARCHAR}
     </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
-    </if>
      ORDER BY  report_date desc
   </select>
-  
   
       <select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
     select 

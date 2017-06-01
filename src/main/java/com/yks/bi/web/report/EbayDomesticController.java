@@ -79,7 +79,7 @@ public class EbayDomesticController {
 		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<Dailysalescategoryreports> list = isale.selectcategoryAll(business, starttime, endtime, oldsku, category);
+    	List<Dailysalescategoryreports> list = isale.selectcategoryAll(business, starttime, endtime, category);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
       
@@ -87,7 +87,7 @@ public class EbayDomesticController {
     
     
     @RequestMapping(value = "/ebayoverseascategorynew/grid" ,method = RequestMethod.GET)
-    public GridModel ebayoverseascategoryMethodnew(String business,String st,String et,String oldsku,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
+    public GridModel ebayoverseascategoryMethodnew(String business,String st,String et,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	/*if(StringUtils.isNotEmpty(category)){
     		category = new String(category.getBytes("ISO-8859-1"),"UTF-8"); 
     	}*/
@@ -105,7 +105,7 @@ public class EbayDomesticController {
 		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<Dailysalescategoryreports> list = isale.selectcategorynewAll(business, starttime, endtime, oldsku, category);
+    	List<Dailysalescategoryreports> list = isale.selectcategorynewAll(business, starttime, endtime, category);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
       

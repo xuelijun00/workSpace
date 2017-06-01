@@ -28,15 +28,15 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
      *  ebay国内仓每日销售额  表格数据, 柱状图
      */
    @Override
-    public List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String oldsku,String category) {
+    public List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String category) {
        	 
-           return isalescategory.selectAll(business, st, et, oldsku, category);
+           return isalescategory.selectAll(business, st, et, category);
         }
     
     @Override
-    public List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String oldsku,String category) {
+    public List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category) {
     	
-           return isalescategory.selectnewAll(business, st, et, oldsku, category);
+           return isalescategory.selectnewAll(business, st, et,category);
         }  
     
    

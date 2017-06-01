@@ -6,8 +6,6 @@ public class DailyOutEbayGroupLeaderReprotsKey {
     private String zhandian;
 
     private Date reportDate;
-
-    private String groupleader;
     
     private String startDate;
     private String endDate;
@@ -26,14 +24,6 @@ public class DailyOutEbayGroupLeaderReprotsKey {
 
     public void setReportDate(Date reportDate) {
         this.reportDate = reportDate;
-    }
-
-    public String getGroupleader() {
-        return groupleader;
-    }
-
-    public void setGroupleader(String groupleader) {
-        this.groupleader = groupleader == null ? null : groupleader.trim();
     }
 
 	public String getStartDate() {

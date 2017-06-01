@@ -26,21 +26,21 @@
         <div class="container loginbg">
             <div class="admin_login">
     <div class="login">
-        <p class="b20">账户登录</p>
+        <p class="b20" style="font-size: 14px; font-weight:600;">账户登录</p>
         <form class="form" id="loginform" method="post">
          <div >
                 <div >
                     <ul  class="input-group">
                         <li class="row1">用户名：</li>
-                        <li class="row2"><input class="input" name="username" size="30" type="text" checkfor="not_empty" alertfor="用户名"></li>
+                        <li class="row2"><input class="input form-control" name="username" size="30" type="text" checkfor="not_empty" alertfor="用户名"></li>
                     </ul>
                     <ul class="input-group">
                         <li class="row1">密码：</li>
-                        <li class="row2"><input class="input" name="password" size="30" type="password" checkfor="not_empty" alertfor="密码"></li>
+                        <li class="row2"><input class="input form-control" name="password" size="30" type="password" checkfor="not_empty" alertfor="密码"></li>
                     </ul>
                 </div>
-             &nbsp;&nbsp;&nbsp;&nbsp;   <div class="operation">
-                    <button class="btn btn-primary login-button"  id="login-button" type="button" >登入</button>
+             &nbsp;&nbsp;&nbsp;&nbsp;<div class="operation">
+                    <button class="btn btn-primary login-button btn-block"  id="login-button" type="button" >登入</button>
                 </div>
             </div>
              <div id="error"  class="yanshi"></div>

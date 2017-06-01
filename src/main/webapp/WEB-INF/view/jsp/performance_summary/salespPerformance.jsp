@@ -18,11 +18,11 @@
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
-              <label>开始时间</label>
+              <label>付款开始时间</label>
               <input type="text" id="start_date"class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
-              <label>结束时间</label>
+              <label>付款结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
@@ -63,7 +63,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "销售业绩整体报表" + startDate +"-"+ endDate + ".csv";
-	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
+	var title = [ '付款时间', '平台名称', '销售额', '订单数'];
 	var column = ['reportDate1','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
@@ -118,7 +118,7 @@ function getChartData(chartUrl){
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
 		,sortname:"reportDate1"

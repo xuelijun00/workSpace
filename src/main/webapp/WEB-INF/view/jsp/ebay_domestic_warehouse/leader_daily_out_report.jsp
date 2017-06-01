@@ -13,7 +13,7 @@
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Ebay组长站点发货业绩 </h5></div>
+    <div class="ibox-title"><h5>Ebay站点发货业绩 </h5></div>
     <div class="ibox-content">
     	<form class="form-inline">
            <div class="form-group">
@@ -29,12 +29,7 @@
                <select class="form-control w120" id="site1" >
                </select>
            </div>
-           <div class="form-group">
-               <label>管理员：</label>
-               <input id="groupleader_input1" list="groupleader1" />
-			<datalist id="groupleader1"></datalist>
-           </div>
-           <div class="form-group">
+            <div class="form-group">
                <button type="button" id="query1"  class="btn btn-primary" onclick="query(1)">查询</button>
            </div>
            <div class="form-group">
@@ -63,11 +58,6 @@
                </select>
            </div>
            <div class="form-group">
-               <label>管理员：</label>
-               <input id="groupleader_input2" list="groupleader2" />
-			<datalist id="groupleader2"></datalist>
-           </div>
-           <div class="form-group">
                <button type="button" id="query2"  class="btn btn-primary" onclick="query(2)">查询</button>
            </div>
            <div class="form-group">
@@ -87,7 +77,6 @@ function getUrl(type){
 	var startDate = $("#start_date" + type).val();
 	var endDate = $("#end_date" + type).val();
 	var site = $("#site" + type).val();
-	var groupleader = $("#groupleader_input" + type).val();
 	var url = "";
 	if(type === 1){
 		url = contextPath + '/report/daily_out_ebay_group_leader_reprots/grid?startDate=' + startDate + '&endDate=' + endDate;
@@ -95,7 +84,6 @@ function getUrl(type){
 		url = contextPath + '/report/daily_out_ebay_group_leader_reprots/weekgrid?startDate=' + startDate + '&endDate=' + endDate;
 	}
 	if(site !== 'all'){url += "&zhandian=" + site;}
-	if(groupleader !== 'all' && groupleader.length > 0){url += "&groupleader=" + groupleader;}
 	return url;
 }
 
@@ -105,12 +93,12 @@ function query(type){
 }
 function exportGridData(type){
 	var fileName = "Ebay组长站点发货业绩 " + new Date().getTime() + ".csv";
-	var title = [ '日期','组长','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利'];
+	var title = [ '日期','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利'];
 	var column;
 	if(type == 1){
-		column = ['reportDate','groupleader','zhandian','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
+		column = ['reportDate','zhandian','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
 	}else{
-		column = ['startDate','groupleader','zhandian','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
+		column = ['startDate','zhandian','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
 	}
 	var exportData = [];
 	$.ajax({
@@ -153,36 +141,20 @@ function exportGridData(type){
 			}
 		}
 	});
-	$.ajax({
-		url : contextPath + "/report/daily_out_ebay_group_leader_reprots/leaders",
-		cache : false,
-		type:"get",
-		async: false,
-		success : function(data) {
-			if(data != null && data.length > 0){
-				$("#groupleader1").empty();
-				$("#groupleader2").empty();
-				for(var i=0;i<data.length;i++){
-					$("#groupleader1").append("<option value='"+ data[i] +"'> </option>");
-					$("#groupleader2").append("<option value='"+ data[i] +"'> </option>");
-				}
-			}
-		}
-	});
+
 	
 	common.grid({
 		id:"#list1",
 		title:"Ebay组长站点发货业绩 "
 		,url:getUrl(1)
-		,colNames:[ '日期','组长','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
+		,colNames:[ '日期','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120,formatter:function(cellvalue, options, row){return new Date(cellvalue).toLocaleDateString()}}, 
-		            {name : 'groupleader',index : 'groupleader',width : 100}, 
 		            {name : 'zhandian',index : 'zhandian',width : 100},
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','}},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+		             {name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,pager:"pager1"
@@ -191,17 +163,16 @@ function exportGridData(type){
 	
 	common.grid({
 		id:"#list2",
-		title:"Ebay业务线组长站点每周发货数据 "
+		title:"Ebay业务线站点每周发货数据 "
 		,url:getUrl(2)
-		,colNames:[  '日期','组长','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
+		,colNames:[  '日期','站点','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
 		,colModel:[ {name : 'startDate',index : 'startDate',width : 120,}, 
-		            {name : 'groupleader',index : 'groupleader',width : 100}, 
 		            {name : 'zhandian',index : 'zhandian',width : 100}, 
-		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
-		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},]
+		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
+		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,pager:"pager2"

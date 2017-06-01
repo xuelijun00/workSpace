@@ -30,11 +30,6 @@
                                _value=""/>
             </div>
             <div class="form-group">
-            <label>原始SKU</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="oldsku" name="oldsku"
-                               _value=""/>
-            </div>
-            <div class="form-group">
                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
@@ -58,23 +53,21 @@ var operation;
 var domesticData = [];
 function queryData(){
 	var category = $('#category').val().trim();
-	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&category=" + category;	
+	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
 	var category = $('#category').val();
-	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Amazon业务线每日品类销售数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '分类', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-	var column = ['category','skuOld','reportDate1','orders','quantity','sales'];
 	
-	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&category=" + category;	
+	var	title = ['分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
+	var	column = ['category','reportDate1','orders','quantity','sales'];
 
+	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -108,7 +101,6 @@ function exportData(){
     });
 	
 	var category = $('#category').val();
-	var oldsku = $('#oldsku').val();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate;
@@ -117,14 +109,13 @@ function exportData(){
 	common.grid({
 		title:"Amazon业务线每日品类销售数据"
 		,url:chartUrl
-		,colNames:[ '分类', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colNames:[ '分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 255}, 
-            {name : 'skuOld',index : 'skuOld',width : 205}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
+            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"asc"
