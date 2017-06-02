@@ -17,7 +17,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.yks.bi.dto.report.Dailysalescategoryreports;
 import com.yks.bi.dto.report.Dailysalesskureports;
 import com.yks.bi.dto.report.SalesPerformance;
-import com.yks.bi.dto.report.TargetCompletionRateVo;
 import com.yks.bi.service.report.IEbayDomesticService;
 import com.yks.bi.service.report.ISalespPerformanceService;
 import com.yks.bi.service.report.ITargetCompletionRateService;

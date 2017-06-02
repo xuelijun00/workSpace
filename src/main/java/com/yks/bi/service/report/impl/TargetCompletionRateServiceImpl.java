@@ -1,8 +1,7 @@
 package com.yks.bi.service.report.impl;
 
-import com.yks.bi.dao.TargetCompletionRateMapper;
-import com.yks.bi.dto.report.TargetCompletionRate;
-import com.yks.bi.dto.report.TargetCompletionRateVo;
+import com.yks.bi.dao.ConfigPlatformGoalNewMapper;
+import com.yks.bi.dto.report.ConfigPlatformGoalNew;
 import com.yks.bi.service.report.ITargetCompletionRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +15,21 @@ import java.util.List;
 public class TargetCompletionRateServiceImpl implements ITargetCompletionRateService {
 
     @Autowired
-    private TargetCompletionRateMapper targetCompletionRateMapper;
+    private ConfigPlatformGoalNewMapper configPlatformGoalNewMapper;
     /**
      * 表格数据
      */
     @Override
-    public List<TargetCompletionRateVo> selectAll(String month, String platform) {
-        return targetCompletionRateMapper.selectAll(month,platform);
+    public List<ConfigPlatformGoalNew> selectAll(String month, String platform) {
+        return configPlatformGoalNewMapper.selectByPrimaryKey(month,platform);
     }
-    /**
-     * 柱状图
-     */
-    @Override
-    public List<TargetCompletionRate> selectByPrimaryKey(String platform) {
-        return targetCompletionRateMapper.selectByPrimaryKey(platform);
-    }
+    
 	@Override
 	public List<String> selectPlatform() {
-		return targetCompletionRateMapper.selectPlatform();
+		return configPlatformGoalNewMapper.selectPlatform();
 	}
 	@Override
-	public int updateSelective(TargetCompletionRateVo record) {
-		return targetCompletionRateMapper.updateSelective(record);
+	public int updateSelective(ConfigPlatformGoalNew record) {
+		return configPlatformGoalNewMapper.updateByPrimaryKeySelective(record);
 	}
 }

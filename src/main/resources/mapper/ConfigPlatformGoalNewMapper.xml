@@ -27,16 +27,28 @@
     quarterly_estimated_percentage, target_profit, actual_profit, net_profit_target, 
     net_profit_completion_rate, modify_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <!-- 查询平台 -->
+  <select id="selectPlatform" resultType="String">
+  	select distinct platform from configplatformgoal_new;
+  </select>
+  <!-- 查询报表 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from configplatformgoal_new
-    where id = #{id,jdbcType=INTEGER}
+    where 1=1
+    <if test="month != null and month.length() > 0">
+    	and report_month = #{month,jdbcType=VARCHAR}
+    </if>
+    <if test="platform != null and platform.length() > 0">
+      and platform = #{platform,jdbcType=VARCHAR}
+    </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  
+  <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from configplatformgoal_new
     where id = #{id,jdbcType=INTEGER}
-  </delete>
+  </delete> -->
   <insert id="insert" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
     insert into configplatformgoal_new (id, platform, name, 
       report_date, report_month, performance_targets, 
@@ -171,17 +183,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
     update configplatformgoal_new
     <set >
-      <if test="platform != null" >
-        platform = #{platform,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="reportDate != null" >
         report_date = #{reportDate,jdbcType=DATE},
-      </if>
-      <if test="reportMonth != null" >
-        report_month = #{reportMonth,jdbcType=VARCHAR},
       </if>
       <if test="performanceTargets != null" >
         performance_targets = #{performanceTargets,jdbcType=INTEGER},
@@ -223,7 +229,7 @@
         modify_date = #{modifyDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where platform = #{platform,jdbcType=VARCHAR} and report_month = #{reportMonth,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
     update configplatformgoal_new

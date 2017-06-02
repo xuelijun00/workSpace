@@ -2,7 +2,6 @@ package com.yks.bi.service.report;
 
 import com.yks.bi.dto.report.Dailysalescategoryreports;
 import com.yks.bi.dto.report.Dailysalesskureports;
-import com.yks.bi.dao.TargetCompletionRateMapper;
 
 import java.util.Date;
 import java.util.List;

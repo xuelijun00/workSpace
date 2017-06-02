@@ -6,11 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yks.bi.dao.DailyOutSkuReprotsMapper;
-import com.yks.bi.dao.DailySalesAccountReportsMapper;
 import com.yks.bi.dto.report.DailyOutSkuReprots;
-import com.yks.bi.dto.report.DailySalesAccountReports;
-import com.yks.bi.dto.report.DailySalesAccountReportsKey;
-import com.yks.bi.service.report.IAccountAchievementService;
 import com.yks.bi.service.report.INetProfitDetailsService;
 
 @Service

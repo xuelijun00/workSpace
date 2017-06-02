@@ -11,29 +11,16 @@
     <div class="ibox-content">
     <form class="form-inline">
        <div class="form-group">
-                <label>月份：</label>
-                <select class="form-control w120" name="month" id="date">
-                    <option value='1'>一月</option>
-                    <option value='2'>二月</option>
-                    <option value='3'>三月</option>
-                    <option value='4'>四月</option>
-                    <option value='5'>五月</option>
-                    <option value='6'>六月</option>
-                    <option value='7'>七月</option>
-                    <option value='8'>八月</option>
-                    <option value='9'>九月</option>
-                    <option value='10'>十月</option>
-                    <option value='11'>十一月</option>
-                    <option value='12'>十二月</option>
-                </select>
-            </div>
+          <label>月份：</label>
+          <input type="text" id="date" class="form-control" placeholder="" readonly="readonly">
+        </div>
         <!-- <div class="form-group">
             <button type="button" class="btn btn-primary add-space" id="query">查询</button>
         </div> -->
      </form>
      <div class="hr-line-dashed"></div>
 	     <h2 class="text-center bottom20">各平台目标管理</h2>
-	     <div class="mbottom"> <a href="javascript:void(0);" data-toggle="modal" data-target="#addtarget">
+	     <div class="mbottom"> <a href="###" data-toggle="modal" data-target="#addtarget">
 	     <i class="fa fa-plus"></i>新增目标</a> 
 	     <!--  <a href="javascript:void(0);" data-toggle="modal" data-target=".modifyreport" >修改</a> -->
      </div>
@@ -49,7 +36,7 @@
 <!-- 模态框弹窗  -->
 <!-- Modal -->
 <div class="modal fade" id="addtarget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -58,22 +45,9 @@
     <form class="form-inline" id="form1">
         <div class="modal-body">
             <div class="form-group">
-                <label>月份：</label>
-                <select class="form-control w120" name="month" id="date1">
-                    <option value='1'>一月</option>
-                    <option value='2'>二月</option>
-                    <option value='3'>三月</option>
-                    <option value='4'>四月</option>
-                    <option value='5'>五月</option>
-                    <option value='6'>六月</option>
-                    <option value='7'>七月</option>
-                    <option value='8'>八月</option>
-                    <option value='9'>九月</option>
-                    <option value='10'>十月</option>
-                    <option value='11'>十一月</option>
-                    <option value='12'>十二月</option>
-                </select>
-            </div>
+	          <label>月份：</label>
+	          <input type="text" id="date1" class="form-control" placeholder="" readonly="readonly">
+	        </div>
             <table class="table table-bordered top20">
                 <thead>
                 <tr>
@@ -82,6 +56,7 @@
                     <th>目标利润</th>
                     <th>实际销售额</th>
                     <th>实际利润</th>
+                    <th>净利目标</th>
                 </tr>
                 </thead>
                 <tbody id="tbody">
@@ -91,10 +66,11 @@
                         </select>
                         </div>
                     </td>
-                    <td><input type="text" name="performanceTarget" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="targetprofit" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="monthSales" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="actualprofit" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="performanceTargets" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="targetProfit" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="sales" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="actualProfit" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="netProfitTarget" class="form-control w80" placeholder=""></td>
                 </tr>
                 </tbody>
             </table>
@@ -150,14 +126,28 @@ function Modify(platform)
 }
 
 (function(){
-	$("#date").val(new Date().getMonth() + 1);
-	$("#date1").val(new Date().getMonth() + 1);
-	$("#date").on("change",function(){
-		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $(this).val());
-	});
-	$("#date1").on("change",function(){
-		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $(this).val());
-	});
+	$("#date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM",
+        zIndex:3000,
+        isClear:false,
+        choosefun:function(val,month,b) {
+        	common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + month);
+        },
+        okfun:function(val,date,b) {
+        	common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + month);
+        }
+    });
+	$("#date1").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM",
+        zIndex:3000,
+        isClear:false,
+    });
 	$.ajax({
 		url : contextPath + "/report/targetcompletioncrate/platform",
 		cache : false,
@@ -181,36 +171,40 @@ function Modify(platform)
 			trs[trs.length - 1].remove();
 		}
 	});
+	$("#myModalLabel").on("click",function(){
+		var trs = $("#tbody tr");
+		for (var i = 1; i < trs.length; i++) {
+			trs[i].remove();
+		}
+	});
 	common.grid({
 		title:"各平台目标管理"
-		,url:contextPath + "/report/targetcompletioncrate/grid?month=" + (new Date($("#date").val()).getMonth() + 1)
-		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标利润','实际利润']  //
-		,colModel:[ {name : 'month',index : 'month',width : 120}, 
+		,url:contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val()
+		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标利润','实际利润','净利目标','净利完成率']  //
+		,colModel:[ {name : 'reportMonth',index : 'reportMonth',width : 120}, 
 		             {name : 'platform',index : 'platform',width : 120}, 
-		             {name : 'performanceTarget',index : 'performanceTarget',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'monthSales',index : 'monthSales' ,width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		             {name : 'targetprofit',index : 'targetprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		             {name : 'actualprofit',index : 'actualprofit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
+		             {name : 'performanceTargets',index : 'performanceTargets',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
+		             {name : 'sales',index : 'sales' ,width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'targetProfit',index : 'targetProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'actualProfit',index : 'actualProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'netProfitTarget',index : 'netProfitTarget',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		             {name : 'netProfitCompletionRate',index : 'netProfitCompletionRate',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		             /* {name:'Modify',index:'platform',width:80,align:"center",formatter:function(cellvalue, options, rowObject){
 		            	 return "<a href='#' style='color:#f60'  onclick='Modify(\""+ rowObject.platform +"\")'>修改</a>";
 		             },sortable:false} */
 		             ],
-		             
-		 sortname:"month"
+		 sortname:"reportDate"
 		,sortorder:"asc"
 		,height:"520px"
-		,
 	});
 	
 	$("#inster").on("click",function(){
-		debugger;
-		var month = new Date($("#date1").val()).getMonth() + 1
-		
+		var month = $("#date1").val();
 		var reg = /^\d+(\.\d+)?$/;
 		var array = $("#form1").serializeArray();
-		for(var i=0;i<array.length / 5;i++){
-			if(reg.test(array[i*5+1].value.trim()) && reg.test(array[i*5+2].value.trim()) && reg.test(array[i*5+3].value.trim()) && reg.test(array[i*5+4].value.trim())){
-				var record = {"platform":array[i*5].value,"performanceTarget":array[i*5+1].value,"targetprofit":array[i*5+2].value,"monthSales":array[i*5+3].value,"actualprofit":array[i*5+4].value,"month":month};
+		for(var i=0;i<array.length / 6;i++){
+			if(reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim()) && reg.test(array[i*6+3].value.trim()) && reg.test(array[i*6+4].value.trim())){
+				var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"netProfitTarget":array[i*6+5].value,"reportMonth":month};
 				$.ajax({
 					url : contextPath + "/report/targetcompletioncrate/update",
 					cache : false,
@@ -223,6 +217,7 @@ function Modify(platform)
 				return;
 			}
 		}
+		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val());
 	});
 })();
 </script>

@@ -2,8 +2,7 @@ package com.yks.bi.web.report;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.yks.bi.dto.report.TargetCompletionRate;
-import com.yks.bi.dto.report.TargetCompletionRateVo;
+import com.yks.bi.dto.report.ConfigPlatformGoalNew;
 import com.yks.bi.service.report.ITargetCompletionRateService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
@@ -36,12 +35,9 @@ public class TargetCompletionRateController {
      */
     @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
     public GridModel targetCompletionRate(String month,String platform,FilterDto filter){
-    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-			filter.setSidx("report_date");
-		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<TargetCompletionRateVo> list = targetCompletionRateService.selectAll(month,platform);
+    	List<ConfigPlatformGoalNew> list = targetCompletionRateService.selectAll(month,platform);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }
@@ -52,8 +48,8 @@ public class TargetCompletionRateController {
      * @return
      */
     @RequestMapping(value = "/targetcompletioncrate/histogram" ,method = RequestMethod.GET)
-    public List<TargetCompletionRate> targetCompletionRate1(String platform,FilterDto filter){
-        return targetCompletionRateService.selectByPrimaryKey(platform);
+    public List<ConfigPlatformGoalNew> targetCompletionRate1(String platform,String month){
+        return targetCompletionRateService.selectAll(month,platform);
     }
     
     @RequestMapping(value = "/targetcompletioncrate/platform" ,method = RequestMethod.GET)
@@ -62,7 +58,7 @@ public class TargetCompletionRateController {
     }
     
     @RequestMapping(value = "/targetcompletioncrate/update" ,method = RequestMethod.POST)
-    public MessageVo update(TargetCompletionRateVo record){
+    public MessageVo update(ConfigPlatformGoalNew record){
     	int i = targetCompletionRateService.updateSelective(record);
     	if(i > 0){
     		return new MessageVo(200, "新增成功");

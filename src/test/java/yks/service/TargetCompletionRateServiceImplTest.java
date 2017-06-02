@@ -1,7 +1,6 @@
 package yks.service;
 
-import com.yks.bi.dto.report.TargetCompletionRate;
-import com.yks.bi.dto.report.TargetCompletionRateVo;
+import com.yks.bi.dto.report.ConfigPlatformGoalNew;
 import com.yks.bi.service.report.ITargetCompletionRateService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,8 +26,8 @@ public class TargetCompletionRateServiceImplTest {
 
     @Test
     public void selectAll() {
-        String month = "1";
-        List<TargetCompletionRateVo> targetCompletionRates = targetCompletionRateService.selectAll(month, null);
+        String month = "2017-01";
+        List<ConfigPlatformGoalNew> targetCompletionRates = targetCompletionRateService.selectAll(month, null);
         System.out.println(targetCompletionRates.size());
     }
 
