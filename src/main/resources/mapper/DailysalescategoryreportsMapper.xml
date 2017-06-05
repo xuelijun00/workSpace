@@ -5,7 +5,6 @@
     <id column="report_date" property="reportDate" jdbcType="DATE" />
     <id column="business" property="business" jdbcType="VARCHAR" />
     <id column="category" property="category" jdbcType="VARCHAR" />
-    <result column="sku_old" property="skuOld" jdbcType="VARCHAR" />
     <result column="orders" property="orders" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="sales" property="sales" jdbcType="REAL" />
@@ -47,9 +46,6 @@
 	    </if>
     <if test="category != null and category.length() > 0">
     	and  category = #{category,jdbcType=VARCHAR}
-    </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
     </if>
      ORDER BY  report_date desc
   </select>
