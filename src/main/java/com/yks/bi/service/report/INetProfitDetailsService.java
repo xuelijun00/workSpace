@@ -2,11 +2,8 @@ package com.yks.bi.service.report;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 
 import com.yks.bi.dto.report.DailyOutSkuReprots;
-import com.yks.bi.dto.report.DailySalesAccountReports;
-import com.yks.bi.dto.report.DailySalesAccountReportsKey;
 
 public interface INetProfitDetailsService {
 	

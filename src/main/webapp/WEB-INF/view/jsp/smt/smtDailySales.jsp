@@ -126,7 +126,7 @@ function getChartData(chartUrl){
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
 		,sortname:"reportDate1"
-		,sortorder:"asc"
+		,sortorder:"desc"
 	});
 })();
 </script>

@@ -1,9 +1,12 @@
 package com.yks.bi.web.vo;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class MessageVo {
+@SuppressWarnings("serial")
+public class MessageVo implements Serializable {
 	private static ObjectMapper json = new ObjectMapper();
 	private int status;
 	private String message;

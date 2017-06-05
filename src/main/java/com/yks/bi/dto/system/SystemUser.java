@@ -1,10 +1,14 @@
 package com.yks.bi.dto.system;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class SystemUser {
+public class SystemUser implements Serializable {
 
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer groupId;
 
@@ -17,6 +21,10 @@ public class SystemUser {
     private Date crtTime;
     
     private String salt;
+    
+    private List<String> role;//角色
+    
+    private List<String> competence;//权限
 
     public Integer getId() {
         return id;
@@ -74,4 +82,20 @@ public class SystemUser {
 		this.username = username;
 	}
 
+	public List<String> getRole() {
+		return role;
+	}
+
+	public void setRole(List<String> role) {
+		this.role = role;
+	}
+
+	public List<String> getCompetence() {
+		return competence;
+	}
+
+	public void setCompetence(List<String> competence) {
+		this.competence = competence;
+	}
+	
 }

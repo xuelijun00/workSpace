@@ -5,16 +5,11 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.DailyOutSkuReprots;
-import com.yks.bi.dto.report.DailySalesAccountReports;
-import com.yks.bi.dto.report.DailySalesAccountReportsKey;
-import com.yks.bi.service.report.IAccountAchievementService;
 import com.yks.bi.service.report.INetProfitDetailsService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
@@ -29,11 +24,9 @@ public class NetProfitDetailsController {
 	
 	@RequestMapping(value="/profit_details/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
-	
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
 			filter.setSidx("report_date");
 		}
-		
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<DailyOutSkuReprots> list = NetProfit.selectAll(key);

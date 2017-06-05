@@ -203,7 +203,7 @@ function exportGridData(type){
 		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},]
 		,sortname:"startDate"
-		,sortorder:"asc"
+		,sortorder:"desc"
 		,pager:"pager2"
 	});
 })();

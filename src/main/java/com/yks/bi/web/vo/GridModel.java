@@ -1,11 +1,12 @@
 package com.yks.bi.web.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 
-public class GridModel {
+@SuppressWarnings("serial")
+public class GridModel implements Serializable  {
 	/**
 	 * 页面显示的属性
 	 */

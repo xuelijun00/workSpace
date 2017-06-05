@@ -32,7 +32,6 @@ public class EbayDomesticController {
 
     @Autowired
     IEbayDomesticService isale;
-   // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  
     private static final String YYYYMMDD = "yyyy-MM-dd";
     /**
      * 表格数据  柱状图
@@ -65,7 +64,6 @@ public class EbayDomesticController {
     
     @RequestMapping(value = "/ebayoverseascategory/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethod(String business,String st,String et,String oldsku,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
-    	
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -88,10 +86,6 @@ public class EbayDomesticController {
     
     @RequestMapping(value = "/ebayoverseascategorynew/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethodnew(String business,String st,String et,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
-    	/*if(StringUtils.isNotEmpty(category)){
-    		category = new String(category.getBytes("ISO-8859-1"),"UTF-8"); 
-    	}*/
-    	
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);

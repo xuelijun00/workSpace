@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.SalesPerformance;
@@ -45,9 +44,6 @@ public class SalespPerformanceController {
      */                          
     @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
     public GridModel dailysalesMethod(String business,String st,String et,FilterDto filter) throws Exception{
-    	if(StringUtils.isNotEmpty(business)){
-    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
-    	}
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -67,9 +63,6 @@ public class SalespPerformanceController {
     }
     @RequestMapping(value = "/dailysales/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> chart(String business,String st,String et) throws Exception{
-    	if(StringUtils.isNotEmpty(business)){
-    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
-    	}
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -90,9 +83,6 @@ public class SalespPerformanceController {
     
     @RequestMapping(value = "/dailysalesnew/grid" ,method = RequestMethod.GET)
     public GridModel dailysalesnewMethod(String business,String st,String et,FilterDto filter) throws Exception{
-    	if(StringUtils.isNotEmpty(business)){
-    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
-    	}
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -115,9 +105,6 @@ public class SalespPerformanceController {
     
     @RequestMapping(value = "/dailysalesnew/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> newchart(String business,String st,String et) throws Exception{
-    	if(StringUtils.isNotEmpty(business)){
-    		business = new String(business.getBytes("ISO-8859-1"),"UTF-8"); 
-    	}
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);

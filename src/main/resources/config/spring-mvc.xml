@@ -75,7 +75,7 @@
 		<property name="basePackage" value="com.yks.bi.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -93,7 +93,7 @@
 	</tx:advice>
 	<!-- 配置事务拦截器拦截哪些类的哪些方法,一般设置成拦截Service -->
 	<aop:config>
-		<aop:pointcut id="serviceMethod"  expression="execution(* com.yks.bi.service.*.*(..))" />
+		<aop:pointcut id="serviceMethod" expression="execution(* com.yks.bi.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
 	</aop:config>
 
@@ -103,23 +103,24 @@
 	<!-- 设置使用注解的类所在的jar包 -->
 	<context:component-scan base-package="com.yks.bi.service" />
 	<context:component-scan base-package="com.yks.bi.web" />
-	
+
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/index" />
 			<mvc:mapping path="/common" />
 			<mvc:mapping path="/report/**" />
-			<bean class="com.yks.bi.web.interceptors.LoginInterceptor"/>
+			<bean class="com.yks.bi.web.interceptors.LoginInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- 视图解析器:定义跳转的文件的前后缀 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/view/jsp/" />
 		<!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+
 	<!-- 对静态资源文件的访问，交给default servlet handler处理 -->
 	<mvc:default-servlet-handler />
 	<!--对静态资源文件的访问 -->
@@ -130,5 +131,19 @@
 	<mvc:resources location="/WEB-INF/view/jsLoad/" mapping="/jsLoad/**" />
 	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/fonts/**" />
 	<mvc:resources location="/WEB-INF/view/tatol/" mapping="/tatol/**" />
-	
+	<mvc:resources location="/WEB-INF/view/jsp/error/" mapping="/error/**" />
+
+	<bean id="facadeMonitoringAdvisor" class="net.bull.javamelody.MonitoringSpringAdvisor">
+		<property name="pointcut">
+			<bean class="org.springframework.aop.support.JdkRegexpMethodPointcut">
+				<property name="pattern" value="com.yks.bi.service.*.*.*ServiceImpl" /><!-- 正则表达式 -->
+			</bean>
+			<!-- <bean class="net.bull.javamelody.MonitoredWithInterfacePointcut">
+				<property name="interfaceName" value="com.xyz.someapp.service.Facade" />
+			</bean> -->
+		</property>
+	</bean>
+	<import resource="classpath:net/bull/javamelody/monitoring-spring.xml" />
+	<import resource="classpath:net/bull/javamelody/monitoring-spring-aspectj.xml" />
+
 </beans>

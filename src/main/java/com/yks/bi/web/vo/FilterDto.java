@@ -1,6 +1,9 @@
 package com.yks.bi.web.vo;
 
-public class FilterDto {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class FilterDto implements Serializable  {
 	
 	/**
 	 * 过滤属性

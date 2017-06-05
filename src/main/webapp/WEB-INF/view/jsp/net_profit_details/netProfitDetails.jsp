@@ -183,7 +183,7 @@ function exportData(){
 		         
 		             ]	      
 		,sortname:"reportDate1"
-		,sortorder:"asc"
+		,sortorder:"desc"
 	});
 })();
 </script>

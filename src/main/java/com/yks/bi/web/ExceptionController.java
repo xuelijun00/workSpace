@@ -12,7 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class ExceptionController implements HandlerExceptionResolver{
 	
 	private static Logger log = Logger.getLogger(ExceptionController.class);
-	
+	/**
+	 * SimpleMappingExceptionResolver
+	 * 可以通过配置这个自定义异常 跳转
+	 */
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object arg2,Exception ex) {
 		log.error("异常", ex);
 		return new ModelAndView("error/500", "message", ex.getLocalizedMessage());

@@ -118,7 +118,7 @@ function exportData(){
             {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
 		,sortname:"reportDate1"
-		,sortorder:"asc"
+		,sortorder:"desc"
 	});
 })();
 </script>

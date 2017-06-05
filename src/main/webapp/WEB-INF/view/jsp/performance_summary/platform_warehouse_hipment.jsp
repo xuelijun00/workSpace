@@ -132,7 +132,7 @@ function getChartData(chartUrl){
 		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
 		,sortname:"reportDate1"
-		,sortorder:"asc"
+		,sortorder:"desc"
 	});
 })();
 </script>
