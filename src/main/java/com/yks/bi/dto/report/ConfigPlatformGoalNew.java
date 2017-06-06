@@ -21,7 +21,10 @@ public class ConfigPlatformGoalNew {
 
     private Integer quarterlySales;
 
-    private Integer estimatedSales;
+    private Integer netProfitTarget;
+   
+
+	private Integer estimatedSales;
 
     private Integer quarterlyEstimatedSales;
 
@@ -33,7 +36,6 @@ public class ConfigPlatformGoalNew {
 
     private Integer actualProfit;
 
-    private Integer netProfitTarget;
 
     private Integer netProfitCompletionRate;
 
@@ -63,6 +65,15 @@ public class ConfigPlatformGoalNew {
         this.name = name == null ? null : name.trim();
     }
 
+    
+    public Integer getNetProfitTarget() {
+		return netProfitTarget;
+	}
+
+	public void setNetProfitTarget(Integer netProfitTarget) {
+		this.netProfitTarget = netProfitTarget;
+	}
+    
     public Date getReportDate() {
         return reportDate;
     }
@@ -159,13 +170,6 @@ public class ConfigPlatformGoalNew {
         this.actualProfit = actualProfit;
     }
 
-    public Integer getNetProfitTarget() {
-        return netProfitTarget;
-    }
-
-    public void setNetProfitTarget(Integer netProfitTarget) {
-        this.netProfitTarget = netProfitTarget;
-    }
 
     public Integer getNetProfitCompletionRate() {
         return netProfitCompletionRate;

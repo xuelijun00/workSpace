@@ -219,9 +219,6 @@
       <if test="actualProfit != null" >
         actual_profit = #{actualProfit,jdbcType=INTEGER},
       </if>
-      <if test="netProfitTarget != null" >
-        net_profit_target = #{netProfitTarget,jdbcType=INTEGER},
-      </if>
       <if test="netProfitCompletionRate != null" >
         net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=INTEGER},
       </if>

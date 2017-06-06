@@ -53,10 +53,9 @@
                 <tr>
                     <th>平台</th>
                     <th>目标销售额</th>
-                    <th>目标利润</th>
+                    <th>目标净利</th>
                     <th>实际销售额</th>
                     <th>实际利润</th>
-                    <th>净利目标</th>
                 </tr>
                 </thead>
                 <tbody id="tbody">
@@ -70,7 +69,6 @@
                     <td><input type="text" name="targetProfit" class="form-control w80" placeholder=""></td>
                     <td><input type="text" name="sales" class="form-control w80" placeholder=""></td>
                     <td><input type="text" name="actualProfit" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="netProfitTarget" class="form-control w80" placeholder=""></td>
                 </tr>
                 </tbody>
             </table>
@@ -180,7 +178,7 @@ function Modify(platform)
 	common.grid({
 		title:"各平台目标管理"
 		,url:contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val()
-		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标利润','实际利润','净利目标','净利完成率']  //
+		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标净利','实际利润','销售额完成率','净利完成率']  //
 		,colModel:[ {name : 'reportMonth',index : 'reportMonth',width : 120}, 
 		             {name : 'platform',index : 'platform',width : 120}, 
 		             {name : 'performanceTargets',index : 'performanceTargets',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
@@ -191,7 +189,7 @@ function Modify(platform)
 		             {name : 'netProfitCompletionRate',index : 'netProfitCompletionRate',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		             /* {name:'Modify',index:'platform',width:80,align:"center",formatter:function(cellvalue, options, rowObject){
 		            	 return "<a href='#' style='color:#f60'  onclick='Modify(\""+ rowObject.platform +"\")'>修改</a>";
-		             },sortable:false} */
+		             },sortable:false}   */
 		             ],
 		 sortname:"reportDate"
 		,sortorder:"asc"
@@ -204,7 +202,7 @@ function Modify(platform)
 		var array = $("#form1").serializeArray();
 		for(var i=0;i<array.length / 6;i++){
 			if(reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim()) && reg.test(array[i*6+3].value.trim()) && reg.test(array[i*6+4].value.trim())){
-				var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"netProfitTarget":array[i*6+5].value,"reportMonth":month};
+				var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"reportMonth":month};
 				$.ajax({
 					url : contextPath + "/report/targetcompletioncrate/update",
 					cache : false,
