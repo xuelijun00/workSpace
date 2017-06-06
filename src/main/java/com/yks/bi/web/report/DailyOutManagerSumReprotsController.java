@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,8 +15,12 @@ import com.yks.bi.service.report.IDailyOutManagerSumReprotsService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 
-@Controller
-@ResponseBody
+/**
+ * 各平台各账号管理员业绩
+ * @author Administrator
+ *
+ */
+@RestController
 @RequestMapping("/report")
 public class DailyOutManagerSumReprotsController {
 	
@@ -41,6 +44,12 @@ public class DailyOutManagerSumReprotsController {
 		return dailyOutManagerSumReprotsService.selectPlatform();
 	}
 	
+	/**
+	 * 各平台各账号管理员业绩
+	 * @param key
+	 * @param filter
+	 * @return
+	 */
 	@RequestMapping(value="/daily_out_manager_sum/grid")
 	public GridModel selectByCondition(DailyOutManagerSumReprotsKey key,FilterDto filter){
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
@@ -52,7 +61,12 @@ public class DailyOutManagerSumReprotsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+	/**
+	 * 各平台各账号管理员业绩
+	 * @param key
+	 * @param filter
+	 * @return
+	 */
 	@RequestMapping(value="/daily_out_manager_sum/weekgrid")
 	public GridModel selectManagerAchievementByWeek(DailyOutManagerSumReprotsKey key,FilterDto filter){
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("start_date")){

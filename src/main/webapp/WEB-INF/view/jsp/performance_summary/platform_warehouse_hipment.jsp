@@ -15,7 +15,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>各平台每日发货数据</h5></div>
+    <div class="ibox-title"><h5>国内仓各平台发货数据</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">

@@ -6,10 +6,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,13 +18,18 @@ import com.yks.bi.service.report.IDailyOutReportsService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 
-@Controller
-@ResponseBody
+/**
+ * 各平台
+ * @author Administrator
+ *
+ */
+@RestController
 @RequestMapping(value="/report")
 public class DailyOutReportsController {
 	
 	@Autowired
 	IDailyOutReportsService dailyOutReportsService;
+	
 	
 	@RequestMapping(value="/warehouse_shipment/domesticsum/grid",method=RequestMethod.GET)
 	public GridModel selectSumDomesticWarehouseShipment(String startDate,String endDate,FilterDto filter){
@@ -72,6 +76,7 @@ public class DailyOutReportsController {
 				e.printStackTrace();
 			}
 		}
+		PageHelper.orderBy("net_profit desc");
 		return dailyOutReportsService.selectPlatformDomesticWarehouseShipment(key);
 	}
 

@@ -16,6 +16,11 @@ import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 各平台各账号业绩 报表
+ * @author Administrator
+ *
+ */
 @RestController
 @RequestMapping("/report")
 public class AccountAchievementController {
@@ -23,6 +28,13 @@ public class AccountAchievementController {
 	@Autowired
 	private IAccountAchievementService accountAchievementService;
 	
+	/**
+	 * 各平台各账号业绩 表格
+	 * @param key
+	 * @param filter
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value="/account_achievement/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailySalesAccountReportsKey key,FilterDto filter) throws ParseException {
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
@@ -34,16 +46,31 @@ public class AccountAchievementController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
+	
+	/**
+	 * 各平台各账号业绩 曲线图
+	 * @param key
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value="/account_achievement/chart")
 	public List<DailySalesAccountReports> selectAccountAchievementServiceChart(DailySalesAccountReportsKey key) throws ParseException {
 		return accountAchievementService.selectAccountAchievementService(key);
 	}
-	
+	/**
+	 * 查询平台
+	 * @return
+	 */
 	@RequestMapping("/account_achievement/platform")
 	public List<String> selectPlatform() {
 		return accountAchievementService.selectPlatform();
 	}
 	
+	/**
+	 * 查询账号
+	 * @param business
+	 * @return
+	 */
 	@RequestMapping("/account_achievement/account")
 	public List<String> selectAccount(String business) {
 		return accountAchievementService.selectAccount(business);

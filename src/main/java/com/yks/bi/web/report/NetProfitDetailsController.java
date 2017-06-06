@@ -14,14 +14,23 @@ import com.yks.bi.service.report.INetProfitDetailsService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * 净利润详情
+ * @author Administrator
+ */
 @RestController
 @RequestMapping("/report")
 public class NetProfitDetailsController {
 	
 	@Autowired
 	private INetProfitDetailsService NetProfit;
-	
+	/**
+	 * 净利润详情
+	 * @param key
+	 * @param filter
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping(value="/profit_details/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
@@ -33,17 +42,26 @@ public class NetProfitDetailsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+	/**
+	 * 查询平台
+	 * @return
+	 */
 	@RequestMapping("/profit_details/platform")
 	public List<String> selectPlatform() {
 		return NetProfit.selectPlatform();
 	}
-	
+	/**
+	 * 查询账号
+	 * @return
+	 */
 	@RequestMapping("/profit_details/account")
 	public List<String> selectAccount() {
 		return NetProfit.selectAccount();
 	}
-	
+	/**
+	 * 查询sku
+	 * @return
+	 */
 	@RequestMapping("/profit_details/sku")
 	public List<String> selectSku() {
 		return NetProfit.selectSku();

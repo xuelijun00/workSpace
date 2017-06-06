@@ -10,18 +10,17 @@ import com.yks.bi.web.vo.MessageVo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/8.
+ * Created by liuxing on 2017/5/8.
+ * 各平台各月业绩完成率 
  */
-@Controller
-@ResponseBody
+@RestController
 @RequestMapping("/report")
 public class TargetCompletionRateController {
 
@@ -29,9 +28,11 @@ public class TargetCompletionRateController {
     ITargetCompletionRateService targetCompletionRateService;
     /**
      * 表格数据
+     * 各平台各月业绩完成率 
      * @param month
      * @param platform
      * @return
+     * @throws Exception 
      */
     @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
     public GridModel targetCompletionRate(String month,String platform,FilterDto filter){
@@ -43,6 +44,7 @@ public class TargetCompletionRateController {
     }
     /**
      * 柱状图
+     * 各平台各月业绩完成率 
      * @param month
      * @param platform
      * @return
@@ -52,11 +54,20 @@ public class TargetCompletionRateController {
         return targetCompletionRateService.selectAll(month,platform);
     }
     
+    /**
+     * 查询平台
+     * @return
+     */
     @RequestMapping(value = "/targetcompletioncrate/platform" ,method = RequestMethod.GET)
     public List<String> selectPlatform(){
     	return targetCompletionRateService.selectPlatform();
     }
     
+    /**
+     * 新增业绩目标
+     * @param record
+     * @return
+     */
     @RequestMapping(value = "/targetcompletioncrate/update" ,method = RequestMethod.POST)
     public MessageVo update(ConfigPlatformGoalNew record){
     	int i = targetCompletionRateService.updateSelective(record);

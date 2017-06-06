@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,13 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
+    <!-- <script type="text/javascript">
+    debugger;
+	    var user = "${sessionScore.systemUser.id }";
+	    if(!user || user.length <=0 ){
+	    	window.location.href="${pageContext.request.contextPath}/";
+	    }
+    </script> -->
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
 <div id="wrapper">
@@ -20,6 +29,9 @@
             <div class="logo-element nav-header">
             <span class="logotitle" ><i class="glyphicon glyphicon-tree-conifer"></i>YKSBI系统</span></div>
             <ul class="nav" id="side-menu">
+            <%-- ${fn:contains(sessionScope.systemUser.competence,"all") }
+            ${fn:length(sessionScope.systemUser.competence) > 0 
+            sessionScope.systemUser.role[0] == \"admin\"--%>
                 <li>
                     <a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month" >
                         <i class="fa fa-home"></i>
@@ -29,11 +41,15 @@
                 <li>
                     <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_salesp_performance">各平台销售业绩报表</a> </li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_hipment">国内仓发货汇总数据</a> </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_salesp_performance">各平台销售业绩报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_hipment">国内仓发货汇总数据</a>
+                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_hipment">国内仓各平台发货数据</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=net_profit_details/netProfitDetails">净利导出明细</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=net_profit_details/netProfitDetails">净利导出明细</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -46,12 +62,14 @@
                  <li>
                     <a href="#"><i class="fa fa-line-chart"></i> <span class="nav-label">eBay国内仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySales">eBay每日销售额</a></li>
-                        <%-- <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/leader_daily_out_report">eBay站点发货业绩</a></li> --%>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebaySkuSales">SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayCategorySales">品类销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/zhiyou">ebay站点直邮发货业绩</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/zhuanxian">ebay站点专线发货业绩</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySales">eBay每日销售额</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/leader_daily_out_report">eBay站点发货业绩</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebaySkuSales">SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayCategorySales">品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement"><i class="fa fa-pie-chart"></i>各平台各账号业绩</a>
@@ -59,70 +77,104 @@
                 <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a>
+                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a></li>
+                        
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a>
+                        </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a></li>
+                        
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-amazon"></i> <span class="nav-label">Amazon业务线</span><span
                             class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySales">Amazon销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonSkuSales">Amazon SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySales">Amazon销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonSkuSales">Amazon SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">SMT业务线</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">SMT业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySales">SMT销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtCategorySales">SMT品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySales">SMT销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtCategorySales">SMT品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Wish业务线</span><span  class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Wish业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySales">Wish销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishSkuSales">Wish SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySales">Wish销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishSkuSales">Wish SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Lazada业务线</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">Lazada业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySales">Lazada销售报表</a> </li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaSkuSales">Lazada SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaCategorySales">Lazada品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySales">Lazada销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaSkuSales">Lazada SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaCategorySales">Lazada品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新平台业务线</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新平台业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySales">新平台销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformSkuSales">新平台 SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySales">新平台销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformSkuSales">新平台 SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a> </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新蛋业务线</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">新蛋业务线</span><span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySales">新蛋销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggSkuSales">新蛋 SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggCategorySales">新蛋品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySales">新蛋销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggSkuSales">新蛋 SKU销售报表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggCategorySales">新蛋品类销售报表</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

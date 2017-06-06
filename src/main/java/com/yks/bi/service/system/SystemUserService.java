@@ -1,5 +1,6 @@
 package com.yks.bi.service.system;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yks.bi.common.HttpRequestUtils;
@@ -30,9 +31,10 @@ public class SystemUserService {
      * @param username
      * @param password
      * @return
+     * @throws JsonProcessingException 
      * @throws IOException
      */
-    public SystemUser login(String username, String password) throws IOException {
+    public SystemUser login(String username, String password) throws JsonProcessingException, IOException {
         SystemUser user = null;
         String url = "http://sso.youkeshu.com/?c=of_base_sso_api&a=ticket&name=okr&callback=callback";
         ResponseData responseData = HttpRequestUtils.sendHttpGet(url);

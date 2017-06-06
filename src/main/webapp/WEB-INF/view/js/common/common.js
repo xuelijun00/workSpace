@@ -40,7 +40,7 @@ var common = {
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/
-			$(opation.id?opation.id:"#list2").setGridWidth(document.body.clientWidth*0.90);
+			$(opation.id?opation.id:"#list2").setGridWidth(document.body.clientWidth*0.94);
 			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false,search:false});
 			$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
 			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
@@ -65,9 +65,9 @@ var common = {
 
 $(function(){
     $(window).resize(function(){
-    	try{$("#list2").setGridWidth(document.body.clientWidth*0.90);}catch(e){}
+    	try{$("#list2").setGridWidth(document.body.clientWidth*0.94);}catch(e){}
     });
     $(window).resize(function(){
-    	$("#list1").setGridWidth(document.body.clientWidth*0.90);
+    	try{$("#list1").setGridWidth(document.body.clientWidth*0.94);}catch(e){}
     });
 });

@@ -4,10 +4,9 @@ package com.yks.bi.web.report;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -25,8 +24,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/5/8.
  */
-@Controller
-@ResponseBody
+@RestController
 @RequestMapping("/report")
 public class EbayDomesticController {
 

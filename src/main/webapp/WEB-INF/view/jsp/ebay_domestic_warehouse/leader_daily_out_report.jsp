@@ -41,7 +41,7 @@
 			<div id="pager1"></div>
 	   </div>
 	</div>
-	<div class="ibox-title"><h5>各业务线各销售员每周业绩数据(注：周一到周日为一个周)</h5></div>
+	<div class="ibox-title"><h5>各业务线每周业绩数据(注：周一到周日为一个周)</h5></div>
 	<div class="ibox-content">
     	<form class="form-inline">
            <div class="form-group">
@@ -110,7 +110,7 @@ function exportGridData(type){
 			if(data != null && data.rows.length > 0){
 				if(type == 1){
 					for(var i=0;i<data.rows.length;i++){
-						data.rows.reportDate = new Date(data.rows.reportDate).toLocaleDateString()
+						data.rows[i].reportDate = new Date(data.rows[i].reportDate).toLocaleDateString()
 					}
 				}
 				exportData = data.rows;
