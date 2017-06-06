@@ -2,6 +2,11 @@ package com.yks.bi.common;
 
 import java.security.MessageDigest;
 
+/**
+ * MD5加密
+ * @author Administrator
+ *
+ */
 public class MD5Util {
 	
     public final static String encode(String s) {

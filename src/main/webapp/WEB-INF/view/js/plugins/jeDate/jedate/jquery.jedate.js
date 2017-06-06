@@ -37,6 +37,11 @@ window.console && (console = console || {log : function(){return;}});
             maxDate:"2099-12-31 23:59:59" //最大日期
         };
     $.fn.jeDate = function(options){
+    	$(this).keydown(function() {
+	   		 if (event.keyCode == "13") {//keyCode=13是回车键
+	   			 event.returnValue = false;
+	   		 }
+	   	});
         return this.each(function(){
             return new jeDate($(this),options||{});
         });

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>YKSBI系统 - 主页</title>
-    <script src="jsLoad/code/load.js" include="../top.html"></script>
+    <script src="${pageContext.request.contextPath }/jsLoad/code/load.js" include="../top.html"></script>
     <!--加css-->
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
@@ -274,12 +274,20 @@
     </div>
     <!--右侧边栏结束-->
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
-<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/hplus.min.js?v=4.1.0"></script>
-<script type="text/javascript" src="js/contabs.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery.min.js?v=2.1.4"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/plugins/layer/layer.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/hplus.min.js?v=4.1.0"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/contabs.min.js"></script>
+<!-- <script type="text/javascript">
+	$("a").keydown(function() {
+		debugger;
+		 if (event.keyCode == "13") {//keyCode=13是回车键
+			 event.returnValue = false;
+		 }
+	});
+</script> -->
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.apache.http.Header;
 
 /**
  * Created by liuxing on 2017/5/5.
+ * http 请求资源 实体
  */
 public class ResponseData {
 

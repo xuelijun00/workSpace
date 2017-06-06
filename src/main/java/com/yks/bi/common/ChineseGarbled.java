@@ -5,6 +5,12 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 验证字符是否是中文，并转码
+ * spring 默认字符集 ISO8859-1
+ * @author Administrator
+ *
+ */
 public class ChineseGarbled {
 	
 	private static boolean isChinese(char c) {  

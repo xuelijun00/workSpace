@@ -22,7 +22,7 @@
 <script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/export-csv.js"></script>
-<script type="text/javascript" src="js/plugins/jeDate/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="js/plugins/jeDate/jedate/jquery.jedate.js"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/jqgrid.export.js"></script>
 <script type="text/javascript" src="js/common/common.js" ></script>
 <script type="text/javascript">

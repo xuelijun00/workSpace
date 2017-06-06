@@ -102,11 +102,14 @@ var targetCompletionRate = {
 			async: false,
 			success : function(data) {
 				if(data != null && data.rows.length > 0){
+					for(var i=0;i<data.rows.length;i++){
+						data.rows[i].reportDate = new Date(data.rows[i].reportDate).toLocaleDateString();
+					}
 					tableData = data.rows;
 				}
 			}
 		});
-		var cloumn = ['name','reportMonth','performanceTargets','sales','estimatedSales','estimatedPercentage'
+		var cloumn = ['name','reportDate','performanceTargets','sales','estimatedSales','estimatedPercentage'
 		              ,'quarterlyPerformanceTargets','quarterlySales','quarterlyEstimatedSales','quarterlyEstimatedPercentage'
 		              ,'netProfitTarget','netProfitCompletionRate'];
 		exportDataToCSV('#list2',title,tableData,fileName,cloumn);
