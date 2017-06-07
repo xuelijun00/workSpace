@@ -124,6 +124,8 @@ function exportGridData(){
 		,sortorder:"desc"
 		,pager:"pager1"
 		,height:"520px"
+		,shrinkToFit:true
+		,autoScroll:true
 	});
 	
 })();

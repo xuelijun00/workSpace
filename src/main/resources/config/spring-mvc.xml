@@ -133,17 +133,4 @@
 	<mvc:resources location="/WEB-INF/view/tatol/" mapping="/tatol/**" />
 	<mvc:resources location="/WEB-INF/view/jsp/error/" mapping="/error/**" />
 
-	<bean id="facadeMonitoringAdvisor" class="net.bull.javamelody.MonitoringSpringAdvisor">
-		<property name="pointcut">
-			<bean class="org.springframework.aop.support.JdkRegexpMethodPointcut">
-				<property name="pattern" value="com.yks.bi.service.*.*.*ServiceImpl" /><!-- 正则表达式 -->
-			</bean>
-			<!-- <bean class="net.bull.javamelody.MonitoredWithInterfacePointcut">
-				<property name="interfaceName" value="com.xyz.someapp.service.Facade" />
-			</bean> -->
-		</property>
-	</bean>
-	<import resource="classpath:net/bull/javamelody/monitoring-spring.xml" />
-	<import resource="classpath:net/bull/javamelody/monitoring-spring-aspectj.xml" />
-
 </beans>
