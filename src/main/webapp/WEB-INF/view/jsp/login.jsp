@@ -88,5 +88,10 @@
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript">
+if (window != top) {  
+    top.location.href = location.href;  
+}
+</script>
 </body>
 </html>

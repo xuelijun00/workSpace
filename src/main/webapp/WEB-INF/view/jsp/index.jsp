@@ -281,13 +281,5 @@
 <script src="${pageContext.request.contextPath }/js/plugins/layer/layer.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/hplus.min.js?v=4.1.0"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/contabs.min.js"></script>
-<!-- <script type="text/javascript">
-	$("a").keydown(function() {
-		debugger;
-		 if (event.keyCode == "13") {//keyCode=13是回车键
-			 event.returnValue = false;
-		 }
-	});
-</script> -->
 </body>
 </html>

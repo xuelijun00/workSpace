@@ -30,6 +30,8 @@ public class EbayDailyOutZhuanXianReprots extends EbayDailyOutZhuanXianReprotsKe
     private Integer netProfit;
 
     private Float netProfitMargin;
+    
+    private Integer profit;
 
     public Integer getOrdersType() {
         return ordersType;
@@ -150,4 +152,12 @@ public class EbayDailyOutZhuanXianReprots extends EbayDailyOutZhuanXianReprotsKe
     public void setNetProfitMargin(Float netProfitMargin) {
         this.netProfitMargin = netProfitMargin;
     }
+
+	public Integer getProfit() {
+		return profit;
+	}
+
+	public void setProfit(Integer profit) {
+		this.profit = profit;
+	}
 }

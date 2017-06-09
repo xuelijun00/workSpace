@@ -102,12 +102,12 @@ function exportGridData(){
 		id:"#list1",
 		title:"Ebay站点直邮发货业绩 "
 		,url:getUrl()
-		,colNames:[ '日期','站点', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税前综合利润率']
+		,colNames:[ '日期','站点', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '净利', '税前综合利润率']
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120,formatter:function(cellvalue, options, row){return new Date(cellvalue).toLocaleDateString()}}, 
 		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
 		             {name : 'orderNum',index : 'orderNum',width : 100,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
 		             {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
-		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             {name : 'productRefund',index : 'productRefund',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             {name : 'orderPrice',index : 'orderPrice',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             {name : 'grossProfit',index : 'grossProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
@@ -117,7 +117,7 @@ function exportGridData(){
 					{name : 'orderExecutionFee',index : 'orderExecutionFee',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 					{name : 'operatingCost',index : 'operatingCost',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 					{name : 'profitMargin',index : 'profitMargin',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
-					{name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+					{name : 'profit',index : 'profit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 					{name : 'netProfitMargin',index : 'netProfitMargin',width : 120,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             ]
 		,sortname:"reportDate"

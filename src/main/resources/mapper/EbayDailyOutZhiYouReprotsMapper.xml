@@ -19,11 +19,12 @@
     <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
     <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
     <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     platform, report_date, zhuzhandian, order_num, unit_price, product_total_cny, product_refund, 
     order_price, gross_profit, product_shipping, platform_cost, material_cost, order_execution_fee, 
-    operating_cost, profit_margin, net_profit, net_profit_margin
+    operating_cost, profit_margin, net_profit, net_profit_margin,profit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.EbayDailyOutZhiYouReprotsKey" >
     select 

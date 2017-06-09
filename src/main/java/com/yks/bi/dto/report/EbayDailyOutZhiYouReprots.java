@@ -28,6 +28,8 @@ public class EbayDailyOutZhiYouReprots extends EbayDailyOutZhiYouReprotsKey {
     private Integer netProfit;
 
     private Float netProfitMargin;
+    
+    private Integer profit;
 
     public Integer getOrderNum() {
         return orderNum;
@@ -140,4 +142,12 @@ public class EbayDailyOutZhiYouReprots extends EbayDailyOutZhiYouReprotsKey {
     public void setNetProfitMargin(Float netProfitMargin) {
         this.netProfitMargin = netProfitMargin;
     }
+
+	public Integer getProfit() {
+		return profit;
+	}
+
+	public void setProfit(Integer profit) {
+		this.profit = profit;
+	}
 }
