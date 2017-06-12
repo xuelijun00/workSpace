@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasCountryWeightMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasCountryWeight">
+    <id column="country_weight" jdbcType="VARCHAR" property="a_countryWeight" />
+    <result column="zero_to_two" jdbcType="DOUBLE" property="b_zeroToTwo" />
+    <result column="one_to_five" jdbcType="DOUBLE" property="c_oneToFive" />
+    <result column="one_to_ten" jdbcType="DOUBLE" property="d_oneToTen" />
+    <result column="one_to_fifteen" jdbcType="DOUBLE" property="e_oneToFifteen" />
+    <result column="one_to_twenty_five" jdbcType="DOUBLE" property="f_oneToTwentyFive" />
+    <result column="one_to_thirty" jdbcType="DOUBLE" property="g_oneToThirty" />
+    <result column="one_to_forty" jdbcType="DOUBLE" property="h_oneToForty" />
+    <result column="one_to_fifty" jdbcType="DOUBLE" property="i_oneToFifty" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    country_weight, zero_to_two, one_to_five, one_to_ten, one_to_fifteen, one_to_twenty_five, 
+    one_to_thirty, one_to_forty, one_to_fifty
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_country_weight
+    where country_weight = #{countryWeight,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_country_weight
+    where country_weight = #{countryWeight,jdbcType=VARCHAR}
+  </delete>
+  
+   <!--批量新增  -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="list" >
+     insert into yks_overseas_country_weight (
+     	country_weight, zero_to_two, one_to_five,one_to_ten, one_to_fifteen, one_to_twenty_five
+     	, one_to_thirty, one_to_forty, one_to_fifty
+      )
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_countryWeight,jdbcType=VARCHAR}, #{item.b_zeroToTwo,jdbcType=DOUBLE}, #{item.c_oneToFive,jdbcType=DOUBLE}, 
+      #{item.d_oneToTen,jdbcType=DOUBLE}, #{item.e_oneToFifteen,jdbcType=DOUBLE}, #{item.f_oneToTwentyFive,jdbcType=DOUBLE}, 
+      #{item.g_oneToThirty,jdbcType=DOUBLE}, #{item.h_oneToForty,jdbcType=DOUBLE}, #{item.i_oneToFifty,jdbcType=DOUBLE}
+      )
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasCountryWeight">
+    insert into yks_overseas_country_weight (country_weight, "zero_to_ two", one_to_five, 
+      one_to_ten, one_to_fifteen, one_to_twenty_five, 
+      one_to_thirty, one_to_forty, one_to_fifty
+      )
+    values (#{countryWeight,jdbcType=VARCHAR}, #{zeroToTwo,jdbcType=DOUBLE}, #{oneToFive,jdbcType=DOUBLE}, 
+      #{oneToTen,jdbcType=DOUBLE}, #{oneToFifteen,jdbcType=DOUBLE}, #{oneToTwentyFive,jdbcType=DOUBLE}, 
+      #{oneToThirty,jdbcType=DOUBLE}, #{oneToForty,jdbcType=DOUBLE}, #{oneToFifty,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasCountryWeight">
+    insert into yks_overseas_country_weight
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countryWeight != null">
+        country_weight,
+      </if>
+      <if test="zeroToTwo != null">
+        "zero_to_ two",
+      </if>
+      <if test="oneToFive != null">
+        one_to_five,
+      </if>
+      <if test="oneToTen != null">
+        one_to_ten,
+      </if>
+      <if test="oneToFifteen != null">
+        one_to_fifteen,
+      </if>
+      <if test="oneToTwentyFive != null">
+        one_to_twenty_five,
+      </if>
+      <if test="oneToThirty != null">
+        one_to_thirty,
+      </if>
+      <if test="oneToForty != null">
+        one_to_forty,
+      </if>
+      <if test="oneToFifty != null">
+        one_to_fifty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countryWeight != null">
+        #{countryWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="zeroToTwo != null">
+        #{zeroToTwo,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFive != null">
+        #{oneToFive,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToTen != null">
+        #{oneToTen,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFifteen != null">
+        #{oneToFifteen,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToTwentyFive != null">
+        #{oneToTwentyFive,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToThirty != null">
+        #{oneToThirty,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToForty != null">
+        #{oneToForty,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFifty != null">
+        #{oneToFifty,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasCountryWeight">
+    update yks_overseas_country_weight
+    <set>
+      <if test="zeroToTwo != null">
+        "zero_to_ two" = #{zeroToTwo,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFive != null">
+        one_to_five = #{oneToFive,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToTen != null">
+        one_to_ten = #{oneToTen,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFifteen != null">
+        one_to_fifteen = #{oneToFifteen,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToTwentyFive != null">
+        one_to_twenty_five = #{oneToTwentyFive,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToThirty != null">
+        one_to_thirty = #{oneToThirty,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToForty != null">
+        one_to_forty = #{oneToForty,jdbcType=DOUBLE},
+      </if>
+      <if test="oneToFifty != null">
+        one_to_fifty = #{oneToFifty,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where country_weight = #{countryWeight,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasCountryWeight">
+    update yks_overseas_country_weight
+    set "zero_to_ two" = #{zeroToTwo,jdbcType=DOUBLE},
+      one_to_five = #{oneToFive,jdbcType=DOUBLE},
+      one_to_ten = #{oneToTen,jdbcType=DOUBLE},
+      one_to_fifteen = #{oneToFifteen,jdbcType=DOUBLE},
+      one_to_twenty_five = #{oneToTwentyFive,jdbcType=DOUBLE},
+      one_to_thirty = #{oneToThirty,jdbcType=DOUBLE},
+      one_to_forty = #{oneToForty,jdbcType=DOUBLE},
+      one_to_fifty = #{oneToFifty,jdbcType=DOUBLE}
+    where country_weight = #{countryWeight,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

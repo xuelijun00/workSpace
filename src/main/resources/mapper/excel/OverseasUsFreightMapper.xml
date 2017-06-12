@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasUsFreightMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasUsFreight">
+    <id column="order_number" jdbcType="VARCHAR" property="a_orderNumber" />
+    <result column="recipient" jdbcType="VARCHAR" property="b_recipient" />
+    <result column="recipient_country" jdbcType="VARCHAR" property="c_recipientCountry" />
+    <result column="recipient_address" jdbcType="VARCHAR" property="d_recipientAddress" />
+    <result column="recipient_city" jdbcType="VARCHAR" property="e_recipientCity" />
+    <result column="recipient_state" jdbcType="VARCHAR" property="f_recipientState" />
+    <result column="order_weight" jdbcType="DOUBLE" property="g_orderWeight" />
+    <result column="shipping_method" jdbcType="VARCHAR" property="h_shippingMethod" />
+    <result column="tracking_number" jdbcType="VARCHAR" property="i_trackingNumber" />
+    <result column="zipcode" jdbcType="VARCHAR" property="j_zipcode" />
+    <result column="delivery_time" jdbcType="VARCHAR" property="k_deliveryTime" />
+    <result column="freight" jdbcType="DOUBLE" property="o_freight" />
+    <result column="theory_weight" jdbcType="DOUBLE" property="m_theoryWeight" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_number, recipient, recipient_country, recipient_address, recipient_city, recipient_state, 
+    order_weight, shipping_method, tracking_number, zipcode, delivery_time, freight, 
+    theory_weight
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_us_freight
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_us_freight
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </delete>
+  <!--批量新增  -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="list" >
+     insert into yks_overseas_us_freight (order_number, recipient, recipient_country, 
+      recipient_address, recipient_city, recipient_state, 
+      order_weight, shipping_method, tracking_number, 
+      zipcode, delivery_time, freight, 
+      theory_weight)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+       (#{item.a_orderNumber,jdbcType=VARCHAR}, #{item.b_recipient,jdbcType=VARCHAR}, #{item.c_recipientCountry,jdbcType=VARCHAR}, 
+      #{item.d_recipientAddress,jdbcType=VARCHAR}, #{item.e_recipientCity,jdbcType=VARCHAR}, #{item.f_recipientState,jdbcType=VARCHAR}, 
+      #{item.g_orderWeight,jdbcType=DOUBLE}, #{item.h_shippingMethod,jdbcType=VARCHAR}, #{item.i_trackingNumber,jdbcType=VARCHAR}, 
+      #{item.j_zipcode,jdbcType=VARCHAR}, #{item.k_deliveryTime,jdbcType=VARCHAR}, #{item.o_freight,jdbcType=DOUBLE}, 
+      #{item.m_theoryWeight,jdbcType=DOUBLE})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasUsFreight">
+    insert into yks_overseas_us_freight (order_number, recipient, recipient_country, 
+      recipient_address, recipient_city, recipient_state, 
+      order_weight, shipping_method, tracking_number, 
+      zipcode, delivery_time, freight, 
+      theory_weight)
+    values (#{orderNumber,jdbcType=VARCHAR}, #{recipient,jdbcType=VARCHAR}, #{recipientCountry,jdbcType=VARCHAR}, 
+      #{recipientAddress,jdbcType=VARCHAR}, #{recipientCity,jdbcType=VARCHAR}, #{recipientState,jdbcType=VARCHAR}, 
+      #{orderWeight,jdbcType=DOUBLE}, #{shippingMethod,jdbcType=VARCHAR}, #{trackingNumber,jdbcType=VARCHAR}, 
+      #{zipcode,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=TIMESTAMP}, #{freight,jdbcType=DOUBLE}, 
+      #{theoryWeight,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasUsFreight">
+    insert into yks_overseas_us_freight
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="recipient != null">
+        recipient,
+      </if>
+      <if test="recipientCountry != null">
+        recipient_country,
+      </if>
+      <if test="recipientAddress != null">
+        recipient_address,
+      </if>
+      <if test="recipientCity != null">
+        recipient_city,
+      </if>
+      <if test="recipientState != null">
+        recipient_state,
+      </if>
+      <if test="orderWeight != null">
+        order_weight,
+      </if>
+      <if test="shippingMethod != null">
+        shipping_method,
+      </if>
+      <if test="trackingNumber != null">
+        tracking_number,
+      </if>
+      <if test="zipcode != null">
+        zipcode,
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time,
+      </if>
+      <if test="freight != null">
+        freight,
+      </if>
+      <if test="theoryWeight != null">
+        theory_weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null">
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCountry != null">
+        #{recipientCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientAddress != null">
+        #{recipientAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCity != null">
+        #{recipientCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientState != null">
+        #{recipientState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderWeight != null">
+        #{orderWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="shippingMethod != null">
+        #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNumber != null">
+        #{trackingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freight != null">
+        #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="theoryWeight != null">
+        #{theoryWeight,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasUsFreight">
+    update yks_overseas_us_freight
+    <set>
+      <if test="recipient != null">
+        recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCountry != null">
+        recipient_country = #{recipientCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientAddress != null">
+        recipient_address = #{recipientAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCity != null">
+        recipient_city = #{recipientCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientState != null">
+        recipient_state = #{recipientState,jdbcType=VARCHAR},
+      </if>
+      <if test="orderWeight != null">
+        order_weight = #{orderWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="shippingMethod != null">
+        shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="trackingNumber != null">
+        tracking_number = #{trackingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null">
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freight != null">
+        freight = #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="theoryWeight != null">
+        theory_weight = #{theoryWeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasUsFreight">
+    update yks_overseas_us_freight
+    set recipient = #{recipient,jdbcType=VARCHAR},
+      recipient_country = #{recipientCountry,jdbcType=VARCHAR},
+      recipient_address = #{recipientAddress,jdbcType=VARCHAR},
+      recipient_city = #{recipientCity,jdbcType=VARCHAR},
+      recipient_state = #{recipientState,jdbcType=VARCHAR},
+      order_weight = #{orderWeight,jdbcType=DOUBLE},
+      shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      tracking_number = #{trackingNumber,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      freight = #{freight,jdbcType=DOUBLE},
+      theory_weight = #{theoryWeight,jdbcType=DOUBLE}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

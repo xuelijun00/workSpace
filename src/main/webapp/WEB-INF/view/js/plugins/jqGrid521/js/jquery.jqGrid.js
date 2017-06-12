@@ -3173,6 +3173,7 @@ $.fn.jqGrid = function( pin ) {
 			elem = $('<form></form>');
 			var str1= '<div>'+$.jgrid.getRegional(ts, "colmenu.searchTitle")+'</div>';
 			str1 += '<div><select id="oper1" class="'+colmenustyle.filter_select+'">';
+			
 			$.each(texts.odata, function(i, n) {
 				selected = n.oper === o1 ? 'selected="selected"' : '';
 				if($.inArray(n.oper, so) !== -1) {
@@ -3205,6 +3206,7 @@ $.fn.jqGrid = function( pin ) {
 			elem.append(str1);
 			//oper2 		
 			repstr ='';
+			
 			$.each(texts.odata, function(i, n) {
 				selected = n.oper === o2 ? 'selected="selected"' : '';
 				if($.inArray(n.oper, so) !== -1) {
@@ -7649,6 +7651,7 @@ $.extend($.fn.jqFilter,{
 		});
 	},
 	addFilter: function (pfilter) {
+		
 		if (typeof pfilter === "string") {
 			pfilter = $.jgrid.parse( pfilter );
 		}
@@ -7957,6 +7960,7 @@ $.jgrid.extend({
 					options.sopt = [];
 					options.sopt[0]= cm.stype==='select' ?  'eq' : p.defaultSearch;
 				}
+				
 				$.each(p.odata, function() { aoprs.push(this.oper); });
 				for ( i = 0 ; i < options.sopt.length; i++) {
 					ina = $.inArray(options.sopt[i],aoprs);
@@ -8029,6 +8033,7 @@ $.jgrid.extend({
 						if( p.restoreFromFilters && restores) {
 							so = restores.op;
 						}
+						
 						for(i = 0;i<p.odata.length;i++) {
 							if(p.odata[i].oper === so) {
 								sot = p.operands[so] || "";
@@ -8254,6 +8259,7 @@ $.jgrid.extend({
 		});
 	},
 	searchGrid : function (p) {
+		
 		var regional =  $.jgrid.getRegional(this[0], 'search');
 		p = $.extend(true, {
 			recreateFilter: false,
@@ -8304,6 +8310,7 @@ $.jgrid.extend({
 			operands : { "eq" :"=", "ne":"<>","lt":"<","le":"<=","gt":">","ge":">=","bw":"LIKE","bn":"NOT LIKE","in":"IN","ni":"NOT IN","ew":"LIKE","en":"NOT LIKE","cn":"LIKE","nc":"NOT LIKE","nu":"IS NULL","nn":"ISNOT NULL"}
 		}, regional,  p || {});
 		return this.each(function() {
+			
 			var $t = this;
 			if(!$t.grid) {return;}
 			var fid = "fbox_"+$t.p.id,
@@ -8322,6 +8329,7 @@ $.jgrid.extend({
 				$("#"+$.jgrid.jqID(IDs.themodal)).remove();
 			}
 			function showFilter(_filter) {
+				
 				showFrm = $($t).triggerHandler("jqGridFilterBeforeShow", [_filter]);
 				if(showFrm === undefined) {
 					showFrm = true;
@@ -8337,6 +8345,7 @@ $.jgrid.extend({
 					}
 				}
 			}
+			
 			if ( $("#"+$.jgrid.jqID(IDs.themodal))[0] !== undefined ) {
 				showFilter($("#fbox_"+$.jgrid.jqID( $t.p.id )));
 			} else {
@@ -8390,6 +8399,7 @@ $.jgrid.extend({
 					}
 					defaultFilters = {groupOp: "AND", rules: [{field: colnm, op: cmop, data: ""}]};
 				}
+				
 				found = false;
 				if(p.tmplNames && p.tmplNames.length) {
 					found = true;
@@ -8404,6 +8414,7 @@ $.jgrid.extend({
 
 				bt = "<table class='EditTable' style='border:0px none;margin-top:5px' id='"+fid+"_2'><tbody><tr><td colspan='2'><hr class='" + common.content + "' style='margin:1px'/></td></tr>"+tmpl+"<tr><td class='EditButton' style='text-align:"+align+"'>"+bC+"</td><td class='EditButton' "+butleft+">"+bQ+bS+"</td></tr></tbody></table>";
 				fid = $.jgrid.jqID( fid);
+				
 				$("#"+fid).jqFilter({
 					columns: columns,
 					sortStrategy: p.sortStrategy,
@@ -8425,6 +8436,7 @@ $.jgrid.extend({
 					delrule : p.delrule,
 					autoencode : $t.p.autoencode,
 					onChange : function() {
+						
 						if(this.p.showQuery) {
 							$('.query',this).html(this.toUserFriendlyString());
 						}
@@ -8484,6 +8496,7 @@ $.jgrid.extend({
 					// to provide backward compatibility, inferring stringResult value from multipleSearch
 					p.stringResult = p.multipleSearch;
 				}
+				
 				$("#"+fid+"_search").on('click', function(){
 					var sdata={}, res, filters;
 					fl = $("#"+fid);
@@ -8508,7 +8521,7 @@ $.jgrid.extend({
 							return false;
 						}
 					}
-
+					
 					if(p.stringResult) {
 						try {
 							res = JSON.stringify(filters);
@@ -8592,6 +8605,7 @@ $.jgrid.extend({
 			afterSearch : null
 		}, p || {});
 		return this.each(function(){
+			
 			var $t = this;
 			if(!$t.grid) {return;}
 			var nm, sop,ruleGroup = "{\"groupOp\":\"" + p.groupOp + "\",\"rules\":[", gi=0, so;

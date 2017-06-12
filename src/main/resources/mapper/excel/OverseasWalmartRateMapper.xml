@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasWalmartRateMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasWalmartRate">
+    <result column="sku" jdbcType="VARCHAR" property="a_sku" />
+    <result column="platform_rate" jdbcType="FLOAT" property="platformRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sku, platform_rate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_walmart_rate
+    where sku = #{sku,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_walmart_rate
+    where sku = #{sku,jdbcType=VARCHAR}
+  </delete>
+  <!--批量新增  -->
+  <insert id="insertBatch"  parameterType="list" >
+     insert into yks_overseas_walmart_rate (sku, platform_rate)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+       (#{item.a_sku,jdbcType=VARCHAR}, #{item.platformRate,jdbcType=FLOAT})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasWalmartRate">
+    insert into yks_overseas_walmart_rate (sku, platform_rate)
+    values (#{sku,jdbcType=VARCHAR}, #{platformRate,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasWalmartRate">
+    insert into yks_overseas_walmart_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="platformRate != null">
+        platform_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="platformRate != null">
+        #{platformRate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasWalmartRate">
+    update yks_overseas_walmart_rate
+    <set>
+      <if test="platformRate != null">
+        platform_rate = #{platformRate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sku = #{sku,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasWalmartRate">
+    update yks_overseas_walmart_rate
+    set platform_rate = #{platformRate,jdbcType=VARCHAR}
+    where sku = #{sku,jdbcType=VARCHAR}
+  </update>
+ 
+</mapper>

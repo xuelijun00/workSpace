@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.excel.OverseasCostMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasCost" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sku" property="a_sku" jdbcType="VARCHAR" />
+    <result column="price" property="b_price" jdbcType="DOUBLE" />
+    <result column="warehouse" property="c_warehouse" jdbcType="VARCHAR" />
+    <result column="first_price" property="d_firstPrice" jdbcType="DOUBLE" />
+    <result column="weight" property="e_weight" jdbcType="DOUBLE" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sku, price, warehouse, first_price, weight, create_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_cost
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yks_overseas_cost
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!--批量新增  -->
+  <insert id="insertBatch" parameterType="list" >
+      insert into yks_overseas_cost (sku, price, warehouse, first_price, weight)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_sku,jdbcType=VARCHAR}, #{item.b_price,jdbcType=DOUBLE}, #{item.c_warehouse,jdbcType=VARCHAR}, #{item.d_firstPrice,jdbcType=DOUBLE}, #{item.e_weight,jdbcType=DOUBLE})
+    </foreach>
+  </insert>
+  
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasCost" >
+    insert into yks_overseas_cost (id, sku, price, 
+      warehouse, first_price, weight, 
+      create_at)
+    values (#{id,jdbcType=INTEGER}, #{sku,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{warehouse,jdbcType=VARCHAR}, #{firstPrice,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, 
+      #{createAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasCost" >
+    insert into yks_overseas_cost
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sku != null" >
+        sku,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="warehouse != null" >
+        warehouse,
+      </if>
+      <if test="firstPrice != null" >
+        first_price,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="warehouse != null" >
+        #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="firstPrice != null" >
+        #{firstPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasCost" >
+    update yks_overseas_cost
+    <set >
+      <if test="sku != null" >
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="warehouse != null" >
+        warehouse = #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="firstPrice != null" >
+        first_price = #{firstPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasCost" >
+    update yks_overseas_cost
+    set sku = #{sku,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      warehouse = #{warehouse,jdbcType=VARCHAR},
+      first_price = #{firstPrice,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      create_at = #{createAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

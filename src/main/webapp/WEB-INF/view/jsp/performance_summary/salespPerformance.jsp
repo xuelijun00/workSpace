@@ -116,10 +116,12 @@ function getChartData(chartUrl){
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
-		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
+		            //,searchtype:"integer"指定为数字才有大于小于搜索
+		            //searchoptions:{ sopt : [ 'eq', 'le', 'ge', 'cn', 'nc', 'gt', 'ew' ]}  指定搜索的方式
+		             {name : 'reportDate1',index : 'reportDate',width : 255}, 
+		             {name : 'business',index : 'business',width : 205},
+		             {name : 'sales',index : 'sales',width : 205,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}}, 
+		             {name : 'orders',index : 'orders',sortable : "true",width : 205,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"desc"

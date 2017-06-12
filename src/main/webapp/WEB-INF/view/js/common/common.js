@@ -22,7 +22,6 @@ var common = {
 			$(opation.id?opation.id:"#list2").jqGrid({
 				url : opation.url,//组件创建完成之后请求数据的url
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
-				//colNames : [ '平台名称', '报表时间', targetCompletionRate.month+'月份业绩目标', targetCompletionRate.month+'月份销售额', targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比', targetCompletionRate.month+'季度业绩目标' , targetCompletionRate.month+'季度销售额', targetCompletionRate.month+'季度预计销售额', targetCompletionRate.month+'季度预计百分比'],//jqGrid的列显示名字
 				colNames : opation.colNames,
 				colModel : opation.colModel,
 				rowNum : opation.rowNum,//一页显示多少条

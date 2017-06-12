@@ -1,7 +1,5 @@
 package com.yks.bi.common.excelutil;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
@@ -15,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -26,6 +25,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.util.ReflectionUtils;
 
 public class ExcelUtil {
+	
+	private static Logger log = Logger.getLogger(ExcelUtil.class);
+	
 	/**
 	 * 根据execl数据类型返回数据
 	 * @param cell
@@ -63,6 +65,7 @@ public class ExcelUtil {
 	 */
 	public static Workbook create(InputStream inp) throws Exception{
 		if(inp == null){
+			log.error("要解析excel的文件空");
 			throw new Exception("要解析excel的文件空");
 		}
 		return WorkbookFactory.create(inp);
@@ -78,7 +81,7 @@ public class ExcelUtil {
 		Method[] method = ReflectionUtils.getAllDeclaredMethods(cls);
 		List<String> methodNames = new ArrayList<String>();
 		for (Method method2 : method) {
-			if(method2.getName().startsWith(prefix)&& !method2.getName().equals("getClass")){
+			if(method2.getName().startsWith(prefix) && method2.getName().indexOf("_") > -1){
 				methodNames.add(method2.getName());
 			}
 		}
@@ -93,6 +96,7 @@ public class ExcelUtil {
 			}
 			i++;
 		}
+		log.info("生成excel列和字段对应关系");
 		return columns;
 	}
 	
@@ -111,13 +115,14 @@ public class ExcelUtil {
 				Class<?>[] paramTypes = method[i].getParameterTypes();
 				try{
 					if("java.lang.Integer".equals(paramTypes[0].getName())){
-						value = Integer.parseInt(value.toString());
+						value = Integer.parseInt(value.toString().replaceAll(",", ""));
 					}else if("java.lang.Float".equals(paramTypes[0].getName())){
-						value = Float.parseFloat(value.toString());
+						value = Float.parseFloat(value.toString().replaceAll(",", ""));
 					}else if("java.lang.Double".equals(paramTypes[0].getName())){
-						value = Double.parseDouble(value.toString());
+						value = Double.parseDouble(value.toString().replaceAll(",", ""));
 					}
 				}catch(Exception ex){
+					log.error("设置value值失败,类型不能转换,methodName:" + methodName + " value:" + value);
 					return false;
 				}
 				ReflectionUtils.invokeMethod(method[i], cls, value);
@@ -163,9 +168,8 @@ public class ExcelUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static List<Object> parseExcel(File file,Map<Integer,String> column,Class<?> cls) throws Exception{
-		FileInputStream fis = new FileInputStream(file);
-		Workbook workBook = create(fis);
+	public static List<Object> parseExcel(InputStream is,Map<Integer,String> column,Class<?> cls) throws Exception{
+		Workbook workBook = create(is);
 		List<Object> data = new ArrayList<Object>();
 		Sheet sheet = workBook.getSheetAt(0);
 		for (int i = 0; i < sheet.getLastRowNum(); i++) {
@@ -182,8 +186,9 @@ public class ExcelUtil {
 			else
 				continue;
 		}
-		fis.close();
+		is.close();
 		workBook.close();
+		log.info("解析excel记录总数：" + data.size());
 		return data;
 	}
 	/**
@@ -206,15 +211,7 @@ public class ExcelUtil {
 		FileOutputStream fileOutputStream = new FileOutputStream(fileName);
 		workBook.write(fileOutputStream);
 		workBook.close();
-	}
-	
-	public static void main(String[] args) throws Exception{
-		File file = new File("f:\\test\\9002.xls");
-		Map<Integer,String> column = generateColumn(ExcelPojo.class,"set",0,3,9);
-		List<Object> list = ExcelUtil.parseExcel(file, column, ExcelPojo.class);
-		System.out.println(list.size());
-		
-		ExcelUtil.writeExcel("f:\\test\\test9002.xlsx", list);
+		log.error("生成excel成功：" + fileName);
 	}
 	
 }

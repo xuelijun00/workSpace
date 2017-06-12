@@ -16,7 +16,7 @@
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript" src="js/jquery.min.js?v=2.1.4"></script>
 <script type="text/javascript" src="js/bootstrap.min.js?v=3.3.6"></script>
-<script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.js"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
 <!-- <script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script> -->
 <script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script>

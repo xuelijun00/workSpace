@@ -74,3 +74,12 @@ select * from (
     union
     select '2017-12',platform, name, report_date, month12, quarter4,month12sales, quarter4sales,month12estimatesales, quarter4estimatesales, month12percent, quarter4percent,targetprofit12,actualprofit12,0,0 from configplatformgoal
     ) a
+    
+    
+CREATE TABLE `yks_order_weight` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_number` varchar(255) DEFAULT NULL COMMENT '订单号',
+  `logisticsType` varchar(255) DEFAULT NULL COMMENT '物流方式',
+  `weight` float DEFAULT NULL COMMENT '重量',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
