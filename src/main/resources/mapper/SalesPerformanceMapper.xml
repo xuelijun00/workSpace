@@ -19,7 +19,12 @@
   </select>
   <!--查询所有平台  -->
   <select id="selectPlatforms" resultType="String">
-    select distinct business from dailysalesreports order by business 
+    select distinct business from dailysalesreports
+    where 1=1
+    <if test="business != null">
+    	and business like concat('%',#{business,jdbcType=VARCHAR},'%')
+    </if>
+    order by business 
   </select>
   
    <select id="selectAll" resultMap="BaseResultMap">

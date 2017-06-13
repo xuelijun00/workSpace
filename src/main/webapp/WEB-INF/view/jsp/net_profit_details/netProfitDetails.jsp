@@ -38,9 +38,8 @@
             </div>
             
              <div class="form-group">
-            <label>SKU</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku"
-                               _value=""/>
+	            <label>SKU</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku" value=""/>
             </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>

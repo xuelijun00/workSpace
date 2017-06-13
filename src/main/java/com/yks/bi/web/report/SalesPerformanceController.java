@@ -19,7 +19,9 @@ import com.yks.bi.web.vo.GridModel;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/8.
@@ -59,7 +61,17 @@ public class SalesPerformanceController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<SalesPerformance> list = isale.selectAll(business,starttime,endtime);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	double sumSales = 0;
+    	for (SalesPerformance salesPerformance : list) {
+    		sumOrders += salesPerformance.getOrders();
+    		sumSales += salesPerformance.getSales();
+		}
+    	userdata.put("business", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("sales", sumSales);
+        return new GridModel(pageInfo,userdata);
     }
     
     /**
@@ -87,8 +99,8 @@ public class SalesPerformanceController {
      * @return
      */
     @RequestMapping(value = "/dailysales/platforms" ,method = RequestMethod.GET)
-    public List<String> platforms(){
-        return isale.selectPlatforms();
+    public List<String> platforms(String business){
+        return isale.selectPlatforms(business);
     }
     /**
      * 新平台销售业绩

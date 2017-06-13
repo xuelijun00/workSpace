@@ -35,7 +35,9 @@ var common = {
                 autoScroll: !opation.autoScroll?true:false,
 				caption : opation.title,//表格的标题名字
 				height : opation.height?opation.height:"520px",//表格的大小
-				//gridComplete:function(){doResize()},
+				footerrow : opation.footerrow?true:false,
+				userDataOnFooter:opation.userDataOnFooter?true:false,
+				gridComplete:opation.gridComplete?opation.gridComplete:null,
 			});
 			/*创建jqGrid的操作按钮容器*/
 			/*可以控制界面上增删改查的按钮是否显示*/

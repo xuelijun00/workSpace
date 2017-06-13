@@ -2,6 +2,7 @@ package com.yks.bi.web.vo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 
@@ -14,12 +15,21 @@ public class GridModel implements Serializable  {
 	private int page;
 	private long records;
 	private List<?> rows;
+	private Map<String,Object> userdata;
 	
 	public GridModel(PageInfo<?> pageInfo){
 		this.setPage(pageInfo.getPageNum());
 		this.setRecords(pageInfo.getTotal());
 		this.setTotal(pageInfo.getPages());
 		this.setRows(pageInfo.getList());
+	}
+	
+	public GridModel(PageInfo<?> pageInfo,Map<String,Object> userdata){
+		this.setPage(pageInfo.getPageNum());
+		this.setRecords(pageInfo.getTotal());
+		this.setTotal(pageInfo.getPages());
+		this.setRows(pageInfo.getList());
+		this.setUserdata(userdata);
 	}
 	
 	public int getTotal() {
@@ -52,6 +62,14 @@ public class GridModel implements Serializable  {
 
 	public void setRows(List<?> rows) {
 		this.rows = rows;
+	}
+
+	public Map<String, Object> getUserdata() {
+		return userdata;
+	}
+
+	public void setUserdata(Map<String, Object> userdata) {
+		this.userdata = userdata;
 	}
 
 }

@@ -25,7 +25,7 @@ public interface SalesPerformanceMapper {
      * 查询所有平台
      * @return
      */
-    List<String> selectPlatforms();
+    List<String> selectPlatforms(@Param("business")String business);
      
     List<String> selectnewPlatforms();
     

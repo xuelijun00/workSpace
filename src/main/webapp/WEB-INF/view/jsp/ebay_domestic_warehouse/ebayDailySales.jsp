@@ -26,6 +26,11 @@
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
+                <label>业务线：</label>
+                <select class="form-control w120" id="business" >
+                </select>
+            </div>
+            <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
@@ -50,10 +55,11 @@ var domesticData = [];
 function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
+	var business = $("#business").val();
 	if(type === 1){
-		return contextPath + '/report/dailysales/grid?business=ebay&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate + "&business=" + business;
 	}else{
-		return contextPath + '/report/dailysales/chart?business=ebay&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/dailysales/chart?st=' + startDate + "&et=" + endDate + "&business=" + business;
 	}
 }
 function queryData(){
@@ -63,7 +69,7 @@ function queryData(){
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "EEbay业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "Ebay业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
 	var column = ['reportDate1','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -115,6 +121,20 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
+	$.ajax({
+		url : contextPath + "/report/dailysales/platforms?business=ebay",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				for(var i=0;i<data.length;i++){
+					if(data[i].indexOf("Ebay_") <= -1)
+						$("#business").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
+	});
 	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
 		title:"Ebay业务线每日销售数据"
@@ -128,6 +148,8 @@ function getChartData(chartUrl){
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"desc"
+		,footerrow:true
+		,userDataOnFooter:true
 	});
 })();
 </script>

@@ -19,7 +19,7 @@ public interface ISalespPerformanceService {
 	 * 查询平台
 	 * @return
 	 */
-	List<String> selectPlatforms();
+	List<String> selectPlatforms(String business);
 	
 	List<String> selectnewPlatforms();
 
