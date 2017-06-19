@@ -192,7 +192,7 @@ function Modify(platform)
 		             },sortable:false}   */
 		             ],
 		 sortname:"reportDate"
-		,sortorder:"asc"
+		,sortorder:"desc"
 		,height:"520px"
 	});
 	
