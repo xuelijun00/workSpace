@@ -185,7 +185,7 @@ function exportGridData(type){
 		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             {name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},]
 		,sortname:"reportDate1"
-		,sortorder:"asc"
+		,sortorder:"desc"
 		,pager:"pager1"
 		,height:"520px"
 	});
