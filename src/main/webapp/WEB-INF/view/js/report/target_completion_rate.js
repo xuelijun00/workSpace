@@ -170,8 +170,8 @@ var targetCompletionRate = {
 				rowNum : 20,//一页显示多少条
 				rowList : [ 20, 40, 50 ],//可供用户选择一页显示多少条
 				pager : '#pager2',//表格页脚的占位符(一般是div)的id
-				sortname : 'name',//初始化的时候排序的字段
-				sortorder : "asc",//排序方式,可选desc,asc
+				sortname : 'reportDate',//初始化的时候排序的字段
+				sortorder : "desc",//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				height:"450px",
