@@ -20,8 +20,10 @@
      </form>
      <div class="hr-line-dashed"></div>
 	     <h2 class="text-center bottom20">各平台目标管理</h2>
-	     <div class="mbottom"> <a href="###" data-toggle="modal" data-target="#addtarget">
-	     <i class="fa fa-plus"></i>新增目标</a> 
+	     <div class="mbottom"> 
+	     <a href="###" data-toggle="modal" id="insert" data-target="#addtarget">
+	     	<i class="fa fa-plus"></i>新增目标
+	     </a> 
 	     <!--  <a href="javascript:void(0);" data-toggle="modal" data-target=".modifyreport" >修改</a> -->
      </div>
      <!-- <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> -->
@@ -67,8 +69,8 @@
                     </td>
                     <td><input type="text" name="performanceTargets" class="form-control w80" placeholder=""></td>
                     <td><input type="text" name="targetProfit" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="sales" class="form-control w80" placeholder=""></td>
-                    <td><input type="text" name="actualProfit" class="form-control w80" placeholder=""></td>
+                    <td><input type="text" name="sales" class="form-control w80 inputReadOnly" placeholder=""></td>
+                    <td><input type="text" name="actualProfit" class="form-control w80 inputReadOnly" placeholder=""></td>
                 </tr>
                 </tbody>
             </table>
@@ -154,6 +156,7 @@ function Modify(platform)
 		success : function(data) {
 			if(data != null && data.length > 0){
 				$(".platform").empty();
+				$(".platform").append("<option value=''>"+"请选择"+"</option>");
 				for(var i=0;i<data.length;i++){
 					$(".platform").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
@@ -161,7 +164,39 @@ function Modify(platform)
 		}
 	});
 	$("#insertRecord").on("click",function(){
-		$("#tbody tr:eq(0)").clone().prependTo("#tbody");
+		var tr = $("#tbody tr:eq(0)").clone(true);
+		tr.prependTo("#tbody");
+		$.each($("input",tr),function(i,n){
+			$(n).val("");
+		});
+	});
+	$(".platform").on("change",function() {
+		if($(this).val() != null && $(this).val() !="B2B"){
+			$.each($(this).parent().parent().parent().find(".inputReadOnly"),function(i,n){
+				$(n).attr("readonly","readonly");
+			});
+			
+			/* $(".inputReadOnly1").attr("readonly","readonly");
+			$(".inputReadOnly2").attr("readonly","readonly"); */
+		}else{
+			/* $(".inputReadOnly1").removeAttr("readonly");
+			$(".inputReadOnly2").removeAttr("readonly"); */
+			$.each($(this).parent().parent().parent().find(".inputReadOnly"),function(i,n){
+				$(n).removeAttr("readonly");
+			});
+		};
+		
+	});
+	$("#insert").on("click",function(){
+		var trs = $("#tbody tr");
+		for (var i = 1; i < trs.length; i++) {
+			trs[i].remove();
+		}
+		$.each($(".table input"),function(i,n){
+			$(n).val("");
+		});
+		//$(".platform option")[0].setAttribute("seleced","seleced");
+		$(".platform").change();
 	});
 	$("#deleteRecord").on("click",function(){
 		var trs = $("#tbody tr");
@@ -169,12 +204,7 @@ function Modify(platform)
 			trs[trs.length - 1].remove();
 		}
 	});
-	$("#myModalLabel").on("click",function(){
-		var trs = $("#tbody tr");
-		for (var i = 1; i < trs.length; i++) {
-			trs[i].remove();
-		}
-	});
+
 	common.grid({
 		title:"各平台目标管理"
 		,url:contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val()
@@ -198,26 +228,44 @@ function Modify(platform)
 	
 	$("#inster").on("click",function(){
 		var month = $("#date1").val();
-		var reg = /^\d+(\.\d+)?$/;
+		var reg = /^(\-)?\d+(\.\d+)?$/;
 		var array = $("#form1").serializeArray();
 		for(var i=0;i<array.length / 6;i++){
-			if(reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim()) && reg.test(array[i*6+3].value.trim()) && reg.test(array[i*6+4].value.trim())){
-				var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"reportMonth":month};
-				$.ajax({
-					url : contextPath + "/report/targetcompletioncrate/update",
-					cache : false,
-					type:"POST",
-					data:record,
-					success : function(data) {}
-				});
+			if(array[i*6].value == "B2B"){
+				if(reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim()) && reg.test(array[i*6+3].value.trim()) && reg.test(array[i*6+4].value.trim())){
+					var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"reportMonth":month};
+					$.ajax({
+						url : contextPath + "/report/targetcompletioncrate/update",
+						cache : false,
+						type:"POST",
+						data:record,
+						success : function(data) {}
+					});
+				}else{
+					alert("第"+  (i+1) + "行有非法数字或者数据为空");
+					return;
+				}
 			}else{
-				alert("第"+  (i+1) + "行有非法数字或者数据为空");
-				return;
+				if(array[i*6].value != "" && reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim())){
+					var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"reportMonth":month};
+					$.ajax({
+						url : contextPath + "/report/targetcompletioncrate/update",
+						cache : false,
+						type:"POST",
+						data:record,
+						success : function(data) {}
+					});
+				}else{
+					alert("第"+  (i+1) + "行有非法数字或者数据为空");
+					return;
+				}
 			}
+			
 		}
 		common.refreshData(contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val());
 	});
 })();
+
 </script>
 </body>
 </html>

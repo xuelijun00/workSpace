@@ -128,7 +128,7 @@ function query(type){
 function exportGridData(type){
 	//debugger;
 	var fileName = "各平台各账号管理员业绩" + new Date().getTime() + ".csv";
-	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利'];
+	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利'];
 	var column;
 	if(type == 1){
 		column = ['manager','reportDate1','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
@@ -176,7 +176,7 @@ function exportGridData(type){
 		id:"#list1",
 		title:"各平台各账号管理员业绩"
 		,url:getUrl(1)
-		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
+		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利']
 		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 120}, 
 		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
@@ -194,7 +194,7 @@ function exportGridData(type){
 		id:"#list2",
 		title:"各平台各账号管理员业绩"
 		,url:getUrl(2)
-		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税前综合净利']
+		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利']
 		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
 		             {name : 'startDate',index : 'startDate',width : 120}, 
 		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 

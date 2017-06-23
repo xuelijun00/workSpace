@@ -54,13 +54,13 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税前综合净利', '税前综合利润率'];
+	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
 	var column = ['platform','reportDate1','orderNum','productTotalCny','netProfit','netProfitMargin'];
 	exportDataToCSV('#list2',title,platformData,fileName,column);
 }
 function getChartData(chartUrl){
-	var netProfit=[];//税前综合净利
-	var netProfitMargin=[];//税前综合利润率
+	var netProfit=[];//税后综合净利
+	var netProfitMargin=[];//税后综合利润率
 	var orderNum=[];//发货单数
 	var productTotalCny=[];//发货收入
 	var categories = [];
@@ -96,8 +96,8 @@ function getChartData(chartUrl){
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
 		         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
-		         {name: '税前综合净利',type: 'column',data:netProfit,tooltip: {valueSuffix: '' }},
-		         {name: '税前综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
+		         {name: '税后综合净利',type: 'column',data:netProfit,tooltip: {valueSuffix: '' }},
+		         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -122,7 +122,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"各平台每日发货数据"
 		,url:getUrl(1)
-		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税前综合净利', '税前综合利润率']
+		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'platform',index : 'platform',width : 155}, 
 		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
