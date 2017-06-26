@@ -22,5 +22,11 @@ public interface ISalespPerformanceService {
 	List<String> selectPlatforms(String business);
 	
 	List<String> selectnewPlatforms();
+	
+	/**
+     * 国内仓平台
+     * @return
+     */
+    List<String> selectDomesticPlatforms();
 
 }

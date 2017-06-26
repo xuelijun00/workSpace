@@ -122,15 +122,14 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/dailysales/platforms?business=ebay",
+		url : contextPath + "/report/dailysales/domestic/platforms",
 		cache : false,
 		type:"get",
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
 				for(var i=0;i<data.length;i++){
-					if(data[i].indexOf("Ebay_") <= -1)
-						$("#business").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#business").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}

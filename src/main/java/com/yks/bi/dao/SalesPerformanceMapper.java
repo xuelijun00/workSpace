@@ -28,6 +28,11 @@ public interface SalesPerformanceMapper {
     List<String> selectPlatforms(@Param("business")String business);
      
     List<String> selectnewPlatforms();
+    /**
+     * 国内仓平台
+     * @return
+     */
+    List<String> selectDomesticPlatforms();
     
     int updateByPrimaryKeySelective(SalesPerformance record);
 

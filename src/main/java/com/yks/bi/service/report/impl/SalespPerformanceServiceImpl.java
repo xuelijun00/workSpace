@@ -40,4 +40,9 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
 		return isales.selectnewPlatforms();
 	}
 
+	@Override
+	public List<String> selectDomesticPlatforms() {
+		return isales.selectDomesticPlatforms();
+	}
+
 }

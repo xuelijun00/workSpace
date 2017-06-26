@@ -27,6 +27,14 @@
     order by business 
   </select>
   
+  <select id="selectDomesticPlatforms" resultType="String">
+    select distinct business from dailysalesreports
+	where business = 'ebay'
+	union
+	select distinct business from dailysalesreports
+	where 1=1 and business like 'cn_%'
+  </select>
+  
    <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

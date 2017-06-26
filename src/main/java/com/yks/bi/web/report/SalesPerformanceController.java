@@ -102,6 +102,15 @@ public class SalesPerformanceController {
     public List<String> platforms(String business){
         return isale.selectPlatforms(business);
     }
+    
+    /**
+     * 查询国内仓平台
+     * @return
+     */
+    @RequestMapping(value = "/dailysales/domestic/platforms" ,method = RequestMethod.GET)
+    public List<String> domesticPlatforms(){
+        return isale.selectDomesticPlatforms();
+    }
     /**
      * 新平台销售业绩
      * @param business

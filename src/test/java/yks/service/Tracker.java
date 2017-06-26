@@ -6,22 +6,36 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.http.Header;
+import org.apache.http.message.BasicHeader;
+
+import com.yks.bi.common.HttpRequestUtils;
+import com.yks.bi.common.ResponseData;
+
 public class Tracker {
 
-	/** Apikey */
+	/** Apikey my */
 	private static final String Apikey = "c7cdeb1d-7fa2-4fe2-97a6-73a7c64768a7";
+	//private static final String Apikey = "c6e70625-7a26-4373-9d5d-49f119d79a65";
 	
 	public static void main(String[] args) throws Exception{
-		String urlStr ="?page=1&limit=25";
+		/*String urlStr ="?page=1&limit=25";
 		String requestData=null;
 		String result = new Tracker().orderOnlineByJson(requestData,urlStr,"get");
-		System.out.println(result);
+		System.out.println(result);*/
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00");
+		System.out.println(format.format(new Date()));
+		System.out.println(format.parse("2017-06-12T06:50:42+00:00").getYear() + 1900);
 	}
 
 	/**
@@ -32,6 +46,10 @@ public class Tracker {
 		Map<String,String> headerparams = new HashMap<>();
 		headerparams.put("Trackingmore-Api-Key", Apikey);
 		headerparams.put("Content-Type", "application/json");
+		
+		Header[] header = new Header[]{new BasicHeader("Trackingmore-Api-Key", Apikey)
+				,new BasicHeader("Content-Type", "application/json")};
+		
 		// ---bodyParams
 		List<String> bodyParams = new ArrayList<>();
 		String result = null;
@@ -42,7 +60,9 @@ public class Tracker {
 		} else if (type.equals("get")) {
 			String ReqURL = "http://api.trackingmore.com/v2/trackings/get";
 			String RelUrl = ReqURL + urlStr;
-			result = sendPost(RelUrl, headerparams, bodyParams, "GET");
+			ResponseData data = HttpRequestUtils.sendHttpGet(RelUrl, null, header);
+			//result = sendPost(RelUrl, headerparams, bodyParams, "GET");
+			result = data.getResponseText();
 		} else if (type.equals("batch")) {
 			String ReqURL = "http://api.trackingmore.com/v2/trackings/batch";
 			bodyParams.add(requestData);
@@ -96,16 +116,10 @@ public class Tracker {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		finally {
+		} finally {
 			try {
-				if (out != null) {
-					out.close();
-				}
-				if (in != null) {
-					in.close();
-				}
+				if (out != null) {out.close();}
+				if (in != null) {in.close();}
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -135,15 +149,10 @@ public class Tracker {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("Exception " + e);
             e.printStackTrace();
-        }
-       
-        finally {
+        } finally {
             try {
-                if (in != null) {
-                    in.close();
-                }
+                if (in != null) { in.close(); }
             } catch (Exception e2) {
                 e2.printStackTrace();
             }
