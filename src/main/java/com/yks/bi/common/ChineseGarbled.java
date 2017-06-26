@@ -25,7 +25,10 @@ public class ChineseGarbled {
         }  
         return false;  
     }  
-      
+    
+	/*
+	  判断中文是否乱码
+    */
     public static boolean isMessyCode(String strName) {  
         Pattern p = Pattern.compile("\\s*|\t*|\r*|\n*");  
         Matcher m = p.matcher(strName);  
@@ -54,7 +57,9 @@ public class ChineseGarbled {
     public static String toChinese(Object msg){  
         String tempMsg = msg.toString() ;  
         if(isMessyCode(tempMsg)){  
-            try {return new String(tempMsg.getBytes("ISO8859-1"), "UTF-8");} catch (Exception e) {}  
+            try {return new String(tempMsg.getBytes("ISO8859-1"), "UTF-8");} catch (Exception e) {}  //String的getBytes()方法是得到一个系统默认的编码格式的字节数组 getBytes("utf-8")  得到一个UTF-8格式的字节数组
+
+
         }  
         return tempMsg ;   
     } 

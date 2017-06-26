@@ -26,6 +26,9 @@ public class ModifyParamters extends HttpServletRequestWrapper {
 		this.request = request;
 	}
 	
+	/** 
+     * 实际上就是调用被包装的请求对象的getParameter方法获得参数，然后再进行编码转换 
+     */ 
 	@Override
 	public String getParameter(String name) {
 		String sidx = request.getParameter("sidx");
