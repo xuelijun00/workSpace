@@ -15,6 +15,9 @@ public interface ISalespPerformanceService {
 	List<SalesPerformance> selectAll(String business,Date st,Date et);
 	
 	List<SalesPerformance> selectnewAll(String business,Date st,Date et);
+	
+	//查询数据并汇总
+	List<SalesPerformance> selectAllCount(String business,Date st,Date et);
 	/**
 	 * 查询平台
 	 * @return

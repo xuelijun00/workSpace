@@ -45,4 +45,9 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
 		return isales.selectDomesticPlatforms();
 	}
 
+	@Override
+	public List<SalesPerformance> selectAllCount(String business, Date startDate, Date endDate) {
+		return isales.selectAllCount(business,startDate,endDate);
+	}
+
 }

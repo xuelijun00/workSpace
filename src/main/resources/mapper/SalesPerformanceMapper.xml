@@ -35,22 +35,46 @@
 	where 1=1 and business like 'cn_%'
   </select>
   
+  
+   <select id="selectAllCount" resultMap="BaseResultMap">
+   			select
+   			business, sum(orders) orders, sum(sales) sales
+    		from dailysalesreports 
+    		where 1=1
+    		<choose>
+    			<when test="business != null">
+		    		and business = #{business,jdbcType=VARCHAR}
+    			</when>
+    			<otherwise>
+    				and (business like 'cn_%'
+		    		 or business ='ebay')
+    			</otherwise>
+    		</choose>
+    		 <if test="start_date != null">
+    			<![CDATA[and report_date >= #{start_date,jdbcType=DATE}]]>
+    		</if>
+	 		<if test="end_date != null">
+	  		 	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+			 </if>
+			 GROUP BY business
+  </select> 
+  
    <select id="selectAll" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dailysalesreports
-    where 1=1
-    <if test="business != null">
-    	and business = #{business,jdbcType=VARCHAR}
-    </if>
-     <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
-	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	 </if>
-	 order by business,report_date 
-  </select>
+		    select 
+		    <include refid="Base_Column_List" />
+		    from dailysalesreports
+		    where 1=1
+		    <if test="business != null">
+		    	and business = #{business,jdbcType=VARCHAR}
+		    </if>
+		     <if test="start_date != null">
+		    	and report_date >= #{start_date,jdbcType=DATE}
+		    </if>
+			 <if test="end_date != null">
+			    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+			 </if>
+			 order by business,report_date 	
+  </select> 
   
   
   <select id="selectnewAll" resultMap="BaseResultMap">
@@ -69,7 +93,7 @@
 	 </if>
 	 order by report_date 
   </select>
-  
+   
     <!--查询平台  -->
   <select id="selectnewPlatforms" resultMap="BaseResultMap" >
     SELECT business FROM dailysalesreports WHERE business like 'new%' and business != 'newegg' GROUP by  business

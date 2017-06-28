@@ -94,6 +94,69 @@ public class SalesPerformanceController {
     	}
     	return isale.selectAll(business,starttime,endtime);
     }
+    
+    /**
+     * 表格数据  汇总
+     * 销售业绩整体报表
+     * @param month
+     * @param platform
+     * @return
+     * @throws ParseException 
+     * @throws UnsupportedEncodingException 
+     * @throws JsonProcessingException 
+     */                          
+    @RequestMapping(value = "/dailysales/gridCount" ,method = RequestMethod.GET)
+    public GridModel dailysalesMethodCount(String business,String st,String et,FilterDto filter) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+    		filter.setSidx("report_date");
+    	}
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<SalesPerformance> list = isale.selectAllCount(business,starttime,endtime);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	double sumSales = 0;
+    	for (SalesPerformance salesPerformance : list) {
+    		sumOrders += salesPerformance.getOrders();
+    		sumSales += salesPerformance.getSales();
+		}
+    	userdata.put("business", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("sales", sumSales);
+        return new GridModel(pageInfo,userdata);
+    }
+    
+    /**
+     * 销售业绩整体报表
+     * 柱状图汇总
+     * @param business
+     * @param st
+     * @param et
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/dailysales/chartCount" ,method = RequestMethod.GET)
+    public List<SalesPerformance> chartCount(String business,String st,String et) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	return isale.selectAllCount(business,starttime,endtime);
+    }
+    
     /**
      * 查询平台
      * @return

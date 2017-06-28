@@ -21,6 +21,9 @@ public interface SalesPerformanceMapper {
     List<SalesPerformance> selectnewAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
     
     List<SalesPerformance> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    
+    //查询数据并汇总
+    List<SalesPerformance> selectAllCount(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
     /**
      * 查询所有平台
      * @return
