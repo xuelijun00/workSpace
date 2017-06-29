@@ -38,13 +38,18 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
            return isalescategory.selectnewAll(business, st, et,category);
         }  
     
-   
+    //查询ebaydailysalesskureports表中的所有信息
+    @Override
+    public List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku) {
+    
+        return isalessku.selectEbay(business, st, et, sku, oldsku);
+    }
+    
     @Override
     public List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku) {
     
         return isalessku.selectAll(business, st, et, sku, oldsku);
     }
-    
     
     @Override
     public List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku) {

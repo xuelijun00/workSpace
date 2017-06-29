@@ -59,6 +59,28 @@ public class EbayDomesticController {
       
     }
     
+    //用于ebay国内仓 sku销售报表
+    @RequestMapping(value = "/ebayoverseassku/gridEbay" ,method = RequestMethod.GET)
+    public GridModel ebayoverseasMethodEbay(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<Dailysalesskureports> list = isale.selectEbay(business, starttime, endtime, sku, oldsku);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+      
+    }
+    
     
     @RequestMapping(value = "/ebayoverseascategory/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethod(String business,String st,String et,String oldsku,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{

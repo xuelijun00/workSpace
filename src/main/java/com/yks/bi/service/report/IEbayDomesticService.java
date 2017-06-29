@@ -17,6 +17,9 @@ public interface IEbayDomesticService {
 	List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String category);
 	
 	List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku);
+	
+	 //查询ebaydailysalesskureports表中的所有信息
+	List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku);
 
 	
 	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category);
