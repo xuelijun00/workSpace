@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YKSUI框架 - 需求管理</title>
+    <script src="../jsLoad/code/load.js?20170503" include="../top.html"></script>
+    <!--加css-->
+</head>
+<body>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="ibox-title"><h5>表格</h5></div>
+    <div class="ibox-content">
+        <form class="form-inline">
+            <div class="form-group">
+                <label>报关状态</label>
+                <select class="form-control w120" name="">
+                <option>待发货</option>
+                <option>已发货</option>
+                <option>报关材料已生成</option>
+                <option>已申报</option>
+                <option>报关成功</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>公司主体</label>
+                <select class="form-control w120" name="">
+                <option>深圳市有棵树科技股份有限公司</option>
+                <option>选项 2</option>
+                <option>选项 3</option>
+                <option>选项 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>仓库</label>
+                <select class="form-control w120" name="">
+                <option>选项 1</option>
+                <option>选项 2</option>
+                <option>选项 3</option>
+                <option>选项 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">查询</button>
+            </div>
+        </form>
+        <div class="hr-line-dashed"></div>
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <div id="main" style="height: 600px;min-width:300px;"></div>
+    </div>
+</div>
+<script src="../jsLoad/code/load.js?20170503" include="../jscharts.html"></script>
+<!--加本页面 的js文件与js代码-->
+<script>
+var chart = echarts.init(document.getElementById('main'));
+
+option = {
+    tooltip: {
+        trigger: 'axis',
+        formatter: function(params, ticket, callback) {
+
+            var res = params[0].name;
+
+            for (var i = 0, l = params.length; i < l; i++) {
+                if (params[i].seriesType === 'line') {
+                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-') + 'h';
+                } else {
+                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-') + '个';
+                }
+            }
+            return res;
+
+        }
+    },
+    grid: {
+        containLabel: true
+    },
+    legend: {
+        data: ['时间', '人均个数', '总体个数']
+    },
+    xAxis: [{
+        type: 'category',
+        axisTick: {
+            alignWithLabel: true
+        },
+        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+    }],
+    dataZoom: [{
+        type: 'slider',
+        xAxisIndex: 0,
+        filterMode: 'empty',
+        start: 0,
+        end: 100
+    }, {
+        type: 'slider',
+        yAxisIndex: 0,
+        filterMode: 'empty',
+        start: 0,
+        end: 100
+    }, {
+        type: 'inside',
+        xAxisIndex: 0,
+        filterMode: 'empty',
+        start: 0,
+        end: 100
+    }, {
+        type: 'inside',
+        yAxisIndex: 0,
+        filterMode: 'empty',
+        start: 0,
+        end: 100
+    }],
+    yAxis: [{
+        type: 'value',
+        name: '时间',
+        min: 0,
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} h'
+        }
+    }, {
+        type: 'value',
+        name: '个数',
+        min: 0,
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} 个'
+        }
+    }],
+    series: [{
+        name: '时间',
+        type: 'line',
+        label: {
+            normal: {
+                show: true,
+                position: 'top',
+            }
+        },
+        lineStyle: {
+            normal: {
+                width: 3,
+                shadowColor: 'rgba(0,0,0,0.4)',
+                shadowBlur: 10,
+                shadowOffsetY: 10
+            }
+        },
+        data: [1, 13, 37, 35, 15, 13, 25, 21, 6, 45, 32, 2]
+    }, {
+        name: '人均个数',
+        type: 'bar',
+        yAxisIndex: 1,
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
+        data: [22, 22, 23, 77, 24, 55, 55, 89, 98, 164, 106, 224]
+    }, {
+        name: '总体个数',
+        type: 'bar',
+        yAxisIndex: 1,
+        label: {
+            normal: {
+                show: true,
+                position: 'top'
+            }
+        },
+        data: [201, 222, 223, 777, 244, 255, 555, 879, 938, 1364, 1806, 2324]
+    }]
+};
+chart.setOption(option);
+</script>
+</body>
+</html>
