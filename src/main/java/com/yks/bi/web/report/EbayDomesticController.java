@@ -59,7 +59,7 @@ public class EbayDomesticController {
       
     }
     
-    //用于ebay国内仓 sku销售报表
+    //用于ebay的 sku销售报表
     @RequestMapping(value = "/ebayoverseassku/gridEbay" ,method = RequestMethod.GET)
     public GridModel ebayoverseasMethodEbay(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;

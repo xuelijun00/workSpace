@@ -155,7 +155,7 @@ function getChartData(chartUrl){
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
 		,sortname:"business"
-		,sortorder:"desc"
+		,sortorder:"asc"  //可选desc和asc
 		,footerrow:true
 		,userDataOnFooter:true
 	});
