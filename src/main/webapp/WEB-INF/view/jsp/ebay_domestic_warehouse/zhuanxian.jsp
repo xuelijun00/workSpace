@@ -47,7 +47,7 @@
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
 function getUrl(){
-	var url = contextPath + "/report/green_line/grid?";
+	var url = contextPath + "/report/daily_out_ebay_group_leader_reprots/green_line/grid?";
 	url += "channelName=" + $("#site1").val();
 	url += "&startDate=" + $("#start_date1").val();
 	url += "&endDate=" + $("#end_date1").val();
@@ -84,7 +84,7 @@ function exportGridData(){
 	$("#start_date1").jeDate({ isinitVal: true,initAddVal:{DD:"-15"},isTime:false,ishmsVal: false,format: "YYYY-MM-DD",zIndex:3000});
 	$("#end_date1").jeDate({ isinitVal: true,isTime:false,ishmsVal: false,format: "YYYY-MM-DD",zIndex:3000});
 	$.ajax({
-		url : contextPath + "/report/green_line/channel",
+		url : contextPath + "/report/daily_out_ebay_group_leader_reprots/green_line/channel",
 		cache : false,
 		type:"get",
 		async: false,

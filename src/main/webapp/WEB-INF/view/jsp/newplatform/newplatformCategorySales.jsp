@@ -63,7 +63,7 @@ function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
-	var chartUrl = contextPath + '/report/ebayoverseascategorynew/grid?st=' + startDate + '&et=' + endDate+ "&category=" + category;
+	var chartUrl = contextPath + '/report/ebay_domestic/categorynew/grid?st=' + startDate + '&et=' + endDate+ "&category=" + category;
 	if(platform !== 'all'){chartUrl += "&business=" + platform;}
 	return chartUrl;
 }
@@ -86,7 +86,7 @@ function getUrl(){
     });
 		
 	$.ajax({
-		url : contextPath + "/report/xueplatforms/platformnew",
+		url : contextPath + "/report/ebay_domestic/platforms/platformnew",
 		cache : false,
 		type:"get",
 		async: false,

@@ -55,7 +55,7 @@ function queryData(){
 	var category = $('#category').val().trim();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
@@ -67,7 +67,7 @@ function exportData(){
 	var	title = ['分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var	column = ['category','reportDate1','orders','quantity','sales'];
 
-	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -103,7 +103,7 @@ function exportData(){
 	var category = $('#category').val();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebayoverseascategory/grid?business=amazon&st=' + startDate + "&et=" + endDate;
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate;
 	var series = [];
 	
 	common.grid({

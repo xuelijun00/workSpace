@@ -45,9 +45,9 @@ var chart;
 var platformData = [];
 function getUrl(type){
 	if(type === 1){
-		return contextPath + '/report/warehouse_shipment/platformsum/grid?date=' + $("#start_date").val();
+		return contextPath + '/report/daily_out_report/platformsum/grid?date=' + $("#start_date").val();
 	}else{
-		return contextPath + '/report/warehouse_shipment/platformsum/chart?date=' + $("#start_date").val();
+		return contextPath + '/report/daily_out_report/platformsum/chart?date=' + $("#start_date").val();
 	}
 }
 function exportData(){

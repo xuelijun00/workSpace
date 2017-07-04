@@ -47,7 +47,7 @@
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
 function getUrl(){
-	var url = contextPath + "/report/direct_mail/grid?";
+	var url = contextPath + "/report/daily_out_ebay_group_leader_reprots/direct_mail/grid?";
 	url += "zhuzhandian=" + $("#site1").val();
 	url += "&startDate=" + $("#start_date1").val();
 	url += "&endDate=" + $("#end_date1").val();
@@ -84,7 +84,7 @@ function exportGridData(){
 	$("#start_date1").jeDate({ isinitVal: true,initAddVal:{DD:"-15"},isTime:false,ishmsVal: false,format: "YYYY-MM-DD",zIndex:3000});
 	$("#end_date1").jeDate({ isinitVal: true,isTime:false,ishmsVal: false,format: "YYYY-MM-DD",zIndex:3000});
 	$.ajax({
-		url : contextPath + "/report/direct_mail/site",
+		url : contextPath + "/report/daily_out_ebay_group_leader_reprots/direct_mail/site",
 		cache : false,
 		type:"get",
 		async: false,

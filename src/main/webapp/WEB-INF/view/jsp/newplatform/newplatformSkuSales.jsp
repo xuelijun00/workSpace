@@ -75,7 +75,7 @@ function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
-	var chartUrl = contextPath + '/report/skunew/grid?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;
+	var chartUrl = contextPath + '/report/ebay_domestic/skunew/grid?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;
 	if(platform !== 'all'){chartUrl += "&business=" + platform;}
 	return chartUrl;
 }
@@ -100,7 +100,7 @@ function getUrl(){
 	
 	
 	$.ajax({
-		url : contextPath + "/report/skuplatforms/platformnew",
+		url : contextPath + "/report/ebay_domestic/skuplatforms/platformnew",
 		cache : false,
 		type:"get",
 		async: false,

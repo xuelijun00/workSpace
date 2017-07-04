@@ -44,7 +44,7 @@ public class SalesPerformanceController {
      * @throws UnsupportedEncodingException 
      * @throws JsonProcessingException 
      */                          
-    @RequestMapping(value = "/dailysales/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/grid" ,method = RequestMethod.GET)
     public GridModel dailysalesMethod(String business,String st,String et,FilterDto filter) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -82,7 +82,7 @@ public class SalesPerformanceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/dailysales/chart" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> chart(String business,String st,String et) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -105,7 +105,7 @@ public class SalesPerformanceController {
      * @throws UnsupportedEncodingException 
      * @throws JsonProcessingException 
      */                          
-    @RequestMapping(value = "/dailysales/gridCount" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/gridCount" ,method = RequestMethod.GET)
     public GridModel dailysalesMethodCount(String business,String st,String et,FilterDto filter) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -144,7 +144,7 @@ public class SalesPerformanceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/dailysales/chartCount" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/chartCount" ,method = RequestMethod.GET)
     public List<SalesPerformance> chartCount(String business,String st,String et) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -161,7 +161,7 @@ public class SalesPerformanceController {
      * 查询平台
      * @return
      */
-    @RequestMapping(value = "/dailysales/platforms" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/platforms" ,method = RequestMethod.GET)
     public List<String> platforms(String business){
         return isale.selectPlatforms(business);
     }
@@ -170,7 +170,7 @@ public class SalesPerformanceController {
      * 查询国内仓平台
      * @return
      */
-    @RequestMapping(value = "/dailysales/domestic/platforms" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/domestic/platforms" ,method = RequestMethod.GET)
     public List<String> domesticPlatforms(){
         return isale.selectDomesticPlatforms();
     }
@@ -183,7 +183,7 @@ public class SalesPerformanceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/dailysalesnew/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/new/grid" ,method = RequestMethod.GET)
     public GridModel dailysalesnewMethod(String business,String st,String et,FilterDto filter) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -210,7 +210,7 @@ public class SalesPerformanceController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/dailysalesnew/chart" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/new/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> newchart(String business,String st,String et) throws Exception{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -226,7 +226,7 @@ public class SalesPerformanceController {
      * 新平台
      * @return
      */
-    @RequestMapping(value = "/dailysalesnew/platformnew" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/sales_performance/new/platformnew" ,method = RequestMethod.GET)
     public List<String> newplatforms(){
         return isale.selectnewPlatforms();
     }

@@ -47,9 +47,9 @@ var chart;
 var domesticData = [];
 function getUrl(type){
 	if(type === 1){
-		return chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum/grid?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();	
+		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/grid?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();	
 	}else{
-		return chartUrl =  contextPath + '/report/warehouse_shipment/domesticsum/chart?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();
+		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/chart?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();
 	}
 	
 }

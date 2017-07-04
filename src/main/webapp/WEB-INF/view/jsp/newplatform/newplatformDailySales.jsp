@@ -62,9 +62,9 @@ function getUrl(type){
 	var platform = $("#platform").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/dailysalesnew/grid?st=' + startDate + '&et=' + endDate;
+		url = contextPath + '/report/sales_performance/new/grid?st=' + startDate + '&et=' + endDate;
 	}else{
-		url = contextPath + '/report/dailysalesnew/chart?st=' + startDate + '&et=' + endDate;
+		url = contextPath + '/report/sales_performance/new/chart?st=' + startDate + '&et=' + endDate;
 	}
 	if(platform !== 'all'){url += "&business=" + platform;}
 	return url;
@@ -117,7 +117,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/dailysalesnew/platformnew",
+		url : contextPath + "/report/sales_performance/new/platformnew",
 		cache : false,
 		type:"get",
 		async: false,

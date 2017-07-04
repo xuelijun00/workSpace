@@ -57,9 +57,9 @@ function getUrl(type){//拼接url
 	var endDate = $("#end_date").val();
 	var business = $("#business").val();
 	if(type === 1){
-		return contextPath + '/report/dailysales/grid?st=' + startDate + "&et=" + endDate + "&business=" + business;
+		return contextPath + '/report/sales_performance/grid?st=' + startDate + "&et=" + endDate + "&business=" + business;
 	}else{
-		return contextPath + '/report/dailysales/chart?st=' + startDate + "&et=" + endDate + "&business=" + business;
+		return contextPath + '/report/sales_performance/chart?st=' + startDate + "&et=" + endDate + "&business=" + business;
 	}
 }
 function queryData(){
@@ -122,7 +122,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/dailysales/domestic/platforms",
+		url : contextPath + "/report/sales_performance/domestic/platforms",
 		cache : false,
 		type:"get",
 		async: false,

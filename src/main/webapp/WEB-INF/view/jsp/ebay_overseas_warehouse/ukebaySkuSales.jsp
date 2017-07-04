@@ -62,7 +62,7 @@ function queryData(){
 	var oldsku = encodeURIComponent($('#oldsku').val().trim());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebayoverseassku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/sku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
@@ -74,7 +74,7 @@ function exportData(){
 	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
 	
-	var chartUrl =  contextPath + '/report/ebayoverseassku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/sku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
 
 	$.ajax({
 		url : chartUrl,
@@ -112,7 +112,7 @@ function exportData(){
 	var oldsku = $('#oldsku').val();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebayoverseassku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate;
+	var chartUrl =  contextPath + '/report/ebay_domestic/sku/gridEbay?business=Ebay_UK&st=' + startDate + "&et=" + endDate;
 	var series = [];
 	
 	common.grid({

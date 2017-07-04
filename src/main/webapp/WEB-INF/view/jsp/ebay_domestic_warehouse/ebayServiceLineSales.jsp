@@ -58,15 +58,15 @@ function getUrl(type){//拼接url
 	var business = $("#business").val();
 	if(type === 1){
 		if(business != "all"){
-			return contextPath + '/report/dailysales/gridCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
+			return contextPath + '/report/sales_performance/gridCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
 		}else{
-			return contextPath + '/report/dailysales/gridCount?st=' + startDate + "&et=" + endDate
+			return contextPath + '/report/sales_performance/gridCount?st=' + startDate + "&et=" + endDate
 		}
 	}else{
 		if(business != "all"){
-			return contextPath + '/report/dailysales/chartCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
+			return contextPath + '/report/sales_performance/chartCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
 		}else{
-			return contextPath + '/report/dailysales/chartCount?st=' + startDate + "&et=" + endDate
+			return contextPath + '/report/sales_performance/chartCount?st=' + startDate + "&et=" + endDate
 		}
 	}
 }
@@ -131,7 +131,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/dailysales/domestic/platforms",
+		url : contextPath + "/report/sales_performance/domestic/platforms",
 		cache : false,
 		type:"get",
 		async: false,

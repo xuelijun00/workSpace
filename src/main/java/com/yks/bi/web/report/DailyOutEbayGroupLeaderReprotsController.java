@@ -84,7 +84,7 @@ public class DailyOutEbayGroupLeaderReprotsController {
 	 * @param filter
 	 * @return
 	 */
-	@RequestMapping("/green_line/grid")
+	@RequestMapping("/daily_out_ebay_group_leader_reprots/green_line/grid")
 	public GridModel greenLineGrid(EbayDailyOutZhuanXianReprotsKey key, FilterDto filter){
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -96,7 +96,7 @@ public class DailyOutEbayGroupLeaderReprotsController {
 	 * ebay站点发货专线 通道
 	 * @return
 	 */
-	@RequestMapping("/green_line/channel")
+	@RequestMapping("/daily_out_ebay_group_leader_reprots/green_line/channel")
 	public List<String> selectChannel() {
 		return service.selectChannel();
 	}
@@ -107,7 +107,7 @@ public class DailyOutEbayGroupLeaderReprotsController {
 	 * @param filter
 	 * @return
 	 */
-	@RequestMapping("/direct_mail/grid")
+	@RequestMapping("/daily_out_ebay_group_leader_reprots/direct_mail/grid")
 	public GridModel directMail(EbayDailyOutZhiYouReprotsKey key, FilterDto filter){
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -119,7 +119,7 @@ public class DailyOutEbayGroupLeaderReprotsController {
 	 * ebay直邮发货站点
 	 * @return
 	 */
-	@RequestMapping("/direct_mail/site")
+	@RequestMapping("/daily_out_ebay_group_leader_reprots/direct_mail/site")
 	public List<String> selectDirectMailSite() {
 		return service.selectDirectMailSite();
 	}

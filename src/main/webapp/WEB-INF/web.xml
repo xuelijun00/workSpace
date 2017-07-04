@@ -56,8 +56,8 @@
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
-	<welcome-file-list><!--/WEB-INF/view/jsp/  -->
-		<welcome-file>login.jsp</welcome-file>
+	<welcome-file-list>
+		<welcome-file>/WEB-INF/view/jsp/login.jsp</welcome-file>
 	</welcome-file-list>
 	<error-page>
 	    <error-code>404</error-code>

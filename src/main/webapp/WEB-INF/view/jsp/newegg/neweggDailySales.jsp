@@ -50,9 +50,9 @@ function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	if(type === 1){
-		return contextPath + '/report/dailysales/grid?business=new_newegg&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/sales_performance/grid?business=new_newegg&st=' + startDate + "&et=" + endDate;
 	}else{
-		return contextPath + '/report/dailysales/chart?business=new_newegg&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/sales_performance/chart?business=new_newegg&st=' + startDate + "&et=" + endDate;
 	}
 }
 function queryData(){

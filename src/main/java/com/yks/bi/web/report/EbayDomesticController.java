@@ -38,7 +38,7 @@ public class EbayDomesticController {
      * @return
      */
    
-    @RequestMapping(value = "/ebayoverseassku/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/sku/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseasMethod(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -60,7 +60,7 @@ public class EbayDomesticController {
     }
     
     //用于ebay的 sku销售报表
-    @RequestMapping(value = "/ebayoverseassku/gridEbay" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/sku/gridEbay" ,method = RequestMethod.GET)
     public GridModel ebayoverseasMethodEbay(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -82,7 +82,7 @@ public class EbayDomesticController {
     }
     
     
-    @RequestMapping(value = "/ebayoverseascategory/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethod(String business,String st,String et,String oldsku,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -104,7 +104,7 @@ public class EbayDomesticController {
     }
     
     
-    @RequestMapping(value = "/ebayoverseascategorynew/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/categorynew/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethodnew(String business,String st,String et,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -126,13 +126,13 @@ public class EbayDomesticController {
     }
     
     
-    @RequestMapping(value = "/xueplatforms/platformnew" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/platforms/platformnew" ,method = RequestMethod.GET)
     public List<String> newplatforms(){
         return isale.selectnewPlatforms();
     }
     
 
-    @RequestMapping(value = "/skunew/grid" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/skunew/grid" ,method = RequestMethod.GET)
     public GridModel skuMethodnew(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
@@ -155,7 +155,7 @@ public class EbayDomesticController {
     
     
     
-    @RequestMapping(value = "/skuplatforms/platformnew" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/ebay_domestic/skuplatforms/platformnew" ,method = RequestMethod.GET)
     public List<String> newskuplatforms(){
         return isale.selectskuPlatforms();
     }

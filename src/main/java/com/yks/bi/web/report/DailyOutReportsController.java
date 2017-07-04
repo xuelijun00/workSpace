@@ -31,7 +31,7 @@ public class DailyOutReportsController {
 	IDailyOutReportsService dailyOutReportsService;
 	
 	
-	@RequestMapping(value="/warehouse_shipment/domesticsum/grid",method=RequestMethod.GET)
+	@RequestMapping(value="/daily_out_report/domesticsum/grid",method=RequestMethod.GET)
 	public GridModel selectSumDomesticWarehouseShipment(String startDate,String endDate,FilterDto filter){
 		if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
     		filter.setSidx("report_date");
@@ -42,12 +42,12 @@ public class DailyOutReportsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	@RequestMapping(value="/warehouse_shipment/domesticsum/chart",method=RequestMethod.GET)
+	@RequestMapping(value="/daily_out_report/domesticsum/chart",method=RequestMethod.GET)
 	public List<DailyOutReports> selectSumDomesticWarehouseShipmentChart(String startDate,String endDate){
 		return dailyOutReportsService.selectSumDomesticWarehouseShipment(startDate, endDate);
 	}
 	
-	@RequestMapping(value="/warehouse_shipment/platformsum/grid",method=RequestMethod.GET)
+	@RequestMapping(value="/daily_out_report/platformsum/grid",method=RequestMethod.GET)
 	public GridModel selectPlatformDomesticWarehouseShipment(String date,FilterDto filter){
 		DailyOutReportsKey key = new DailyOutReportsKey();
 		if(StringUtils.isNotEmpty(date)){
@@ -66,7 +66,7 @@ public class DailyOutReportsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	@RequestMapping(value="/warehouse_shipment/platformsum/chart",method=RequestMethod.GET)
+	@RequestMapping(value="/daily_out_report/platformsum/chart",method=RequestMethod.GET)
 	public List<DailyOutReports> selectPlatformDomesticWarehouseShipmentChart(String date){
 		DailyOutReportsKey key = new DailyOutReportsKey();
 		if(StringUtils.isNotEmpty(date)){
