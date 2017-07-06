@@ -13,31 +13,31 @@ public class ConfigPlatformGoalNew {
 
     private String reportMonth;
 
-    private Integer performanceTargets;
+    private double performanceTargets;
 
-    private Integer quarterlyPerformanceTargets;
+    private double quarterlyPerformanceTargets;
 
-    private Integer sales;
+    private double sales;
 
-    private Integer quarterlySales;
+    private double quarterlySales;
 
-    private Integer netProfitTarget;
+    private float netProfitTarget;
    
 
-	private Integer estimatedSales;
+	private double estimatedSales;
 
-    private Integer quarterlyEstimatedSales;
+    private double quarterlyEstimatedSales;
 
-    private Integer estimatedPercentage;
+    private float estimatedPercentage;
 
-    private Integer quarterlyEstimatedPercentage;
+    private float quarterlyEstimatedPercentage;
 
-    private Integer targetProfit;
+    private double targetProfit;
 
-    private Integer actualProfit;
+    private double actualProfit;
 
 
-    private Integer netProfitCompletionRate;
+    private float netProfitCompletionRate;
 
     private Date modifyDate;
 
@@ -66,11 +66,11 @@ public class ConfigPlatformGoalNew {
     }
 
     
-    public Integer getNetProfitTarget() {
+    public float getNetProfitTarget() {
 		return netProfitTarget;
 	}
 
-	public void setNetProfitTarget(Integer netProfitTarget) {
+	public void setNetProfitTarget(float netProfitTarget) {
 		this.netProfitTarget = netProfitTarget;
 	}
     
@@ -90,92 +90,92 @@ public class ConfigPlatformGoalNew {
         this.reportMonth = reportMonth == null ? null : reportMonth.trim();
     }
 
-    public Integer getPerformanceTargets() {
+    public double getPerformanceTargets() {
         return performanceTargets;
     }
 
-    public void setPerformanceTargets(Integer performanceTargets) {
+    public void setPerformanceTargets(double performanceTargets) {
         this.performanceTargets = performanceTargets;
     }
 
-    public Integer getQuarterlyPerformanceTargets() {
+    public double getQuarterlyPerformanceTargets() {
         return quarterlyPerformanceTargets;
     }
 
-    public void setQuarterlyPerformanceTargets(Integer quarterlyPerformanceTargets) {
+    public void setQuarterlyPerformanceTargets(double quarterlyPerformanceTargets) {
         this.quarterlyPerformanceTargets = quarterlyPerformanceTargets;
     }
 
-    public Integer getSales() {
+    public double getSales() {
         return sales;
     }
 
-    public void setSales(Integer sales) {
+    public void setSales(double sales) {
         this.sales = sales;
     }
 
-    public Integer getQuarterlySales() {
+    public double getQuarterlySales() {
         return quarterlySales;
     }
 
-    public void setQuarterlySales(Integer quarterlySales) {
+    public void setQuarterlySales(double quarterlySales) {
         this.quarterlySales = quarterlySales;
     }
 
-    public Integer getEstimatedSales() {
+    public double getEstimatedSales() {
         return estimatedSales;
     }
 
-    public void setEstimatedSales(Integer estimatedSales) {
+    public void setEstimatedSales(double estimatedSales) {
         this.estimatedSales = estimatedSales;
     }
 
-    public Integer getQuarterlyEstimatedSales() {
+    public double getQuarterlyEstimatedSales() {
         return quarterlyEstimatedSales;
     }
 
-    public void setQuarterlyEstimatedSales(Integer quarterlyEstimatedSales) {
+    public void setQuarterlyEstimatedSales(double quarterlyEstimatedSales) {
         this.quarterlyEstimatedSales = quarterlyEstimatedSales;
     }
 
-    public Integer getEstimatedPercentage() {
+    public float getEstimatedPercentage() {
         return estimatedPercentage;
     }
 
-    public void setEstimatedPercentage(Integer estimatedPercentage) {
+    public void setEstimatedPercentage(float estimatedPercentage) {
         this.estimatedPercentage = estimatedPercentage;
     }
 
-    public Integer getQuarterlyEstimatedPercentage() {
+    public float getQuarterlyEstimatedPercentage() {
         return quarterlyEstimatedPercentage;
     }
 
-    public void setQuarterlyEstimatedPercentage(Integer quarterlyEstimatedPercentage) {
+    public void setQuarterlyEstimatedPercentage(float quarterlyEstimatedPercentage) {
         this.quarterlyEstimatedPercentage = quarterlyEstimatedPercentage;
     }
 
-    public Integer getTargetProfit() {
+    public double getTargetProfit() {
         return targetProfit;
     }
 
-    public void setTargetProfit(Integer targetProfit) {
+    public void setTargetProfit(double targetProfit) {
         this.targetProfit = targetProfit;
     }
 
-    public Integer getActualProfit() {
+    public double getActualProfit() {
         return actualProfit;
     }
 
-    public void setActualProfit(Integer actualProfit) {
+    public void setActualProfit(double actualProfit) {
         this.actualProfit = actualProfit;
     }
 
 
-    public Integer getNetProfitCompletionRate() {
+    public float getNetProfitCompletionRate() {
         return netProfitCompletionRate;
     }
 
-    public void setNetProfitCompletionRate(Integer netProfitCompletionRate) {
+    public void setNetProfitCompletionRate(float netProfitCompletionRate) {
         this.netProfitCompletionRate = netProfitCompletionRate;
     }
 
