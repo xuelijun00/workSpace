@@ -17,12 +17,13 @@
     <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
     <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
     <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="REAL" />
     <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
   </resultMap>
   <sql id="Base_Column_List" >
     platform, report_date, order_num, unit_price, product_total_cny, product_refund, 
     order_price, gross_profit, product_shipping, platform_cost, material_cost, order_execution_fee, 
-    operating_cost, profit_margin, net_profit, net_profit_margin
+    operating_cost, profit_margin, net_profit, profit, net_profit_margin
   </sql>
   <!--国内仓发货汇总  -->
   <select id="selectSumDomesticWarehouseShipment" resultMap="BaseResultMap">
@@ -44,6 +45,29 @@
        and report_date = #{reportDate}
     </if>
 	ORDER BY report_date 
+  </select>
+  
+  <!-- 通过开始时间、结束时间、平台查询发货数据 -->
+  <select id="selectByTimesAndPlatform" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutreprots
+    where
+    <choose>
+    	<when test="platform == 'newAndAll'">
+    		platform like 'new%'
+    	</when>
+    	<otherwise>
+    		platform = #{platform,jdbcType=VARCHAR}
+    	</otherwise>
+    </choose>
+    <!-- and platform = #{platform,jdbcType=VARCHAR} -->
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey" >

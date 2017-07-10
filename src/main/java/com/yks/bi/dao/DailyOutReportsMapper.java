@@ -15,6 +15,14 @@ public interface DailyOutReportsMapper {
     int insertSelective(DailyOutReports record);
 
     DailyOutReports selectByPrimaryKey(DailyOutReportsKey key);
+    
+    /**
+     * 各平台发货数据
+     * @param key
+     * @return
+     */
+    List<DailyOutReports> selectByTimesAndPlatform(DailyOutReportsKey key);
+    
     /**
      * 国内仓发货数据汇总
      * @param startDate

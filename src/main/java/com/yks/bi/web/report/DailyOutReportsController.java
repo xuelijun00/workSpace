@@ -14,6 +14,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.DailyOutReports;
 import com.yks.bi.dto.report.DailyOutReportsKey;
+import com.yks.bi.dto.report.EbayDailyOutZhiYouReprots;
+import com.yks.bi.dto.report.EbayDailyOutZhiYouReprotsKey;
 import com.yks.bi.service.report.IDailyOutReportsService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
@@ -80,4 +82,13 @@ public class DailyOutReportsController {
 		return dailyOutReportsService.selectPlatformDomesticWarehouseShipment(key);
 	}
 
+	@RequestMapping("/daily_out_report/each_platform/grid")
+	public GridModel directMail(DailyOutReportsKey key, FilterDto filter){
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<DailyOutReports> list = dailyOutReportsService.selectByTimesAndPlatform(key);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+    	return new GridModel(pageInfo);
+	}
+	
 }

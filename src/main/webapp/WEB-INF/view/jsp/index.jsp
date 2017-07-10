@@ -82,6 +82,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySales">Amazon销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonSkuSales">Amazon SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOut">Amazon每日发货报表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -90,6 +91,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySales">SMT销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtSkuSales">SMT SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtCategorySales">SMT品类销售报表</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOut">SMT每日发货报表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -98,6 +100,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySales">Wish销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishSkuSales">Wish SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOut">Wish每日发货报表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -106,6 +109,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySales">Lazada销售报表</a> </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaSkuSales">Lazada SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaCategorySales">Lazada品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOut">Lazada每日发货报表</a></li>
                     </ul>
                 </li>
                 <li>
@@ -114,12 +118,14 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySales">新平台销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformSkuSales">新平台 SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOut">新平台每日发货报表</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a> </li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOut">沃尔玛每日发货报表</a> </li>
                     </ul>
                 </li>
                 <li>
@@ -128,6 +134,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySales">新蛋销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggSkuSales">新蛋 SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggCategorySales">新蛋品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOut">新蛋每日发货报表</a></li>
                     </ul>
                 </li>
             </ul>

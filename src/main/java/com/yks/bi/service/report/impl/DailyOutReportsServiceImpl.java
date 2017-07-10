@@ -17,6 +17,12 @@ public class DailyOutReportsServiceImpl implements IDailyOutReportsService {
 	private DailyOutReportsMapper dailyOutReportsMapper;
 
 	@Override
+	public List<DailyOutReports> selectByTimesAndPlatform(DailyOutReportsKey key) {
+		
+		return dailyOutReportsMapper.selectByTimesAndPlatform(key);
+	}
+	
+	@Override
 	public List<DailyOutReports> selectSumDomesticWarehouseShipment(String startDate,String endDate) {
 		return dailyOutReportsMapper.selectSumDomesticWarehouseShipment(startDate, endDate);
 	}

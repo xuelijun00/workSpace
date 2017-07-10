@@ -27,6 +27,8 @@ public class DailyOutReports extends DailyOutReportsKey {
 
     private Integer netProfit;
 
+    private Float profit;  //净利
+    
     private Float netProfitMargin;
 
     public Integer getOrderNum() {
@@ -133,6 +135,14 @@ public class DailyOutReports extends DailyOutReportsKey {
         this.netProfit = netProfit;
     }
 
+    public Float getProfit() {
+		return profit;
+	}
+
+	public void setProfit(Float profit) {
+		this.profit = profit;
+	}
+	
     public Float getNetProfitMargin() {
         return netProfitMargin;
     }
@@ -140,4 +150,6 @@ public class DailyOutReports extends DailyOutReportsKey {
     public void setNetProfitMargin(Float netProfitMargin) {
         this.netProfitMargin = netProfitMargin;
     }
+
+	
 }
