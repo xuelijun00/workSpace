@@ -200,7 +200,17 @@ public class SalesPerformanceController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<SalesPerformance> list = isale.selectnewAll(business,starttime,endtime);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	double sumSales = 0;
+    	for (SalesPerformance salesPerformance : list) {
+    		sumOrders += salesPerformance.getOrders();
+    		sumSales += salesPerformance.getSales();
+		}
+    	userdata.put("business", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("sales", sumSales);
+        return new GridModel(pageInfo,userdata);
     }
     /**
      *  新平台销售业绩

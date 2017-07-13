@@ -128,6 +128,8 @@ function getChartData(chartUrl){
 		           ]
 		,sortname:"reportDate1"
 		,sortorder:"desc"
+		,footerrow:true
+		,userDataOnFooter:true
 	});
 })();
 </script>
