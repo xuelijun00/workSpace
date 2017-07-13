@@ -41,7 +41,7 @@ var targetCompletionRate = {
 					             ,targetCompletionRate.month+'月份预计销售额',targetCompletionRate.month+'月份预计百分比'
 					             ,Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度业绩目标',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度销售额'
 					             ,Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度预计销售额',Math.ceil(parseInt(targetCompletionRate.month)*1/3)+'季度预计百分比'
-					             ,targetCompletionRate.month+'月份净利目标',targetCompletionRate.month+'月份净利完成率'];
+					             ,targetCompletionRate.month+'月份目标净利',targetCompletionRate.month+'月份净利完成率'];
 					var array1 = [[],[],[],[],[],[],[],[],[],[]];
 					while(targetCompletionRate.chart.series.length > 0) {  
 						targetCompletionRate.chart.series[0].remove();  
@@ -55,7 +55,7 @@ var targetCompletionRate = {
 						array1[5].push(data[j].quarterlySales);
 						array1[6].push(data[j].quarterlyEstimatedSales);
 						array1[7].push(data[j].quarterlyEstimatedPercentage);
-						array1[8].push(data[j].netProfitTarget);
+						array1[8].push(data[j].targetProfit);
 						array1[9].push(data[j].netProfitCompletionRate);
 					}
 					for(var i=0;i<title.length;i++){
@@ -93,7 +93,7 @@ var targetCompletionRate = {
 		var fileName ="各平台"+ targetCompletionRate.month +"月份业绩目标及完成率" + new Date().getTime() + ".csv";
 		var title = ['平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比'
 		             , '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比'
-		             ,'净利目标','净利完成率']
+		             ,'目标净利','净利完成率']
 		var tableData;
 		$.ajax({
 			url : contextPath + '/report/targetcompletioncrate/grid?month=' + $("#month").val(),
@@ -111,7 +111,7 @@ var targetCompletionRate = {
 		});
 		var cloumn = ['name','reportDate','performanceTargets','sales','estimatedSales','estimatedPercentage'
 		              ,'quarterlyPerformanceTargets','quarterlySales','quarterlyEstimatedSales','quarterlyEstimatedPercentage'
-		              ,'netProfitTarget','netProfitCompletionRate'];
+		              ,'targetProfit','netProfitCompletionRate'];
 		exportDataToCSV('#list2',title,tableData,fileName,cloumn);
 	}
 };
@@ -152,7 +152,7 @@ var targetCompletionRate = {
 	jQuery("#list2").jqGrid({
 				url : contextPath + '/report/targetcompletioncrate/grid?month=' + $("#month").val(),//组件创建完成之后请求数据的url
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
-				colNames : [ '平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比', '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比','净利目标','净利完成率'],
+				colNames : [ '平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','预计百分比', '季度业绩目标' , '季度销售额', '季度预计销售额', '季度预计百分比','目标净利','净利完成率'],
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 				             {name : 'name',index : 'name',width : 155}, 
 				             {name : 'reportDate',index : 'reportDate',width : 105,formatter:function(val){return new Date(val).toLocaleDateString();}}, 
@@ -164,7 +164,7 @@ var targetCompletionRate = {
 				             {name : 'quarterlySales',index : 'quarterlySales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				             {name : 'quarterlyEstimatedSales',index : 'quarterlyEstimatedSales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				             {name : 'quarterlyEstimatedPercentage',index : 'quarterlyEstimatedPercentage',width : 105,formatter:'integer', formatoptions:{decimalPlaces:2},align:"right"},
-				             {name : 'netProfitTarget',index : 'netProfitTarget',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
+				             {name : 'targetProfit',index : 'targetProfit',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				             {name : 'netProfitCompletionRate',index : 'netProfitCompletionRate',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				           ],
 				rowNum : 20,//一页显示多少条
