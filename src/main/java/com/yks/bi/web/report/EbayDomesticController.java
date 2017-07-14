@@ -59,6 +59,48 @@ public class EbayDomesticController {
       
     }
     
+    @RequestMapping(value = "/ebay_domestic/smtSku/grid" ,method = RequestMethod.GET)
+    public GridModel smtSkuMethod(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<Dailysalesskureports> list = isale.selectSmtSku(starttime, endtime, sku, oldsku);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+      
+    }
+    
+    @RequestMapping(value = "/ebay_domestic/wishSku/grid" ,method = RequestMethod.GET)
+    public GridModel WishSkuMethod(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
+			filter.setSidx("report_date");
+		}
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<Dailysalesskureports> list = isale.selectWishSku(starttime, endtime, sku, oldsku);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+      
+    }
+    
     //用于ebay的 sku销售报表
     @RequestMapping(value = "/ebay_domestic/sku/gridEbay" ,method = RequestMethod.GET)
     public GridModel ebayoverseasMethodEbay(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{

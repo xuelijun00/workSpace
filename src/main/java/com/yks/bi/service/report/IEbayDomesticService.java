@@ -20,6 +20,10 @@ public interface IEbayDomesticService {
 	
 	 //查询ebaydailysalesskureports表中的所有信息
 	List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku);
+	
+	List<Dailysalesskureports> selectSmtSku(Date st, Date et, String sku, String oldsku);
+
+	List<Dailysalesskureports> selectWishSku(Date st, Date et, String sku, String oldsku);
 
 	
 	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category);
@@ -30,5 +34,5 @@ public interface IEbayDomesticService {
 	List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku);
 
 	List<String> selectskuPlatforms();
-	
+
 }

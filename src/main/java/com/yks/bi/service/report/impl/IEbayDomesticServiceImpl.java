@@ -43,7 +43,20 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
     public List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku) {
     
         return isalessku.selectEbay(business, st, et, sku, oldsku);
+        
     }
+    
+    @Override
+	public List<Dailysalesskureports> selectSmtSku(Date st,Date et,String sku,String oldsku) {
+	
+    	return isalessku.selectSmtSku(st, et, oldsku, oldsku);
+	}
+    
+    @Override
+   	public List<Dailysalesskureports> selectWishSku(Date st,Date et,String sku,String oldsku) {
+   	
+       	return isalessku.selectWishSku(st, et, oldsku, oldsku);
+   	}
     
     @Override
     public List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku) {
@@ -69,6 +82,5 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 		return isalessku.selectskuPlatforms();
 	}
 
-	
 	
 }
