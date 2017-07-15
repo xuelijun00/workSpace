@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.Dailysalescategoryreports;
 import com.yks.bi.dto.report.Dailysalesskureports;
+import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.service.report.IEbayDomesticService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
@@ -19,7 +20,9 @@ import com.yks.bi.web.vo.GridModel;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/8.
@@ -76,7 +79,20 @@ public class EbayDomesticController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalesskureports> list = isale.selectSmtSku(starttime, endtime, sku, oldsku);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	int sumQuantity = 0;
+    	double sumSales = 0;
+    	for (Dailysalesskureports Dailysalesskureports : list) {
+    		sumOrders += Dailysalesskureports.getOrders();
+    		sumQuantity += Dailysalesskureports.getQuantity();
+    		sumSales += Dailysalesskureports.getSales();
+		}
+    	userdata.put("reportDate1", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("quantity", sumQuantity);
+    	userdata.put("sales", sumSales);
+        return new GridModel(pageInfo,userdata);
       
     }
     
@@ -97,7 +113,20 @@ public class EbayDomesticController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalesskureports> list = isale.selectWishSku(starttime, endtime, sku, oldsku);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	int sumQuantity = 0;
+    	double sumSales = 0;
+    	for (Dailysalesskureports Dailysalesskureports : list) {
+    		sumOrders += Dailysalesskureports.getOrders();
+    		sumQuantity += Dailysalesskureports.getQuantity();
+    		sumSales += Dailysalesskureports.getSales();
+		}
+    	userdata.put("reportDate1", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("quantity", sumQuantity);
+    	userdata.put("sales", sumSales);
+        return new GridModel(pageInfo,userdata);
       
     }
     
