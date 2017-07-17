@@ -31,10 +31,11 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_salesp_performance">各平台销售业绩报表</a> </li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_hipment">国内仓发货汇总数据</a> </li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_hipment">国内仓各平台发货数据</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_shipment">国内仓发货汇总数据</a> </li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_shipment">国内仓各平台发货数据</a>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=net_profit_details/netProfitDetails">净利导出明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_sales">各业务线每日销售数据</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_shipment_count">各平台发货汇总数据</a></li>
                     </ul>
                 </li>
                 <li>

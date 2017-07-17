@@ -25,6 +25,16 @@
     order_price, gross_profit, product_shipping, platform_cost, material_cost, order_execution_fee, 
     operating_cost, profit_margin, net_profit, profit, net_profit_margin
   </sql>
+  
+  <select id="selectPlatforms" resultType="String">
+    select platform from dailyoutreprots
+    where 1=1
+    <if test="platform != null">
+    	and platform like concat('%',#{platform,jdbcType=VARCHAR},'%')
+    </if>
+    order by platform 
+  </select>
+  
   <!--国内仓发货汇总  -->
   <select id="selectSumDomesticWarehouseShipment" resultMap="BaseResultMap">
   	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin from dailyoutreprots
@@ -37,6 +47,24 @@
     </if>
 	ORDER BY report_date 
   </select>
+  
+  <!--各平台发货汇总数据  -->
+  <select id="selectPlatformWarehouseShipmentCount" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
+  	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin 
+  	from dailyoutreprots
+	where 1=1
+	<if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=DATE} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform != 'all'" >
+       and platform = #{platform , jdbcType=VARCHAR}
+    </if>
+	ORDER BY report_date 
+  </select>
+  
   <!--各平台国内仓发货汇总数据  -->
   <select id="selectPlatformDomesticWarehouseShipment" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
   	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin from dailyoutreprots

@@ -15,18 +15,27 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>国内仓各平台发货数据</h5></div>
+    <div class="ibox-title"><h5>各平台发货数据汇总报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
-              <label>日期：</label>
-              <input type="text" id="start_date" class="form-control" placeholder=""  readonly="readonly">
+              <label>开始时间</label>
+              <input type="text" id="start_date"class="form-control" placeholder="" readonly="readonly">
             </div>
-            <!-- <div class="form-group">
-                <button type="button" class="btn btn-primary" onclick="queryData()">查询</button>
-            </div> -->
             <div class="form-group">
-                <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
+              <label>结束时间</label>
+              <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label>平台：</label>
+                <select class="form-control w120" id="platform" >
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
         </form>
         <div class="hr-line-dashed"></div>
@@ -44,16 +53,25 @@
 var chart;
 var platformData = [];
 function getUrl(type){
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var platform = $("#platform").val();
 	if(type === 1){
-		return contextPath + '/report/daily_out_report/platformsum/grid?date=' + $("#start_date").val();
+		return contextPath + '/report/daily_out_report/platformCount/grid?st=' + startDate + "&et=" + endDate + "&platform=" + platform;
 	}else{
-		return contextPath + '/report/daily_out_report/platformsum/chart?date=' + $("#start_date").val();
+		return contextPath + '/report/daily_out_report/platformCount/chart?st=' + startDate + "&et=" + endDate + "&platform=" + platform;
 	}
 }
+
+function queryData(){
+	var operation = getChartData(getUrl());
+	common.refreshData(getUrl(1),chart,operation);
+}
+
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "各平台发货汇总数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
 	var column = ['platform','reportDate1','orderNum','productTotalCny','netProfit','netProfitMargin'];
 	exportDataToCSV('#list2',title,platformData,fileName,column);
@@ -71,7 +89,7 @@ function getChartData(chartUrl){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				platformData = data.rows;
+				platformData = data;
 				for(var i=0;i<data.length;i++){
 					categories.push(data[i].reportDate1+"<br/>"+ data[i].platform);
 					netProfit.push(data[i].netProfit);
@@ -91,7 +109,7 @@ function getChartData(chartUrl){
         opposite: true
     }];
 	return {
-		title:{text:"各平台每日发货数据"}
+		title:{text:"各平台发货汇总数据"}
 		,categories:categories
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
@@ -103,24 +121,37 @@ function getChartData(chartUrl){
 (function(){
 	$("#start_date").jeDate({
         isinitVal: true,
-        initAddVal:{DD:"-1"},
+        initAddVal:{DD:"-7"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
-        zIndex:3000,
-        choosefun:function(elem, val, date) {
-        	var operation = getChartData(getUrl());
-        	common.refreshData(getUrl(1),chart,operation);
-        },
-        okfun:function(elem, val, date) {
-        	var operation = getChartData(getUrl());
-        	common.refreshData(getUrl(1),chart,operation);
-        },
+        zIndex:3000
     });
+	$("#end_date").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$.ajax({
+		url : contextPath + "/report/sales_performance/platforms",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#platform").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#platform").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
+	});
 	
 	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
-		title:"各平台每日发货数据"
+		title:"各平台发货汇总数据"
 		,url:getUrl(1)
 		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....

@@ -1,5 +1,6 @@
 package com.yks.bi.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -40,4 +41,9 @@ public interface DailyOutReportsMapper {
     int updateByPrimaryKeySelective(DailyOutReports record);
 
     int updateByPrimaryKey(DailyOutReports record);
+
+	List<DailyOutReports> selectPlatformWarehouseShipmentCount(@Param("startDate")Date startDate, @Param("endDate")Date endDate, @Param("platform")String platform);
+
+	List<String> selectPlatforms(@Param("platform")String platforms);
+
 }

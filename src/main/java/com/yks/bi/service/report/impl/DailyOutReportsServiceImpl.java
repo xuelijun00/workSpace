@@ -1,5 +1,6 @@
 package com.yks.bi.service.report.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,13 @@ public class DailyOutReportsServiceImpl implements IDailyOutReportsService {
 		return dailyOutReportsMapper.selectPlatformDomesticWarehouseShipment(key);
 	}
 
+	@Override
+	public List<DailyOutReports> selectPlatformWarehouseShipmentCount(Date startDate, Date endDate, String platform) {
+		return dailyOutReportsMapper.selectPlatformWarehouseShipmentCount(startDate, endDate, platform);
+	}
+
+	@Override
+	public List<String> selectPlatforms(String platforms) {
+		return dailyOutReportsMapper.selectPlatforms(platforms);
+	}
 }
