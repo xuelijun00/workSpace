@@ -42,7 +42,7 @@ public class EbayDomesticController {
      */
    
     @RequestMapping(value = "/ebay_domestic/sku/grid" ,method = RequestMethod.GET)
-    public GridModel ebayoverseasMethod(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    public GridModel ebayoverseasMethodGrid(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -59,11 +59,24 @@ public class EbayDomesticController {
     	List<Dailysalesskureports> list = isale.selectskuAll(business, starttime, endtime, sku, oldsku);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
-      
+    }
+    
+    @RequestMapping(value = "/ebay_domestic/sku/chart" ,method = RequestMethod.GET)
+    public List<Dailysalesskureports> ebayoverseasMethodChart(String business,String st,String et,String sku,String oldsku) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	
+        return isale.selectskuAll(business, starttime, endtime, sku, oldsku);
     }
     
     @RequestMapping(value = "/ebay_domestic/smtSku/grid" ,method = RequestMethod.GET)
-    public GridModel smtSkuMethod(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    public GridModel smtSkuMethodGrid(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -96,8 +109,22 @@ public class EbayDomesticController {
       
     }
     
+    @RequestMapping(value = "/ebay_domestic/smtSku/chart" ,method = RequestMethod.GET)
+    public List<Dailysalesskureports> smtSkuMethodChart(String business,String st,String et,String sku,String oldsku) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	
+        return isale.selectSmtSku(starttime, endtime, sku, oldsku);
+    }
+    
     @RequestMapping(value = "/ebay_domestic/wishSku/grid" ,method = RequestMethod.GET)
-    public GridModel WishSkuMethod(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    public GridModel WishSkuMethodGrid(String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -130,9 +157,23 @@ public class EbayDomesticController {
       
     }
     
+    @RequestMapping(value = "/ebay_domestic/wishSku/chart" ,method = RequestMethod.GET)
+    public List<Dailysalesskureports> WishSkuMethodChart(String business,String st,String et,String sku,String oldsku) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	
+        return isale.selectWishSku(starttime, endtime, sku, oldsku);
+    }
+    
     //用于ebay的 sku销售报表
     @RequestMapping(value = "/ebay_domestic/sku/gridEbay" ,method = RequestMethod.GET)
-    public GridModel ebayoverseasMethodEbay(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    public GridModel ebayDomesticMethodGrid(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -148,10 +189,22 @@ public class EbayDomesticController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalesskureports> list = isale.selectEbay(business, starttime, endtime, sku, oldsku);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
-      
+        return new GridModel(pageInfo); 
     }
-    
+     
+    @RequestMapping(value = "/ebay_domestic/sku/chartEbay" ,method = RequestMethod.GET)
+    public List<Dailysalesskureports> ebayDomesticMethodChart(String business,String st,String et,String sku,String oldsku) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	
+        return isale.selectEbay(business, starttime, endtime, sku, oldsku);
+    }
     
     @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethod(String business,String st,String et,String oldsku,String category,FilterDto filter) throws ParseException, UnsupportedEncodingException{
@@ -170,8 +223,7 @@ public class EbayDomesticController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalescategoryreports> list = isale.selectcategoryAll(business, starttime, endtime, category);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
-      
+        return new GridModel(pageInfo); 
     }
     
     
@@ -193,18 +245,15 @@ public class EbayDomesticController {
     	List<Dailysalescategoryreports> list = isale.selectcategorynewAll(business, starttime, endtime, category);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
-      
     }
-    
     
     @RequestMapping(value = "/ebay_domestic/platforms/platformnew" ,method = RequestMethod.GET)
     public List<String> newplatforms(){
         return isale.selectnewPlatforms();
     }
     
-
     @RequestMapping(value = "/ebay_domestic/skunew/grid" ,method = RequestMethod.GET)
-    public GridModel skuMethodnew(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
+    public GridModel newPlatformSkuGrid(String business,String st,String et,String sku,String oldsku,FilterDto filter) throws ParseException{
     	Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
@@ -220,11 +269,22 @@ public class EbayDomesticController {
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalesskureports> list = isale.selectskunewAll(business, starttime, endtime, sku, oldsku);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
-      
+        return new GridModel(pageInfo); 
     }
     
-    
+    @RequestMapping(value = "/ebay_domestic/skunew/chart" ,method = RequestMethod.GET)
+    public List<Dailysalesskureports> newPlatformSkuChart(String business,String st,String et,String sku,String oldsku) throws Exception{
+    	Date starttime = null;
+    	if(StringUtils.isNotEmpty(st)){
+    		starttime = DateUtils.parseDate(st, YYYYMMDD);
+    	}
+    	Date endtime = null;
+    	if(StringUtils.isNotEmpty(et)){
+    		endtime = DateUtils.parseDate(et, YYYYMMDD);
+    	}
+    	
+        return isale.selectskunewAll(business, starttime, endtime, sku, oldsku);
+    }
     
     @RequestMapping(value = "/ebay_domestic/skuplatforms/platformnew" ,method = RequestMethod.GET)
     public List<String> newskuplatforms(){

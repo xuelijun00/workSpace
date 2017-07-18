@@ -47,7 +47,6 @@
 </div>
 </div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
-<script type="text/javascript" src="js/common/common.js" ></script>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
 var chart;
