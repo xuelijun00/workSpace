@@ -15,7 +15,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>各平台发货数据汇总报表</h5></div>
+    <div class="ibox-title"><h5>国内仓各平台发货数据报表</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -70,7 +70,7 @@ function queryData(){
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "各平台发货汇总数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "国内仓各平台发货数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
 	var column = ['platform','reportDate1','orderNum','productTotalCny','netProfit','netProfitMargin'];
 	exportDataToCSV('#list2',title,platformData,fileName,column);
@@ -108,7 +108,7 @@ function getChartData(chartUrl){
         opposite: true
     }];
 	return {
-		title:{text:"各平台发货汇总数据"}
+		title:{text:"国内仓各平台发货数据"}
 		,categories:categories
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
@@ -150,7 +150,7 @@ function getChartData(chartUrl){
 	
 	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
-		title:"各平台发货汇总数据"
+		title:"国内仓各平台发货数据"
 		,url:getUrl(1)
 		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
