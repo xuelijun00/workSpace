@@ -135,7 +135,7 @@ function getChartData(chartUrl){
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
 	return {
-		title:{text:"新平台业务线每日sku销售数据"}
+		title:{text:"新平台业务线时间段sku销售数据"}
 		,categories:skuAndbusiness
 		,y:y
 		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},

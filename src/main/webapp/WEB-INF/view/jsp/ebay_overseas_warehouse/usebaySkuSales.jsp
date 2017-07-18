@@ -78,7 +78,7 @@ function exportData(){
 	var oldsku = encodeURIComponent($('#oldsku').val());
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "Ebay业务线美仓每日sku销售数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "Ebay业务线美仓时间段sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
 	var chartUrl =  contextPath + '/report/ebay_domestic/sku/gridEbay?business=Ebay_US&st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
