@@ -82,5 +82,33 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 		return isalessku.selectskuPlatforms();
 	}
 
+	@Override
+	public List<Dailysalesskureports> selectskuAllSum(String business, Date st,Date et, String sku,
+			String oldsku) {
+		return isalessku.selectskuAllSum(business, st, et, sku, oldsku);
+	}
+
+	@Override
+	public List<Dailysalesskureports> selectWishSkuSum(Date st, Date et, String sku, String oldsku) {
+		return isalessku.selectWishSkuSum(st, et, oldsku, oldsku);
+	}
+
+	@Override
+	public List<Dailysalesskureports> selectSmtSkuSum(Date st, Date et, String sku, String oldsku) {
+		return isalessku.selectSmtSkuSum(st, et, oldsku, oldsku);
+	}
+
+	@Override
+	public List<Dailysalesskureports> selectAllSum(String business, Date st,Date et, String sku,String oldsku) {
+		
+		return isalessku.selectAllSum(business, st, et, sku, oldsku);
+	}
+
+	@Override
+	public List<Dailysalesskureports> selectEbaySum(String business, Date st, Date et, String sku, String oldsku) {
+		
+		return isalessku.selectEbaySum(business, st, et, sku, oldsku);
+	}
+
 	
 }

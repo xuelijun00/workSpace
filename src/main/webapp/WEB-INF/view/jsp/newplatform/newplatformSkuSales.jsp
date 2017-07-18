@@ -92,7 +92,7 @@ function exportData(){
 	var title = [ '业务线', 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['business', 'sku','skuOld','reportDate1','orders','quantity','sales'];
 	$.ajax({
-		url : getUrl(),
+		url : getUrl(1),
 		cache : false,
 		type:"get",
 		async: false,
@@ -112,9 +112,9 @@ function queryData(){
 }
 
 function getChartData(chartUrl){
-	var reportDate = [];
-	var sales = [];
-	var orders = [];
+	var skuAndbusiness = [];
+	var salesSum = [];
+	var ordersSum = [];
 	var categories = [];
 	$.ajax({
 		url : chartUrl,
@@ -125,9 +125,9 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate1+"<br/>"+ data[i].sku+"<br/>"+ data[i].business);
-				  sales.push(data[i].sales);
-            	  orders.push(data[i].orders);
+				  skuAndbusiness.push(data[i].sku+"<br/>"+ data[i].business);
+				  salesSum.push(data[i].sales);
+				  ordersSum.push(data[i].orders);
 	            }
 			}
 		}
@@ -136,10 +136,10 @@ function getChartData(chartUrl){
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
 	return {
 		title:{text:"新平台业务线每日sku销售数据"}
-		,categories:reportDate
+		,categories:skuAndbusiness
 		,y:y
-		,series:[{name: '订单数',type: 'column',data:orders,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:sales,tooltip: {valueSuffix: '' }},]
+		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 

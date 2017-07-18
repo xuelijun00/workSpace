@@ -72,7 +72,7 @@ public class EbayDomesticController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	
-        return isale.selectskuAll(business, starttime, endtime, sku, oldsku);
+        return isale.selectAllSum(business, starttime, endtime, sku, oldsku);
     }
     
     @RequestMapping(value = "/ebay_domestic/smtSku/grid" ,method = RequestMethod.GET)
@@ -120,7 +120,7 @@ public class EbayDomesticController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	
-        return isale.selectSmtSku(starttime, endtime, sku, oldsku);
+        return isale.selectSmtSkuSum(starttime, endtime, sku, oldsku);
     }
     
     @RequestMapping(value = "/ebay_domestic/wishSku/grid" ,method = RequestMethod.GET)
@@ -168,7 +168,7 @@ public class EbayDomesticController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	
-        return isale.selectWishSku(starttime, endtime, sku, oldsku);
+        return isale.selectWishSkuSum(starttime, endtime, sku, oldsku);
     }
     
     //用于ebay的 sku销售报表
@@ -203,7 +203,7 @@ public class EbayDomesticController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	
-        return isale.selectEbay(business, starttime, endtime, sku, oldsku);
+        return isale.selectEbaySum(business, starttime, endtime, sku, oldsku);
     }
     
     @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
@@ -283,7 +283,7 @@ public class EbayDomesticController {
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
     	}
     	
-        return isale.selectskunewAll(business, starttime, endtime, sku, oldsku);
+        return isale.selectskuAllSum(business, starttime, endtime, sku, oldsku);
     }
     
     @RequestMapping(value = "/ebay_domestic/skuplatforms/platformnew" ,method = RequestMethod.GET)

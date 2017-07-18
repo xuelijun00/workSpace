@@ -34,4 +34,14 @@ public interface DailysalesskureportsMapper {
     int updateByPrimaryKeySelective(Dailysalesskureports record);
 
     int updateByPrimaryKey(Dailysalesskureports record);
+
+	List<Dailysalesskureports> selectskuAllSum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
+
+	List<Dailysalesskureports> selectWishSkuSum(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+
+	List<Dailysalesskureports> selectSmtSkuSum(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+
+	List<Dailysalesskureports> selectAllSum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
+
+	List<Dailysalesskureports> selectEbaySum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
 }

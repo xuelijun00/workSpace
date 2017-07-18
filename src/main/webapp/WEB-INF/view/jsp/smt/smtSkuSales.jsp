@@ -81,7 +81,7 @@ function exportData(){
 	var fileName = "smt业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['sku','skuOld','reportDate1','orders','quantity','sales'];
-	var chartUrl =  contextPath + '/report/ebay_domestic/smtSku/chart?st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/smtSku/grid?st=' + startDate + "&et=" + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;	
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -98,9 +98,9 @@ function exportData(){
 }
 
 function getChartData(chartUrl){
-	var reportDate = [];
-	var sales = [];
-	var orders = [];
+	var sku = [];
+	var salesSum = [];
+	var ordersSum = [];
 	var categories = [];
 	$.ajax({
 		url : chartUrl,
@@ -111,9 +111,9 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate1+"<br/>"+ data[i].sku);
-				  sales.push(data[i].sales);
-            	  orders.push(data[i].orders);
+				  sku.push(data[i].sku);
+				  salesSum.push(data[i].sales);
+            	  ordersSum.push(data[i].orders);
 	            }
 			}
 		}
@@ -122,10 +122,10 @@ function getChartData(chartUrl){
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
 	return {
 		title:{text:"smt业务线每日sku销售数据"}
-		,categories:reportDate
+		,categories:sku
 		,y:y
-		,series:[{name: '订单数',type: 'column',data:orders,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:sales,tooltip: {valueSuffix: '' }},]
+		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 

@@ -14,112 +14,125 @@
     report_date, business, sku, sku_old, orders, quantity, sales
   </sql>
   
-    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from dailysalesskureports
-      where business = #{business,jdbcType=VARCHAR}
-    <if test="start_date != null">
+  <sql id="Base_Column_List_Sum" >
+    SUM(orders) as orders,SUM(sales) as sales,sku,business
+  </sql>
+  
+  <sql id="Base_If_Sql">
+  <if test="start_date != null">
     	and report_date >= #{start_date,jdbcType=DATE}
     </if>
 	 <if test="end_date != null">
 	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    
-	    </if>
+	</if>
     <if test="sku != null and sku.length() > 0">
     	and  sku = #{sku,jdbcType=VARCHAR}
     </if>
     <if test="sku_old != null and sku_old.length() > 0">
     	and sku_old = #{sku_old,jdbcType=VARCHAR}
     </if>
+  </sql>
+  
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailysalesskureports
+    where business = #{business,jdbcType=VARCHAR}
+    <include refid="Base_If_Sql" />
     ORDER BY  report_date desc
+  </select>
+  
+  <!--用于曲线图，汇总时间段内的订单数和销售额 -->
+   <select id="selectAllSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+   	select 
+    <include refid="Base_Column_List_Sum" />
+    from dailysalesskureports
+    where business = #{business,jdbcType=VARCHAR}
+    <include refid="Base_If_Sql" />
+    GROUP BY sku,business
+    ORDER BY sales desc
   </select>
   
   <select id="selectEbay" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
     select 
     <include refid="Base_Column_List" />
     from ebaydailysalesskureports
-      where business = #{business,jdbcType=VARCHAR}
-    <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
-	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    
-	    </if>
-    <if test="sku != null and sku.length() > 0">
-    	and  sku = #{sku,jdbcType=VARCHAR}
-    </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
-    </if>
+    where business = #{business,jdbcType=VARCHAR}
+    <include refid="Base_If_Sql" />
     ORDER BY  report_date desc
+  </select>
+  
+  <select id="selectEbaySum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+    select 
+    <include refid="Base_Column_List_Sum" />
+    from ebaydailysalesskureports
+    where business = #{business,jdbcType=VARCHAR}
+    <include refid="Base_If_Sql" />
+    GROUP BY sku,business
+    ORDER BY sales desc
   </select>
   
   <select id="selectSmtSku" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
     select 
     <include refid="Base_Column_List" />
     from smtdailysalesskureports
-      where 1=1
-    <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
-	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    
-	    </if>
-    <if test="sku != null and sku.length() > 0">
-    	and  sku = #{sku,jdbcType=VARCHAR}
-    </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
-    </if>
+    where 1=1
+    <include refid="Base_If_Sql" />
     ORDER BY  report_date desc
+  </select>
+  
+  <select id="selectSmtSkuSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+    select 
+    <include refid="Base_Column_List_Sum" />
+    from smtdailysalesskureports
+    where 1=1
+    <include refid="Base_If_Sql" />
+    GROUP BY sku,business
+    ORDER BY sales desc
   </select>
   
   <select id="selectWishSku" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
     select 
     <include refid="Base_Column_List" />
     from wishdailysalesskureports
-      where 1=1
-    <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
-	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    
-	    </if>
-    <if test="sku != null and sku.length() > 0">
-    	and  sku = #{sku,jdbcType=VARCHAR}
-    </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
-    </if>
+    where 1=1
+    <include refid="Base_If_Sql" />
     ORDER BY  report_date desc
+  </select>
+  
+  <select id="selectWishSkuSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+    select 
+    <include refid="Base_Column_List_Sum" />
+    from wishdailysalesskureports
+    where 1=1
+    <include refid="Base_If_Sql" />
+    GROUP BY sku,business
+    ORDER BY sales desc
   </select>
   
   <select id="selectskuAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
     select 
     <include refid="Base_Column_List" />
     from dailysalesskureports
-      where business like 'new%' and business != 'new_newegg'
-      <if test="business != null">
+    where business like 'new%' and business != 'new_newegg'
+    <if test="business != null">
     	and business = #{business,jdbcType=VARCHAR}
     </if>
-    <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
-	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	    
-	    </if>
-    <if test="sku != null and sku.length() > 0">
-    	and  sku = #{sku,jdbcType=VARCHAR}
-    </if>
-    <if test="sku_old != null and sku_old.length() > 0">
-    	and sku_old = #{sku_old,jdbcType=VARCHAR}
-    </if>
+    <include refid="Base_If_Sql" />
     ORDER BY  report_date desc
+  </select>
+ <!--用于曲线图，汇总时间段内的订单数和销售额 -->
+  <select id="selectskuAllSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalesskureportsKey" >
+    select 
+    <include refid="Base_Column_List_Sum" />
+    from dailysalesskureports
+    where business like 'new%' and business != 'new_newegg'
+    <if test="business != null">
+    	and business = #{business,jdbcType=VARCHAR}
+    </if>
+    <include refid="Base_If_Sql" />
+    GROUP BY sku,business
+    ORDER BY sales desc
   </select>
   
    <!--查询平台  -->

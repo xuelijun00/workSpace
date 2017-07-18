@@ -35,4 +35,14 @@ public interface IEbayDomesticService {
 
 	List<String> selectskuPlatforms();
 
+	List<Dailysalesskureports> selectskuAllSum(String business,Date st,Date et,String sku,String oldsku);
+
+	List<Dailysalesskureports> selectWishSkuSum(Date st,Date et,String sku,String oldsku);
+
+	List<Dailysalesskureports> selectSmtSkuSum(Date st,Date et,String sku,String oldsku);
+
+	List<Dailysalesskureports> selectAllSum(String business,Date st,Date et,String sku,String oldsku);
+
+	List<Dailysalesskureports> selectEbaySum(String business,Date st,Date et,String sku,String oldsku);
+
 }
