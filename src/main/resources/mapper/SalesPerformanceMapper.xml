@@ -1,166 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yks.bi.dao.SalesPerformanceMapper">
-  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.SalesPerformance">
-    <id column="report_date" jdbcType="DATE" property="reportDate" />
-    <id column="business" jdbcType="VARCHAR" property="business" />
-    <result column="orders" jdbcType="INTEGER" property="orders" />
-    <result column="sales" jdbcType="REAL" property="sales" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    report_date, business, orders, sales
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dailysalesreports
-    where report_date = #{reportDate,jdbcType=DATE}
-      and business = #{business,jdbcType=VARCHAR}
-  </select>
-  <!--查询所有平台  -->
-  <select id="selectPlatforms" resultType="String">
-    select distinct business from dailysalesreports
-    where 1=1
-    <if test="business != null">
-    	and business like concat('%',#{business,jdbcType=VARCHAR},'%')
-    </if>
-    order by business 
-  </select>
-  
-  <select id="selectDomesticPlatforms" resultType="String">
-    select distinct business from dailysalesreports
-	where business = 'ebay'
-	union
-	select distinct business from dailysalesreports
-	where 1=1 and business like 'cn_%'
-  </select>
-  
-  
-   <select id="selectAllCount" resultMap="BaseResultMap">
-   			select
-   			business, sum(orders) orders, sum(sales) sales
-    		from dailysalesreports 
-    		where 1=1
-    		<choose>
-    			<when test="business != null">
-		    		and business = #{business,jdbcType=VARCHAR}
-    			</when>
-    			<otherwise>
-    				and (business like 'cn_%'
-		    		 or business ='ebay')
-    			</otherwise>
-    		</choose>
-    		 <if test="start_date != null">
+	<resultMap id="BaseResultMap" type="com.yks.bi.dto.report.SalesPerformance">
+		<id column="report_date" jdbcType="DATE" property="reportDate" />
+		<id column="business" jdbcType="VARCHAR" property="business" />
+		<result column="orders" jdbcType="INTEGER" property="orders" />
+		<result column="sales" jdbcType="REAL" property="sales" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		report_date, business, orders, sales
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dailysalesreports
+		where report_date = #{reportDate,jdbcType=DATE}
+		and business = #{business,jdbcType=VARCHAR}
+	</select>
+	<!--查询所有平台 -->
+	<select id="selectPlatforms" resultType="String">
+		select distinct business from dailysalesreports
+		where 1=1
+		<if test="business != null">
+			and business like concat('%',#{business,jdbcType=VARCHAR},'%')
+		</if>
+		order by business
+	</select>
+
+	<select id="selectDomesticPlatforms" resultType="String">
+		select distinct business from dailysalesreports
+		where business = 'ebay'
+		union
+		select distinct business from dailysalesreports
+		where 1=1 and business like 'cn_%'
+	</select>
+
+
+	<select id="selectAllCount" resultMap="BaseResultMap">
+		select
+		business, sum(orders) orders, sum(sales) sales
+		from dailysalesreports
+		where 1=1
+		<choose>
+			<when test="business != null">
+				and business = #{business,jdbcType=VARCHAR}
+			</when>
+			<otherwise>
+				and (business like 'cn_%'
+				or business ='ebay')
+			</otherwise>
+		</choose>
+		<if test="start_date != null">
     			<![CDATA[and report_date >= #{start_date,jdbcType=DATE}]]>
-    		</if>
-	 		<if test="end_date != null">
+		</if>
+		<if test="end_date != null">
 	  		 	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-			 </if>
-			 GROUP BY business
-  </select> 
-  
-   <select id="selectAll" resultMap="BaseResultMap">
-		    select 
-		    <include refid="Base_Column_List" />
-		    from dailysalesreports
-		    where 1=1
-		    <if test="business != null">
-		    	and business = #{business,jdbcType=VARCHAR}
-		    </if>
-		     <if test="start_date != null">
-		    	and report_date >= #{start_date,jdbcType=DATE}
-		    </if>
-			 <if test="end_date != null">
+		</if>
+		GROUP BY business
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dailysalesreports
+		where 1=1
+		<if test="business != null">
+			and business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="start_date != null">
+			and report_date >= #{start_date,jdbcType=DATE}
+		</if>
+		<if test="end_date != null">
 			    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-			 </if>
-			 order by business,report_date 	
-  </select> 
-  
-  
-  <select id="selectnewAll" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dailysalesreports
-    where business like 'new%' and business != 'new_newegg'
-    <if test="business != null">
-    	and business = #{business,jdbcType=VARCHAR}
-    </if>
-     <if test="start_date != null">
-    	and report_date >= #{start_date,jdbcType=DATE}
-    </if>
-	 <if test="end_date != null">
+		</if>
+		order by business,report_date
+	</select>
+
+
+	<select id="selectnewAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dailysalesreports
+		where business like 'new%' and business != 'new_newegg'
+		<if test="business != null">
+			and business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="start_date != null">
+			and report_date >= #{start_date,jdbcType=DATE}
+		</if>
+		<if test="end_date != null">
 	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
-	 </if>
-	 order by report_date 
-  </select>
-   
-    <!--查询平台  -->
-  <select id="selectnewPlatforms" resultMap="BaseResultMap" >
-    SELECT business FROM dailysalesreports WHERE business like 'new%' and business != 'newegg' GROUP by  business
-  </select>
-  
-  
-  <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
-    delete from dailysalesreports
-    where report_date = #{reportDate,jdbcType=DATE}
-      and business = #{business,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.yks.bi.dto.report.SalesPerformance">
-    insert into dailysalesreports (report_date, business, orders, 
-      sales)
-    values (#{reportDate,jdbcType=DATE}, #{business,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
-      #{sales,jdbcType=REAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.SalesPerformance">
-    insert into dailysalesreports
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="reportDate != null">
-        report_date,
-      </if>
-      <if test="business != null">
-        business,
-      </if>
-      <if test="orders != null">
-        orders,
-      </if>
-      <if test="sales != null">
-        sales,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="reportDate != null">
-        #{reportDate,jdbcType=DATE},
-      </if>
-      <if test="business != null">
-        #{business,jdbcType=VARCHAR},
-      </if>
-      <if test="orders != null">
-        #{orders,jdbcType=INTEGER},
-      </if>
-      <if test="sales != null">
-        #{sales,jdbcType=REAL},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.SalesPerformance">
-    update dailysalesreports
-    <set>
-      <if test="orders != null">
-        orders = #{orders,jdbcType=INTEGER},
-      </if>
-      <if test="sales != null">
-        sales = #{sales,jdbcType=REAL},
-      </if>
-    </set>
-    where report_date = #{reportDate,jdbcType=DATE}
-      and business = #{business,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformance">
-    update dailysalesreports
-    set orders = #{orders,jdbcType=INTEGER},
-      sales = #{sales,jdbcType=REAL}
-    where report_date = #{reportDate,jdbcType=DATE}
-      and business = #{business,jdbcType=VARCHAR}
-  </update>
- 
+		</if>
+		order by report_date
+	</select>
+
+	<!--查询平台 -->
+	<select id="selectnewPlatforms" resultMap="BaseResultMap">
+		SELECT business FROM dailysalesreports WHERE business like 'new%' and
+		business != 'newegg' GROUP by business
+	</select>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
+		delete from dailysalesreports
+		where report_date = #{reportDate,jdbcType=DATE}
+		and business = #{business,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.yks.bi.dto.report.SalesPerformance">
+		insert into dailysalesreports (report_date, business, orders,
+		sales)
+		values (#{reportDate,jdbcType=DATE}, #{business,jdbcType=VARCHAR},
+		#{orders,jdbcType=INTEGER},
+		#{sales,jdbcType=REAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yks.bi.dto.report.SalesPerformance">
+		insert into dailysalesreports
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reportDate != null">
+				report_date,
+			</if>
+			<if test="business != null">
+				business,
+			</if>
+			<if test="orders != null">
+				orders,
+			</if>
+			<if test="sales != null">
+				sales,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reportDate != null">
+				#{reportDate,jdbcType=DATE},
+			</if>
+			<if test="business != null">
+				#{business,jdbcType=VARCHAR},
+			</if>
+			<if test="orders != null">
+				#{orders,jdbcType=INTEGER},
+			</if>
+			<if test="sales != null">
+				#{sales,jdbcType=REAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.SalesPerformance">
+		update dailysalesreports
+		<set>
+			<if test="orders != null">
+				orders = #{orders,jdbcType=INTEGER},
+			</if>
+			<if test="sales != null">
+				sales = #{sales,jdbcType=REAL},
+			</if>
+		</set>
+		where report_date = #{reportDate,jdbcType=DATE}
+		and business = #{business,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformance">
+		update dailysalesreports
+		set orders = #{orders,jdbcType=INTEGER},
+		sales = #{sales,jdbcType=REAL}
+		where report_date = #{reportDate,jdbcType=DATE}
+		and business = #{business,jdbcType=VARCHAR}
+	</update>
+
 </mapper>

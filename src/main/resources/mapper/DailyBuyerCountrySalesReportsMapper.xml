@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyBuyerCountrySalesReportsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.yks.bi.dto.report.DailyBuyerCountrySalesReports">
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
+		<result column="report_date" property="reportDate" jdbcType="DATE" />
+		<result column="buyer_country" property="buyerCountry"
+			jdbcType="VARCHAR" />
+		<result column="orders" property="orders" jdbcType="INTEGER" />
+		<result column="sales" property="sales" jdbcType="REAL" />
+		<result column="quantity" property="quantity" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		`report_date`, `platform`, `buyer_country`, `orders`, `quantity`, `sales`
+	</sql>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">
+		select
+		<include refid="Base_Column_List" />
+		from `dailybuyer_countrysalesreports`
+		where 1=1
+		<if test="startDate != null and startDate.length() > 0">
+			and report_date >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       <![CDATA[and report_date <= #{endDate}]]>
+		</if>
+		<if test="platform != null and platform.length() > 0">
+			and platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		ORDER BY `report_date` DESC
+	</select>
+
+	<select id="selectNewPlatformAll" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReports">
+		select
+		<include refid="Base_Column_List" />
+		from `dailybuyer_countrysalesreports`
+		where platform like 'new%' and platform != 'new_newegg'
+		<if test="platform != null and platform.length() > 0">
+			and platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			and report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null">
+	    <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		ORDER BY `report_date` DESC
+	</select>
+
+	<select id="selectNewPlatforms" resultType="String">
+		SELECT `platform` FROM `dailybuyer_countrysalesreports` 
+		WHERE `platform` like 'new%' and `platform` != 'new_newegg'
+		GROUP by `platform`
+	</select>
+
+</mapper>
