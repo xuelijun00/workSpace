@@ -33,5 +33,17 @@ public class DailyBuyerCountrySalesServiceImpl implements IDailyBuyerCountrySale
 		
 		return iBuyerCountry.selectNewPlatforms();
 	}
+	
+	@Override
+	public List<String> selectBuyerCountry(DailyBuyerCountrySalesReportsKey key) {
+		
+		return iBuyerCountry.selectBuyerCountry(key);
+	}
+	
+	@Override
+	public List<String> selectNewPlatformBuyerCountry(DailyBuyerCountrySalesReportsKey key) {
+		
+		return iBuyerCountry.selectNewPlatformBuyerCountry(key);
+	}
 
 }

@@ -59,5 +59,22 @@ public class DailyBuyerCountrySalesController {
     public List<String> newplatforms(){
         return idbcss.selectNewPlatforms();
     }
-  
+    
+    /**
+     * 查询买家国家
+     * @return
+     */
+    @RequestMapping(value = "/dailyBuyerCountrySales/buyerCountry" ,method = RequestMethod.GET)
+    public List<String> buyerCountry(DailyBuyerCountrySalesReportsKey key){
+        return idbcss.selectBuyerCountry(key);    
+    }
+    
+    /**
+     * 查询新平台买家国家
+     * @return
+     */
+    @RequestMapping(value = "/dailyBuyerCountrySales/newPlatform/buyerCountry" ,method = RequestMethod.GET)
+    public List<String> newPlamformbuyerCountry(DailyBuyerCountrySalesReportsKey key){
+        return idbcss.selectNewPlatformBuyerCountry(key);
+    }
 }

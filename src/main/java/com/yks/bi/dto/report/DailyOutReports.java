@@ -27,7 +27,7 @@ public class DailyOutReports extends DailyOutReportsKey {
 
     private Integer netProfit;
 
-    private Float profit;  //净利
+    private Float profit;  //税后综合净利
     
     private Float netProfitMargin;
 

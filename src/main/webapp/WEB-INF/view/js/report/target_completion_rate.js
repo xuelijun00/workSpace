@@ -67,7 +67,7 @@ var targetCompletionRate = {
 						}
 						targetCompletionRate.chart.addSeries(series);
 					}
-					targetCompletionRate.chart.xAxis[0].setCategories(targetCompletionRate.categories,true);
+					targetCompletionRate.chart.xAxis[k].setCategories(targetCompletionRate.categories,true);
 					targetCompletionRate.chart.redraw();//重新渲染数据
 				}
 			}

@@ -133,6 +133,8 @@
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">沃尔玛业务线</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySales">沃尔玛销售报表</a> </li>
+                    	<%-- <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartSkuSales">沃尔玛 SKU销售报表</a> </li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartCategorySales">沃尔玛品类销售报表</a> </li> --%>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOut">沃尔玛每日发货报表</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartBuyerCountrySales">沃尔玛买家国家数据</a> </li>
                     </ul>

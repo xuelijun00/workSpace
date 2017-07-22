@@ -1,22 +1,13 @@
 package com.yks.bi.dto.report;
 
 public class DailyBuyerCountrySalesReports extends DailyBuyerCountrySalesReportsKey{
-	private String buyerCountry;//买家国家
+	
 	
 	private Integer orders;      //订单
 	
 	private Integer quantity;    //数量
 
 	private Float sales;        //销售额
-    
-
-	public String getBuyerCountry() {
-		return buyerCountry;
-	}
-
-	public void setBuyerCountry(String buyerCountry) {
-		this.buyerCountry = buyerCountry;
-	}
 
 	public Integer getOrders() {
 		return orders;

@@ -2,10 +2,13 @@ package com.yks.bi.dto.report;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class EbayDailyOutZhiYouReprotsKey {
 	
     private String platform;
-
+    
+    /*@JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")*/
     private Date reportDate;
 
     private String zhuzhandian;

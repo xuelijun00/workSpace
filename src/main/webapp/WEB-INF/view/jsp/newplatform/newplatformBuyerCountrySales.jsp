@@ -25,10 +25,15 @@
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
-                <label>平台：</label>
-                <select class="form-control w120" id="platform" name="platform">
-                </select>
+               <label>平台：</label>
+               <select class="form-control w120" id="platform" name="platform" >
+               </select>
             </div>
+            <div class="form-group">
+               <label>国家：</label>
+               <input id="buyerCountry_input" list="buyerCountry" />
+			   <datalist id="buyerCountry"></datalist>
+           </div>
             <div class="form-group">
                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
@@ -48,15 +53,15 @@
 var chart;
 var operation;
 var domesticData = [];
-
 function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var platform = $("#platform").val();
+	var buyerCountry = $("#buyerCountry_input").val();
+	var	platform = $("#platform").val();
 	/* if(type === 1){
 		return contextPath + '/report/dailyBuyerCountrySales/grid?platform=ebay&st=' + startDate + "&et=" + endDate;
 	}else{ */
-	return contextPath + '/report/dailyBuyerCountrySales/newPlatform/grid?platform=' + platform + "&startDate=" + startDate + "&endDate=" + endDate;
+	return contextPath + '/report/dailyBuyerCountrySales/newPlatform/grid?platform=' + platform + "&startDate=" + startDate + "&endDate=" + endDate + "&buyerCountry=" + buyerCountry;
 	/* } */
 }
 function queryData(){	
@@ -81,6 +86,27 @@ function exportData(){
 	});
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
+
+$("#platform").bind("change", function platform(){
+	var	platform = $("#platform").val();
+	var url = contextPath + '/report/dailyBuyerCountrySales/newPlatform/buyerCountry?platform=' + platform;
+	$.ajax({
+		url : url,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#buyerCountry_input").val("");
+				$("#buyerCountry").empty();
+				for(var i=0;i<data.length;i++){
+					$("#buyerCountry").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
+}
+);
 
 (function(){
 	$("#start_date").jeDate({
@@ -114,8 +140,22 @@ function exportData(){
 		}
 	});
 	
-	var series = [];
-	
+	var platform = $("#platform").val();
+	var url = contextPath + '/report/dailyBuyerCountrySales/newPlatform/buyerCountry?platform=' + platform;
+	$.ajax({
+		url : url,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#buyerCountry").empty();
+				for(var i=0;i<data.length;i++){
+					$("#buyerCountry").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
 	common.grid({
 		title:"新平台买家国家交易数据"
 		,url:getUrl()

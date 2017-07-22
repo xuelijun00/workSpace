@@ -4,17 +4,20 @@ import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class DailyOutReportsKey {
 	
     private String platform;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportDate;
     
-    private Date reportDate1;
-    
-    public String getReportDate1() {
-    	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
-    }
+//    private Date reportDate1;
+//    
+//    public String getReportDate1() {
+//    	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
+//    }
     
     private String startDate;
     

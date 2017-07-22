@@ -35,7 +35,7 @@
     order by platform 
   </select>
   
-  <!--国内仓发货汇总  -->
+  <!--国内仓发货汇总   -->
   <select id="selectSumDomesticWarehouseShipment" resultMap="BaseResultMap">
   	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin from dailyoutreprots
 	where platform = 'a_ll'
@@ -48,9 +48,10 @@
 	ORDER BY report_date 
   </select>
   
-  <!--各平台发货汇总数据  -->
+  <!--国内仓各平台发货汇总数据  表格 -->
   <select id="selectPlatformWarehouseShipmentCount" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
-  	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin 
+  	select 
+  	<include refid="Base_Column_List" /> 
   	from dailyoutreprots
 	where 1=1
 	<if test="startDate != null">
@@ -63,6 +64,26 @@
        and platform = #{platform , jdbcType=VARCHAR}
     </if>
 	ORDER BY report_date 
+  </select>
+  
+  <!--国内仓各平台发货汇总数据  曲线图 -->
+  <select id="selectPlatformWarehouseShipmentCountChart" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
+  	select platform, SUM(order_num) as orderNum, SUM(unit_price) as unitPrice, 
+  	SUM(product_total_cny) as productTotalCny, SUM(gross_profit) as grossProfit, 
+  	SUM(profit) as profit, SUM(net_profit_margin) as netProfitMargin
+  	from dailyoutreprots
+	where 1=1
+	<if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=DATE} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform != 'all'" >
+       and platform = #{platform , jdbcType=VARCHAR}
+    </if>
+    GROUP BY platform
+    ORDER BY platform DESC
   </select>
   
   <!--各平台国内仓发货汇总数据  -->

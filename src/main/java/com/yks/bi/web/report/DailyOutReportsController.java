@@ -98,21 +98,10 @@ public class DailyOutReportsController {
      * @throws Exception 
      */   
 	 @RequestMapping(value = "/daily_out_report/platformCount/grid" ,method = RequestMethod.GET)
-	    public GridModel selectPlatformWarehouseShipmentCountGrid(String st,String et,String platform,FilterDto filter) throws Exception{
-		 	Date starttime = null;
-	    	if(StringUtils.isNotEmpty(st)){
-	    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-	    	}
-	    	Date endtime = null;
-	    	if(StringUtils.isNotEmpty(et)){
-	    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-	    	}
-	    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-	    		filter.setSidx("report_date");
-	    	}
+	    public GridModel selectPlatformWarehouseShipmentCountGrid(DailyOutReportsKey key,FilterDto filter) throws Exception{
 	    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 	    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-	    	List<DailyOutReports> list = dailyOutReportsService.selectPlatformWarehouseShipmentCount(starttime, endtime, platform);
+	    	List<DailyOutReports> list = dailyOutReportsService.selectPlatformWarehouseShipmentCount(key);
 	    	PageInfo<?> pageInfo = new PageInfo<>(list);
 	    	
 	        return new GridModel(pageInfo);
@@ -127,17 +116,9 @@ public class DailyOutReportsController {
 	 * @throws Exception 
 	 */   
 	 @RequestMapping(value = "/daily_out_report/platformCount/chart" ,method = RequestMethod.GET)
-	    public List<DailyOutReports> selectPlatformWarehouseShipmentCountChart(String st,String et,String platform) throws Exception{
-	    	Date starttime = null;
-	    	if(StringUtils.isNotEmpty(st)){
-	    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-	    	}
-	    	Date endtime = null;
-	    	if(StringUtils.isNotEmpty(et)){
-	    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-	    	}
-	    	PageHelper.orderBy("report_date desc");
-	        return dailyOutReportsService.selectPlatformWarehouseShipmentCount(starttime, endtime, platform);
+	    public List<DailyOutReports> selectPlatformWarehouseShipmentCountChart(DailyOutReportsKey key) throws Exception{
+	    	/*PageHelper.orderBy("report_date desc");*/
+	        return dailyOutReportsService.selectPlatformWarehouseShipmentCountChart(key);
 	    }
 	 
  	/**

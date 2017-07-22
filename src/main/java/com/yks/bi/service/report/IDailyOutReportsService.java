@@ -15,25 +15,31 @@ public interface IDailyOutReportsService {
 	List<DailyOutReports> selectByTimesAndPlatform(DailyOutReportsKey key);
 	
 	/**
-	 * 国内仓发货汇总数据
+	 * 国内仓发货汇总数据 旧
 	 * @return
 	 */
 	List<DailyOutReports> selectSumDomesticWarehouseShipment(String startDate,String endDate);
 	/**
-	 * 国内仓各平台发货汇总
+	 * 国内仓各平台发货汇总 旧
 	 * @param key
 	 * @return
 	 */
 	List<DailyOutReports> selectPlatformDomesticWarehouseShipment(DailyOutReportsKey key);
 
 	/**
-	 * 各平台发货汇总数据
-	 * @param startDate
-	 * @param endDate
-	 * @param platform
+	 * 国内仓发货汇总数据 表格
+	 * @param key
 	 * @return
 	 */
-	List<DailyOutReports> selectPlatformWarehouseShipmentCount(Date startDate, Date endDate, String platform);
+	List<DailyOutReports> selectPlatformWarehouseShipmentCount(DailyOutReportsKey key);
+	
+	
+	/**
+	 * 国内仓发货汇总数据 曲线图
+	 * @param key
+	 * @return
+	 */
+	List<DailyOutReports> selectPlatformWarehouseShipmentCountChart(DailyOutReportsKey key);
 
 	/**
 	 * 查询平台
@@ -41,5 +47,7 @@ public interface IDailyOutReportsService {
 	 * @return
 	 */
 	List<String> selectPlatforms(String platforms);
+
+	
 	
 }

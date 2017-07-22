@@ -34,12 +34,20 @@ public class DailyOutReportsServiceImpl implements IDailyOutReportsService {
 	}
 
 	@Override
-	public List<DailyOutReports> selectPlatformWarehouseShipmentCount(Date startDate, Date endDate, String platform) {
-		return dailyOutReportsMapper.selectPlatformWarehouseShipmentCount(startDate, endDate, platform);
+	public List<DailyOutReports> selectPlatformWarehouseShipmentCount(DailyOutReportsKey key) {
+		return dailyOutReportsMapper.selectPlatformWarehouseShipmentCount(key);
 	}
 
+	@Override
+	public List<DailyOutReports> selectPlatformWarehouseShipmentCountChart(DailyOutReportsKey key) {
+		
+		return dailyOutReportsMapper.selectPlatformWarehouseShipmentCountChart(key);
+	}
+	
 	@Override
 	public List<String> selectPlatforms(String platforms) {
 		return dailyOutReportsMapper.selectPlatforms(platforms);
 	}
+
+	
 }

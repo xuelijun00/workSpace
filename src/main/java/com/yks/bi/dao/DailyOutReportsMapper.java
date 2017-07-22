@@ -1,6 +1,5 @@
 package com.yks.bi.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -42,8 +41,22 @@ public interface DailyOutReportsMapper {
 
     int updateByPrimaryKey(DailyOutReports record);
 
-	List<DailyOutReports> selectPlatformWarehouseShipmentCount(@Param("startDate")Date startDate, @Param("endDate")Date endDate, @Param("platform")String platform);
+    /**
+     * 国内仓各平台发货汇总 表格
+     * @param key
+     * @return
+     */
+	List<DailyOutReports> selectPlatformWarehouseShipmentCount(DailyOutReportsKey key);
+	
+	/**
+     * 国内仓各平台发货汇总 曲线图
+     * @param key
+     * @return
+     */
+	List<DailyOutReports> selectPlatformWarehouseShipmentCountChart(DailyOutReportsKey key);
 
 	List<String> selectPlatforms(@Param("platform")String platforms);
+
+
 
 }

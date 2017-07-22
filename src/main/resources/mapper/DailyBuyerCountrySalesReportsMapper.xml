@@ -31,11 +31,14 @@
 		<if test="platform != null and platform.length() > 0">
 			and platform = #{platform,jdbcType=VARCHAR}
 		</if>
+		<if test="buyerCountry != null and buyerCountry.length() > 0">
+			and buyer_country = #{buyerCountry,jdbcType=VARCHAR}
+		</if>
 		ORDER BY `report_date` DESC
 	</select>
 
 	<select id="selectNewPlatformAll" resultMap="BaseResultMap"
-		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReports">
+		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">
 		select
 		<include refid="Base_Column_List" />
 		from `dailybuyer_countrysalesreports`
@@ -49,6 +52,9 @@
 		<if test="endDate != null">
 	    <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
+		<if test="buyerCountry != null and buyerCountry.length() > 0">
+			and buyer_country = #{buyerCountry,jdbcType=VARCHAR}
+		</if>
 		ORDER BY `report_date` DESC
 	</select>
 
@@ -58,4 +64,25 @@
 		GROUP by `platform`
 	</select>
 
+	<select id="selectBuyerCountry" resultType="String" 
+		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">
+		SELECT `buyer_country` 
+		FROM `dailybuyer_countrysalesreports` 
+		WHERE 1=1
+		<if test="platform != null and platform.length() > 0">
+			and platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP by `buyer_country`
+	</select>
+	
+	<select id="selectNewPlatformBuyerCountry" resultType="String" 
+		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">
+		SELECT `buyer_country` 
+		FROM `dailybuyer_countrysalesreports` 
+		where platform like 'new%' and platform != 'new_newegg'
+		<if test="platform != null and platform.length() > 0">
+			and platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP by `buyer_country`
+	</select>
 </mapper>

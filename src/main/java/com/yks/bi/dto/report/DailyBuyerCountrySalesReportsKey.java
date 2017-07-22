@@ -9,11 +9,13 @@ public class DailyBuyerCountrySalesReportsKey {
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")  //转换reportDate的格式，+8个时区为中国的时区
 	private Date reportDate;
 
-    private String platform; //平台
+    private String platform;    //平台
     
     private String startDate;
     
     private String endDate;
+    
+    private String buyerCountry;//买家国家
     
    /* private Date reportDate1;
     
@@ -52,6 +54,14 @@ public class DailyBuyerCountrySalesReportsKey {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getBuyerCountry() {
+		return buyerCountry;
+	}
+
+	public void setBuyerCountry(String buyerCountry) {
+		this.buyerCountry = buyerCountry;
 	}
    
 }

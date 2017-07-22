@@ -25,6 +25,11 @@
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
+               <label>国家：</label>
+               <input id="buyerCountry_input" list="buyerCountry" />
+			   <datalist id="buyerCountry"></datalist>
+           </div>
+            <div class="form-group">
                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
@@ -47,10 +52,11 @@ var domesticData = [];
 function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
+	var buyerCountry = $("#buyerCountry_input").val();
 	/* if(type === 1){
 		return contextPath + '/report/dailyBuyerCountrySales/grid?platform=ebay&st=' + startDate + "&et=" + endDate;
 	}else{ */
-	return contextPath + '/report/dailyBuyerCountrySales/grid?platform=smt&startDate=' + startDate + "&endDate=" + endDate;
+	return contextPath + '/report/dailyBuyerCountrySales/grid?platform=smt&startDate=' + startDate + "&endDate=" + endDate + "&buyerCountry=" + buyerCountry;
 	/* } */
 }
 function queryData(){	
@@ -93,7 +99,20 @@ function exportData(){
         zIndex:3000
     });
 	
-	var series = [];
+	$.ajax({
+		url : contextPath + "/report/dailyBuyerCountrySales/buyerCountry?platform=smt",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#buyerCountry").empty();
+				for(var i=0;i<data.length;i++){
+					$("#buyerCountry").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
 	
 	common.grid({
 		title:"SMT买家国家交易数据"

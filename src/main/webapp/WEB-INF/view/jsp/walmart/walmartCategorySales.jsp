@@ -24,14 +24,13 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
-       
               <div class="form-group">
              <label>分类</label>
                         <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
                                _value=""/>
             </div>
             <div class="form-group">
-               <button type="button" onclick="refreshGridData()" class="btn btn-primary">查询</button>
+               <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -42,10 +41,9 @@
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
 		</div>
-        
+       
 </div>
 
-</div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
@@ -83,8 +81,7 @@ function exportData(){
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
-(function(){
-	
+(function(){	
 	$("#start_date").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-14"},
@@ -110,7 +107,7 @@ function exportData(){
 	common.grid({
 		title:"沃尔玛业务线每日品类销售数据"
 		,url:chartUrl
-		,colNames:[ '分类',  '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colNames:[ '分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 255}, 
             {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
