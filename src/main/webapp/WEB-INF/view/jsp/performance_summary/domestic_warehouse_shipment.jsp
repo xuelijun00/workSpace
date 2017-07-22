@@ -64,11 +64,11 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
-	var column = ['platform','reportDate1','orderNum','productTotalCny','netProfit','netProfitMargin'];
+	var column = ['platform','reportDate1','orderNum','productTotalCny','profit','netProfitMargin'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
-	var netProfit=[];//税后综合净利
+	var profit=[];//税后综合净利
 	var netProfitMargin=[];//税后综合利润率
 	var orderNum=[];//发货单数
 	var productTotalCny=[];//发货收入
@@ -83,7 +83,7 @@ function getChartData(chartUrl){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
 					categories.push(data[i].reportDate1);
-					netProfit.push(data[i].netProfit);
+					profit.push(data[i].profit);
 					netProfitMargin.push(data[i].netProfitMargin);
 					orderNum.push(data[i].orderNum);
 					productTotalCny.push(data[i].productTotalCny);
@@ -105,7 +105,7 @@ function getChartData(chartUrl){
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
 		         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
-		         {name: '税后综合净利',type: 'column',data:netProfit,tooltip: {valueSuffix: '' }},
+		         {name: '税后综合净利',type: 'column',data:profit,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
 	};
 }
@@ -136,7 +136,7 @@ function getChartData(chartUrl){
 		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
 		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
 		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'netProfit',index : 'netProfit',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
+		             {name : 'profit',index : 'profit',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
 		,sortname:"reportDate1"

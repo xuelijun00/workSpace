@@ -131,9 +131,9 @@ function exportGridData(type){
 	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利'];
 	var column;
 	if(type == 1){
-		column = ['manager','reportDate1','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
+		column = ['manager','reportDate1','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
 	}else{
-		column = ['manager','startDate','salesorderNum','orderNum','salesorderTotal','productTotalCny','netProfit'];
+		column = ['manager','startDate','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
 	}
 	var exportData = [];
 	$.ajax({
@@ -183,7 +183,7 @@ function exportGridData(type){
 		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}},
 		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
-		             {name : 'netProfit',index : 'netProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},]
+		             {name : 'profit',index : 'profit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},]
 		,sortname:"reportDate1"
 		,sortorder:"desc"
 		,pager:"pager1"
@@ -201,7 +201,7 @@ function exportGridData(type){
 		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		             {name : 'salesorderTotal',index : 'salesorderTotal',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		             {name : 'productTotalCny',index : 'productTotalCny',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		             {name : 'netProfit',index : 'netProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},]
+		             {name : 'profit',index : 'profit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},]
 		,sortname:"startDate"
 		,sortorder:"desc"
 		,pager:"pager2"
