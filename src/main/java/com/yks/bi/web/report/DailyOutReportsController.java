@@ -72,7 +72,7 @@ public class DailyOutReportsController {
 				e.printStackTrace();
 			}
 		}
-		PageHelper.orderBy("net_profit desc");
+		PageHelper.orderBy("profit desc");
 		return dailyOutReportsService.selectPlatformDomesticWarehouseShipment(key);
 	}
 	

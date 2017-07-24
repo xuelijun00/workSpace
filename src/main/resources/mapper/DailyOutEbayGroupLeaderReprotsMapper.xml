@@ -20,12 +20,13 @@
     <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
     <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
     <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     zhandian, report_date, platform, salesorder_num, salesorder_total, order_num, 
     unit_price, product_total_cny, product_refund, order_price, gross_profit, product_shipping, 
     platform_cost, material_cost, order_execution_fee, operating_cost, profit_margin, 
-    net_profit
+    net_profit, profit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
     select 

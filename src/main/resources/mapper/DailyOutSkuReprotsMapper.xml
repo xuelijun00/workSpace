@@ -9,18 +9,18 @@
     <result column="manager" property="manager" jdbcType="VARCHAR" />
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
     <result column="unit_price" property="unitPrice" jdbcType="REAL" />
-    <result column="product_total_cny" property="productTotalCny" jdbcType="INTEGER" />
-    <result column="product_refund" property="productRefund" jdbcType="INTEGER" />
-    <result column="order_price" property="orderPrice" jdbcType="INTEGER" />
-    <result column="gross_profit" property="grossProfit" jdbcType="INTEGER" />
-    <result column="product_shipping" property="productShipping" jdbcType="INTEGER" />
-    <result column="platform_cost" property="platformCost" jdbcType="INTEGER" />
-    <result column="material_cost" property="materialCost" jdbcType="INTEGER" />
-    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="INTEGER" />
-    <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
-    <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
-    <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
-    <result column="profit" property="profit" jdbcType="INTEGER" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
   </resultMap>
   <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
     insert into dailyoutskureprots (platform, sales_account, sku, 
@@ -32,10 +32,11 @@
       )
     values (#{platform,jdbcType=VARCHAR}, #{salesAccount,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
       #{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
-      #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=INTEGER}, #{productRefund,jdbcType=INTEGER}, 
-      #{orderPrice,jdbcType=INTEGER}, #{grossProfit,jdbcType=INTEGER}, #{productShipping,jdbcType=INTEGER}, 
-      #{platformCost,jdbcType=INTEGER}, #{materialCost,jdbcType=INTEGER}, #{orderExecutionFee,jdbcType=INTEGER}, 
-      #{operatingCost,jdbcType=INTEGER}, #{profitMargin,jdbcType=INTEGER}, #{netProfit,jdbcType=INTEGER}
+      #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=DOUBLE}, #{productRefund,jdbcType=DOUBLE}, 
+      #{orderPrice,jdbcType=DOUBLE}, #{grossProfit,jdbcType=DOUBLE}, #{productShipping,jdbcType=DOUBLE}, 
+      #{platformCost,jdbcType=DOUBLE}, #{materialCost,jdbcType=DOUBLE}, #{orderExecutionFee,jdbcType=DOUBLE}, 
+      #{operatingCost,jdbcType=DOUBLE}, #{profitMargin,jdbcType=DOUBLE}, #{netProfit,jdbcType=DOUBLE},
+      #{profit,jdbcType=DOUBLE}
       )
   </insert>
   
@@ -164,40 +165,40 @@
         #{unitPrice,jdbcType=REAL},
       </if>
       <if test="productTotalCny != null" >
-        #{productTotalCny,jdbcType=INTEGER},
+        #{productTotalCny,jdbcType=DOUBLE},
       </if>
       <if test="productRefund != null" >
-        #{productRefund,jdbcType=INTEGER},
+        #{productRefund,jdbcType=DOUBLE},
       </if>
       <if test="orderPrice != null" >
-        #{orderPrice,jdbcType=INTEGER},
+        #{orderPrice,jdbcType=DOUBLE},
       </if>
       <if test="grossProfit != null" >
-        #{grossProfit,jdbcType=INTEGER},
+        #{grossProfit,jdbcType=DOUBLE},
       </if>
       <if test="productShipping != null" >
-        #{productShipping,jdbcType=INTEGER},
+        #{productShipping,jdbcType=DOUBLE},
       </if>
       <if test="platformCost != null" >
-        #{platformCost,jdbcType=INTEGER},
+        #{platformCost,jdbcType=DOUBLE},
       </if>
       <if test="materialCost != null" >
-        #{materialCost,jdbcType=INTEGER},
+        #{materialCost,jdbcType=DOUBLE},
       </if>
       <if test="orderExecutionFee != null" >
-        #{orderExecutionFee,jdbcType=INTEGER},
+        #{orderExecutionFee,jdbcType=DOUBLE},
       </if>
       <if test="operatingCost != null" >
-        #{operatingCost,jdbcType=INTEGER},
+        #{operatingCost,jdbcType=DOUBLE},
       </if>
       <if test="profitMargin != null" >
-        #{profitMargin,jdbcType=INTEGER},
+        #{profitMargin,jdbcType=DOUBLE},
       </if>
       <if test="netProfit != null" >
-        #{netProfit,jdbcType=INTEGER},
+        #{netProfit,jdbcType=DOUBLE},
       </if>
       <if test="profit != null" >
-        #{profit,jdbcType=INTEGER},
+        #{profit,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>

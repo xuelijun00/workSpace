@@ -7,24 +7,24 @@
     <id column="zhuzhandian" property="zhuzhandian" jdbcType="VARCHAR" />
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
     <result column="unit_price" property="unitPrice" jdbcType="REAL" />
-    <result column="product_total_cny" property="productTotalCny" jdbcType="REAL" />
-    <result column="product_refund" property="productRefund" jdbcType="INTEGER" />
-    <result column="order_price" property="orderPrice" jdbcType="INTEGER" />
-    <result column="gross_profit" property="grossProfit" jdbcType="INTEGER" />
-    <result column="product_shipping" property="productShipping" jdbcType="INTEGER" />
-    <result column="platform_cost" property="platformCost" jdbcType="INTEGER" />
-    <result column="material_cost" property="materialCost" jdbcType="INTEGER" />
-    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="INTEGER" />
-    <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
-    <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
-    <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
     <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
-    <result column="profit" property="profit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
     platform, report_date, zhuzhandian, order_num, unit_price, product_total_cny, product_refund, 
     order_price, gross_profit, product_shipping, platform_cost, material_cost, order_execution_fee, 
-    operating_cost, profit_margin, net_profit, net_profit_margin,profit
+    operating_cost, profit_margin, net_profit, net_profit_margin, profit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.EbayDailyOutZhiYouReprotsKey" >
     select 
@@ -57,13 +57,13 @@
       product_refund, order_price, gross_profit, 
       product_shipping, platform_cost, material_cost, 
       order_execution_fee, operating_cost, profit_margin, 
-      net_profit, net_profit_margin)
+      net_profit, net_profit_margin, profit)
     values (#{platform,jdbcType=VARCHAR}, #{reportDate,jdbcType=DATE}, #{zhuzhandian,jdbcType=VARCHAR}, 
-      #{orderNum,jdbcType=INTEGER}, #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=REAL}, 
-      #{productRefund,jdbcType=INTEGER}, #{orderPrice,jdbcType=INTEGER}, #{grossProfit,jdbcType=INTEGER}, 
-      #{productShipping,jdbcType=INTEGER}, #{platformCost,jdbcType=INTEGER}, #{materialCost,jdbcType=INTEGER}, 
-      #{orderExecutionFee,jdbcType=INTEGER}, #{operatingCost,jdbcType=INTEGER}, #{profitMargin,jdbcType=INTEGER}, 
-      #{netProfit,jdbcType=INTEGER}, #{netProfitMargin,jdbcType=REAL})
+      #{orderNum,jdbcType=INTEGER}, #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=DOUBLE}, 
+      #{productRefund,jdbcType=DOUBLE}, #{orderPrice,jdbcType=DOUBLE}, #{grossProfit,jdbcType=DOUBLE}, 
+      #{productShipping,jdbcType=DOUBLE}, #{platformCost,jdbcType=DOUBLE}, #{materialCost,jdbcType=DOUBLE}, 
+      #{orderExecutionFee,jdbcType=DOUBLE}, #{operatingCost,jdbcType=DOUBLE}, #{profitMargin,jdbcType=DOUBLE}, 
+      #{netProfit,jdbcType=DOUBLE}, #{netProfitMargin,jdbcType=REAL}, #{profit,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.yks.bi.dto.report.EbayDailyOutZhiYouReprots" >
     insert into ebaydailyoutzhiyoureprots
@@ -119,6 +119,9 @@
       <if test="netProfitMargin != null" >
         net_profit_margin,
       </if>
+      <if test="profit != null" >
+        profit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="platform != null" >
@@ -137,40 +140,43 @@
         #{unitPrice,jdbcType=REAL},
       </if>
       <if test="productTotalCny != null" >
-        #{productTotalCny,jdbcType=REAL},
+        #{productTotalCny,jdbcType=DOUBLE},
       </if>
       <if test="productRefund != null" >
-        #{productRefund,jdbcType=INTEGER},
+        #{productRefund,jdbcType=DOUBLE},
       </if>
       <if test="orderPrice != null" >
-        #{orderPrice,jdbcType=INTEGER},
+        #{orderPrice,jdbcType=DOUBLE},
       </if>
       <if test="grossProfit != null" >
-        #{grossProfit,jdbcType=INTEGER},
+        #{grossProfit,jdbcType=DOUBLE},
       </if>
       <if test="productShipping != null" >
-        #{productShipping,jdbcType=INTEGER},
+        #{productShipping,jdbcType=DOUBLE},
       </if>
       <if test="platformCost != null" >
-        #{platformCost,jdbcType=INTEGER},
+        #{platformCost,jdbcType=DOUBLE},
       </if>
       <if test="materialCost != null" >
-        #{materialCost,jdbcType=INTEGER},
+        #{materialCost,jdbcType=DOUBLE},
       </if>
       <if test="orderExecutionFee != null" >
-        #{orderExecutionFee,jdbcType=INTEGER},
+        #{orderExecutionFee,jdbcType=DOUBLE},
       </if>
       <if test="operatingCost != null" >
-        #{operatingCost,jdbcType=INTEGER},
+        #{operatingCost,jdbcType=DOUBLE},
       </if>
       <if test="profitMargin != null" >
-        #{profitMargin,jdbcType=INTEGER},
+        #{profitMargin,jdbcType=DOUBLE},
       </if>
       <if test="netProfit != null" >
-        #{netProfit,jdbcType=INTEGER},
+        #{netProfit,jdbcType=DOUBLE},
       </if>
       <if test="netProfitMargin != null" >
         #{netProfitMargin,jdbcType=REAL},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -184,40 +190,43 @@
         unit_price = #{unitPrice,jdbcType=REAL},
       </if>
       <if test="productTotalCny != null" >
-        product_total_cny = #{productTotalCny,jdbcType=REAL},
+        product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
       </if>
       <if test="productRefund != null" >
-        product_refund = #{productRefund,jdbcType=INTEGER},
+        product_refund = #{productRefund,jdbcType=DOUBLE},
       </if>
       <if test="orderPrice != null" >
-        order_price = #{orderPrice,jdbcType=INTEGER},
+        order_price = #{orderPrice,jdbcType=DOUBLE},
       </if>
       <if test="grossProfit != null" >
-        gross_profit = #{grossProfit,jdbcType=INTEGER},
+        gross_profit = #{grossProfit,jdbcType=DOUBLE},
       </if>
       <if test="productShipping != null" >
-        product_shipping = #{productShipping,jdbcType=INTEGER},
+        product_shipping = #{productShipping,jdbcType=DOUBLE},
       </if>
       <if test="platformCost != null" >
-        platform_cost = #{platformCost,jdbcType=INTEGER},
+        platform_cost = #{platformCost,jdbcType=DOUBLE},
       </if>
       <if test="materialCost != null" >
-        material_cost = #{materialCost,jdbcType=INTEGER},
+        material_cost = #{materialCost,jdbcType=DOUBLE},
       </if>
       <if test="orderExecutionFee != null" >
-        order_execution_fee = #{orderExecutionFee,jdbcType=INTEGER},
+        order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
       </if>
       <if test="operatingCost != null" >
-        operating_cost = #{operatingCost,jdbcType=INTEGER},
+        operating_cost = #{operatingCost,jdbcType=DOUBLE},
       </if>
       <if test="profitMargin != null" >
-        profit_margin = #{profitMargin,jdbcType=INTEGER},
+        profit_margin = #{profitMargin,jdbcType=DOUBLE},
       </if>
       <if test="netProfit != null" >
-        net_profit = #{netProfit,jdbcType=INTEGER},
+        net_profit = #{netProfit,jdbcType=DOUBLE},
       </if>
       <if test="netProfitMargin != null" >
         net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
       </if>
     </set>
     where platform = #{platform,jdbcType=VARCHAR}
@@ -228,18 +237,19 @@
     update ebaydailyoutzhiyoureprots
     set order_num = #{orderNum,jdbcType=INTEGER},
       unit_price = #{unitPrice,jdbcType=REAL},
-      product_total_cny = #{productTotalCny,jdbcType=REAL},
-      product_refund = #{productRefund,jdbcType=INTEGER},
-      order_price = #{orderPrice,jdbcType=INTEGER},
-      gross_profit = #{grossProfit,jdbcType=INTEGER},
-      product_shipping = #{productShipping,jdbcType=INTEGER},
-      platform_cost = #{platformCost,jdbcType=INTEGER},
-      material_cost = #{materialCost,jdbcType=INTEGER},
-      order_execution_fee = #{orderExecutionFee,jdbcType=INTEGER},
-      operating_cost = #{operatingCost,jdbcType=INTEGER},
-      profit_margin = #{profitMargin,jdbcType=INTEGER},
-      net_profit = #{netProfit,jdbcType=INTEGER},
-      net_profit_margin = #{netProfitMargin,jdbcType=REAL}
+      product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      product_refund = #{productRefund,jdbcType=DOUBLE},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      product_shipping = #{productShipping,jdbcType=DOUBLE},
+      platform_cost = #{platformCost,jdbcType=DOUBLE},
+      material_cost = #{materialCost,jdbcType=DOUBLE},
+      order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      net_profit = #{netProfit,jdbcType=DOUBLE},
+      net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      profit = #{profit,jdbcType=DOUBLE}  
     where platform = #{platform,jdbcType=VARCHAR}
       and report_date = #{reportDate,jdbcType=DATE}
       and zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
