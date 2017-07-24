@@ -40,6 +40,8 @@ public class DailyOutSkuReprots {
     private Integer profitMargin;
 
     private Integer netProfit;
+    
+    private Integer profit; //税后综合净利
 
     private String startDate;
     private String endDate;
@@ -213,4 +215,14 @@ public class DailyOutSkuReprots {
     public void setNetProfit(Integer netProfit) {
         this.netProfit = netProfit;
     }
+
+
+	public Integer getProfit() {
+		return profit;
+	}
+
+
+	public void setProfit(Integer profit) {
+		this.profit = profit;
+	}
 }

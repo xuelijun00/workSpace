@@ -40,6 +40,8 @@ public class DailyOutManagerSumReprots extends DailyOutManagerSumReprotsKey {
     private Integer profitMargin;//边际利润
 
     private Integer netProfit;//税前综合净利
+    
+    private Integer profit;//税后综合净利
 
     public Integer getSalesorderNum() {
         return salesorderNum;
@@ -160,4 +162,12 @@ public class DailyOutManagerSumReprots extends DailyOutManagerSumReprotsKey {
     public void setNetProfit(Integer netProfit) {
         this.netProfit = netProfit;
     }
+
+	public Integer getProfit() {
+		return profit;
+	}
+
+	public void setProfit(Integer profit) {
+		this.profit = profit;
+	}
 }

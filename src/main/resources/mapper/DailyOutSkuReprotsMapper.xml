@@ -20,6 +20,7 @@
     <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
     <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
     <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
   </resultMap>
   <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
     insert into dailyoutskureprots (platform, sales_account, sku, 
@@ -27,7 +28,7 @@
       unit_price, product_total_cny, product_refund, 
       order_price, gross_profit, product_shipping, 
       platform_cost, material_cost, order_execution_fee, 
-      operating_cost, profit_margin, net_profit
+      operating_cost, profit_margin, net_profit, profit
       )
     values (#{platform,jdbcType=VARCHAR}, #{salesAccount,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
       #{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
@@ -43,7 +44,7 @@
   	select `platform`, `sales_account`, `sku`, `report_date`, `manager`, `order_num`, 
 		  	`unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
 		  	 `product_shipping`, `platform_cost`, `material_cost`,
-		  	 `order_execution_fee`, `operating_cost`, `profit_margin`, `net_profit`
+		  	 `order_execution_fee`, `operating_cost`, `profit_margin`, `profit`, `net_profit`
   	from dailyoutskureprots_new
 	where 1=1
 	<if test="startDate != null and startDate.length() > 0" >
@@ -136,6 +137,9 @@
       <if test="netProfit != null" >
         net_profit,
       </if>
+      <if test="profit != null" >
+        profit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="platform != null" >
@@ -191,6 +195,9 @@
       </if>
       <if test="netProfit != null" >
         #{netProfit,jdbcType=INTEGER},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

@@ -37,7 +37,7 @@
   
   <!--国内仓发货汇总   -->
   <select id="selectSumDomesticWarehouseShipment" resultMap="BaseResultMap">
-  	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin from dailyoutreprots
+  	select platform,report_date,order_num,product_total_cny,profit,net_profit_margin from dailyoutreprots
 	where platform = 'a_ll'
 	<if test="startDate != null and startDate.length() > 0" >
        and report_date >= #{startDate}
@@ -88,7 +88,7 @@
   
   <!--各平台国内仓发货汇总数据  -->
   <select id="selectPlatformDomesticWarehouseShipment" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
-  	select platform,report_date,order_num,product_total_cny,net_profit,net_profit_margin from dailyoutreprots
+  	select platform,report_date,order_num,product_total_cny,profit,net_profit_margin from dailyoutreprots
 	where platform != 'a_ll' and platform != ''
 	<if test="reportDate != null " >
        and report_date = #{reportDate}

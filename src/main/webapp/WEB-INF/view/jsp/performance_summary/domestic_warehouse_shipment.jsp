@@ -64,7 +64,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
-	var column = ['platform','reportDate1','orderNum','productTotalCny','profit','netProfitMargin'];
+	var column = ['platform','reportDate','orderNum','productTotalCny','profit','netProfitMargin'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -82,7 +82,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-					categories.push(data[i].reportDate1);
+					categories.push(data[i].reportDate);
 					profit.push(data[i].profit);
 					netProfitMargin.push(data[i].netProfitMargin);
 					orderNum.push(data[i].orderNum);
@@ -133,13 +133,13 @@ function getChartData(chartUrl){
 		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'platform',index : 'platform',width : 80}, 
-		             {name : 'reportDate1',index : 'reportDate1',width : 105}, 
+		             {name : 'reportDate',index : 'reportDate',width : 105}, 
 		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
 		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'profit',index : 'profit',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 	});
 })();

@@ -21,11 +21,12 @@
     <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
     <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
     <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     platform, report_date, manager, salesorder_num, salesorder_total, order_num, unit_price, 
     product_total_cny, product_refund, order_price, gross_profit, product_shipping, platform_cost, 
-    material_cost, order_execution_fee, operating_cost, profit_margin, net_profit
+    material_cost, order_execution_fee, operating_cost, profit_margin, net_profit, profit
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutManagerSumReprotsKey" >
     select 
@@ -56,7 +57,7 @@
   </select>
   <!-- 根据条件查询每周业绩 -->
   <select id="selectManagerAchievementByWeek" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutManagerSumReprotsKey" >
-    select manager,YEARWEEK(report_date,1) startDate,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny)product_total_cny,sum(net_profit)net_profit
+    select manager,YEARWEEK(report_date,1) startDate,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny) product_total_cny,sum(profit) profit
 	from dailyoutmanagerhuizongreprots  
     where 1=1
     <if test="platform != null">
@@ -96,7 +97,7 @@
       unit_price, product_total_cny, product_refund, 
       order_price, gross_profit, product_shipping, 
       platform_cost, material_cost, order_execution_fee, 
-      operating_cost, profit_margin, net_profit
+      operating_cost, profit_margin, net_profit, profit
       )
     values (#{platform,jdbcType=VARCHAR}, #{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, 
       #{salesorderNum,jdbcType=INTEGER}, #{salesorderTotal,jdbcType=REAL}, #{orderNum,jdbcType=INTEGER}, 
@@ -163,6 +164,9 @@
       <if test="netProfit != null" >
         net_profit,
       </if>
+      <if test="profit != null" >
+        profit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="platform != null" >
@@ -219,6 +223,9 @@
       <if test="netProfit != null" >
         #{netProfit,jdbcType=INTEGER},
       </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.DailyOutManagerSumReprots" >
@@ -269,6 +276,9 @@
       <if test="netProfit != null" >
         net_profit = #{netProfit,jdbcType=INTEGER},
       </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=INTEGER},
+      </if>
     </set>
     where platform = #{platform,jdbcType=VARCHAR}
       and report_date = #{reportDate,jdbcType=DATE}
@@ -291,6 +301,7 @@
       operating_cost = #{operatingCost,jdbcType=INTEGER},
       profit_margin = #{profitMargin,jdbcType=INTEGER},
       net_profit = #{netProfit,jdbcType=INTEGER}
+      profit = #{profit,jdbcType=INTEGER}
     where platform = #{platform,jdbcType=VARCHAR}
       and report_date = #{reportDate,jdbcType=DATE}
       and manager = #{manager,jdbcType=VARCHAR}
