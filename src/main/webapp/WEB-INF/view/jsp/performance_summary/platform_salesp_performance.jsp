@@ -57,9 +57,9 @@ function getUrl(type){
 	var platform = $("#platform").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/sales_performance/grid?st=' + startDate + "&et=" + endDate;
+		url = contextPath + '/report/sales_performance/grid?startDate=' + startDate + "&endDate=" + endDate;
 	}else{
-		url = contextPath + '/report/sales_performance/chart?st=' + startDate + "&et=" + endDate;
+		url = contextPath + '/report/sales_performance/chart?startDate=' + startDate + "&endDate=" + endDate;
 	}
 	if(platform !== 'all'){
 		url += "&business=" + platform;
@@ -75,7 +75,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "各平台每日销售报表" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
-	var column = ['reportDate1','business','sales','orders'];
+	var column = ['reportDate','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -91,7 +91,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate1 + "<br/>" + data[i].business);
+				  reportDate.push(data[i].reportDate + "<br/>" + data[i].business);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -143,11 +143,11 @@ function getChartData(chartUrl){
 		title:"各平台每日销售报表"
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
-		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
+		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 	});
 })();

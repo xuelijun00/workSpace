@@ -31,14 +31,17 @@ public class ISalespPerformanceServiceTest {
 	
 	@Test
 	public void selectAll() throws ParseException {
-		
+		Dailysalesskureports dailysalesskureports = new Dailysalesskureports();
 		String strDate = "2017-05-09 00:00:00";
 		String etrDate = "2017-05-12 00:00:00";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(strDate);
 		Date date1 = sdf.parse(etrDate);
+		dailysalesskureports.setBusiness("Ebay_US");
+		dailysalesskureports.setStartDate(strDate);
+		dailysalesskureports.setEndDate(etrDate);
 		
-        List<Dailysalesskureports> list = test.selectskuAll("Ebay_US", date, date1, null, null);
+        List<Dailysalesskureports> list = test.selectskuAll(dailysalesskureports);
         for (int i = 0; i < list.size(); i++) {  
             System.out.println(list.get(i));  
         }  

@@ -1,14 +1,14 @@
 package com.yks.bi.service.report.impl;
 
-import com.yks.bi.dao.SalesPerformanceMapper;
-import com.yks.bi.dto.report.SalesPerformance;
-import com.yks.bi.service.report.ISalespPerformanceService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import com.yks.bi.dao.SalesPerformanceMapper;
+import com.yks.bi.dto.report.SalesPerformance;
+import com.yks.bi.dto.report.SalesPerformanceKey;
+import com.yks.bi.service.report.ISalespPerformanceService;
 
 /**
  * Created by Administrator on 2017/5/8.
@@ -22,17 +22,17 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
      *  销售业绩整体报表  表格数据, 柱状图
      */
     @Override
-    public List<SalesPerformance> selectAll(String business,Date startDate,Date endDate) {
-    	return isales.selectAll(business,startDate,endDate);
+    public List<SalesPerformance> selectAll(SalesPerformanceKey key) {
+    	return isales.selectAll(key);
     }
      
 	 @Override
-	 public List<SalesPerformance> selectnewAll(String business,Date startDate,Date endDate) {
-	 	return isales.selectnewAll(business,startDate,endDate);
+	 public List<SalesPerformance> selectnewAll(SalesPerformanceKey key) {
+	 	return isales.selectnewAll(key);
 	 }
 	@Override
-	public List<String> selectPlatforms(String business) {
-		return isales.selectPlatforms(business);
+	public List<String> selectPlatforms(SalesPerformanceKey key) {
+		return isales.selectPlatforms(key);
 	}
 	 
 	@Override
@@ -46,8 +46,8 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
 	}
 
 	@Override
-	public List<SalesPerformance> selectAllCount(String business, Date startDate, Date endDate) {
-		return isales.selectAllCount(business,startDate,endDate);
+	public List<SalesPerformance> selectAllCount(SalesPerformanceKey key) {
+		return isales.selectAllCount(key);
 	}
 
 }

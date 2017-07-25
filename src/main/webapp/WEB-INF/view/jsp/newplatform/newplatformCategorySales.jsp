@@ -63,7 +63,7 @@ function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
-	var chartUrl = contextPath + '/report/ebay_domestic/categorynew/grid?st=' + startDate + '&et=' + endDate+ "&category=" + category;
+	var chartUrl = contextPath + '/report/ebay_domestic/categorynew/grid?startDate=' + startDate + '&endDate=' + endDate+ "&category=" + category;
 	if(platform !== 'all'){chartUrl += "&business=" + platform;}
 	return chartUrl;
 }
@@ -119,7 +119,7 @@ function getUrl(){
 		
 		var fileName = "新平台业务线每日分类销售数据.csv";
 		var title = [ '分类','业务线', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-		var column = ['category','business','reportDate1','orders','quantity','sales'];
+		var column = ['category','business','reportDate','orders','quantity','sales'];
 		
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
@@ -131,12 +131,12 @@ function getUrl(){
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 215}, 
 			{name : 'business',index : 'business',width : 175}, 
-            {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
+            {name : 'reportDate',index : 'reportDate',align : "right",width : 175}, 
             {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 	});
 })();

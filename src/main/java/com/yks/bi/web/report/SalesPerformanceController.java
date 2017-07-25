@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yks.bi.dto.report.SalesPerformance;
+import com.yks.bi.dto.report.SalesPerformanceKey;
 import com.yks.bi.service.report.ISalespPerformanceService;
 import com.yks.bi.web.vo.FilterDto;
 import com.yks.bi.web.vo.GridModel;
@@ -45,8 +46,8 @@ public class SalesPerformanceController {
      * @throws JsonProcessingException 
      */                          
     @RequestMapping(value = "/sales_performance/grid" ,method = RequestMethod.GET)
-    public GridModel dailysalesMethod(String business,String st,String et,FilterDto filter) throws Exception{
-    	Date starttime = null;
+    public GridModel dailysalesMethod(SalesPerformanceKey key,FilterDto filter) throws Exception{
+    	/*Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
     	}
@@ -56,10 +57,10 @@ public class SalesPerformanceController {
     	}
     	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
     		filter.setSidx("report_date");
-    	}
+    	}*/
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<SalesPerformance> list = isale.selectAll(business,starttime,endtime);
+    	List<SalesPerformance> list = isale.selectAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
     	Map<String,Object> userdata = new HashMap<String,Object>();
     	int sumOrders = 0;
@@ -83,16 +84,16 @@ public class SalesPerformanceController {
      * @throws Exception
      */
     @RequestMapping(value = "/sales_performance/chart" ,method = RequestMethod.GET)
-    public List<SalesPerformance> chart(String business,String st,String et) throws Exception{
-    	Date starttime = null;
+    public List<SalesPerformance> chart(SalesPerformanceKey key) throws Exception{
+    	/*Date starttime = null;
     	if(StringUtils.isNotEmpty(st)){
     		starttime = DateUtils.parseDate(st, YYYYMMDD);
     	}
     	Date endtime = null;
     	if(StringUtils.isNotEmpty(et)){
     		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	return isale.selectAll(business,starttime,endtime);
+    	}*/
+    	return isale.selectAll(key);
     }
     
     /**
@@ -106,21 +107,10 @@ public class SalesPerformanceController {
      * @throws JsonProcessingException 
      */                          
     @RequestMapping(value = "/sales_performance/gridCount" ,method = RequestMethod.GET)
-    public GridModel dailysalesMethodCount(String business,String st,String et,FilterDto filter) throws Exception{
-    	Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-    		filter.setSidx("report_date");
-    	}
+    public GridModel dailysalesMethodCount(SalesPerformanceKey key,FilterDto filter) throws Exception{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<SalesPerformance> list = isale.selectAllCount(business,starttime,endtime);
+    	List<SalesPerformance> list = isale.selectAllCount(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
     	Map<String,Object> userdata = new HashMap<String,Object>();
     	int sumOrders = 0;
@@ -145,16 +135,8 @@ public class SalesPerformanceController {
      * @throws Exception
      */
     @RequestMapping(value = "/sales_performance/chartCount" ,method = RequestMethod.GET)
-    public List<SalesPerformance> chartCount(String business,String st,String et) throws Exception{
-    	Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	return isale.selectAllCount(business,starttime,endtime);
+    public List<SalesPerformance> chartCount(SalesPerformanceKey key) throws Exception{
+    	return isale.selectAllCount(key);
     }
     
     /**
@@ -162,8 +144,8 @@ public class SalesPerformanceController {
      * @return
      */
     @RequestMapping(value = "/sales_performance/platforms" ,method = RequestMethod.GET)
-    public List<String> platforms(String business){
-        return isale.selectPlatforms(business);
+    public List<String> platforms(SalesPerformanceKey key){
+        return isale.selectPlatforms(key);
     }
     
     /**
@@ -184,21 +166,10 @@ public class SalesPerformanceController {
      * @throws Exception
      */
     @RequestMapping(value = "/sales_performance/new/grid" ,method = RequestMethod.GET)
-    public GridModel dailysalesnewMethod(String business,String st,String et,FilterDto filter) throws Exception{
-    	Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-    		filter.setSidx("report_date");
-    	}
+    public GridModel dailysalesnewMethod(SalesPerformanceKey key,FilterDto filter) throws Exception{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<SalesPerformance> list = isale.selectnewAll(business,starttime,endtime);
+    	List<SalesPerformance> list = isale.selectnewAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
     	Map<String,Object> userdata = new HashMap<String,Object>();
     	int sumOrders = 0;
@@ -221,16 +192,8 @@ public class SalesPerformanceController {
      * @throws Exception
      */
     @RequestMapping(value = "/sales_performance/new/chart" ,method = RequestMethod.GET)
-    public List<SalesPerformance> newchart(String business,String st,String et) throws Exception{
-    	Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	return isale.selectnewAll(business,starttime,endtime);
+    public List<SalesPerformance> newchart(SalesPerformanceKey key) throws Exception{
+    	return isale.selectnewAll(key);
     }
     /**
      * 新平台

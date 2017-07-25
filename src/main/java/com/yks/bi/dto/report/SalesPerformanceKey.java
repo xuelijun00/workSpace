@@ -2,15 +2,21 @@ package com.yks.bi.dto.report;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SalesPerformanceKey {
+	@JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportDate;
-    private String reportDate1;
+    
+    private String startDate;
+    
+    private String endDate;
+    
+    /*private String reportDate1;
 
     public String getReportDate1() {
     	return this.getReportDate() == null?null:DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
-	}
+	}*/
 
 	private String business;
 
@@ -29,4 +35,20 @@ public class SalesPerformanceKey {
     public void setBusiness(String business) {
         this.business = business == null ? null : business.trim();
     }
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
 }

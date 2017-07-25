@@ -62,9 +62,9 @@ function getUrl(type){
 	var platform = $("#platform").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/sales_performance/new/grid?st=' + startDate + '&et=' + endDate;
+		url = contextPath + '/report/sales_performance/new/grid?startDate=' + startDate + '&endDate=' + endDate;
 	}else{
-		url = contextPath + '/report/sales_performance/new/chart?st=' + startDate + '&et=' + endDate;
+		url = contextPath + '/report/sales_performance/new/chart?startDate=' + startDate + '&endDate=' + endDate;
 	}
 	if(platform !== 'all'){url += "&business=" + platform;}
 	return url;
@@ -83,7 +83,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].business + "<br/>" + data[i].reportDate1);
+				  reportDate.push(data[i].business + "<br/>" + data[i].reportDate);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -139,7 +139,7 @@ function getChartData(chartUrl){
 		var platform = $("#platform").val();
 		var fileName = "新平台业务线每日销售数据" + startDate +"-" +platform + ".csv";
 		var title = [ '报表时间', '平台名称','销售额', '订单数'];
-		var column = ['reportDate1','business','sales','orders'];
+		var column = ['reportDate','business','sales','orders'];
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
 	
@@ -148,11 +148,11 @@ function getChartData(chartUrl){
 		title:"新平台业务线每日销售数据"
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
-		,colModel:[ {name : 'reportDate1',index : 'reportDate1',width : 255}, 
+		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 		,footerrow:true
 		,userDataOnFooter:true

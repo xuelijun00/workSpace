@@ -51,11 +51,11 @@
 				or business ='ebay')
 			</otherwise>
 		</choose>
-		<if test="start_date != null">
-    			<![CDATA[and report_date >= #{start_date,jdbcType=DATE}]]>
+		<if test="startDate != null">
+    			<![CDATA[and report_date >= #{startDate,jdbcType=DATE}]]>
 		</if>
-		<if test="end_date != null">
-	  		 	 <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+		<if test="endDate != null">
+	  		 	 <![CDATA[and reportDate <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		GROUP BY business
 	</select>
@@ -68,11 +68,11 @@
 		<if test="business != null">
 			and business = #{business,jdbcType=VARCHAR}
 		</if>
-		<if test="start_date != null">
-			and report_date >= #{start_date,jdbcType=DATE}
+		<if test="startDate != null">
+			and report_date >= #{startDate,jdbcType=DATE}
 		</if>
-		<if test="end_date != null">
-			    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+		<if test="endDate != null">
+			    <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		order by business,report_date
 	</select>
@@ -86,11 +86,11 @@
 		<if test="business != null">
 			and business = #{business,jdbcType=VARCHAR}
 		</if>
-		<if test="start_date != null">
-			and report_date >= #{start_date,jdbcType=DATE}
+		<if test="startDate != null">
+			and report_date >= #{startDate,jdbcType=DATE}
 		</if>
-		<if test="end_date != null">
-	    <![CDATA[and report_date <= #{end_date,jdbcType=DATE}]]>
+		<if test="endDate != null">
+	    <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		order by report_date
 	</select>

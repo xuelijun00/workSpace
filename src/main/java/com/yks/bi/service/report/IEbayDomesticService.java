@@ -1,10 +1,10 @@
 package com.yks.bi.service.report;
 
-import com.yks.bi.dto.report.Dailysalescategoryreports;
-import com.yks.bi.dto.report.Dailysalesskureports;
-
-import java.util.Date;
 import java.util.List;
+
+import com.yks.bi.dto.report.Dailysalescategoryreports;
+import com.yks.bi.dto.report.DailysalescategoryreportsKey;
+import com.yks.bi.dto.report.Dailysalesskureports;
 
 /**
  * Created by Administrator on 2017/5/8.
@@ -14,35 +14,34 @@ public interface IEbayDomesticService {
 	 /**
      *  销售业绩整体报表 
      */
-	List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String category);
+	List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key);
 	
-	List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectskuAll(Dailysalesskureports record);
 	
 	 //查询ebaydailysalesskureports表中的所有信息
-	List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku);
-	
-	List<Dailysalesskureports> selectSmtSku(Date st, Date et, String sku, String oldsku);
+	List<Dailysalesskureports> selectEbay(Dailysalesskureports record);
+	List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectWishSku(Date st, Date et, String sku, String oldsku);
+	List<Dailysalesskureports> selectWishSku(Dailysalesskureports record);
 
 	
-	List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category);
+	List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key);
 
 	List<String> selectnewPlatforms();
 	
 	
-	List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectskunewAll(Dailysalesskureports record);
 
 	List<String> selectskuPlatforms();
 
-	List<Dailysalesskureports> selectskuAllSum(String business,Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record);
+	
+	List<Dailysalesskureports> selectWishSkuSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectWishSkuSum(Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectSmtSkuSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectSmtSkuSum(Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectAllSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectAllSum(String business,Date st,Date et,String sku,String oldsku);
-
-	List<Dailysalesskureports> selectEbaySum(String business,Date st,Date et,String sku,String oldsku);
+	List<Dailysalesskureports> selectEbaySum(Dailysalesskureports record);
 
 }

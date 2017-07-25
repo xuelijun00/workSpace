@@ -3,6 +3,7 @@ package com.yks.bi.service.report.impl;
 import com.yks.bi.dao.DailysalescategoryreportsMapper;
 import com.yks.bi.dao.DailysalesskureportsMapper;
 import com.yks.bi.dto.report.Dailysalescategoryreports;
+import com.yks.bi.dto.report.DailysalescategoryreportsKey;
 import com.yks.bi.dto.report.Dailysalesskureports;
 import com.yks.bi.service.report.IEbayDomesticService;
 
@@ -27,49 +28,48 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
      *  ebay国内仓每日销售额  表格数据, 柱状图
      */
    @Override
-    public List<Dailysalescategoryreports> selectcategoryAll(String business,Date st,Date et,String category) {
+    public List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key) {
        	 
-           return isalescategory.selectAll(business, st, et, category);
+           return isalescategory.selectAll(key);
         }
     
     @Override
-    public List<Dailysalescategoryreports> selectcategorynewAll(String business,Date st,Date et,String category) {
+    public List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key) {
     	
-           return isalescategory.selectnewAll(business, st, et,category);
+           return isalescategory.selectnewAll(key);
         }  
     
     //查询ebaydailysalesskureports表中的所有信息
     @Override
-    public List<Dailysalesskureports> selectEbay(String business,Date st,Date et,String sku,String oldsku) {
+    public List<Dailysalesskureports> selectEbay(Dailysalesskureports record) {
     
-        return isalessku.selectEbay(business, st, et, sku, oldsku);
+        return isalessku.selectEbay(record);
         
     }
     
     @Override
-	public List<Dailysalesskureports> selectSmtSku(Date st,Date et,String sku,String oldsku) {
+	public List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record) {
 	
-    	return isalessku.selectSmtSku(st, et, oldsku, oldsku);
+    	return isalessku.selectSmtSku(record);
 	}
     
     @Override
-   	public List<Dailysalesskureports> selectWishSku(Date st,Date et,String sku,String oldsku) {
+   	public List<Dailysalesskureports> selectWishSku(Dailysalesskureports record) {
    	
-       	return isalessku.selectWishSku(st, et, oldsku, oldsku);
+       	return isalessku.selectWishSku(record);
    	}
     
     @Override
-    public List<Dailysalesskureports> selectskuAll(String business,Date st,Date et,String sku,String oldsku) {
+    public List<Dailysalesskureports> selectskuAll(Dailysalesskureports record) {
     
-        return isalessku.selectAll(business, st, et, sku, oldsku);
+        return isalessku.selectAll(record);
     }
     
     @Override
-    public List<Dailysalesskureports> selectskunewAll(String business,Date st,Date et,String sku,String oldsku) {
+    public List<Dailysalesskureports> selectskunewAll(Dailysalesskureports record) {
     
-        return isalessku.selectskuAll(business, st, et, sku, oldsku);
+        return isalessku.selectskuAll(record);
     }
-    
     
 	@Override
 	public List<String> selectnewPlatforms() {
@@ -83,32 +83,30 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectskuAllSum(String business, Date st,Date et, String sku,
-			String oldsku) {
-		return isalessku.selectskuAllSum(business, st, et, sku, oldsku);
+	public List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record) {
+		return isalessku.selectskuAllSum(record);
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectWishSkuSum(Date st, Date et, String sku, String oldsku) {
-		return isalessku.selectWishSkuSum(st, et, oldsku, oldsku);
+	public List<Dailysalesskureports> selectWishSkuSum(Dailysalesskureports record) {
+		return isalessku.selectWishSkuSum(record);
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectSmtSkuSum(Date st, Date et, String sku, String oldsku) {
-		return isalessku.selectSmtSkuSum(st, et, oldsku, oldsku);
+	public List<Dailysalesskureports> selectSmtSkuSum(Dailysalesskureports record) {
+		return isalessku.selectSmtSkuSum(record);
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectAllSum(String business, Date st,Date et, String sku,String oldsku) {
+	public List<Dailysalesskureports> selectAllSum(Dailysalesskureports record) {
 		
-		return isalessku.selectAllSum(business, st, et, sku, oldsku);
+		return isalessku.selectAllSum(record);
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectEbaySum(String business, Date st, Date et, String sku, String oldsku) {
+	public List<Dailysalesskureports> selectEbaySum(Dailysalesskureports record) {
 		
-		return isalessku.selectEbaySum(business, st, et, sku, oldsku);
+		return isalessku.selectEbaySum(record);
 	}
-
 	
 }

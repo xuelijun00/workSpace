@@ -1,9 +1,6 @@
 package com.yks.bi.dao;
 
-import java.util.Date;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 import com.yks.bi.dto.report.SalesPerformance;
 import com.yks.bi.dto.report.SalesPerformanceKey;
@@ -18,19 +15,24 @@ public interface SalesPerformanceMapper {
 
     SalesPerformance selectByPrimaryKey(SalesPerformanceKey key);
 
-    List<SalesPerformance> selectnewAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    List<SalesPerformance> selectnewAll(SalesPerformanceKey key);
     
-    List<SalesPerformance> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    List<SalesPerformance> selectAll(SalesPerformanceKey key);
     
-    //查询数据并汇总
-    List<SalesPerformance> selectAllCount(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date);
+    /**
+     * 查询数据并汇总
+     * @return
+     */
+    List<SalesPerformance> selectAllCount(SalesPerformanceKey key);
+   
     /**
      * 查询所有平台
      * @return
      */
-    List<String> selectPlatforms(@Param("business")String business);
+    List<String> selectPlatforms(SalesPerformanceKey key);
      
     List<String> selectnewPlatforms();
+    
     /**
      * 国内仓平台
      * @return
@@ -41,7 +43,4 @@ public interface SalesPerformanceMapper {
 
     int updateByPrimaryKey(SalesPerformance record);
 
-	
-
-	
 }

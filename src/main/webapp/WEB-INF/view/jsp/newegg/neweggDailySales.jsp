@@ -50,9 +50,9 @@ function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	if(type === 1){
-		return contextPath + '/report/sales_performance/grid?business=new_newegg&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/sales_performance/grid?business=new_newegg&startDate=' + startDate + "&endDate=" + endDate;
 	}else{
-		return contextPath + '/report/sales_performance/chart?business=new_newegg&st=' + startDate + "&et=" + endDate;
+		return contextPath + '/report/sales_performance/chart?business=new_newegg&startDate=' + startDate + "&endDate=" + endDate;
 	}
 }
 function queryData(){
@@ -64,7 +64,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "newegg业务线每日销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
-	var column = ['reportDate1','business','sales','orders'];
+	var column = ['reportDate','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -81,7 +81,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate1);
+				  reportDate.push(data[i].reportDate);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -120,12 +120,12 @@ function getChartData(chartUrl){
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'reportDate1',index : 'reportDate1',width : 255}, 
+		             {name : 'reportDate',index : 'reportDate',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
 		           ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 		,footerrow:true
 		,userDataOnFooter:true

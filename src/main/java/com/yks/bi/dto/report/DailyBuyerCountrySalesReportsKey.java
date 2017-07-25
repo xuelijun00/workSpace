@@ -37,7 +37,7 @@ public class DailyBuyerCountrySalesReportsKey {
 	}
 
 	public void setPlatform(String platform) {
-		this.platform = platform;
+		this.platform = platform == null ? null : platform.trim();
 	}
 
 	public String getStartDate() {
@@ -61,7 +61,7 @@ public class DailyBuyerCountrySalesReportsKey {
 	}
 
 	public void setBuyerCountry(String buyerCountry) {
-		this.buyerCountry = buyerCountry;
+		this.buyerCountry = buyerCountry == null ? null : buyerCountry.trim();
 	}
    
 }

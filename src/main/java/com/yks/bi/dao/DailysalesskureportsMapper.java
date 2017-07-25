@@ -17,17 +17,17 @@ public interface DailysalesskureportsMapper {
 
     Dailysalesskureports selectByPrimaryKey(DailysalesskureportsKey key);  
 
-    List<Dailysalesskureports> selectAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+    List<Dailysalesskureports> selectAll(Dailysalesskureports record);
     
     
     //查询ebaydailysalesskureports表中的所有信息
-    List<Dailysalesskureports> selectEbay(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+    List<Dailysalesskureports> selectEbay(Dailysalesskureports record);
     
-    List<Dailysalesskureports> selectSmtSku(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+    List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record);
     
-    List<Dailysalesskureports> selectWishSku(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+    List<Dailysalesskureports> selectWishSku(Dailysalesskureports record);
     
-    List<Dailysalesskureports> selectskuAll(@Param("business")String business,@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+    List<Dailysalesskureports> selectskuAll(Dailysalesskureports record);
     
     List<String> selectskuPlatforms();
     
@@ -35,13 +35,13 @@ public interface DailysalesskureportsMapper {
 
     int updateByPrimaryKey(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectskuAllSum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
+	List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectWishSkuSum(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+	List<Dailysalesskureports> selectWishSkuSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectSmtSkuSum(@Param("start_date")Date start_date,@Param("end_date")Date end_date,@Param("sku")String sku,@Param("sku_old")String sku_old);
+	List<Dailysalesskureports> selectSmtSkuSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectAllSum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
+	List<Dailysalesskureports> selectAllSum(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectEbaySum(@Param("business")String business, @Param("start_date")Date start_date, @Param("end_date")Date end_date, @Param("sku")String sku, @Param("sku_old")String oldsku);
+	List<Dailysalesskureports> selectEbaySum(Dailysalesskureports record);
 }

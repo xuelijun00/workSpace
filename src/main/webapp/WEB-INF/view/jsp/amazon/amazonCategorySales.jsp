@@ -55,7 +55,7 @@ function queryData(){
 	var category = $('#category').val().trim();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&startDate=' + startDate + "&endDate=" + endDate+ "&category=" + category;	
 	common.refreshData(chartUrl,chart,operation);
 }
 function exportData(){
@@ -65,9 +65,9 @@ function exportData(){
 	var fileName = "Amazon业务线每日品类销售数据" + startDate +"-"+ endDate + ".csv";
 	
 	var	title = ['分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-	var	column = ['category','reportDate1','orders','quantity','sales'];
+	var	column = ['category','reportDate','orders','quantity','sales'];
 
-	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate+ "&category=" + category;	
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&startDate=' + startDate + "&endDate=" + endDate+ "&category=" + category;	
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -103,7 +103,7 @@ function exportData(){
 	var category = $('#category').val();
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&st=' + startDate + "&et=" + endDate;
+	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&startDate=' + startDate + "&endDate=" + endDate;
 	var series = [];
 	
 	common.grid({
@@ -112,12 +112,12 @@ function exportData(){
 		,colNames:[ '分类','日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 255}, 
-            {name : 'reportDate1',index : 'reportDate1',align : "right",width : 205}, 
+            {name : 'reportDate',index : 'reportDate',align : "right",width : 205}, 
             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 	});
 })();

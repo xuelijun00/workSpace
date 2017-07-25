@@ -74,9 +74,9 @@ function getUrl(type){
 	var platform = $("#platform").val();
 	var chartUrl = "";
 	if(type === 1){ 	
-		chartUrl = contextPath + '/report/ebay_domestic/skunew/grid?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;
+		chartUrl = contextPath + '/report/ebay_domestic/skunew/grid?startDate=' + startDate + '&endDate=' + endDate+ "&skuOld=" + oldsku+ "&sku=" + sku;
 	}else{
-		chartUrl = contextPath + '/report/ebay_domestic/skunew/chart?st=' + startDate + '&et=' + endDate+ "&oldsku=" + oldsku+ "&sku=" + sku;
+		chartUrl = contextPath + '/report/ebay_domestic/skunew/chart?startDate=' + startDate + '&endDate=' + endDate+ "&skuOld=" + oldsku+ "&sku=" + sku;
 	}
 	if(platform !== 'all'){chartUrl += "&business=" + platform;}
 	return chartUrl;
@@ -90,7 +90,7 @@ function exportData(){
 	var business = $("#platform").val();
 	var fileName = "newegg业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '业务线', 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-	var column = ['business', 'sku','skuOld','reportDate1','orders','quantity','sales'];
+	var column = ['business', 'sku','skuOld','reportDate','orders','quantity','sales'];
 	$.ajax({
 		url : getUrl(1),
 		cache : false,
@@ -196,7 +196,7 @@ function getChartData(chartUrl){
 		
 		var fileName = "新平台业务线每日sku销售数据.csv";
 		var title = ['业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-		var column = ['business','skuOld','reportDate1','orders','quantity','sales'];
+		var column = ['business','skuOld','reportDate','orders','quantity','sales'];
 		
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});*/
@@ -210,12 +210,12 @@ function getChartData(chartUrl){
 			{name : 'business',index : 'business',width : 175}, 
 			{name : 'sku',index : 'sku',width : 215}, 
             {name : 'skuOld',index : 'skuOld',width : 175}, 
-            {name : 'reportDate1',index : 'reportDate1',align : "right",width : 175}, 
+            {name : 'reportDate',index : 'reportDate',align : "right",width : 175}, 
             {name : 'orders',index : 'orders',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'quantity',index : 'quantity',sortable : "true",width : 145,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
             {name : 'sales',index : 'sales',sortable : "true",width : 155,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
 		           ]
-		,sortname:"reportDate1"
+		,sortname:"reportDate"
 		,sortorder:"desc"
 	});
 })();
