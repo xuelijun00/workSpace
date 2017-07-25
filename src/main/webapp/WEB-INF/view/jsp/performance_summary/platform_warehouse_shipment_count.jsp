@@ -74,6 +74,17 @@ function exportData(){
 	var title = [ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
 	var column = ['reportDate','platform','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
 	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];
+	$.ajax({
+		url : getUrl(1),
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.rows.length > 0){
+				platformData = data.rows;
+			}
+		}
+	});
 	exportDataToCSV('#list2',title,platformData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -91,7 +102,6 @@ function getChartData(chartUrl){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				platformData = data;
 				for(var i=0;i<data.length;i++){
 					categories.push(data[i].platform);
 					orderNum.push(data[i].orderNum);

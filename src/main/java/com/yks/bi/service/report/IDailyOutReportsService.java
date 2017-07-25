@@ -7,6 +7,7 @@ import com.yks.bi.dto.report.DailyOutReports;
 import com.yks.bi.dto.report.DailyOutReportsKey;
 
 public interface IDailyOutReportsService {
+	
 	/**
 	 * 各平台发货数据
 	 * @param key
@@ -15,10 +16,11 @@ public interface IDailyOutReportsService {
 	List<DailyOutReports> selectByTimesAndPlatform(DailyOutReportsKey key);
 	
 	/**
-	 * 国内仓发货汇总数据 旧
+	 * 国内仓发货汇总数据
 	 * @return
 	 */
-	List<DailyOutReports> selectSumDomesticWarehouseShipment(String startDate,String endDate);
+	List<DailyOutReports> selectSumDomesticWarehouseShipment(DailyOutReportsKey key);
+	
 	/**
 	 * 国内仓各平台发货汇总 旧
 	 * @param key

@@ -27,11 +27,14 @@ public class DailyOutReportsServiceTest {
 	
 	@Test
 	public void selectSumDomesticWarehouseShipmentTest(){
+		DailyOutReportsKey key = new DailyOutReportsKey();
 		String startDate = "2017-05-01";
 		String endDate = "2017-05-11";
+		key.setStartDate(startDate);
+		key.setEndDate(endDate);
 		PageHelper.startPage(1, 20, true);
 		PageHelper.orderBy("");
-		List<DailyOutReports> list = report.selectSumDomesticWarehouseShipment(startDate, endDate);
+		List<DailyOutReports> list = report.selectSumDomesticWarehouseShipment(key);
 		Assert.assertEquals(11, list.size());
 	}
 	

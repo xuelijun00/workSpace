@@ -46,10 +46,12 @@
 var chart;
 var domesticData = [];
 function getUrl(type){
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
 	if(type === 1){
-		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/grid?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();	
+		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/grid?startDate=' + startDate + "&endDate=" + endDate;	
 	}else{
-		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/chart?startDate=' + $("#start_date").val() + "&endDate=" + $("#end_date").val();
+		return chartUrl =  contextPath + '/report/daily_out_report/domesticsum/chart?startDate=' + startDate + "&endDate=" + endDate;
 	}
 	
 }
@@ -63,15 +65,18 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台每日发货汇总数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率'];
-	var column = ['platform','reportDate','orderNum','productTotalCny','profit','netProfitMargin'];
+	var title = [ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
+	var column = ['reportDate','platform','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
+	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
-	var profit=[];//税后综合净利
-	var netProfitMargin=[];//税后综合利润率
-	var orderNum=[];//发货单数
-	var productTotalCny=[];//发货收入
+	var profit=[];            //税后综合净利
+	var netProfitMargin=[];   //税后综合利润率
+	var orderNum=[];          //发货单数
+	var productTotalCny=[];   //发货收入
+	var unitPrice=[];         //客单价
+	var grossProfit=[];       //毛利
 	var categories = [];
 	$.ajax({
 		url : chartUrl,
@@ -83,10 +88,12 @@ function getChartData(chartUrl){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
 					categories.push(data[i].reportDate);
+					orderNum.push(data[i].orderNum);
+					unitPrice.push(data[i].unitPrice);
+					productTotalCny.push(data[i].productTotalCny);
+					grossProfit.push(data[i].grossProfit);
 					profit.push(data[i].profit);
 					netProfitMargin.push(data[i].netProfitMargin);
-					orderNum.push(data[i].orderNum);
-					productTotalCny.push(data[i].productTotalCny);
 				}
 			}
 		}
@@ -104,9 +111,11 @@ function getChartData(chartUrl){
 		,categories:categories
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
-		         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
-		         {name: '税后综合净利',type: 'column',data:profit,tooltip: {valueSuffix: '' }},
-		         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
+			 {name:'客单价',type: 'column',data:unitPrice,tooltip: {valueSuffix: '' }},
+	         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
+	         {name: '毛利',type: 'column',data:grossProfit,tooltip: {valueSuffix: '' }},
+	         {name: '税后综合净利',type: 'column',data:profit,tooltip: {valueSuffix: '' }},
+	         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -130,17 +139,28 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"国内仓发货汇总数据"
 		,url:getUrl(1)
-		,colNames:[ '平台名称', '日期(day)', '发货单数', '发货收入','税后综合净利', '税后综合利润率']
-		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'platform',index : 'platform',width : 80}, 
-		             {name : 'reportDate',index : 'reportDate',width : 105}, 
-		             {name : 'orderNum',index : 'orderNum',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
-		             {name : 'productTotalCny',index : 'productTotalCny',align : "right",width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'profit',index : 'profit',align : "right",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'netProfitMargin',index : 'netProfitMargin',align : "right",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
-		           ]
-		,sortname:"reportDate"
-		,sortorder:"desc"
+		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
+	,colModel:[ {name : 'platform',index : 'platform',width : 100},
+				{name : 'reportDate',index : 'reportDate',width : 120}, 
+	            {name : 'orderNum',index : 'orderNum',width : 100,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
+	            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	            {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	            {name : 'productRefund',index : 'productRefund',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	            {name : 'orderPrice',index : 'orderPrice',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	            {name : 'grossProfit',index : 'grossProfit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	            {name : 'productShipping',index : 'productShipping',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'platformCost',index : 'platformCost',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'materialCost',index : 'materialCost',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'orderExecutionFee',index : 'orderExecutionFee',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'operatingCost',index : 'operatingCost',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'profitMargin',index : 'profitMargin',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'profit',index : 'profit',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+				{name : 'netProfitMargin',index : 'netProfitMargin',width : 120,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
+	             ]
+	,sortname:"reportDate"
+	,sortorder:"desc"
+	,shrinkToFit:true
+	,autoScroll:true
 	});
 })();
 </script>

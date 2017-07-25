@@ -29,7 +29,7 @@ public interface DailyOutReportsMapper {
      * @param endDate
      * @return
      */
-    List<DailyOutReports> selectSumDomesticWarehouseShipment(@Param("startDate")String startDate,@Param("endDate")String endDate);
+    List<DailyOutReports> selectSumDomesticWarehouseShipment(DailyOutReportsKey key);
     /**
      * 国内仓各平台发货汇总
      * @param key

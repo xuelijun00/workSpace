@@ -24,8 +24,8 @@ public class DailyOutReportsServiceImpl implements IDailyOutReportsService {
 	}
 	
 	@Override
-	public List<DailyOutReports> selectSumDomesticWarehouseShipment(String startDate,String endDate) {
-		return dailyOutReportsMapper.selectSumDomesticWarehouseShipment(startDate, endDate);
+	public List<DailyOutReports> selectSumDomesticWarehouseShipment(DailyOutReportsKey key) {
+		return dailyOutReportsMapper.selectSumDomesticWarehouseShipment(key);
 	}
 
 	@Override
