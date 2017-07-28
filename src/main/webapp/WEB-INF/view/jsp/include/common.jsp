@@ -27,7 +27,4 @@
 <script type="text/javascript" src="js/common/common.js" ></script>
 <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
-	$(document).ready(function() {
-	    $(document).ajaxError(function(){window.top.location.href= contextPath+ "/";});
-	});
 </script>

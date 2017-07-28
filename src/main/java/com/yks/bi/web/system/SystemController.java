@@ -24,10 +24,10 @@ public class SystemController {
     @Autowired
     private SystemUserService systemUserService;
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String root(){
         return "login";
-    }
+    }*/
     
     @RequestMapping("/index")
     public String index(){

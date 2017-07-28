@@ -80,7 +80,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!--注解事物处理 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 配置事务的传播特性 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -122,7 +122,7 @@
 	</bean>
 
 	<!-- 对静态资源文件的访问，交给default servlet handler处理 -->
-	<mvc:default-servlet-handler />
+	<!-- <mvc:default-servlet-handler /> -->
 	<!--对静态资源文件的访问 -->
 	<mvc:resources location="/WEB-INF/view/img/" mapping="/img/**" />
 	<mvc:resources location="/WEB-INF/view/js/" mapping="/js/**" />
