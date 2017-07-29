@@ -3,13 +3,11 @@ package com.yks.bi.web.report;
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +31,6 @@ public class EbayDomesticController {
 
     @Autowired
     IEbayDomesticService isale;
-    private static final String YYYYMMDD = "yyyy-MM-dd";
     /**
      * 表格数据  柱状图
      * @param month

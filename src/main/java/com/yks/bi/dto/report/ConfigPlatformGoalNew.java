@@ -21,8 +21,7 @@ public class ConfigPlatformGoalNew {
 
     private double quarterlySales;
 
-    private float netProfitTarget;
-   
+/*    private float netProfitTarget;     //无效字段 */  
 
 	private double estimatedSales;
 
@@ -32,10 +31,9 @@ public class ConfigPlatformGoalNew {
 
     private float quarterlyEstimatedPercentage;
 
-    private double targetProfit;
+    private double targetProfit;                     //实际上是页面中的目标净利
 
-    private double actualProfit;
-
+    private double actualProfit;                     //实际利润
 
     private float netProfitCompletionRate;
 
@@ -66,13 +64,13 @@ public class ConfigPlatformGoalNew {
     }
 
     
-    public float getNetProfitTarget() {
+   /* public float getNetProfitTarget() {
 		return netProfitTarget;
 	}
 
 	public void setNetProfitTarget(float netProfitTarget) {
 		this.netProfitTarget = netProfitTarget;
-	}
+	}*/
     
     public Date getReportDate() {
         return reportDate;

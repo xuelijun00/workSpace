@@ -7,25 +7,25 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="report_date" property="reportDate" jdbcType="DATE" />
     <result column="report_month" property="reportMonth" jdbcType="VARCHAR" />
-    <result column="performance_targets" property="performanceTargets" jdbcType="INTEGER" />
-    <result column="quarterly_performance_targets" property="quarterlyPerformanceTargets" jdbcType="INTEGER" />
-    <result column="sales" property="sales" jdbcType="INTEGER" />
-    <result column="quarterly_sales" property="quarterlySales" jdbcType="INTEGER" />
-    <result column="estimated_sales" property="estimatedSales" jdbcType="INTEGER" />
-    <result column="quarterly_estimated_sales" property="quarterlyEstimatedSales" jdbcType="INTEGER" />
-    <result column="estimated_percentage" property="estimatedPercentage" jdbcType="INTEGER" />
-    <result column="quarterly_estimated_percentage" property="quarterlyEstimatedPercentage" jdbcType="INTEGER" />
-    <result column="target_profit" property="targetProfit" jdbcType="INTEGER" />
-    <result column="actual_profit" property="actualProfit" jdbcType="INTEGER" />
-    <result column="net_profit_target" property="netProfitTarget" jdbcType="INTEGER" />
-    <result column="net_profit_completion_rate" property="netProfitCompletionRate" jdbcType="INTEGER" />
+    <result column="performance_targets" property="performanceTargets" jdbcType="DOUBLE" />
+    <result column="quarterly_performance_targets" property="quarterlyPerformanceTargets" jdbcType="DOUBLE" />
+    <result column="sales" property="sales" jdbcType="DOUBLE" />
+    <result column="quarterly_sales" property="quarterlySales" jdbcType="DOUBLE" />
+    <result column="estimated_sales" property="estimatedSales" jdbcType="DOUBLE" />
+    <result column="quarterly_estimated_sales" property="quarterlyEstimatedSales" jdbcType="DOUBLE" />
+    <result column="estimated_percentage" property="estimatedPercentage" jdbcType="REAL" />
+    <result column="quarterly_estimated_percentage" property="quarterlyEstimatedPercentage" jdbcType="REAL" />
+    <result column="target_profit" property="targetProfit" jdbcType="DOUBLE" />
+    <result column="actual_profit" property="actualProfit" jdbcType="DOUBLE" />
+ <!--    <result column="net_profit_target" property="netProfitTarget" jdbcType="INTEGER" />  被删除了 -->
+    <result column="net_profit_completion_rate" property="netProfitCompletionRate" jdbcType="REAL" />
     <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, platform, name, report_date, report_month, performance_targets, quarterly_performance_targets, 
     sales, quarterly_sales, estimated_sales, quarterly_estimated_sales, estimated_percentage, 
-    quarterly_estimated_percentage, target_profit, actual_profit, net_profit_target, 
-    net_profit_completion_rate, modify_date
+    quarterly_estimated_percentage, target_profit, actual_profit, net_profit_completion_rate,
+    modify_date
   </sql>
   <!-- 查询平台 -->
   <select id="selectPlatform" resultType="String">
@@ -55,15 +55,15 @@
       quarterly_performance_targets, sales, quarterly_sales, 
       estimated_sales, quarterly_estimated_sales, 
       estimated_percentage, quarterly_estimated_percentage, 
-      target_profit, actual_profit, net_profit_target, 
-      net_profit_completion_rate, modify_date)
+      target_profit, actual_profit, net_profit_completion_rate,
+      modify_date)
     values (#{id,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{reportDate,jdbcType=DATE}, #{reportMonth,jdbcType=VARCHAR}, #{performanceTargets,jdbcType=INTEGER}, 
-      #{quarterlyPerformanceTargets,jdbcType=INTEGER}, #{sales,jdbcType=INTEGER}, #{quarterlySales,jdbcType=INTEGER}, 
-      #{estimatedSales,jdbcType=INTEGER}, #{quarterlyEstimatedSales,jdbcType=INTEGER}, 
-      #{estimatedPercentage,jdbcType=INTEGER}, #{quarterlyEstimatedPercentage,jdbcType=INTEGER}, 
-      #{targetProfit,jdbcType=INTEGER}, #{actualProfit,jdbcType=INTEGER}, #{netProfitTarget,jdbcType=INTEGER}, 
-      #{netProfitCompletionRate,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP})
+      #{reportDate,jdbcType=DATE}, #{reportMonth,jdbcType=VARCHAR}, #{performanceTargets,jdbcType=DOUBLE}, 
+      #{quarterlyPerformanceTargets,jdbcType=DOUBLE}, #{sales,jdbcType=DOUBLE}, #{quarterlySales,jdbcType=DOUBLE}, 
+      #{estimatedSales,jdbcType=DOUBLE}, #{quarterlyEstimatedSales,jdbcType=DOUBLE}, 
+      #{estimatedPercentage,jdbcType=REAL}, #{quarterlyEstimatedPercentage,jdbcType=REAL}, 
+      #{targetProfit,jdbcType=DOUBLE}, #{actualProfit,jdbcType=DOUBLE},  
+      #{netProfitCompletionRate,jdbcType=DOUBLE}, #{modifyDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
     insert into configplatformgoal_new
@@ -113,9 +113,9 @@
       <if test="actualProfit != null" >
         actual_profit,
       </if>
-      <if test="netProfitTarget != null" >
+      <!-- <if test="netProfitTarget != null" >
         net_profit_target,
-      </if>
+      </if> -->
       <if test="netProfitCompletionRate != null" >
         net_profit_completion_rate,
       </if>
@@ -140,40 +140,40 @@
         #{reportMonth,jdbcType=VARCHAR},
       </if>
       <if test="performanceTargets != null" >
-        #{performanceTargets,jdbcType=INTEGER},
+        #{performanceTargets,jdbcType=DOUBLE},
       </if>
       <if test="quarterlyPerformanceTargets != null" >
-        #{quarterlyPerformanceTargets,jdbcType=INTEGER},
+        #{quarterlyPerformanceTargets,jdbcType=DOUBLE},
       </if>
       <if test="sales != null" >
-        #{sales,jdbcType=INTEGER},
+        #{sales,jdbcType=DOUBLE},
       </if>
       <if test="quarterlySales != null" >
-        #{quarterlySales,jdbcType=INTEGER},
+        #{quarterlySales,jdbcType=DOUBLE},
       </if>
       <if test="estimatedSales != null" >
-        #{estimatedSales,jdbcType=INTEGER},
+        #{estimatedSales,jdbcType=DOUBLE},
       </if>
       <if test="quarterlyEstimatedSales != null" >
-        #{quarterlyEstimatedSales,jdbcType=INTEGER},
+        #{quarterlyEstimatedSales,jdbcType=DOUBLE},
       </if>
       <if test="estimatedPercentage != null" >
-        #{estimatedPercentage,jdbcType=INTEGER},
+        #{estimatedPercentage,jdbcType=REAL},
       </if>
       <if test="quarterlyEstimatedPercentage != null" >
-        #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
+        #{quarterlyEstimatedPercentage,jdbcType=REAL},
       </if>
       <if test="targetProfit != null" >
-        #{targetProfit,jdbcType=INTEGER},
+        #{targetProfit,jdbcType=DOUBLE},
       </if>
       <if test="actualProfit != null" >
-        #{actualProfit,jdbcType=INTEGER},
+        #{actualProfit,jdbcType=DOUBLE},
       </if>
-      <if test="netProfitTarget != null" >
+     <!--  <if test="netProfitTarget != null" >
         #{netProfitTarget,jdbcType=INTEGER},
-      </if>
+      </if> -->
       <if test="netProfitCompletionRate != null" >
-        #{netProfitCompletionRate,jdbcType=INTEGER},
+        #{netProfitCompletionRate,jdbcType=DOUBLE},
       </if>
       <if test="modifyDate != null" >
         #{modifyDate,jdbcType=TIMESTAMP},
@@ -190,37 +190,37 @@
         report_date = #{reportDate,jdbcType=DATE},
       </if>
       <if test="performanceTargets != null" >
-        performance_targets = #{performanceTargets,jdbcType=INTEGER},
+        performance_targets = #{performanceTargets,jdbcType=DOUBLE},
       </if>
       <if test="quarterlyPerformanceTargets != null" >
-        quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=INTEGER},
+        quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=DOUBLE},
       </if>
       <if test="sales != null" >
-        sales = #{sales,jdbcType=INTEGER},
+        sales = #{sales,jdbcType=DOUBLE},
       </if>
       <if test="quarterlySales != null" >
-        quarterly_sales = #{quarterlySales,jdbcType=INTEGER},
+        quarterly_sales = #{quarterlySales,jdbcType=DOUBLE},
       </if>
       <if test="estimatedSales != null" >
-        estimated_sales = #{estimatedSales,jdbcType=INTEGER},
+        estimated_sales = #{estimatedSales,jdbcType=DOUBLE},
       </if>
       <if test="quarterlyEstimatedSales != null" >
-        quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=INTEGER},
+        quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=DOUBLE},
       </if>
       <if test="estimatedPercentage != null" >
-        estimated_percentage = #{estimatedPercentage,jdbcType=INTEGER},
+        estimated_percentage = #{estimatedPercentage,jdbcType=REAL},
       </if>
       <if test="quarterlyEstimatedPercentage != null" >
-        quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
+        quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=REAL},
       </if>
       <if test="targetProfit != null" >
-        target_profit = #{targetProfit,jdbcType=INTEGER},
+        target_profit = #{targetProfit,jdbcType=DOUBLE},
       </if>
       <if test="actualProfit != null" >
-        actual_profit = #{actualProfit,jdbcType=INTEGER},
+        actual_profit = #{actualProfit,jdbcType=DOUBLE},
       </if>
       <if test="netProfitCompletionRate != null" >
-        net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=INTEGER},
+        net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=DOUBLE},
       </if>
       <if test="modifyDate != null" >
         modify_date = #{modifyDate,jdbcType=TIMESTAMP},
@@ -234,18 +234,18 @@
       name = #{name,jdbcType=VARCHAR},
       report_date = #{reportDate,jdbcType=DATE},
       report_month = #{reportMonth,jdbcType=VARCHAR},
-      performance_targets = #{performanceTargets,jdbcType=INTEGER},
-      quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=INTEGER},
-      sales = #{sales,jdbcType=INTEGER},
-      quarterly_sales = #{quarterlySales,jdbcType=INTEGER},
-      estimated_sales = #{estimatedSales,jdbcType=INTEGER},
-      quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=INTEGER},
-      estimated_percentage = #{estimatedPercentage,jdbcType=INTEGER},
-      quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=INTEGER},
-      target_profit = #{targetProfit,jdbcType=INTEGER},
-      actual_profit = #{actualProfit,jdbcType=INTEGER},
-      net_profit_target = #{netProfitTarget,jdbcType=INTEGER},
-      net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=INTEGER},
+      performance_targets = #{performanceTargets,jdbcType=DOUBLE},
+      quarterly_performance_targets = #{quarterlyPerformanceTargets,jdbcType=DOUBLE},
+      sales = #{sales,jdbcType=DOUBLE},
+      quarterly_sales = #{quarterlySales,jdbcType=DOUBLE},
+      estimated_sales = #{estimatedSales,jdbcType=DOUBLE},
+      quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=DOUBLE},
+      estimated_percentage = #{estimatedPercentage,jdbcType=REAL},
+      quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=REAL},
+      target_profit = #{targetProfit,jdbcType=DOUBLE},
+      actual_profit = #{actualProfit,jdbcType=DOUBLE},
+     <!--  net_profit_target = #{netProfitTarget,jdbcType=INTEGER}, -->
+      net_profit_completion_rate = #{netProfitCompletionRate,jdbcType=DOUBLE},
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
