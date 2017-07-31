@@ -58,15 +58,15 @@ function getUrl(type){//拼接url
 	var business = $("#business").val();
 	if(type === 1){
 		if(business != "all"){
-			return contextPath + '/report/sales_performance/gridCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
+			return contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate + "&business=" + business;
 		}else{
-			return contextPath + '/report/sales_performance/gridCount?st=' + startDate + "&et=" + endDate
+			return contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate
 		}
 	}else{
 		if(business != "all"){
-			return contextPath + '/report/sales_performance/chartCount?st=' + startDate + "&et=" + endDate + "&business=" + business;
+			return contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate + "&business=" + business;
 		}else{
-			return contextPath + '/report/sales_performance/chartCount?st=' + startDate + "&et=" + endDate
+			return contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate
 		}
 	}
 }

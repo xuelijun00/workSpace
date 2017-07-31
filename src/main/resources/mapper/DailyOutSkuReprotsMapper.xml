@@ -5,6 +5,7 @@
     <result column="platform" property="platform" jdbcType="VARCHAR" />
     <result column="sales_account" property="salesAccount" jdbcType="VARCHAR" />
     <result column="sku" property="sku" jdbcType="VARCHAR" />
+    <result column="sku_cnname" property="skuCnName" jdbcType="VARCHAR" />
     <result column="report_date" property="reportDate" jdbcType="DATE" />
     <result column="manager" property="manager" jdbcType="VARCHAR" />
     <result column="order_num" property="orderNum" jdbcType="INTEGER" />
@@ -21,32 +22,34 @@
     <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
     <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
     <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="zhuzhandian" property="zhuzhandian" jdbcType="VARCHAR" />
   </resultMap>
   <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-    insert into dailyoutskureprots (platform, sales_account, sku, 
+    insert into dailyoutskureprots (platform, sales_account, sku, sku_cnname, 
       report_date, manager, order_num, 
       unit_price, product_total_cny, product_refund, 
       order_price, gross_profit, product_shipping, 
       platform_cost, material_cost, order_execution_fee, 
-      operating_cost, profit_margin, net_profit, profit
+      operating_cost, profit_margin, net_profit, profit, zhuzhandian
       )
     values (#{platform,jdbcType=VARCHAR}, #{salesAccount,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
-      #{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
+      #{skuCnName,jdbcType=VARCHAR},#{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
       #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=DOUBLE}, #{productRefund,jdbcType=DOUBLE}, 
       #{orderPrice,jdbcType=DOUBLE}, #{grossProfit,jdbcType=DOUBLE}, #{productShipping,jdbcType=DOUBLE}, 
       #{platformCost,jdbcType=DOUBLE}, #{materialCost,jdbcType=DOUBLE}, #{orderExecutionFee,jdbcType=DOUBLE}, 
       #{operatingCost,jdbcType=DOUBLE}, #{profitMargin,jdbcType=DOUBLE}, #{netProfit,jdbcType=DOUBLE},
-      #{profit,jdbcType=DOUBLE}
+      #{profit,jdbcType=DOUBLE}, #{zhuzhandian,jdbcType=VARCHAR}
       )
   </insert>
   
   
     <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	select `platform`, `sales_account`, `sku`, `report_date`, `manager`, `order_num`, 
-		  	`unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
-		  	 `product_shipping`, `platform_cost`, `material_cost`,
-		  	 `order_execution_fee`, `operating_cost`, `profit_margin`, `profit`, `net_profit`
-  	from dailyoutskureprots_new
+  	select `platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
+		   `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
+		   `product_shipping`, `platform_cost`, `material_cost`,
+		   `order_execution_fee`, `operating_cost`, `profit_margin`, `profit`, `net_profit`,
+		   `zhuzhandian`
+  	from dailyoutskureprots_new_bak
 	where 1=1
 	<if test="startDate != null and startDate.length() > 0" >
        and report_date >= #{startDate}
@@ -68,17 +71,17 @@
   
   
   <select id="selectPlatform" resultType="String" >
-    SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
+    SELECT `platform` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP by `platform`
   </select>
   
   
    <select id="selectAccount" resultType="String" >
-    SELECT `sales_account` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `sales_account`
+    SELECT `sales_account` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP by `sales_account`
   </select>
   
   
    <select id="selectSku" resultType="String" >
-    SELECT `sku` FROM `dailyoutskureprots_new` WHERE 1 GROUP BY`sku`
+    SELECT `sku` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP BY`sku`
   </select>
   
   <insert id="insertSelective" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
@@ -92,6 +95,9 @@
       </if>
       <if test="sku != null" >
         sku,
+      </if>
+      <if test="skuCnName != null" >
+        sku_cnname,
       </if>
       <if test="reportDate != null" >
         report_date,
@@ -141,6 +147,9 @@
       <if test="profit != null" >
         profit,
       </if>
+      <if test="zhuzhandian != null" >
+        zhuzhandian,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="platform != null" >
@@ -151,6 +160,9 @@
       </if>
       <if test="sku != null" >
         #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCnName != null" >
+        #{skuCnName,jdbcType=VARCHAR},
       </if>
       <if test="reportDate != null" >
         #{reportDate,jdbcType=DATE},
@@ -199,6 +211,9 @@
       </if>
       <if test="profit != null" >
         #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuzhandian != null" >
+        #{zhuzhandian,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

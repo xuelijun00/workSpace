@@ -55,7 +55,7 @@
     			<![CDATA[and report_date >= #{startDate,jdbcType=DATE}]]>
 		</if>
 		<if test="endDate != null">
-	  		 	 <![CDATA[and reportDate <= #{endDate,jdbcType=DATE}]]>
+	  		 	 <![CDATA[and report_Date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		GROUP BY business
 	</select>

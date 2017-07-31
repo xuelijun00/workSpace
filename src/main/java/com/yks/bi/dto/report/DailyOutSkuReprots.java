@@ -10,6 +10,8 @@ public class DailyOutSkuReprots {
     private String salesAccount;     //账号
 
     private String sku;              //sku
+    
+    private String skuCnName;        //sku中文名称
 
     private Date reportDate;         //日期
 
@@ -45,7 +47,9 @@ public class DailyOutSkuReprots {
 
     private String startDate;
     
-    private String endDate;
+	private String endDate;
+    
+    private String zhuzhandian;      //eBay的主站点
     
 	private String reportDate1;
 
@@ -252,6 +256,25 @@ public class DailyOutSkuReprots {
 
 	public void setReportDate1(String reportDate1) {
 		this.reportDate1 = reportDate1;
+	}
+	
+	public String getZhuzhandian() {
+			return zhuzhandian;
+	}
+
+
+	public void setZhuzhandian(String zhuzhandian) {
+		this.zhuzhandian = zhuzhandian;
+	}
+
+
+	public String getSkuCnName() {
+		return skuCnName;
+	}
+
+
+	public void setSkuCnName(String skuCnName) {
+		this.skuCnName = skuCnName;
 	}
 
 }
