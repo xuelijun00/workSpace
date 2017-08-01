@@ -137,6 +137,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartCategorySales">沃尔玛品类销售报表</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOut">沃尔玛每日发货报表</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartBuyerCountrySales">沃尔玛买家国家数据</a> </li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutNetProfit">沃尔玛发货订单净利</a> </li>
                     </ul>
                 </li>
                 <li>

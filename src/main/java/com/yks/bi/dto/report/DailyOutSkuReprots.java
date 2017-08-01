@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class DailyOutSkuReprots {
     private String platform;         //平台
 
@@ -13,6 +15,7 @@ public class DailyOutSkuReprots {
     
     private String skuCnName;        //sku中文名称
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportDate;         //日期
 
     private String manager;          //管理员
@@ -51,14 +54,18 @@ public class DailyOutSkuReprots {
     
     private String zhuzhandian;      //eBay的主站点
     
-	private String reportDate1;
+/*	private String reportDate1;*/
+	
+	private Long erpOrdersId;        //在walmartdailyoutskureprots表中，表示“内订单号”
+	
+	private String 	buyerId;         //在walmartdailyoutskureprots表中，表示“（买家id）平台订单号”
 
-	public String getReportDate1() {
+	/*public String getReportDate1() {
 		if(this.getReportDate() != null){
 			return DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
 		}
         return null;
-    }
+    }*/
     
     
     public String getStartDate() {
@@ -254,9 +261,9 @@ public class DailyOutSkuReprots {
 	}
 
 
-	public void setReportDate1(String reportDate1) {
+	/*public void setReportDate1(String reportDate1) {
 		this.reportDate1 = reportDate1;
-	}
+	}*/
 	
 	public String getZhuzhandian() {
 			return zhuzhandian;
@@ -264,7 +271,7 @@ public class DailyOutSkuReprots {
 
 
 	public void setZhuzhandian(String zhuzhandian) {
-		this.zhuzhandian = zhuzhandian;
+		this.zhuzhandian = zhuzhandian == null ? null : zhuzhandian.trim();
 	}
 
 
@@ -274,7 +281,27 @@ public class DailyOutSkuReprots {
 
 
 	public void setSkuCnName(String skuCnName) {
-		this.skuCnName = skuCnName;
+		this.skuCnName = skuCnName == null ? null : skuCnName.trim();
+	}
+
+
+	public Long getErpOrdersId() {
+		return erpOrdersId;
+	}
+
+
+	public void setErpOrdersId(Long erpOrdersId) {
+		this.erpOrdersId = erpOrdersId;
+	}
+
+
+	public String getBuyerId() {
+		return buyerId;
+	}
+
+
+	public void setBuyerId(String buyerId) {
+		this.buyerId = buyerId == null ? null : buyerId.trim();
 	}
 
 }

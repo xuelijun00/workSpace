@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>净利导出明细</h5></div>
+    <div class="ibox-title"><h5>沃尔玛发货订单净利明细</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -27,9 +27,8 @@
             </div>
             <br/>
             <div class="form-group">
-                <label>平台：</label>
-                <select class="form-control w120" id="platform" >
-                </select>
+                <label>内订单号：</label>
+                <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId" name="erpOrdersId" value=""/>
             </div>
              <div class="form-group">
 	            <label>SKU：</label>
@@ -39,7 +38,7 @@
                 <label>账号：</label>
                 <input id="account_input" list="account" />
 				<datalist id="account"></datalist>
-            </div>       
+            </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
@@ -63,15 +62,15 @@ var domesticData = [];
 function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var platform = $("#platform").val();
+	var erpOrdersId = $("#erpOrdersId").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
 	var url = "";
 	
-		url = contextPath + '/report/profit_details/grid?startDate=' + startDate + "&endDate=" + endDate;
+		url = contextPath + '/report/profit_details/walmart/grid?startDate=' + startDate + "&endDate=" + endDate;
 	
-	if(platform !== 'all'){
-		url += "&platform=" + platform;
+	if(erpOrdersId !== ''){
+		url += "&erpOrdersId=" + erpOrdersId;
 	}
 	
 	if(sku !== ''){
@@ -101,13 +100,11 @@ function exportData(){
 		}
 	});
 	
-	var fileName = "净利导出明细.csv";
-	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
-	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
-	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
-	var column = ['reportDate','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit']; */
+	var fileName = "沃尔玛发货订单净利导出明细.csv";
+	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入', '退款', '成本', '毛利',
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '平台订单号'];
+	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','buyerId'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -127,23 +124,9 @@ function exportData(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	$.ajax({
-		url : contextPath + "/report/profit_details/platform",
-		cache : false,
-		type:"get",
-		async: false,
-		success : function(data) {
-			if(data != null && data.length > 0){
-				$("#platform").append("<option value='all'>全部</option>");
-				for(var i=0;i<data.length;i++){
-					$("#platform").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
-				}
-			}
-		}
-	});
 	
 	$.ajax({
-		url : contextPath + "/report/profit_details/account",
+		url : contextPath + "/report/profit_details/walmart/account",
 		cache : false,
 		type:"get",
 		async: false,
@@ -158,14 +141,15 @@ function exportData(){
 	});
 		
 	common.grid({
-		title:"净利导出明细"
+		title:"沃尔玛发货订单净利明细"
 		,url:getUrl()
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
-		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
+		,colNames:[ '内订单号','平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '平台订单号']
+		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
+					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},
-		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
-		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
-		            {name : 'skuCnName',index : 'skuCnName',width : 100},
+		            {name : 'salesAccount',index : 'sales_account',width : 260}, 
+		            {name : 'sku',index : 'sku',sortable : "true",width : 100},
+		            {name : 'skuCnName',index : 'sku_cnname',width : 100},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -181,8 +165,8 @@ function exportData(){
 		            {name : 'netProfit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}, 
-		             ]	      
+		            {name : 'buyerId',index : 'buyerId',width : 200} 
+		            ]	      
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true

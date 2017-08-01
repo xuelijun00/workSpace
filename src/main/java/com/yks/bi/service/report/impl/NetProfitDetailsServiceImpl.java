@@ -35,4 +35,15 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 		return dailyout.selectSku();
 	}
 
+	@Override
+	public List<DailyOutSkuReprots> selectWalmartAll(DailyOutSkuReprots key) {
+		
+		return dailyout.selectWalmartAll(key);
+	}
+
+	@Override
+	public List<String> selectWalmartAccount() {
+		return dailyout.selectWalmartAccount();
+	}
+
 }
