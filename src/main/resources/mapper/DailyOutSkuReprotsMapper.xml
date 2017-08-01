@@ -51,7 +51,7 @@
 		   `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, 
 		   `operating_cost`, `profit_margin`, `profit`, `net_profit`,
 		   `zhuzhandian`
-  	from dailyoutskureprots_new_bak
+  	from dailyoutskureprots_new
 	where 1=1
 	<if test="startDate != null and startDate.length() > 0" >
        and report_date >= #{startDate}
@@ -71,15 +71,15 @@
   </select>
   
   <select id="selectPlatform" resultType="String" >
-    SELECT `platform` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP by `platform`
+    SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
   </select>
   
    <select id="selectAccount" resultType="String" >
-    SELECT `sales_account` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP by `sales_account`
+    SELECT `sales_account` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `sales_account`
   </select>
   
    <select id="selectSku" resultType="String" >
-    SELECT `sku` FROM `dailyoutskureprots_new_bak` WHERE 1 GROUP BY`sku`
+    SELECT `sku` FROM `dailyoutskureprots_new` WHERE 1 GROUP BY`sku`
   </select>
   
    <select id="selectWalmartAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
