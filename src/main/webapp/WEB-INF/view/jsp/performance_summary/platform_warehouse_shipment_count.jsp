@@ -56,9 +56,9 @@ function getUrl(type){
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
 	if(type === 1){
-		return contextPath + '/report/daily_out_report/platformCount/grid?startDate=' + startDate + "&startDate=" + endDate + "&platform=" + platform;
+		return contextPath + '/report/daily_out_report/platformCount/grid?startDate=' + startDate + "&endDate=" + endDate + "&platform=" + platform;
 	}else{
-		return contextPath + '/report/daily_out_report/platformCount/chart?startDate=' + startDate + "&startDate=" + endDate + "&platform=" + platform;
+		return contextPath + '/report/daily_out_report/platformCount/chart?startDate=' + startDate + "&endDate=" + endDate + "&platform=" + platform;
 	}
 }
 
