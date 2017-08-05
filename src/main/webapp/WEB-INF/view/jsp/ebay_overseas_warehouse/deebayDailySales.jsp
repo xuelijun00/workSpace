@@ -62,7 +62,7 @@ function queryData(){
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "Ebay海外仓美仓业绩数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "Ebay海外仓德仓业绩数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
 	var column = ['reportDate','business','sales','orders'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -116,7 +116,7 @@ function getChartData(chartUrl){
     });
 	chart = common.chart(getChartData(getUrl()));//chart
 	common.grid({
-		title:"EEbay海外仓德仓业绩数据"
+		title:"Ebay海外仓德仓业绩数据"
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....

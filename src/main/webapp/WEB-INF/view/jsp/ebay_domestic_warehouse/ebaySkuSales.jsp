@@ -106,7 +106,6 @@ function getChartData(chartUrl){
 		url : chartUrl,
 		cache : false,
 		type:"get",
-		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
 				domesticData = data;
