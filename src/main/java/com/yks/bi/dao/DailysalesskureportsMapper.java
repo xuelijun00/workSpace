@@ -27,15 +27,17 @@ public interface DailysalesskureportsMapper {
     
     List<Dailysalesskureports> selectWishSku(Dailysalesskureports record);
     
+    //查询新平台sku的所有数据
     List<Dailysalesskureports> selectskuAll(Dailysalesskureports record);
     
+    //查询新平台的平台
     List<String> selectskuPlatforms();
     
     int updateByPrimaryKeySelective(Dailysalesskureports record);
 
     int updateByPrimaryKey(Dailysalesskureports record);
 
-	List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record);
+	List<Dailysalesskureports> selectskuNewAllSum(Dailysalesskureports record);
 
 	List<Dailysalesskureports> selectWishSkuSum(Dailysalesskureports record);
 

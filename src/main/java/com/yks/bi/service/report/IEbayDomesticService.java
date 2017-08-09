@@ -34,7 +34,7 @@ public interface IEbayDomesticService {
 
 	List<String> selectskuPlatforms();
 
-	List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record);
+	List<Dailysalesskureports> selectskuNewAllSum(Dailysalesskureports record);
 	
 	List<Dailysalesskureports> selectWishSkuSum(Dailysalesskureports record);
 

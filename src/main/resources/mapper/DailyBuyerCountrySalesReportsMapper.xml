@@ -42,7 +42,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from `dailybuyer_countrysalesreports`
-		where platform like 'new%' and platform != 'new_newegg'
+		where platform like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
 		<if test="platform != null and platform.length() > 0">
 			and platform = #{platform,jdbcType=VARCHAR}
 		</if>
@@ -60,7 +60,7 @@
 
 	<select id="selectNewPlatforms" resultType="String">
 		SELECT `platform` FROM `dailybuyer_countrysalesreports` 
-		WHERE `platform` like 'new%' and `platform` != 'new_newegg'
+		WHERE `platform` like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
 		GROUP by `platform`
 	</select>
 
@@ -79,7 +79,7 @@
 		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">
 		SELECT `buyer_country` 
 		FROM `dailybuyer_countrysalesreports` 
-		where platform like 'new%' and platform != 'new_newegg'
+		where platform like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
 		<if test="platform != null and platform.length() > 0">
 			and platform = #{platform,jdbcType=VARCHAR}
 		</if>

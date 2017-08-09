@@ -83,8 +83,8 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 	}
 
 	@Override
-	public List<Dailysalesskureports> selectskuAllSum(Dailysalesskureports record) {
-		return isalessku.selectskuAllSum(record);
+	public List<Dailysalesskureports> selectskuNewAllSum(Dailysalesskureports record) {
+		return isalessku.selectskuNewAllSum(record);
 	}
 
 	@Override

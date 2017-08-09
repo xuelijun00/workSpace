@@ -161,7 +161,7 @@ public class EbayDomesticController {
     
     @RequestMapping(value = "/ebay_domestic/skunew/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> newPlatformSkuChart(Dailysalesskureports record) throws Exception{
-        return isale.selectskuAllSum(record);
+        return isale.selectskuNewAllSum(record);
     }
     
     @RequestMapping(value = "/ebay_domestic/skuplatforms/platformnew" ,method = RequestMethod.GET)

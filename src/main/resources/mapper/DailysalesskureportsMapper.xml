@@ -114,7 +114,7 @@
     select 
     <include refid="Base_Column_List" />
     from dailysalesskureports
-    where business like 'new%' and business != 'new_newegg'
+    where business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock'
     <if test="business != null">
     	and business = #{business,jdbcType=VARCHAR}
     </if>
@@ -122,11 +122,11 @@
     ORDER BY  report_date desc
   </select>
  <!--用于曲线图，汇总时间段内的订单数和销售额 -->
-  <select id="selectskuAllSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
+  <select id="selectskuNewAllSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
     select 
     <include refid="Base_Column_List_Sum" />
     from dailysalesskureports
-    where business like 'new%' and business != 'new_newegg'
+    where business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock'
     <if test="business != null">
     	and business = #{business,jdbcType=VARCHAR}
     </if>
@@ -137,7 +137,10 @@
   
    <!--查询平台  -->
   <select id="selectskuPlatforms" resultMap="BaseResultMap" >
-    SELECT business FROM dailysalesskureports WHERE business like 'new%' and business != 'newegg' GROUP by  business
+    SELECT business 
+    FROM dailysalesskureports 
+    WHERE business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock'
+    GROUP by  business
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >

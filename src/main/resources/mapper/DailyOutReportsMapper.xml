@@ -106,7 +106,7 @@
     where
     <choose>
     	<when test="platform == 'newAndAll'"><!--新平台每日发货数据 去掉new_newegg的数据  -->
-    		platform like 'new%' and platform != 'new_newegg'
+    		platform like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
     	</when>
     	<otherwise>
     		platform = #{platform,jdbcType=VARCHAR}

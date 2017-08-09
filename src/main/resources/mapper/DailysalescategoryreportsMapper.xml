@@ -34,7 +34,7 @@
     select 
     <include refid="Base_Column_List" />
     from dailysalescategoryreports
-     where business like 'new%' and business != 'new_newegg'
+     where business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock'
       <if test="business != null">
     	and business = #{business,jdbcType=VARCHAR}
     </if>
@@ -52,7 +52,9 @@
   
       <!--查询平台  -->
   <select id="selectnewPlatforms" resultMap="BaseResultMap" >
-    SELECT business FROM dailysalescategoryreports WHERE business like 'new%' and business != 'newegg' GROUP by  business
+    SELECT business FROM dailysalescategoryreports 
+    WHERE business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock' 
+    GROUP by  business
   </select>
   
   
