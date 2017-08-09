@@ -31,10 +31,12 @@
   <select id="selectPlatform" resultType="String">
   	select distinct platform from configplatformgoal_new;
   </select>
-  <!-- 查询报表 -->
+  <!-- 查询报表 没使用<include refid="Base_Column_List" /> 是因为 前台注释了“季度业绩目标”、“季度销售额”、“季度预计百分比”-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
-    <include refid="Base_Column_List" />
+    id, platform, name, report_date, report_month, performance_targets, 
+    sales, estimated_sales, estimated_percentage, 
+    target_profit, actual_profit, net_profit_completion_rate
     from configplatformgoal_new
     where 1=1
     <if test="month != null and month.length() > 0">

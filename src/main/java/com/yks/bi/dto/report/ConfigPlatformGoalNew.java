@@ -27,7 +27,7 @@ public class ConfigPlatformGoalNew {
 
     private double quarterlyEstimatedSales;
 
-    private float estimatedPercentage;
+    private float estimatedPercentage;               //业绩完成率（原来是 预计百分比）
 
     private float quarterlyEstimatedPercentage;
 
