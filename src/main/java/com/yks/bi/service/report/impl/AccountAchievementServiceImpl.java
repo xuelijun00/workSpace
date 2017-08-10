@@ -31,4 +31,11 @@ public class AccountAchievementServiceImpl implements IAccountAchievementService
 		return accountAchievement.selectAccount(business);
 	}
 
+	@Override
+	public List<DailySalesAccountReports> selectAccountSum(DailySalesAccountReportsKey key) {
+		return accountAchievement.selectAccountSum(key);
+	}
+	
+	
+
 }

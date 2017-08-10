@@ -55,7 +55,7 @@ public class AccountAchievementController {
 	 */
 	@RequestMapping(value="/account_achievement/chart")
 	public List<DailySalesAccountReports> selectAccountAchievementServiceChart(DailySalesAccountReportsKey key) throws ParseException {
-		return accountAchievementService.selectAccountAchievementService(key);
+		return accountAchievementService.selectAccountSum(key);
 	}
 	/**
 	 * 查询平台

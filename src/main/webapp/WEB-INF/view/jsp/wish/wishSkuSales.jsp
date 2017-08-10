@@ -69,7 +69,7 @@ function getUrl(type){//拼接url
 
 function queryData(){
 	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	common.refreshData1(getUrl(1),chart,operation);
 }
 
 function exportData(){
@@ -98,7 +98,6 @@ function exportData(){
 }
 
 function getChartData(chartUrl){
-	var sku = [];
 	var salesSum = [];
 	var ordersSum = [];
 	var categories = [];
@@ -111,7 +110,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  sku.push(data[i].sku);
+					categories.push(data[i].reportDate);
 				  salesSum.push(data[i].sales);
             	  ordersSum.push(data[i].orders);
 	            }
@@ -122,7 +121,7 @@ function getChartData(chartUrl){
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
 	return {
 		title:{text:"wish业务线时间段sku销售数据"}
-		,categories:sku
+		,categories:categories
 		,y:y
 		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
 			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
@@ -146,7 +145,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"wish业务线每日sku销售数据"
 		,url:getUrl(1)

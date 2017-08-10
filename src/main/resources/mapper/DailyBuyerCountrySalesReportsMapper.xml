@@ -14,7 +14,11 @@
 	<sql id="Base_Column_List">
 		`report_date`, `platform`, `buyer_country`, `orders`, `quantity`, `sales`
 	</sql>
-
+	
+	<select id="selectSalesGroupcountry" resultMap="BaseResultMap">
+		select buyer_country,sum(sales) sales from dailybuyer_countrysalesreports
+		group by buyer_country
+	</select>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="com.yks.bi.dto.report.DailyBuyerCountrySalesReportsKey">

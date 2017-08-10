@@ -47,17 +47,6 @@ public class SalesPerformanceController {
      */                          
     @RequestMapping(value = "/sales_performance/grid" ,method = RequestMethod.GET)
     public GridModel dailysalesMethod(SalesPerformanceKey key,FilterDto filter) throws Exception{
-    	/*Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}
-    	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-    		filter.setSidx("report_date");
-    	}*/
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<SalesPerformance> list = isale.selectAll(key);
@@ -85,14 +74,6 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> chart(SalesPerformanceKey key) throws Exception{
-    	/*Date starttime = null;
-    	if(StringUtils.isNotEmpty(st)){
-    		starttime = DateUtils.parseDate(st, YYYYMMDD);
-    	}
-    	Date endtime = null;
-    	if(StringUtils.isNotEmpty(et)){
-    		endtime = DateUtils.parseDate(et, YYYYMMDD);
-    	}*/
     	return isale.selectAll(key);
     }
     
@@ -193,7 +174,7 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/new/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> newchart(SalesPerformanceKey key) throws Exception{
-    	return isale.selectnewAll(key);
+    	return isale.selectnewAllSum(key);
     }
     /**
      * 新平台

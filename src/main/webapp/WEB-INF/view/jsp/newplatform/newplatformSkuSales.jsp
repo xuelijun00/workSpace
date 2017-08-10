@@ -65,7 +65,6 @@
 <script type="text/javascript">
 var chart;
 var domesticData = [];
-
 function getUrl(type){	
 	var sku = encodeURIComponent($("#sku").val());
 	var oldsku = encodeURIComponent($("#oldsku").val());
@@ -108,11 +107,10 @@ function exportData(){
 
 function queryData(){
 	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	common.refreshData1(getUrl(1),chart,operation);
 }
 
 function getChartData(chartUrl){
-	var skuAndbusiness = [];
 	var salesSum = [];
 	var ordersSum = [];
 	var categories = [];
@@ -125,7 +123,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  skuAndbusiness.push(data[i].sku+"<br/>"+ data[i].business);
+					categories.push(data[i].reportDate);
 				  salesSum.push(data[i].sales);
 				  ordersSum.push(data[i].orders);
 	            }
@@ -134,12 +132,19 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {
+	/* return {
 		title:{text:"新平台业务线时间段sku销售数据"}
-		,categories:skuAndbusiness
+		,categories:categories
 		,y:y
 		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
 			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
+	}; */
+	return {
+		title:{text:"新平台业务线时间段sku销售数据"}
+		,categories:categories
+		,y:y
+		,series:[{name: '订单数',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'line',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 
@@ -175,33 +180,7 @@ function getChartData(chartUrl){
 		}
 	});
 	
-	/* $("#query").bind("click",function(){
-		var operation = getChartData(getUrl());
-		common.refreshData(getUrl(1),chart,operation);
-	});
-	
-	$("#export").bind("click",function(){
-		chartUrl = getUrl(); 
-		$.ajax({
-			url : chartUrl,
-			cache : false,
-			type:"get",
-			async: false,
-			success : function(data) {
-				if(data != null && data.rows.length > 0){
-					domesticData = data.rows;
-				}
-			}
-		}); 
-		
-		var fileName = "新平台业务线每日sku销售数据.csv";
-		var title = ['业务线', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-		var column = ['business','skuOld','reportDate','orders','quantity','sales'];
-		
-		exportDataToCSV('#list2',title,domesticData,fileName,column);
-	});*/
-	
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"新平台业务线每日sku销售数据"
 		,url:getUrl(1)

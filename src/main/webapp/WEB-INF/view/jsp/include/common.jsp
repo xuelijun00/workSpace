@@ -19,7 +19,12 @@
 <script type="text/javascript" src="js/plugins/jqGrid521/js/jquery.jqGrid.js"></script>
 <script type="text/javascript" src="js/plugins/jqGrid521/js/i18n/grid.locale-cn.js"></script>
 <!-- <script type="text/javascript" src="js/plugins/highcharts/highcharts.js"></script> -->
-<script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script>
+<script type="text/javascript" src="js/plugins/highcharts/highstock.js"></script><!-- highchart -->
+
+<script type="text/javascript" src="js/plugins/echarts/echarts.js"></script>
+<script type="text/javascript" src="js/plugins/echarts/echarts-gl.js"></script>
+
+
 <script type="text/javascript" src="js/plugins/highcharts/exporting.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/export-csv.js"></script>
 <script type="text/javascript" src="js/plugins/jeDate/jedate/jquery.jedate.js"></script>

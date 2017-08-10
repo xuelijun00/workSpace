@@ -69,7 +69,7 @@ function getUrl(type){//拼接url
 
 function queryData(){
 	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	common.refreshData1(getUrl(1),chart,operation);
 }
 
 function exportData(){
@@ -98,7 +98,7 @@ function exportData(){
 }
 
 function getChartData(chartUrl){
-	var sku = [];
+	var reportDate = [];
 	var salesSum = [];
 	var ordersSum = [];
 	var categories = [];
@@ -106,11 +106,12 @@ function getChartData(chartUrl){
 		url : chartUrl,
 		cache : false,
 		type:"get",
+		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  sku.push(data[i].sku);
+				  reportDate.push(data[i].reportDate);
 				  salesSum.push(data[i].sales);
             	  ordersSum.push(data[i].orders);
 	            }
@@ -119,13 +120,20 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {
+	/* return {
 		title:{text:"Ebay业务线时间段销售数据"}
 		,categories:sku
 		,y:y
 		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
 			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
-	};
+	}; */
+	return {
+		title:{text:"Ebay业务线时间段销售数据"}
+		,categories:reportDate
+		,y:y
+		,series:[{name: '订单数',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'line',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
+	}; 
 }
 
 (function(){	
@@ -145,7 +153,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"Ebay业务线每日sku销售数据"
 		,url:getUrl(1)

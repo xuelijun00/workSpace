@@ -57,7 +57,7 @@ function getUrl(type){//拼接url
 }
 function queryData(){
 	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	common.refreshData1(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -89,10 +89,18 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {title:{text:"销售业绩整体报表"},categories:reportDate,y:y
-			,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
-	};
+	/* return {
+			title:{text:"销售业绩整体报表"}
+			,categories:reportDate,y:y
+			,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }}
+					,{name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
+			}; */
+	return {
+		title:{text:"销售业绩整体报表"}
+		,categories:reportDate,y:y
+		,series:[{name:'销售额',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }}
+				,{name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		};
 }
 (function(){
 	$("#start_date").jeDate({
@@ -110,7 +118,7 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"销售业绩整体报表"
 		,url:getUrl(1)

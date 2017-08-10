@@ -16,4 +16,7 @@ public interface DailyBuyerCountrySalesReportsMapper {
 	List<String> selectBuyerCountry(DailyBuyerCountrySalesReportsKey key);
 	
 	List<String> selectNewPlatformBuyerCountry(DailyBuyerCountrySalesReportsKey key);
+	
+	List<DailyBuyerCountrySalesReports> selectSalesGroupcountry();
+	
 }

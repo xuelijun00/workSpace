@@ -22,5 +22,12 @@ public interface IAccountAchievementService {
      * @return
      */
     List<String>selectAccount(@Param("business") String business);
+    
+    /**
+     * 账号汇总
+     * @param key
+     * @return
+     */
+    List<DailySalesAccountReports> selectAccountSum(DailySalesAccountReportsKey key);
 
 }

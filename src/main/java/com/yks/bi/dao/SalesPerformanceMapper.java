@@ -19,6 +19,8 @@ public interface SalesPerformanceMapper {
     
     List<SalesPerformance> selectAll(SalesPerformanceKey key);
     
+    List<SalesPerformance> selectnewAllSum(SalesPerformanceKey key);
+    
     /**
      * 查询数据并汇总
      * @return

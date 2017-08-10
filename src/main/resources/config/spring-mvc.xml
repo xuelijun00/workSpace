@@ -16,9 +16,98 @@
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 引入配置文件 -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
+		<!-- <property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:permission.properties</value>
+			</list>
+		</property> -->
+	</bean>
+	<!--报表权限控制  -->
+	<bean id="permission" class="com.yks.bi.dto.system.ReportPermission">
+		<property name="permission">
+			<map>
+				<entry key="main" value="/common?path=target_completion_rate/main"></entry>
+				<entry key="salespPerformance" value="/common?path=performance_summary/salespPerformance"></entry><!--销售业绩整体报表  -->
+				<entry key="platform_salesp_performance" value="/common?path=performance_summary/platform_salesp_performance"></entry>
+				<entry key="domestic_warehouse_shipment" value="/common?path=performance_summary/domestic_warehouse_shipment"></entry>
+				<entry key="platform_warehouse_shipment_count" value="/common?path=performance_summary/platform_warehouse_shipment_count"></entry>
+				<entry key="netProfitDetails" value="/common?path=net_profit_details/netProfitDetails"></entry>
+				<entry key="platform_daily_sales" value="/common?path=performance_summary/platform_daily_sales"></entry>
+				
+				<entry key="1month" value="/common?path=target_completion_rate/1month"></entry>
+				<entry key="target_managerment" value="/common?path=target_completion_rate/target_managerment"></entry>
+				
+				<entry key="ebayDailySales" value="/common?path=ebay_domestic_warehouse/ebayDailySales"></entry>
+				<entry key="ebayServiceLineSales" value="/common?path=ebay_domestic_warehouse/ebayServiceLineSales"></entry>
+				<entry key="ebaySkuSales" value="/common?path=ebay_domestic_warehouse/ebaySkuSales"></entry>
+				<entry key="ebayCategorySales" value="/common?path=ebay_domestic_warehouse/ebayCategorySales"></entry>
+				<entry key="zhiyou" value="/common?path=ebay_domestic_warehouse/zhiyou"></entry>
+				<entry key="zhuanxian" value="/common?path=ebay_domestic_warehouse/zhuanxian"></entry>
+				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
+				
+				<entry key="account_achievement" value="/common?path=account_achievement/account_achievement"></entry>
+				<entry key="manager_account_achievement" value="/common?path=account_achievement/manager_account_achievement"></entry>
+				
+				<entry key="usebayDailySales" value="/common?path=ebay_overseas_warehouse/usebayDailySales"></entry>
+				<entry key="usebaySkuSales" value="/common?path=ebay_overseas_warehouse/usebaySkuSales"></entry>
+				<entry key="usebayCategorySales" value="/common?path=ebay_overseas_warehouse/usebayCategorySales"></entry>
+				<entry key="ukebayDailySales" value="/common?path=ebay_overseas_warehouse/ukebayDailySales"></entry>
+				<entry key="ukebaySkuSales" value="/common?path=ebay_overseas_warehouse/ukebaySkuSales"></entry>
+				<entry key="ukebayCategorySales" value="/common?path=ebay_overseas_warehouse/ukebayCategorySales"></entry>
+				<entry key="deebayDailySales" value="/common?path=ebay_overseas_warehouse/deebayDailySales"></entry>
+				<entry key="deebaySkuSales" value="/common?path=ebay_overseas_warehouse/deebaySkuSales"></entry>
+				<entry key="deebayCategorySales" value="/common?path=ebay_overseas_warehouse/deebayCategorySales"></entry>
+				<entry key="auebayDailySales" value="/common?path=ebay_overseas_warehouse/auebayDailySales"></entry>
+				<entry key="auebaySkuSales" value="/common?path=ebay_overseas_warehouse/auebaySkuSales"></entry>
+				<entry key="auebayCategorySales" value="/common?path=ebay_overseas_warehouse/auebayCategorySales"></entry>
+				
+				<entry key="amazonDailySales" value="/common?path=amazon/amazonDailySales"></entry>
+				<entry key="amazonSkuSales" value="/common?path=amazon/amazonSkuSales"></entry>
+				<entry key="amazonCategorySales" value="/common?path=amazon/amazonCategorySales"></entry>
+				<entry key="amazonDailyOut" value="/common?path=amazon/amazonDailyOut"></entry>
+				<entry key="amazonBuyerCountrySales" value="/common?path=amazon/amazonBuyerCountrySales"></entry>
+				
+				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
+				<entry key="smt/smtSkuSales" value="/common?path=smt/smtSkuSales"></entry>
+				<entry key="smtCategorySales" value="/common?path=smt/smtCategorySales"></entry>
+				<entry key="smtDailyOut" value="/common?path=smt/smtDailyOut"></entry>
+				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtBuyerCountrySales"></entry>
+				
+				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
+				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
+				<entry key="wishCategorySales" value="/common?path=wish/wishCategorySales"></entry>
+				<entry key="wishDailyOut" value="/common?path=wish/wishDailyOut"></entry>
+				<entry key="wishBuyerCountrySales" value="/common?path=wish/wishBuyerCountrySales"></entry>
+				
+				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
+				<entry key="lazadaSkuSales" value="/common?path=lazada/lazadaSkuSales"></entry>
+				<entry key="lazadaCategorySales" value="/common?path=lazada/lazadaCategorySales"></entry>
+				<entry key="lazadaDailyOut" value="/common?path=lazada/lazadaDailyOut"></entry>
+				<entry key="lazadaBuyerCountrySales" value="/common?path=lazada/lazadaBuyerCountrySales"></entry>
+				
+				<entry key="newplatformDailySales" value="/common?path=newplatform/newplatformDailySales"></entry>
+				<entry key="newplatformSkuSales" value="/common?path=newplatform/newplatformSkuSales"></entry>
+				<entry key="newplatformCategorySales" value="/common?path=newplatform/newplatformCategorySales"></entry>
+				<entry key="newplatformDailyOut" value="/common?path=newplatform/newplatformDailyOut"></entry>
+				<entry key="newplatformBuyerCountrySales" value="/common?path=newplatform/newplatformBuyerCountrySales"></entry>
+				
+				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
+				<entry key="walmartSkuSales" value="/common?path=walmart/walmartSkuSales"></entry>
+				<entry key="walmartCategorySales" value="/common?path=walmart/walmartCategorySales"></entry>
+				<entry key="walmartDailyOut" value="/common?path=walmart/walmartDailyOut"></entry>
+				<entry key="walmartBuyerCountrySales" value="/common?path=walmart/walmartBuyerCountrySales"></entry>
+				<entry key="walmartDailyOutNetProfit" value="/common?path=walmart/walmartDailyOutNetProfit"></entry>
+				
+				<entry key="neweggDailySales" value="/common?path=newegg/neweggDailySales"></entry>
+				<entry key="neweggSkuSales" value="/common?path=newegg/neweggSkuSales"></entry>
+				<entry key="neweggCategorySales" value="/common?path=newegg/neweggCategorySales"></entry>
+				<entry key="neweggDailyOut" value="/common?path=newegg/neweggDailyOut"></entry>
+				<entry key="neweggBuyerCountrySales" value="/common?path=newegg/neweggBuyerCountrySales"></entry>
+			</map>
+		</property>
 	</bean>
 	<!--数据库连接 https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -110,6 +199,11 @@
 			<mvc:mapping path="/common" />
 			<mvc:mapping path="/report/**" />
 			<bean class="com.yks.bi.web.interceptors.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/index" />
+			<mvc:mapping path="/common" />
+			<bean class="com.yks.bi.web.interceptors.PermissionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

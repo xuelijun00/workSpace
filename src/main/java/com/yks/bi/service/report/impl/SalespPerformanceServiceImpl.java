@@ -50,4 +50,10 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
 		return isales.selectAllCount(key);
 	}
 
+	@Override
+	public List<SalesPerformance> selectnewAllSum(SalesPerformanceKey key) {
+		return isales.selectnewAllSum(key);
+	}
+	
+
 }

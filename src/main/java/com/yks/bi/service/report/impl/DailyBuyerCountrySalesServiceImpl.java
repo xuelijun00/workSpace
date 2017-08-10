@@ -18,32 +18,32 @@ public class DailyBuyerCountrySalesServiceImpl implements IDailyBuyerCountrySale
 	
 	@Override
 	public List<DailyBuyerCountrySalesReports> selectByPrimaryKey(DailyBuyerCountrySalesReportsKey key) {
-		
 		return iBuyerCountry.selectByPrimaryKey(key);
 	}
 
 	@Override
 	public List<DailyBuyerCountrySalesReports> selectNewPlatformAll(DailyBuyerCountrySalesReportsKey key) {
-		
 		return iBuyerCountry.selectNewPlatformAll(key);
 	}
 	
 	@Override
 	public List<String> selectNewPlatforms() {
-		
 		return iBuyerCountry.selectNewPlatforms();
 	}
 	
 	@Override
 	public List<String> selectBuyerCountry(DailyBuyerCountrySalesReportsKey key) {
-		
 		return iBuyerCountry.selectBuyerCountry(key);
 	}
 	
 	@Override
 	public List<String> selectNewPlatformBuyerCountry(DailyBuyerCountrySalesReportsKey key) {
-		
 		return iBuyerCountry.selectNewPlatformBuyerCountry(key);
+	}
+
+	@Override
+	public List<DailyBuyerCountrySalesReports> selectSalesGroupcountry() {
+		return iBuyerCountry.selectSalesGroupcountry();
 	}
 
 }

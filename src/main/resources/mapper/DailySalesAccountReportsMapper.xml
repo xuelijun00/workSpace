@@ -37,6 +37,24 @@
        and account = #{account,jdbcType=VARCHAR}
     </if>
   </select>
+  <select id="selectAccountSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesAccountReportsKey">
+  	select  account, sum(orders) orders, sum(sales) sales
+	from dailysalesaccountreports
+	where 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate}]]>
+    </if>
+    <if test="business != null and business.length() > 0" >
+       and business = #{business,jdbcType=VARCHAR}
+    </if>
+    <if test="account != null and account.length() > 0" >
+       and account = #{account,jdbcType=VARCHAR}
+    </if>
+	group by account
+  </select>
   <!--查询平台  -->
   <select id="selectPlatform" resultType="String" >
     select distinct business from dailysalesaccountreports

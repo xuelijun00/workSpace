@@ -3,6 +3,7 @@ package com.yks.bi.dto.system;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class SystemUser implements Serializable {
 
@@ -25,6 +26,8 @@ public class SystemUser implements Serializable {
     private List<String> role;//角色
     
     private List<String> competence;//权限
+    
+    private Map<String,String> urls;//报表url
 
     public Integer getId() {
         return id;
@@ -96,6 +99,14 @@ public class SystemUser implements Serializable {
 
 	public void setCompetence(List<String> competence) {
 		this.competence = competence;
+	}
+
+	public Map<String, String> getUrls() {
+		return urls;
+	}
+
+	public void setUrls(Map<String, String> urls) {
+		this.urls = urls;
 	}
 	
 }

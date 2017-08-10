@@ -77,4 +77,13 @@ public class DailyBuyerCountrySalesController {
     public List<String> newPlamformbuyerCountry(DailyBuyerCountrySalesReportsKey key){
         return idbcss.selectNewPlatformBuyerCountry(key);
     }
+    
+    /**
+     * 查询新平台买家国家
+     * @return
+     */
+    @RequestMapping(value = "/dailyBuyerCountrySales/worldMap" ,method = RequestMethod.GET)
+    public List<DailyBuyerCountrySalesReports> worldMap(DailyBuyerCountrySalesReportsKey key){
+        return idbcss.selectSalesGroupcountry();
+    }
 }

@@ -83,7 +83,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].business + "<br/>" + data[i].reportDate);
+				  reportDate.push(data[i].reportDate);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -92,12 +92,19 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {
+	/* return {
 		title:{text:"新平台业务线每日销售数据"}
 		,categories:reportDate
 		,y:y
 		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
+	}; */
+	return {
+		title:{text:"新平台业务线每日销售数据"}
+		,categories:reportDate
+		,y:y
+		,series:[{name:'销售额',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }},
+		         {name: '订单数',type: 'line',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -132,7 +139,7 @@ function getChartData(chartUrl){
 	});
 	$("#query").bind("click",function(){
 		var operation = getChartData(getUrl());
-		common.refreshData(getUrl(1),chart,operation);
+		common.refreshData1(getUrl(1),chart,operation);
 	});
 	$("#export").bind("click",function(){
 		var startDate = $("#start_date").val();
@@ -140,10 +147,21 @@ function getChartData(chartUrl){
 		var fileName = "新平台业务线每日销售数据" + startDate +"-" +platform + ".csv";
 		var title = [ '报表时间', '平台名称','销售额', '订单数'];
 		var column = ['reportDate','business','sales','orders'];
+		$.ajax({
+			url : getUrl(1),
+			cache : false,
+			type:"get",
+			async: false,
+			success : function(data) {
+				if(data != null && data.rows.length > 0){
+					domesticData = data.rows;
+				}
+			}
+		});
 		exportDataToCSV('#list2',title,domesticData,fileName,column);
 	});
 	
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"新平台业务线每日销售数据"
 		,url:getUrl(1)

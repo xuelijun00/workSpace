@@ -90,7 +90,7 @@ function getChartData(chartUrl){
         title: {text: '率',style: {color: Highcharts.getOptions().colors[1]}},
         opposite: true
     }];
-	return {
+	/* return {
 		title:{text:"各平台每日发货数据"}
 		,categories:categories
 		,y:y
@@ -98,6 +98,15 @@ function getChartData(chartUrl){
 		         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合净利',type: 'column',data:netProfit,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
+	}; */
+	return {
+		title:{text:"各平台每日发货数据"}
+		,categories:categories
+		,y:y
+		,series:[{name:'发货单数',type: 'bar',data:orderNum,tooltip: {valueSuffix: '' }},
+		         {name: '发货收入',type: 'bar',data:productTotalCny,tooltip: {valueSuffix: '' }},
+		         {name: '税后综合净利',type: 'bar',data:netProfit,tooltip: {valueSuffix: '' }},
+		         {name: '税后综合利润率',type: 'line',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -114,11 +123,11 @@ function getChartData(chartUrl){
         },
         okfun:function(elem, val, date) {
         	var operation = getChartData(getUrl());
-        	common.refreshData(getUrl(1),chart,operation);
+        	common.refreshData1(getUrl(1),chart,operation);
         },
     });
 	
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"各平台每日发货数据"
 		,url:getUrl(1)

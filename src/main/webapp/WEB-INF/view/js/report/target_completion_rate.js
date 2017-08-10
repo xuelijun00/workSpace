@@ -1,36 +1,107 @@
 var targetCompletionRate = {
 	month:new Date().getMonth() + 1,
 	categories:[],
-	chart:Highcharts.chart('container',{
-		credits:{enabled:false},//去除版权信息
-	    chart: {zoomType: 'xy' },
-	    exporting:{enabled:false},
-	    title: {},
-	    xAxis: [{categories: [],crosshair: true}],
-	    yAxis: [{ 
-	        title: {text: '销售额',style: { color: Highcharts.getOptions().colors[1]}},
-	        labels: { format: '{value}',style: {color: Highcharts.getOptions().colors[1] }},
-	        crosshair: true
-	    },{ 
-	        labels: {format: '{value} %',style: {color: Highcharts.getOptions().colors[0]}},
-	        title: { text: '预计百分比',style: {color: Highcharts.getOptions().colors[0]}},
-	        opposite: true
-	    }],
-	    tooltip: {shared: true},
-	    legend: {
-	    	layout: 'horizontal',align: 'left',x: 120,verticalAlign: 'top',y: 25,floating: true,
-	        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-	    },
-	    //'1月份业绩目标', '1月份销售额', '1月份预计销售额','1月份业绩完成率', '1季度业绩目标' , '1季度销售额', '1季度预计百分比' ,'1月份实际净利'
-	    series: []
-	}),
+	chart:function(option){
+		var chart = echarts.init(document.getElementById('container'));
+		chart.setOption(option);
+		return chart;
+	},
+	getOpation:function(operation){
+		var legenddata = [];
+		for(var i=0;i<operation.series.length;i++){
+			legenddata.push(operation.series[i].name);
+		}
+		var option = {
+				tooltip: {
+			        trigger: 'axis',
+			        formatter: function(params, ticket, callback) {
+			            var res = params[0].name;
+			            for (var i = 0, l = params.length; i < l; i++) {
+			                if (params[i].seriesType === 'line') {
+			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+			                } else {
+			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+			                }
+			            }
+			            return res;
+			        }
+				},
+				grid: {
+			        containLabel: true
+			    },
+			    legend: {
+			        data: legenddata
+			    },
+			    toolbox: {
+			        feature: {
+			            dataView: {show: true, readOnly: false},
+			            magicType: {show: true, type: ['line', 'bar']},
+			            restore: {show: true},
+			            saveAsImage: {show: true}
+			        }
+			    }
+			    ,dataZoom: [{
+			        type: 'slider',
+			        xAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'slider',
+			        yAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'inside',
+			        xAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'inside',
+			        yAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }]
+			    ,color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']
+			    ,xAxis: [
+			        {
+			            type: 'category',
+			            data: operation.categories,
+			            axisLine: { onZero: false },
+			            axisPointer: {
+			                type: 'shadow'
+			            }
+			        }
+			    ],
+			    yAxis: [{
+			        type: 'value',
+			        name: '销售额',
+			        min: 0,
+			        position: 'left',
+			        axisLabel: {
+			            formatter: '{value} '
+			        }
+			    }, {
+			        type: 'value',
+			        name: '预计百分比',
+			        min: 0,
+			        position: 'right',
+			        axisLabel: {
+			            formatter: '{value} '
+			        }
+			    }],
+			    series: operation.series
+		};
+		return option;
+	},
 	loadData:function(platform){
-		targetCompletionRate.chart.title.textSetter('各平台'+ targetCompletionRate.month +'月份业绩目标及完成率');
 		var url = contextPath + '/report/targetcompletioncrate/histogram?month=' + $("#month").val();
 		if(platform != null && $("#" + platform).val() != "all"){
 			url = url + "&platform=" + $("#" + platform).val();
 		}
-		targetCompletionRate.chart.showLoading();
 		$.ajax({
 			url : url,
 			cache : false,
@@ -49,9 +120,6 @@ var targetCompletionRate = {
 					             ,targetCompletionRate.month+'月份净利完成率'];
 					var array1 = [[],[],[],[],[],[],[]/*,[],[],[]*/];
 					var platformArray = [];
-					while(targetCompletionRate.chart.series.length > 0) {  
-						targetCompletionRate.chart.series[0].remove();  
-	                }
 					for(var j=0;j<data.length;j++){
 						array1[0].push(data[j].performanceTargets);            //业绩目标
 						array1[1].push(data[j].sales);                         //销售额
@@ -66,21 +134,26 @@ var targetCompletionRate = {
 						platformArray.push(data[j].platform);
 					}
 					targetCompletionRate.categories = platformArray;
+					var seriess = [];
 					for(var i=0;i<title.length;i++){
 						var series = {};
-						if(i == 3/* || i==7*/){
-							series = { name: title[i],type: 'spline',yAxis: 1,data: array1[i],tooltip: {valueSuffix: '%'}};
+						if(i == 3 || i==6){
+							series = {name: title[i],type: 'line',yAxisIndex: 1,data:array1[i],tooltip: {valueSuffix: '' }};
 						}else{
-							series = {name: title[i],type: 'column',data:array1[i],tooltip: {valueSuffix: '' }};
+							series = {name: title[i],type: 'bar',data:array1[i],tooltip: {valueSuffix: '' }};
 						}
-						targetCompletionRate.chart.addSeries(series);
+						seriess.push(series);
 					}
-					targetCompletionRate.chart.xAxis[0].setCategories(platformArray,true);
-					targetCompletionRate.chart.redraw();//重新渲染数据
+					var op = {
+								title:{text:'各平台'+ targetCompletionRate.month +'月份业绩目标及完成率'}
+								,categories:platformArray
+								,series:seriess
+							}
+					var opa = targetCompletionRate.getOpation(op);
+					targetCompletionRate.chart(opa);
 				}
 			}
 		});
-		targetCompletionRate.chart.hideLoading();
 	}
 	,gridData:function(platform){
 		/*$(".ui-jqgrid-title").text("各平台"+ targetCompletionRate.month +"月份业绩目标及完成率");*/
@@ -157,7 +230,6 @@ var targetCompletionRate = {
 			}
 		}
 	});
-	targetCompletionRate.chart.title.textSetter('各平台'+ targetCompletionRate.month +'月份业绩目标及完成率');
 	targetCompletionRate.loadData(null);
 	// 创建jqGrid组件
 	jQuery("#list2").jqGrid({

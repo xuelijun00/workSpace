@@ -28,14 +28,14 @@ public class Tracker {
 	//private static final String Apikey = "c6e70625-7a26-4373-9d5d-49f119d79a65";
 	
 	public static void main(String[] args) throws Exception{
-		/*String urlStr ="?page=1&limit=25";
-		String requestData=null;
-		String result = new Tracker().orderOnlineByJson(requestData,urlStr,"get");
-		System.out.println(result);*/
+		String urlStr ="?page=1&limit=25";
+		String requestData = "{\"tracking_number\": \"WC8150707160004\",\"carrier_code\":\"sfcservice\"}";
+		String result = new Tracker().orderOnlineByJson(requestData,urlStr,"realtime");
+		System.out.println(result);
 		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00");
+		/*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00");
 		System.out.println(format.format(new Date()));
-		System.out.println(format.parse("2017-06-12T06:50:42+00:00").getYear() + 1900);
+		System.out.println(format.parse("2017-06-12T06:50:42+00:00").getYear() + 1900);*/
 	}
 
 	/**

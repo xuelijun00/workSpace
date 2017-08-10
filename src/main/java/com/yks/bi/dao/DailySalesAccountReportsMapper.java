@@ -32,4 +32,10 @@ public interface DailySalesAccountReportsMapper {
     int updateByPrimaryKeySelective(DailySalesAccountReports record);
 
     int updateByPrimaryKey(DailySalesAccountReports record);
+    /**
+     * 账号汇总
+     * @param key
+     * @return
+     */
+    List<DailySalesAccountReports> selectAccountSum(DailySalesAccountReportsKey key);
 }

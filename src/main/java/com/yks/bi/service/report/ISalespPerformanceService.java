@@ -32,5 +32,11 @@ public interface ISalespPerformanceService {
      * @return
      */
     List<String> selectDomesticPlatforms();
+    /**
+     * 新平台销售汇总
+     * @param key
+     * @return
+     */
+    List<SalesPerformance> selectnewAllSum(SalesPerformanceKey key);
 
 }

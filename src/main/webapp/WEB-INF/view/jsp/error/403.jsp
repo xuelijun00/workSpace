@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>YKSUI框架 - 500错误</title>
-    <script src="${pageContext.request.contextPath }jsLoad/code/load.js" include="../top.html"></script>
+    <script src="${pageContext.request.contextPath }/jsLoad/code/load.js" include="../top.html"></script>
     <!--加css-->
 </head>
 
@@ -18,7 +18,7 @@
             <br/><a href="###" onclick="tz()" class="btn btn-primary m-t">主页</a>
         </div>
     </div>
-    <script src="${pageContext.request.contextPath }jsLoad/code/load.js" include="../js.html"></script>
+    <script src="${pageContext.request.contextPath }/jsLoad/code/load.js" include="../js.html"></script>
     <!--加本页面 的js文件与js代码-->
     <script type="text/javascript">
     function tz(){

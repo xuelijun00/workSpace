@@ -17447,7 +17447,7 @@ module.exports = "@export ecgl.lines3D.vertex\n\nuniform mat4 worldViewProjectio
             this._context = {};
         },
 
-        delete: function (key) {
+        "delete": function (key) {
             delete this._context[key];
         },
 

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,8 @@
             <span class="logotitle" ><i class="glyphicon glyphicon-tree-conifer"></i>YKSBI系统</span></div>
             <ul class="nav" id="side-menu">
                 <li>
-                    <a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month" >
+                    <%-- <a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/1month" > --%>
+                    <a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=target_completion_rate/main" >
                         <i class="fa fa-home"></i>
                         <span class="nav-label">主页</span>
                     </a>
@@ -29,7 +31,7 @@
                 <li>
                     <a href="#"><i class="fa fa-pie-chart"></i> <span class="nav-label">业绩汇总</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/salespPerformance">销售业绩整体报表</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }${sessionScope.systemUser.urls.get('salespPerformance')}">销售业绩整体报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_salesp_performance">各平台销售业绩报表</a> </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/domestic_warehouse_shipment">国内仓发货汇总数据</a> </li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_warehouse_shipment_count">国内仓各平台发货数据</a></li>

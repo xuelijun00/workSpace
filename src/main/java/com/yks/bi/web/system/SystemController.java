@@ -2,13 +2,16 @@ package com.yks.bi.web.system;
 
 import com.yks.bi.dto.system.SystemUser;
 import com.yks.bi.service.system.SystemUserService;
+import com.yks.bi.web.exception.ForbiddenException;
 import com.yks.bi.web.vo.MessageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,8 +51,10 @@ public class SystemController {
         SystemUser loginuser = systemUserService.login(user.getUsername(),user.getPassword());
         if(loginuser == null){
             return new MessageVo(400,"用户名或密码错误");
+        }else if(CollectionUtils.isEmpty(loginuser.getRole())){
+        	return new MessageVo(403,"权限不足！");
         }else{
-            HttpSession session = request.getSession();
+        	HttpSession session = request.getSession();
             session.setAttribute("systemUser",loginuser);
             return new MessageVo(200,"登入成功");
         }

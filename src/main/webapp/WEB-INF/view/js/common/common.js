@@ -18,6 +18,87 @@ var common = {
 			});
 			return chart1;
 		},
+		echartsOption :function (operation){
+			var legenddata = [];
+			for(var i=0;i<operation.series.length;i++){
+				legenddata.push(operation.series[i].name);
+			}
+			var option = {
+				tooltip: {
+			        trigger: 'axis',
+			        formatter: function(params, ticket, callback) {
+			            var res = params[0].name;
+			            for (var i = 0, l = params.length; i < l; i++) {
+			                if (params[i].seriesType === 'line') {
+			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+			                } else {
+			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+			                }
+			            }
+			            return res;
+			        }
+				},
+				grid: {
+			        containLabel: true
+			    },
+			    legend: {
+			        data: legenddata
+			    },
+			    toolbox: {
+			        feature: {
+			            dataView: {show: true, readOnly: false},
+			            magicType: {show: true, type: ['line', 'bar']},
+			            restore: {show: true},
+			            saveAsImage: {show: true}
+			        }
+			    }
+			    ,dataZoom: [{
+			        type: 'slider',
+			        xAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'slider',
+			        yAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'inside',
+			        xAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'inside',
+			        yAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }]
+			    ,color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']
+			    ,xAxis: [
+			        {
+			            type: 'category',
+			            data: operation.categories,
+			            axisLine: { onZero: false },
+			            axisPointer: {
+			                type: 'shadow'
+			            }
+			        }
+			    ],
+			    yAxis: operation.y,
+			    series: operation.series
+			};
+			return option;
+		},
+		echarts:function(operation){
+			var chart = echarts.init(document.getElementById('container'));
+			var option = common.echartsOption(operation);
+			chart.setOption(option);
+			return chart;
+		},
 		grid:function(opation){
 			$(opation.id?opation.id:"#list2").jqGrid({
 				url : opation.url,//组件创建完成之后请求数据的url
@@ -45,8 +126,8 @@ var common = {
 			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false,search:false});
 			//$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
 			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
-		},
-		refreshData:function(gridUrl,chart,operation){
+		}
+		,refreshData:function(gridUrl,chart,operation){
 			if(chart != null && operation != null){
 				while(chart.series.length > 0) {  
 					chart.series[0].remove();  
@@ -56,6 +137,16 @@ var common = {
 				}
 				chart.xAxis[0].setCategories(operation.categories,true);
 				chart.redraw();//重新渲染数据
+			}
+			$('#list2').jqGrid('clearGridData');
+			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');
+			//$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
+			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
+		}
+		,refreshData1:function(gridUrl,chart,operation){
+			if(chart &&	operation.series[0].data.length > 0 ){
+				var option = common.echartsOption(operation);
+				chart.setOption(option);
 			}
 			$('#list2').jqGrid('clearGridData');
 			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');

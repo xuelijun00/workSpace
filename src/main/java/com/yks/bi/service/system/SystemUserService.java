@@ -7,6 +7,7 @@ import com.yks.bi.common.HttpRequestUtils;
 import com.yks.bi.common.MD5Util;
 import com.yks.bi.common.ResponseData;
 import com.yks.bi.dto.system.SystemUser;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;

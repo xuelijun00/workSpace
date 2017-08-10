@@ -15,7 +15,7 @@
   </sql>
   
   <sql id="Base_Column_List_Sum" >
-    SUM(orders) as orders,SUM(sales) as sales, sku, business
+  	report_date,sum(sales) as sales,sum(orders) as orders
   </sql>
   
   <sql id="Base_If_Sql">
@@ -39,7 +39,6 @@
     from dailysalesskureports
     where business = #{business,jdbcType=VARCHAR}
     <include refid="Base_If_Sql" />
-    ORDER BY  report_date desc
   </select>
   
   <!--用于曲线图，汇总时间段内的订单数和销售额 -->
@@ -49,8 +48,7 @@
     from dailysalesskureports
     where business = #{business,jdbcType=VARCHAR}
     <include refid="Base_If_Sql" />
-    GROUP BY sku,business
-    ORDER BY sales desc
+    GROUP BY report_date
   </select>
   
   <select id="selectEbay" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -59,7 +57,6 @@
     from ebaydailysalesskureports
     where business = #{business,jdbcType=VARCHAR}
     <include refid="Base_If_Sql" />
-    ORDER BY  report_date desc
   </select>
   
   <select id="selectEbaySum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -68,8 +65,7 @@
     from ebaydailysalesskureports
     where business = #{business,jdbcType=VARCHAR}
     <include refid="Base_If_Sql" />
-    GROUP BY sku,business
-    ORDER BY sales desc
+    GROUP BY report_date
   </select>
   
   <select id="selectSmtSku" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -78,7 +74,6 @@
     from smtdailysalesskureports
     where 1=1
     <include refid="Base_If_Sql" />
-    ORDER BY  report_date desc
   </select>
   
   <select id="selectSmtSkuSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -87,8 +82,7 @@
     from smtdailysalesskureports
     where 1=1
     <include refid="Base_If_Sql" />
-    GROUP BY sku,business
-    ORDER BY sales desc
+    GROUP BY report_date
   </select>
   
   <select id="selectWishSku" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -97,7 +91,6 @@
     from wishdailysalesskureports
     where 1=1
     <include refid="Base_If_Sql" />
-    ORDER BY  report_date desc
   </select>
   
   <select id="selectWishSkuSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -106,8 +99,7 @@
     from wishdailysalesskureports
     where 1=1
     <include refid="Base_If_Sql" />
-    GROUP BY sku,business
-    ORDER BY sales desc
+    GROUP BY report_date
   </select>
   
   <select id="selectskuAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -119,7 +111,6 @@
     	and business = #{business,jdbcType=VARCHAR}
     </if>
     <include refid="Base_If_Sql" />
-    ORDER BY  report_date desc
   </select>
  <!--用于曲线图，汇总时间段内的订单数和销售额 -->
   <select id="selectskuNewAllSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.Dailysalesskureports" >
@@ -131,15 +122,13 @@
     	and business = #{business,jdbcType=VARCHAR}
     </if>
     <include refid="Base_If_Sql" />
-    GROUP BY sku,business
-    ORDER BY sales desc
+    GROUP BY report_date
   </select>
   
    <!--查询平台  -->
   <select id="selectskuPlatforms" resultMap="BaseResultMap" >
-    SELECT business 
-    FROM dailysalesskureports 
-    WHERE business like 'new\_%' and business != 'new_newegg' and business != 'new_overstock'
+    SELECT business FROM dailysalesskureports 
+    where business like 'new\_%' and business not in( 'new_newegg','new_overstock') 
     GROUP by  business
   </select>
   

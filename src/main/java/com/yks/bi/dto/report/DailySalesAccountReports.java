@@ -7,7 +7,10 @@ public class DailySalesAccountReports extends DailySalesAccountReportsKey {
 	
 	private String reportDate1;
     public String getReportDate1() {
-        return DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
+    	if(this.getReportDate() != null){
+    		return DateFormatUtils.format(this.getReportDate(), "yyyy-MM-dd");
+    	}
+        return null;
     }
 	
     private Integer orders;

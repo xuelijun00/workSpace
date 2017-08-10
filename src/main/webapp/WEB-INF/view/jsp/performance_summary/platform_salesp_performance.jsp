@@ -68,7 +68,7 @@ function getUrl(type){
 }
 function queryData(){
 	var operation = getChartData(getUrl());
-	common.refreshData(getUrl(1),chart,operation);
+	common.refreshData1(getUrl(1),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
@@ -76,6 +76,17 @@ function exportData(){
 	var fileName = "各平台每日销售报表" + startDate +"-"+ endDate + ".csv";
 	var title = [ '报表时间', '平台名称', '销售额', '订单数'];
 	var column = ['reportDate','business','sales','orders'];
+	$.ajax({
+		url : getUrl(1),
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.rows.length > 0){
+				domesticData = data.rows;
+			}
+		}
+	});
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 function getChartData(chartUrl){
@@ -91,7 +102,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].reportDate + "<br/>" + data[i].business);
+				  reportDate.push(data[i].business);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -100,13 +111,19 @@ function getChartData(chartUrl){
 	});
 	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
 	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
-	return {
+	/* return {
 		title:{text:"各平台每日销售报表"}
 		,categories:reportDate
 		,y:y
 		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
-	};
+	}; */
+	return {
+		title:{text:"各平台每日销售报表"}
+		,categories:reportDate,y:y
+		,series:[{name:'销售额',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }}
+				,{name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		};
 }
 (function(){
 	$("#start_date").jeDate({
@@ -138,7 +155,7 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	chart = common.chart(getChartData(getUrl()));//chart
+	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
 		title:"各平台每日销售报表"
 		,url:getUrl(1)

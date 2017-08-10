@@ -56,7 +56,7 @@ function queryData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=amazon&startDate=' + startDate + "&endDate=" + endDate+ "&category=" + category;	
-	common.refreshData(chartUrl,chart,operation);
+	common.refreshData1(chartUrl,chart,operation);
 }
 function exportData(){
 	var category = $('#category').val();

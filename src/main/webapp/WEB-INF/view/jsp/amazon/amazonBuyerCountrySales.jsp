@@ -60,7 +60,7 @@ function getUrl(type){//拼接url
 	/* } */
 }
 function queryData(){	
-	common.refreshData(getUrl(),chart,operation);
+	common.refreshData1(getUrl(),chart,operation);
 }
 function exportData(){
 	var startDate = $("#start_date").val();
