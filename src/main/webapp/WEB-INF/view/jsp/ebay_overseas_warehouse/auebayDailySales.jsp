@@ -134,7 +134,7 @@ function getChartData(chartUrl){
     });
 	chart = common.echarts(getChartData(getUrl()));//chart
 	common.grid({
-		title:"EEbay海外仓澳洲仓业绩数据"
+		title:"Ebay海外仓澳洲仓业绩数据"
 		,url:getUrl(1)
 		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....

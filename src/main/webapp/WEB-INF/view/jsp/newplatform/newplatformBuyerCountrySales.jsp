@@ -70,7 +70,8 @@ function queryData(){
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "新平台买家国家交易数据" + startDate +"-"+ endDate + ".csv";
+	var	platform = $("#platform").val();
+	var fileName = "新平台买家国家交易数据" + startDate +"-"+ endDate +"-"+ platform + ".csv";
 	var title = [  '平台', '买家国家', '日期（day）', '订单数' , '数量' , '销售额'];
 	var column = ['platform','buyerCountry','reportDate','orders','quantity','sales'];
 	$.ajax({

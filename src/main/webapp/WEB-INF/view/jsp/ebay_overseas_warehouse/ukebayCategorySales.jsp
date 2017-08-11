@@ -36,7 +36,6 @@
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
         </form>
-			<h5>表格</h5>
 		</div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>

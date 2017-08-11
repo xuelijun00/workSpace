@@ -64,8 +64,8 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Ebay业务线每日品类销售数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '分类', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-	var column = ['category','skuOld','reportDate','orders','quantity','sales'];
+	var title = [ '分类', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
+	var column = ['category','reportDate','orders','quantity','sales'];
 	
 	var chartUrl =  contextPath + '/report/ebay_domestic/category/grid?business=ebay&startDate=' + startDate + "&endDate=" + endDate+ "&category=" + category;	
 

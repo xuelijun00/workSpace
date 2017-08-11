@@ -64,7 +64,7 @@ var targetCompletionRate = {
 			        filterMode: 'empty',
 			        start: 0,
 			        end: 100
-			    }]
+			    }] 
 			    ,color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']
 			    ,xAxis: [
 			        {
@@ -131,8 +131,13 @@ var targetCompletionRate = {
 						/*array1[7].push(data[j].quarterlyEstimatedPercentage);  //季度预计百分比
 */						array1[5].push(data[j].targetProfit);                  //实际是目标净利
 						array1[6].push(data[j].netProfitCompletionRate);       //净利完成率
-						platformArray.push(data[j].platform);
-					}
+						
+						/*configplatformgoal_new表中的platform为匹配被特殊使用，
+						 * 在实际页面报表中的“平台名称”是configplatformgoal_new表中的name，
+						 * 所以这里用data[j].name
+						*/
+						platformArray.push(data[j].name);                      					
+						}
 					targetCompletionRate.categories = platformArray;
 					var seriess = [];
 					for(var i=0;i<title.length;i++){

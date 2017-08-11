@@ -87,7 +87,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var business = $("#platform").val();
-	var fileName = "newegg业务线每日sku销售数据" + startDate +"-"+ endDate + ".csv";
+	var fileName = "新平台每日sku销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '业务线', 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 	var column = ['business', 'sku','skuOld','reportDate','orders','quantity','sales'];
 	$.ajax({
@@ -151,7 +151,7 @@ function getChartData(chartUrl){
 (function(){
 	$("#start_date").jeDate({
         isinitVal: true,
-        initAddVal:{DD:"-14"},
+        initAddVal:{DD:"-7"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",

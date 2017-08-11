@@ -123,8 +123,8 @@ function getChartData(chartUrl){
 		title:{text:"wish业务线时间段sku销售数据"}
 		,categories:categories
 		,y:y
-		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
+		,series:[{name: '订单数',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'line',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 

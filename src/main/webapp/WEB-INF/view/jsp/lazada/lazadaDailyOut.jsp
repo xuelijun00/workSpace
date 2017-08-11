@@ -57,7 +57,9 @@ function query(){
 	$('#list1').jqGrid('setGridParam', {url: getUrl()}).trigger('reloadGrid');
 }
 function exportGridData(){
-	var fileName = "Lazada每日发货数据 " + new Date().getTime() + ".csv";
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
+	var fileName = "Lazada每日发货数据 " + startDate +"-"+ endDate + ".csv";
 	var title = [ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
 	var column = ['reportDate','platform','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
 	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];

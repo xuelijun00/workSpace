@@ -143,8 +143,9 @@ function getChartData(chartUrl){
 	});
 	$("#export").bind("click",function(){
 		var startDate = $("#start_date").val();
+		var endDate = $("#end_date").val();
 		var platform = $("#platform").val();
-		var fileName = "新平台业务线每日销售数据" + startDate +"-" +platform + ".csv";
+		var fileName = "新平台业务线每日销售数据" + startDate + "-" + endDate + "-" + platform + ".csv";
 		var title = [ '报表时间', '平台名称','销售额', '订单数'];
 		var column = ['reportDate','business','sales','orders'];
 		$.ajax({

@@ -127,7 +127,10 @@ function query(type){
 }
 function exportGridData(type){
 	//debugger;
-	var fileName = "各平台各账号管理员业绩" + new Date().getTime() + ".csv";
+	var startDate = $("#start_date" + type).val();
+	var endDate = $("#end_date" + type).val();
+	var platform = $("#platform" + type).val();	
+	var fileName = "各平台各账号管理员业绩" + startDate + "-" + endDate + "-" + platform + ".csv";
 	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利'];
 	var column;
 	if(type == 1){

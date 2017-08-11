@@ -144,7 +144,7 @@ var common = {
 			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
 		}
 		,refreshData1:function(gridUrl,chart,operation){
-			if(chart &&	operation.series[0].data.length > 0 ){
+			if(chart){
 				var option = common.echartsOption(operation);
 				chart.setOption(option);
 			}

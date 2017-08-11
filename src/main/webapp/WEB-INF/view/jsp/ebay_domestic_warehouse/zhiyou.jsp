@@ -58,7 +58,10 @@ function query(){
 	$('#list1').jqGrid('setGridParam', {url: getUrl()}).trigger('reloadGrid');
 }
 function exportGridData(){
-	var fileName = "Ebay站点直邮发货业绩 " + new Date().getTime() + ".csv";
+	var zhuzhandian = $("#site1").val();
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
+	var fileName = "Ebay站点直邮发货业绩 " + startDate +"-"+ endDate + "-"+ zhuzhandian +".csv";
 	var title = [ '日期','站点', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
 	var column = ['reportDate','zhuzhandian','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
 	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];

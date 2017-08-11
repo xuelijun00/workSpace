@@ -27,11 +27,18 @@
     quarterly_estimated_percentage, target_profit, actual_profit, net_profit_completion_rate,
     modify_date
   </sql>
-  <!-- 查询平台 -->
+  
+  <!-- 查询平台
+  	configplatformgoal_new表中的platform为匹配被特殊使用，
+	 在实际页面报表中的“平台名称”是configplatformgoal_new表中的name，
+	 所以这里用name而不是platfrom -->
   <select id="selectPlatform" resultType="String">
-  	select distinct platform from configplatformgoal_new;
+  	select distinct name from configplatformgoal_new;
   </select>
-  <!-- 查询报表 没使用<include refid="Base_Column_List" /> 是因为 前台注释了“季度业绩目标”、“季度销售额”、“季度预计百分比”-->
+  
+  <!-- 查询报表 
+  	没使用<include refid="Base_Column_List" /> 是因为 
+  	前台注释了“季度业绩目标”、“季度销售额”、“季度预计百分比”-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
     id, platform, name, report_date, report_month, performance_targets, 
@@ -43,7 +50,7 @@
     	and report_month = #{month,jdbcType=VARCHAR}
     </if>
     <if test="platform != null and platform.length() > 0">
-      and platform = #{platform,jdbcType=VARCHAR}
+      and name = #{platform,jdbcType=VARCHAR}
     </if>
   </select>
   

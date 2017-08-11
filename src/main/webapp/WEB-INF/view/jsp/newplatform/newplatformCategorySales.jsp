@@ -49,7 +49,6 @@
         
 </div>
 
-</div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
@@ -117,7 +116,10 @@ function getUrl(){
 			}
 		});
 		
-		var fileName = "新平台业务线每日分类销售数据.csv";
+		var startDate = $("#start_date").val();
+		var endDate = $("#end_date").val();
+		var platform = $("#platform").val();
+		var fileName = "新平台每日品类销售数据" + startDate + "-" + endDate + "-" + platform + ".csv";
 		var title = [ '分类','业务线', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
 		var column = ['category','business','reportDate','orders','quantity','sales'];
 		
@@ -125,7 +127,7 @@ function getUrl(){
 	});
 	
 	common.grid({
-		title:"新平台业务线每日分类销售数据"
+		title:"新平台每日品类销售数据"
 		,url:getUrl()
 		,colNames:[ '分类','业务线', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
