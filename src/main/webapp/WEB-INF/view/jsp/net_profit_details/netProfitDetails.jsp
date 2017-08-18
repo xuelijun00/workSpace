@@ -28,7 +28,7 @@
             <br/>
             <div class="form-group">
                 <label>平台：</label>
-                <select class="form-control w120" id="platform" >
+                <select class="form-control w120" id="platform" onchange="palAndAcc()">
                 </select>
             </div>
              <div class="form-group">
@@ -113,6 +113,27 @@ function exportData(){
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
+function palAndAcc(){
+	var	platform = $("#platform").val();
+	if(platform == 'all'){
+		platform ='';
+	}
+	$.ajax({
+		url : contextPath + "/report/profit_details/account?platform=" +platform,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#account").empty();
+				for(var i=0;i<data.length;i++){
+					$("#account").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
+}
+
 (function(){
 	$("#start_date").jeDate({
         isinitVal: true,
@@ -183,7 +204,7 @@ function exportData(){
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}, 
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
 		             ]	      
 		,sortname:"reportDate"
 		,sortorder:"desc"

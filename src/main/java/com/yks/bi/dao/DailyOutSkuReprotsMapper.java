@@ -2,6 +2,8 @@ package com.yks.bi.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yks.bi.dto.report.DailyOutSkuReprots;
 
 public interface DailyOutSkuReprotsMapper {
@@ -14,10 +16,19 @@ public interface DailyOutSkuReprotsMapper {
   
     List<String> selectPlatform();
     
-    List<String> selectAccount();
+    List<String> selectAccount(@Param("platform")String platform);
     
-    List<String> selectSku();
+    List<String> selectZhuzhandian(@Param("platform")String platform);
+    
+    List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key);
+    
+    List<String> selectNewPlatform();
+    
+    List<String> selectNewPlatformAccount(@Param("platform")String platform);
+    
+    List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key);
 
+    List<String> selectNewEggAccount(@Param("platform")String platform);
     /**
      * 用于“walmart发货订单净利”页面
      * @param key

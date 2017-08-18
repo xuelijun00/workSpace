@@ -48,8 +48,8 @@
 				<entry key="zhiyou" value="/common?path=ebay_domestic_warehouse/zhiyou"></entry>
 				<entry key="zhuanxian" value="/common?path=ebay_domestic_warehouse/zhuanxian"></entry>
 				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
+				<entry key="ebayDailyOutNetProfit" value="/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit"></entry>
 				<entry key="ebayDailyOutAccount" value="/common?path=ebay_domestic_warehouse/ebayDailyOutAccount"></entry>
-				
 				
 				<entry key="account_achievement" value="/common?path=account_achievement/account_achievement"></entry>
 				<entry key="manager_account_achievement" value="/common?path=account_achievement/manager_account_achievement"></entry>
@@ -72,6 +72,7 @@
 				<entry key="amazonCategorySales" value="/common?path=amazon/amazonCategorySales"></entry>
 				<entry key="amazonDailyOut" value="/common?path=amazon/amazonDailyOut"></entry>
 				<entry key="amazonBuyerCountrySales" value="/common?path=amazon/amazonBuyerCountrySales"></entry>
+				<entry key="amazonDailyOutNetProfit" value="/common?path=amazon/amazonDailyOutNetProfit"></entry>
 				<entry key="amazonDailyOutAccount" value="/common?path=amazon/amazonDailyOutAccount"></entry>
 				
 				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
@@ -79,6 +80,7 @@
 				<entry key="smtCategorySales" value="/common?path=smt/smtCategorySales"></entry>
 				<entry key="smtDailyOut" value="/common?path=smt/smtDailyOut"></entry>
 				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtBuyerCountrySales"></entry>
+				<entry key="smtDailyOutNetProfit" value="/common?path=smt/smtDailyOutNetProfit"></entry>
 				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtDailyOutAccount"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
@@ -86,6 +88,7 @@
 				<entry key="wishCategorySales" value="/common?path=wish/wishCategorySales"></entry>
 				<entry key="wishDailyOut" value="/common?path=wish/wishDailyOut"></entry>
 				<entry key="wishBuyerCountrySales" value="/common?path=wish/wishBuyerCountrySales"></entry>
+				<entry key="wishDailyOutNetProfit" value="/common?path=wish/wishDailyOutNetProfit"></entry>
 				<entry key="wishDailyOutAccount" value="/common?path=wish/wishDailyOutAccount"></entry>
 				
 				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
@@ -93,6 +96,7 @@
 				<entry key="lazadaCategorySales" value="/common?path=lazada/lazadaCategorySales"></entry>
 				<entry key="lazadaDailyOut" value="/common?path=lazada/lazadaDailyOut"></entry>
 				<entry key="lazadaBuyerCountrySales" value="/common?path=lazada/lazadaBuyerCountrySales"></entry>
+				<entry key="lazadaDailyOutNetProfit" value="/common?path=lazada/lazadaDailyOutNetProfit"></entry>
 				<entry key="lazadaDailyOutAccount" value="/common?path=lazada/lazadaDailyOutAccount"></entry>
 				
 				<entry key="newplatformDailySales" value="/common?path=newplatform/newplatformDailySales"></entry>
@@ -100,6 +104,7 @@
 				<entry key="newplatformCategorySales" value="/common?path=newplatform/newplatformCategorySales"></entry>
 				<entry key="newplatformDailyOut" value="/common?path=newplatform/newplatformDailyOut"></entry>
 				<entry key="newplatformBuyerCountrySales" value="/common?path=newplatform/newplatformBuyerCountrySales"></entry>
+				<entry key="newplatformDailyOutNetProfit" value="/common?path=newplatform/newplatformDailyOutNetProfit"></entry>
 				<entry key="newplatformDailyOutAccount" value="/common?path=newplatform/newplatformDailyOutAccount"></entry>
 				
 				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
@@ -115,6 +120,7 @@
 				<entry key="neweggCategorySales" value="/common?path=newegg/neweggCategorySales"></entry>
 				<entry key="neweggDailyOut" value="/common?path=newegg/neweggDailyOut"></entry>
 				<entry key="neweggBuyerCountrySales" value="/common?path=newegg/neweggBuyerCountrySales"></entry>
+				<entry key="neweggDailyOutNetProfit" value="/common?path=newegg/neweggDailyOutNetProfit"></entry>
 				<entry key="neweggDailyOutAccount" value="/common?path=newegg/neweggDailyOutAccount"></entry>
 			</map>
 		</property>

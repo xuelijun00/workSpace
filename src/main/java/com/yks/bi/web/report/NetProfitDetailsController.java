@@ -56,19 +56,66 @@ public class NetProfitDetailsController {
 	
 	/**
 	 * 查询账号
+	 * @param platform
 	 * @return
 	 */
 	@RequestMapping("/profit_details/account")
-	public List<String> selectAccount() {
-		return NetProfit.selectAccount();
+	public List<String> selectAccount(String platform) {
+		return NetProfit.selectAccount(platform);
 	}
 	/**
-	 * 查询sku
+	 * 查询主站点
+	 * @param platform
 	 * @return
 	 */
-	@RequestMapping("/profit_details/sku")
-	public List<String> selectSku() {
-		return NetProfit.selectSku();
+	@RequestMapping("/profit_details/zhuzhandian")
+	public List<String> selectZhuzhandian(String platform) {
+		return NetProfit.selectZhuzhandian(platform);
+	}
+	
+	@RequestMapping(value="/profit_details/newPlatform/grid")
+	public GridModel selectNewPlatformGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<DailyOutSkuReprots> list = NetProfit.selectNewPlatformAll(key);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+	}
+	
+	/**
+	 * 查询新平台的平台
+	 * @return
+	 */
+	@RequestMapping("/profit_details/newPlatform/platform")
+	public List<String> selectNewPlatform() {
+		return NetProfit.selectNewPlatform();
+	}
+	
+	/**
+	 * 查询新平台的账号
+	 * @return
+	 */
+	@RequestMapping("/profit_details/newPlatform/account")
+	public List<String> selectNewPlatformAccount(String platform) {
+		return NetProfit.selectNewPlatformAccount(platform);
+	}
+	
+	@RequestMapping(value="/profit_details/newEgg/grid")
+	public GridModel selectNewEggformGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<DailyOutSkuReprots> list = NetProfit.selectNewEggAll(key);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+	}
+	
+	/**
+	 * 查询新蛋的账号
+	 * @return
+	 */
+	@RequestMapping("/profit_details/newEgg/account")
+	public List<String> selectNewEggAccount(String platform) {
+		return NetProfit.selectNewEggAccount(platform);
 	}
 	
 	/**

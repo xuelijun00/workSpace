@@ -25,7 +25,6 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
-            <br/>
             <div class="form-group">
                 <label>平台：</label>
                 <select class="form-control w120" id="platform" onchange="palChangeAcc()">
@@ -117,7 +116,7 @@ function exportData(){
 	var	platform = $("#platform").val();
 	var fileName = "各平台账号维度每日发货数据" + startDate +"-"+ endDate +"-"+ platform + ".csv";
 	var title = [ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类'];
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类/主站点'];
 	var column = [ 'platform', 'salesAccount', 'manager', 'reportDate','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','category'];
 	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入（元）','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
@@ -175,7 +174,7 @@ function exportData(){
 		title:"各平台账号维度每日发货数据"
 		,url:getUrl()
 		,colNames:[ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类']
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类/主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'salesAccount',index : 'sales_account',width : 145}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},
