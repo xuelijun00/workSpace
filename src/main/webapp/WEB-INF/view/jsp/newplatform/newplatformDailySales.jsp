@@ -90,21 +90,36 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
+	var y = [{
+        type: 'value',
+        name: '销售额_美元',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }, {
+        type: 'value',
+        name: '订单数',       
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额_美元',style: {color: Highcharts.getOptions().colors[0]}}}
+	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}]; */
 	/* return {
 		title:{text:"新平台业务线每日销售数据"}
 		,categories:reportDate
 		,y:y
-		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
+		,series:[{name:'销售额_美元',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	}; */
 	return {
 		title:{text:"新平台业务线每日销售数据"}
 		,categories:reportDate
 		,y:y
-		,series:[{name:'销售额',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'line',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
+		         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -146,7 +161,7 @@ function getChartData(chartUrl){
 		var endDate = $("#end_date").val();
 		var platform = $("#platform").val();
 		var fileName = "新平台业务线每日销售数据" + startDate + "-" + endDate + "-" + platform + ".csv";
-		var title = [ '报表时间', '平台名称','销售额', '订单数'];
+		var title = [ '报表时间', '平台名称','销售额_美元', '订单数'];
 		var column = ['reportDate','business','sales','orders'];
 		$.ajax({
 			url : getUrl(1),
@@ -166,7 +181,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"新平台业务线每日销售数据"
 		,url:getUrl(1)
-		,colNames:[ '报表时间', '平台名称', '销售额', '订单数']
+		,colNames:[ '报表时间', '平台名称', '销售额_美元', '订单数']
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 255}, 
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 

@@ -117,8 +117,23 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
+	var y = [{
+        type: 'value',
+        name: '订单金额_美元',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }, {
+        type: 'value',
+        name: '订单数',       
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
+	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}]; */
 	/* return {
 		title:{text:"smt业务线时间段sku销售数据"}
 		,categories:sku
@@ -130,8 +145,8 @@ function getChartData(chartUrl){
 		title:{text:"smt业务线时间段sku销售数据"}
 		,categories:categories
 		,y:y
-		,series:[{name: '订单数',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'line',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'订单金额_美元',type: 'line',data:salesSum,tooltip: {valueSuffix: '' }},
+			{name: '订单数',type: 'bar',yAxisIndex: 1,data:ordersSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 

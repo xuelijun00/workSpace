@@ -15,7 +15,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>国内仓各平台发货数据报表</h5></div>
+    <div class="ibox-title"><h5>国内仓各平台发货数据报表(注意：本页面货币的单位，均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -71,7 +71,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "国内仓各平台发货数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
+	var title = [ '日期','平台', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
 	var column = ['reportDate','platform','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
 	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];
 	$.ajax({
@@ -91,7 +91,7 @@ function getChartData(chartUrl){
 	var profit=[];            //税后综合净利
 	var netProfitMargin=[];   //税后综合利润率
 	var orderNum=[];          //发货单数
-	var productTotalCny=[];   //发货收入
+	var productTotalCny=[];   //发货收入（元）
 	var unitPrice=[];         //客单价
 	var grossProfit=[];       //毛利
 	var categories = [];
@@ -115,20 +115,35 @@ function getChartData(chartUrl){
 		}
 	});
 	var y = [{
+        type: 'value',
+        name: '刻度',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }, {
+        type: 'value',
+        name: '率',
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	/* var y = [{
         labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},
         title: {text: '刻度',style: {color: Highcharts.getOptions().colors[0]}}
     },{
         labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},
         title: {text: '率',style: {color: Highcharts.getOptions().colors[1]}},
         opposite: true
-    }];
+    }]; */
 	/* return {
 		title:{text:"国内仓各平台发货数据"}
 		,categories:categories
 		,y:y
 		,series:[{name:'发货单数',type: 'column',data:orderNum,tooltip: {valueSuffix: '' }},
 				 {name:'客单价',type: 'column',data:unitPrice,tooltip: {valueSuffix: '' }},
-		         {name: '发货收入',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
+		         {name: '发货收入（元）',type: 'column',data:productTotalCny,tooltip: {valueSuffix: '' }},
 		         {name: '毛利',type: 'column',data:grossProfit,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合净利',type: 'column',data:profit,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合利润率',type: 'spline',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
@@ -139,10 +154,10 @@ function getChartData(chartUrl){
 		,y:y
 		,series:[{name:'发货单数',type: 'bar',data:orderNum,tooltip: {valueSuffix: '' }},
 				 {name:'客单价',type: 'bar',data:unitPrice,tooltip: {valueSuffix: '' }},
-		         {name: '发货收入',type: 'bar',data:productTotalCny,tooltip: {valueSuffix: '' }},
+		         {name: '发货收入（元）',type: 'bar',data:productTotalCny,tooltip: {valueSuffix: '' }},
 		         {name: '毛利',type: 'bar',data:grossProfit,tooltip: {valueSuffix: '' }},
 		         {name: '税后综合净利',type: 'bar',data:profit,tooltip: {valueSuffix: '' }},
-		         {name: '税后综合利润率',type: 'line',yAxis: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
+		         {name: '税后综合利润率',type: 'line',yAxisIndex: 1,data:netProfitMargin,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){
@@ -180,7 +195,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"国内仓各平台发货数据 "
 		,url:getUrl(1)
-		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
+		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120}, 
 		            {name : 'platform',index : 'platform',width : 100},
 		             {name : 'orderNum',index : 'orderNum',width : 100,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 

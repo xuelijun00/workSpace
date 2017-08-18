@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>净利导出明细</h5></div>
+    <div class="ibox-title"><h5>净利导出明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -100,13 +100,15 @@ function exportData(){
 			}
 		}
 	});
-	
-	var fileName = "净利导出明细.csv";
-	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入', '退款', '成本', '毛利',
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var	platform = $("#platform").val();
+	var fileName = "净利导出明细" + startDate +"-"+ endDate +"-"+ platform + ".csv";
+	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
 	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
-	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
+	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入（元）','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
 	var column = ['reportDate','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit']; */
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
@@ -160,7 +162,7 @@ function exportData(){
 	common.grid({
 		title:"净利导出明细"
 		,url:getUrl()
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
+		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
@@ -178,7 +180,7 @@ function exportData(){
 		            {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'netProfit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}, 

@@ -72,7 +72,7 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var	platform = $("#platform").val();
 	var fileName = "新平台买家国家交易数据" + startDate +"-"+ endDate +"-"+ platform + ".csv";
-	var title = [  '平台', '买家国家', '日期（day）', '订单数' , '数量' , '销售额'];
+	var title = [  '平台', '买家国家', '日期（day）', '订单数' , '数量' , '销售额_美元'];
 	var column = ['platform','buyerCountry','reportDate','orders','quantity','sales'];
 	$.ajax({
 		url : getUrl(),
@@ -160,7 +160,7 @@ $("#platform").bind("change", function platform(){
 	common.grid({
 		title:"新平台买家国家交易数据"
 		,url:getUrl()
-		,colNames:[ '平台', '买家国家', '日期（day）', '订单数' ,'数量' ,'销售额']
+		,colNames:[ '平台', '买家国家', '日期（day）', '订单数' ,'数量' ,'销售额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'platform',index : 'platform',width : 255}, 
 			{name : 'buyerCountry',index : 'buyerCountry',width : 255}, 

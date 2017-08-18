@@ -78,16 +78,16 @@ var targetCompletionRate = {
 			    ],
 			    yAxis: [{
 			        type: 'value',
-			        name: '销售额',
-			        min: 0,
+			        name: '刻度',
+			        /*min: 0,*/
 			        position: 'left',
 			        axisLabel: {
 			            formatter: '{value} '
 			        }
 			    }, {
 			        type: 'value',
-			        name: '预计百分比',
-			        min: 0,
+			        name: '百分比',
+			        /*min: 0,*/
 			        position: 'right',
 			        axisLabel: {
 			            formatter: '{value} '
@@ -124,7 +124,7 @@ var targetCompletionRate = {
 						array1[0].push(data[j].performanceTargets);            //业绩目标
 						array1[1].push(data[j].sales);                         //销售额
 						array1[2].push(data[j].estimatedSales);                //预计销售额
-						array1[3].push(data[j].estimatedPercentage);           //业绩完成率（原来是 预计百分比）
+						array1[3].push(data[j].salesPercentage);               //业绩完成率
 						/*array1[4].push(data[j].quarterlyPerformanceTargets);   //季度业绩目标
 						array1[5].push(data[j].quarterlySales);                //季度销售额	
 */						array1[4].push(data[j].actualProfit);                  //实际利润
@@ -177,7 +177,7 @@ var targetCompletionRate = {
 	}
 	,exportData:function(){
 		var fileName ="各平台"+ targetCompletionRate.month +"月份业绩目标及完成率" + new Date().getTime() + ".csv";
-		var title = ['平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','业绩完成率'
+		var title = ['平台名称', '报表时间', '业绩目标', '预计业绩完成率', '销售额', '预计销售额','业绩完成率'
 		             , /*'季度业绩目标' , '季度销售额', '季度预计百分比',*/ '实际净利'
 		             , '目标净利', '净利完成率']
 		var tableData;
@@ -200,7 +200,7 @@ var targetCompletionRate = {
 				}
 			}
 		});
-		var cloumn = ['name','reportDate','performanceTargets','sales','estimatedSales','estimatedPercentage'
+		var cloumn = ['name','reportDate','performanceTargets','sales','estimatedSales','salesPercentage'
 		              ,/*'quarterlyPerformanceTargets','quarterlySales','quarterlyEstimatedPercentage',*/'actualProfit'
 		              ,'targetProfit','netProfitCompletionRate'];
 		exportDataToCSV('#list2',title,tableData,fileName,cloumn);
@@ -241,20 +241,21 @@ var targetCompletionRate = {
 				caption:"各平台"+ targetCompletionRate.month +"月份业绩目标及完成率",
 				url : contextPath + '/report/targetcompletioncrate/grid?month=' + $("#month").val(),//组件创建完成之后请求数据的url
 				datatype : "json",//请求数据返回的类型。可选json,xml,txt
-				colNames : [ '平台名称', '报表时间', '业绩目标', '销售额', '预计销售额','业绩完成率', /*'季度业绩目标' , '季度销售额', '季度预计百分比', */'实际净利', '目标净利','净利完成率'],
+				colNames : [ '平台名称', '报表时间', '业绩目标', '预计业绩完成率', '销售额', '预计销售额','业绩完成率', /*'季度业绩目标' , '季度销售额', '季度预计百分比', */'实际净利', '目标净利','净利完成率'],
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-				             {name : 'name',index : 'name',width : 185}, 
-				             {name : 'reportDate',index : 'reportDate',width : 135,formatter:function(val){return new Date(val).toLocaleDateString();}}, 
-				             {name : 'performanceTargets',index : 'performanceTargets',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
-				             {name : 'sales',index : 'sales',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
-				             {name : 'estimatedSales',index : 'estimatedSales',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
-				             {name : 'estimatedPercentage',index : 'estimatedPercentage',width : 135,formatter:'integer', formatoptions:{decimalPlaces:2},align:"right"} ,
+				             {name : 'name',index : 'name',width : 155}, 
+				             {name : 'reportDate',index : 'reportDate',width : 125,formatter:function(val){return new Date(val).toLocaleDateString();}}, 
+				             {name : 'performanceTargets',index : 'performanceTargets',width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
+				             {name : 'estimatedSalesPercentage',index : 'estimatedSalesPercentage',width : 115,formatter:'integer', formatoptions:{decimalPlaces:2},align:"right"} ,
+				             {name : 'sales',index : 'sales',width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
+				             {name : 'estimatedSales',index : 'estimatedSales',width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"}, 
+				             {name : 'salesPercentage',index : 'salesPercentage',width : 115,formatter:'integer', formatoptions:{decimalPlaces:2},align:"right"} ,
 				             /*{name : 'quarterlyPerformanceTargets',index : 'quarterlyPerformanceTargets',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				             {name : 'quarterlySales',index : 'quarterlySales',width : 105,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				             {name : 'quarterlyEstimatedPercentage',index : 'quarterlyEstimatedPercentage',width : 105,formatter:'integer', formatoptions:{decimalPlaces:2},align:"right"},*/
-				             {name : 'actualProfit',index : 'actualProfit',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
-				             {name : 'targetProfit',index : 'targetProfit',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
-				             {name : 'netProfitCompletionRate',index : 'netProfitCompletionRate',width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
+				             {name : 'actualProfit',index : 'actualProfit',width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
+				             {name : 'targetProfit',index : 'targetProfit',width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
+				             {name : 'netProfitCompletionRate',index : 'netProfitCompletionRate',width : 115,formatter:'integer', formatoptions:{thousandsSeparator: ',',decimalPlaces:2},align:"right"} ,
 				           ],
 				rowNum : 20,//一页显示多少条
 				rowList : [ 20, 40, 50 ],//可供用户选择一页显示多少条

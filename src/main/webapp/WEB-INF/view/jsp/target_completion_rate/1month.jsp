@@ -13,6 +13,7 @@
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
+	 	<div class="ibox-title"><h5>各平台各月业绩完成率（注意：本页面的货币单位，均是（美元））</h5></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<form class="form-inline" id="form">
             <div class="form-group">

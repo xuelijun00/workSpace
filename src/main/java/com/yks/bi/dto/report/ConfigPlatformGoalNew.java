@@ -21,15 +21,17 @@ public class ConfigPlatformGoalNew {
 
     private double quarterlySales;
 
-/*    private float netProfitTarget;     //无效字段 */  
+/*    private float netProfitTarget;                 //无效字段 */  
 
 	private double estimatedSales;
 
     private double quarterlyEstimatedSales;
 
-    private float estimatedPercentage;               //业绩完成率（原来是 预计百分比）
+    private float salesPercentage;                   //业绩完成率
 
     private float quarterlyEstimatedPercentage;
+    
+    private float estimatedSalesPercentage;          //预计业绩完成率
 
     private double targetProfit;                     //实际上是页面中的目标净利
 
@@ -136,12 +138,12 @@ public class ConfigPlatformGoalNew {
         this.quarterlyEstimatedSales = quarterlyEstimatedSales;
     }
 
-    public float getEstimatedPercentage() {
-        return estimatedPercentage;
+    public float getSalesPercentage() {
+        return salesPercentage;
     }
 
-    public void setEstimatedPercentage(float estimatedPercentage) {
-        this.estimatedPercentage = estimatedPercentage;
+    public void setSalesPercentage(float salesPercentage) {
+        this.salesPercentage = salesPercentage;
     }
 
     public float getQuarterlyEstimatedPercentage() {
@@ -184,4 +186,12 @@ public class ConfigPlatformGoalNew {
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
+
+	public float getEstimatedSalesPercentage() {
+		return estimatedSalesPercentage;
+	}
+
+	public void setEstimatedSalesPercentage(float estimatedSalesPercentage) {
+		this.estimatedSalesPercentage = estimatedSalesPercentage;
+	}
 }

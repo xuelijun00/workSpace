@@ -78,7 +78,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Ebay业务线销售数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '销售额', '订单数'];
+	var title = [ '平台名称', '销售额_美元', '订单数'];
 	var column = ['business','sales','orders'];
 	$.ajax({
 		url : getUrl(1),
@@ -115,21 +115,36 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额',style: {color: Highcharts.getOptions().colors[0]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];
+	var y = [{
+        type: 'value',
+        name: '销售额_美元',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }, {
+        type: 'value',
+        name: '订单数',       
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额_美元',style: {color: Highcharts.getOptions().colors[0]}}}
+	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}]; */
 	/* return {
 		title:{text:"Ebay业务线销售数据"}
 		,categories:businessDate
 		,y:y
-		,series:[{name:'销售额',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
+		,series:[{name:'销售额_美元',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
 		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	}; */
 	return {
 		title:{text:"Ebay业务线销售数据"}
 	,categories:businessDate
 	,y:y
-	,series:[{name:'销售额',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }},
-	         {name: '订单数',type: 'line',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
+	,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
+	         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 };
 }
 (function(){
@@ -166,7 +181,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"Ebay业务线销售数据"
 		,url:getUrl(1)
-		,colNames:[  '平台名称', '销售额', '订单数']
+		,colNames:[  '平台名称', '销售额_美元', '订单数']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		             {name : 'business',index : 'business',width : 205}, 
 		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 

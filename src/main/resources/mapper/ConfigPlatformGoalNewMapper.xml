@@ -13,8 +13,9 @@
     <result column="quarterly_sales" property="quarterlySales" jdbcType="DOUBLE" />
     <result column="estimated_sales" property="estimatedSales" jdbcType="DOUBLE" />
     <result column="quarterly_estimated_sales" property="quarterlyEstimatedSales" jdbcType="DOUBLE" />
-    <result column="estimated_percentage" property="estimatedPercentage" jdbcType="REAL" />
+    <result column="sales_percentage" property="salesPercentage" jdbcType="REAL" />
     <result column="quarterly_estimated_percentage" property="quarterlyEstimatedPercentage" jdbcType="REAL" />
+    <result column="estimated_sales_percentage" property="estimatedSalesPercentage" jdbcType="REAL" />
     <result column="target_profit" property="targetProfit" jdbcType="DOUBLE" />
     <result column="actual_profit" property="actualProfit" jdbcType="DOUBLE" />
  <!--    <result column="net_profit_target" property="netProfitTarget" jdbcType="INTEGER" />  被删除了 -->
@@ -23,8 +24,8 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, platform, name, report_date, report_month, performance_targets, quarterly_performance_targets, 
-    sales, quarterly_sales, estimated_sales, quarterly_estimated_sales, estimated_percentage, 
-    quarterly_estimated_percentage, target_profit, actual_profit, net_profit_completion_rate,
+    sales, quarterly_sales, estimated_sales, quarterly_estimated_sales, sales_percentage, 
+    quarterly_estimated_percentage, estimated_sales_percentage, target_profit, actual_profit, net_profit_completion_rate,
     modify_date
   </sql>
   
@@ -42,7 +43,7 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
     select 
     id, platform, name, report_date, report_month, performance_targets, 
-    sales, estimated_sales, estimated_percentage, 
+    sales, estimated_sales, sales_percentage, estimated_sales_percentage, 
     target_profit, actual_profit, net_profit_completion_rate
     from configplatformgoal_new
     where 1=1
@@ -63,14 +64,14 @@
       report_date, report_month, performance_targets, 
       quarterly_performance_targets, sales, quarterly_sales, 
       estimated_sales, quarterly_estimated_sales, 
-      estimated_percentage, quarterly_estimated_percentage, 
+      sales_percentage, quarterly_estimated_percentage, estimated_sales_percentage, 
       target_profit, actual_profit, net_profit_completion_rate,
       modify_date)
     values (#{id,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{reportDate,jdbcType=DATE}, #{reportMonth,jdbcType=VARCHAR}, #{performanceTargets,jdbcType=DOUBLE}, 
       #{quarterlyPerformanceTargets,jdbcType=DOUBLE}, #{sales,jdbcType=DOUBLE}, #{quarterlySales,jdbcType=DOUBLE}, 
       #{estimatedSales,jdbcType=DOUBLE}, #{quarterlyEstimatedSales,jdbcType=DOUBLE}, 
-      #{estimatedPercentage,jdbcType=REAL}, #{quarterlyEstimatedPercentage,jdbcType=REAL}, 
+      #{salesPercentage,jdbcType=REAL}, #{quarterlyEstimatedPercentage,jdbcType=REAL},#{estimatedSalesPercentage,jdbcType=REAL}, 
       #{targetProfit,jdbcType=DOUBLE}, #{actualProfit,jdbcType=DOUBLE},  
       #{netProfitCompletionRate,jdbcType=DOUBLE}, #{modifyDate,jdbcType=TIMESTAMP})
   </insert>
@@ -110,11 +111,14 @@
       <if test="quarterlyEstimatedSales != null" >
         quarterly_estimated_sales,
       </if>
-      <if test="estimatedPercentage != null" >
-        estimated_percentage,
+      <if test="salesPercentage != null" >
+        sales_percentage,
       </if>
       <if test="quarterlyEstimatedPercentage != null" >
         quarterly_estimated_percentage,
+      </if>
+      <if test="estimatedSalesPercentage != null" >
+        estimated_sales_percentage,
       </if>
       <if test="targetProfit != null" >
         target_profit,
@@ -166,11 +170,14 @@
       <if test="quarterlyEstimatedSales != null" >
         #{quarterlyEstimatedSales,jdbcType=DOUBLE},
       </if>
-      <if test="estimatedPercentage != null" >
-        #{estimatedPercentage,jdbcType=REAL},
+      <if test="salesPercentage != null" >
+        #{salesPercentage,jdbcType=REAL},
       </if>
       <if test="quarterlyEstimatedPercentage != null" >
         #{quarterlyEstimatedPercentage,jdbcType=REAL},
+      </if>
+      <if test="estimatedSalesPercentage != null" >
+        #{estimatedSalesPercentage,jdbcType=REAL},
       </if>
       <if test="targetProfit != null" >
         #{targetProfit,jdbcType=DOUBLE},
@@ -216,11 +223,14 @@
       <if test="quarterlyEstimatedSales != null" >
         quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=DOUBLE},
       </if>
-      <if test="estimatedPercentage != null" >
-        estimated_percentage = #{estimatedPercentage,jdbcType=REAL},
+      <if test="salesPercentage != null" >
+        sales_percentage = #{salesPercentage,jdbcType=REAL},
       </if>
       <if test="quarterlyEstimatedPercentage != null" >
         quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=REAL},
+      </if>
+      <if test="estimatedSalesPercentage != null" >
+        estimated_sales_percentage = #{estimatedSalesPercentage,jdbcType=REAL},
       </if>
       <if test="targetProfit != null" >
         target_profit = #{targetProfit,jdbcType=DOUBLE},
@@ -249,8 +259,9 @@
       quarterly_sales = #{quarterlySales,jdbcType=DOUBLE},
       estimated_sales = #{estimatedSales,jdbcType=DOUBLE},
       quarterly_estimated_sales = #{quarterlyEstimatedSales,jdbcType=DOUBLE},
-      estimated_percentage = #{estimatedPercentage,jdbcType=REAL},
+      sales_percentage = #{salesPercentage,jdbcType=REAL},
       quarterly_estimated_percentage = #{quarterlyEstimatedPercentage,jdbcType=REAL},
+      estimated_sales_percentage = #{estimatedSalesPercentage,jdbcType=REAL},
       target_profit = #{targetProfit,jdbcType=DOUBLE},
       actual_profit = #{actualProfit,jdbcType=DOUBLE},
      <!--  net_profit_target = #{netProfitTarget,jdbcType=INTEGER}, -->

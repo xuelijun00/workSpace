@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>沃尔玛发货订单净利明细</h5></div>
+    <div class="ibox-title"><h5>沃尔玛发货订单净利明细（注意：本页面的货币单位，均为人民币（元）） </h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -101,7 +101,7 @@ function exportData(){
 	});
 	
 	var fileName = "沃尔玛发货订单净利导出明细.csv";
-	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入', '退款', '成本', '毛利',
+	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '平台订单号'];
 	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','buyerId'];
@@ -143,7 +143,7 @@ function exportData(){
 	common.grid({
 		title:"沃尔玛发货订单净利明细"
 		,url:getUrl()
-		,colNames:[ '内订单号','平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '平台订单号']
+		,colNames:[ '内订单号','平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '平台订单号']
 		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
 					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},

@@ -13,7 +13,7 @@
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Amazon每日发货数据 </h5></div>
+    <div class="ibox-title"><h5>Amazon每日发货数据（注意：本页面的货币单位，均为人民币（元）） </h5></div>
     <div class="ibox-content">
     	<form class="form-inline">
            <div class="form-group">
@@ -60,7 +60,7 @@ function exportGridData(){
 	var startDate = $("#start_date1").val();
 	var endDate = $("#end_date1").val();
 	var fileName = "Amazon每日发货数据 " + startDate +"-"+ endDate + ".csv";
-	var title = [ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
+	var title = [ '日期','平台', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率'];
 	var column = ['reportDate','platform','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping'
 	              ,'platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfitMargin'];
 	var exportData = [];
@@ -105,7 +105,7 @@ function exportGridData(){
 		id:"#list1",
 		title:"Amazon每日发货数据 "
 		,url:getUrl()
-		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
+		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
 		,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120,formatter:function(cellvalue, options, row){return new Date(cellvalue).toLocaleDateString()}}, 
 		            {name : 'platform',index : 'platform',width : 100},
 		             {name : 'orderNum',index : 'orderNum',width : 100,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 

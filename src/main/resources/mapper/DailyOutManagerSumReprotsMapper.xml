@@ -57,7 +57,7 @@
   </select>
   <!-- 根据条件查询每周业绩 -->
   <select id="selectManagerAchievementByWeek" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutManagerSumReprotsKey" >
-    select manager,YEARWEEK(report_date,1) startDate,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny) product_total_cny,sum(profit) profit
+    select manager,platform,YEARWEEK(report_date,1) startDate,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny) product_total_cny,sum(profit) profit
 	from dailyoutmanagerhuizongreprots  
     where 1=1
     <if test="platform != null">

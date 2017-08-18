@@ -131,12 +131,12 @@ function exportGridData(type){
 	var endDate = $("#end_date" + type).val();
 	var platform = $("#platform" + type).val();	
 	var fileName = "各平台各账号管理员业绩" + startDate + "-" + endDate + "-" + platform + ".csv";
-	var title = [ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利'];
+	var title = [ '管理员', '平台名称', '日期','销售订单数量', '发货单数', '销售订单金额_美元','发货收入（元）','税后综合净利（元）'];
 	var column;
 	if(type == 1){
-		column = ['manager','reportDate1','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
+		column = ['manager','platform','reportDate1','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
 	}else{
-		column = ['manager','startDate','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
+		column = ['manager','platform','startDate','salesorderNum','orderNum','salesorderTotal','productTotalCny','profit'];
 	}
 	var exportData = [];
 	$.ajax({
@@ -179,8 +179,9 @@ function exportGridData(type){
 		id:"#list1",
 		title:"各平台各账号管理员业绩"
 		,url:getUrl(1)
-		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利']
-		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
+		,colNames:[ '管理员', '平台名称', '日期','销售订单数量', '发货单数', '销售订单金额_美元','发货收入（元）','税后综合净利（元）']
+		,colModel:[  {name : 'manager',index : 'manager',width : 100},
+					 {name : 'platform',index : 'platform',width : 100},
 		             {name : 'reportDate1',index : 'reportDate1',width : 120}, 
 		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
 		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}},
@@ -197,8 +198,9 @@ function exportGridData(type){
 		id:"#list2",
 		title:"各平台各账号管理员业绩"
 		,url:getUrl(2)
-		,colNames:[ '管理员', '日期','销售订单数量', '发货单数', '销售订单金额','发货收入','税后综合净利']
-		,colModel:[ {name : 'manager',index : 'manager',width : 100}, 
+		,colNames:[ '管理员', '平台名称', '日期','销售订单数量', '发货单数', '销售订单金额_美元','发货收入（元）','税后综合净利（元）']
+		,colModel:[  {name : 'manager',index : 'manager',width : 100},
+					 {name : 'platform',index : 'platform',width : 100}, 
 		             {name : 'startDate',index : 'startDate',width : 120}, 
 		             {name : 'salesorderNum',index : 'salesorderNum',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}, 
 		             {name : 'orderNum',index : 'orderNum',sortable : "true",width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},

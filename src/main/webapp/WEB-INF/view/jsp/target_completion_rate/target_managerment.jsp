@@ -7,7 +7,7 @@
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>各平台目标管理</h5></div>
+    <div class="ibox-title"><h5>各平台目标管理（注意：本页面的货币单位，均是（美元））</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
        <div class="form-group">

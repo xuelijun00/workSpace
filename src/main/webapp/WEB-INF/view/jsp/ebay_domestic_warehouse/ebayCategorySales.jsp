@@ -44,7 +44,6 @@
         
 </div>
 
-</div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
