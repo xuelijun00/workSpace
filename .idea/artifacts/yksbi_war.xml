@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="yksbi:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="yksbi.war">
+      <element id="artifact" artifact-name="yksbi:war exploded" />
+    </root>
+  </artifact>
+</component>

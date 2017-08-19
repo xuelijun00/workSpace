@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasOrderWeightMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasOrderWeight">
+    <id column="order_number" jdbcType="VARCHAR" property="a_orderNumber" />
+    <result column="shipping_method" jdbcType="VARCHAR" property="b_shippingMethod" />
+    <result column="weight_kg" jdbcType="DOUBLE" property="c_weightKg" />
+    <result column="weight_g" jdbcType="DOUBLE" property="d_weightG" />
+    <result column="subscription_order_number" jdbcType="VARCHAR" property="e_subscriptionOrderNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_number, shipping_method, weight_kg, weight_g, subscription_order_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_order_weight
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_order_weight
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </delete>
+  <!--批量新增  -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="list" >
+     insert into yks_overseas_order_weight (order_number, shipping_method, weight_kg, 
+      weight_g, subscription_order_number)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_orderNumber,jdbcType=VARCHAR}, #{item.b_shippingMethod,jdbcType=VARCHAR}, #{item.c_weightKg,jdbcType=DOUBLE}, 
+      #{item.d_weightG,jdbcType=DOUBLE}, #{item.e_subscriptionOrderNumber,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasOrderWeight">
+    insert into yks_overseas_order_weight (order_number, shipping_method, weight_kg, 
+      weight_g, subscription_order_number)
+    values (#{orderNumber,jdbcType=VARCHAR}, #{shippingMethod,jdbcType=VARCHAR}, #{weightKg,jdbcType=DOUBLE}, 
+      #{weightG,jdbcType=DOUBLE}, #{subscriptionOrderNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasOrderWeight">
+    insert into yks_overseas_order_weight
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="shippingMethod != null">
+        shipping_method,
+      </if>
+      <if test="weightKg != null">
+        weight_kg,
+      </if>
+      <if test="weightG != null">
+        weight_g,
+      </if>
+      <if test="subscriptionOrderNumber != null">
+        subscription_order_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingMethod != null">
+        #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="weightKg != null">
+        #{weightKg,jdbcType=DOUBLE},
+      </if>
+      <if test="weightG != null">
+        #{weightG,jdbcType=DOUBLE},
+      </if>
+      <if test="subscriptionOrderNumber != null">
+        #{subscriptionOrderNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasOrderWeight">
+    update yks_overseas_order_weight
+    <set>
+      <if test="shippingMethod != null">
+        shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="weightKg != null">
+        weight_kg = #{weightKg,jdbcType=DOUBLE},
+      </if>
+      <if test="weightG != null">
+        weight_g = #{weightG,jdbcType=DOUBLE},
+      </if>
+      <if test="subscriptionOrderNumber != null">
+        subscription_order_number = #{subscriptionOrderNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasOrderWeight">
+    update yks_overseas_order_weight
+    set shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      weight_kg = #{weightKg,jdbcType=DOUBLE},
+      weight_g = #{weightG,jdbcType=DOUBLE},
+      subscription_order_number = #{subscriptionOrderNumber,jdbcType=VARCHAR}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

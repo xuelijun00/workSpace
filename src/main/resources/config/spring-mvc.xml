@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+   		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd   
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd   
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+		<!-- <property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:permission.properties</value>
+			</list>
+		</property> -->
+	</bean>
+	<!--报表权限控制  -->
+	<bean id="permission" class="com.yks.bi.dto.system.ReportPermission">
+		<property name="permission">
+			<map>
+				<entry key="main" value="/common?path=target_completion_rate/main"></entry>
+				<entry key="salespPerformance" value="/common?path=performance_summary/salespPerformance"></entry><!--销售业绩整体报表  -->
+				<entry key="platform_salesp_performance" value="/common?path=performance_summary/platform_salesp_performance"></entry>
+				<entry key="domestic_warehouse_shipment" value="/common?path=performance_summary/domestic_warehouse_shipment"></entry>
+				<entry key="platform_warehouse_shipment_count" value="/common?path=performance_summary/platform_warehouse_shipment_count"></entry>
+				<entry key="netProfitDetails" value="/common?path=net_profit_details/netProfitDetails"></entry>
+				<entry key="platform_daily_sales" value="/common?path=performance_summary/platform_daily_sales"></entry>
+				<entry key="platform_daily_out_account" value="/common?path=performance_summary/platform_daily_out_account"></entry>
+				
+				<entry key="1month" value="/common?path=target_completion_rate/1month"></entry>
+				<entry key="target_managerment" value="/common?path=target_completion_rate/target_managerment"></entry>
+				
+				<entry key="ebayDailySales" value="/common?path=ebay_domestic_warehouse/ebayDailySales"></entry>
+				<entry key="ebayServiceLineSales" value="/common?path=ebay_domestic_warehouse/ebayServiceLineSales"></entry>
+				<entry key="ebaySkuSales" value="/common?path=ebay_domestic_warehouse/ebaySkuSales"></entry>
+				<entry key="ebayCategorySales" value="/common?path=ebay_domestic_warehouse/ebayCategorySales"></entry>
+				<entry key="zhiyou" value="/common?path=ebay_domestic_warehouse/zhiyou"></entry>
+				<entry key="zhuanxian" value="/common?path=ebay_domestic_warehouse/zhuanxian"></entry>
+				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
+				<entry key="ebayDailyOutNetProfit" value="/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit"></entry>
+				<entry key="ebayDailyOutAccount" value="/common?path=ebay_domestic_warehouse/ebayDailyOutAccount"></entry>
+				
+				<entry key="account_achievement" value="/common?path=account_achievement/account_achievement"></entry>
+				<entry key="manager_account_achievement" value="/common?path=account_achievement/manager_account_achievement"></entry>
+				
+				<entry key="usebayDailySales" value="/common?path=ebay_overseas_warehouse/usebayDailySales"></entry>
+				<entry key="usebaySkuSales" value="/common?path=ebay_overseas_warehouse/usebaySkuSales"></entry>
+				<entry key="usebayCategorySales" value="/common?path=ebay_overseas_warehouse/usebayCategorySales"></entry>
+				<entry key="ukebayDailySales" value="/common?path=ebay_overseas_warehouse/ukebayDailySales"></entry>
+				<entry key="ukebaySkuSales" value="/common?path=ebay_overseas_warehouse/ukebaySkuSales"></entry>
+				<entry key="ukebayCategorySales" value="/common?path=ebay_overseas_warehouse/ukebayCategorySales"></entry>
+				<entry key="deebayDailySales" value="/common?path=ebay_overseas_warehouse/deebayDailySales"></entry>
+				<entry key="deebaySkuSales" value="/common?path=ebay_overseas_warehouse/deebaySkuSales"></entry>
+				<entry key="deebayCategorySales" value="/common?path=ebay_overseas_warehouse/deebayCategorySales"></entry>
+				<entry key="auebayDailySales" value="/common?path=ebay_overseas_warehouse/auebayDailySales"></entry>
+				<entry key="auebaySkuSales" value="/common?path=ebay_overseas_warehouse/auebaySkuSales"></entry>
+				<entry key="auebayCategorySales" value="/common?path=ebay_overseas_warehouse/auebayCategorySales"></entry>
+				
+				<entry key="amazonDailySales" value="/common?path=amazon/amazonDailySales"></entry>
+				<entry key="amazonSkuSales" value="/common?path=amazon/amazonSkuSales"></entry>
+				<entry key="amazonCategorySales" value="/common?path=amazon/amazonCategorySales"></entry>
+				<entry key="amazonDailyOut" value="/common?path=amazon/amazonDailyOut"></entry>
+				<entry key="amazonBuyerCountrySales" value="/common?path=amazon/amazonBuyerCountrySales"></entry>
+				<entry key="amazonDailyOutNetProfit" value="/common?path=amazon/amazonDailyOutNetProfit"></entry>
+				<entry key="amazonDailyOutAccount" value="/common?path=amazon/amazonDailyOutAccount"></entry>
+				
+				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
+				<entry key="smt/smtSkuSales" value="/common?path=smt/smtSkuSales"></entry>
+				<entry key="smtCategorySales" value="/common?path=smt/smtCategorySales"></entry>
+				<entry key="smtDailyOut" value="/common?path=smt/smtDailyOut"></entry>
+				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtBuyerCountrySales"></entry>
+				<entry key="smtDailyOutNetProfit" value="/common?path=smt/smtDailyOutNetProfit"></entry>
+				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtDailyOutAccount"></entry>
+				
+				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
+				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
+				<entry key="wishCategorySales" value="/common?path=wish/wishCategorySales"></entry>
+				<entry key="wishDailyOut" value="/common?path=wish/wishDailyOut"></entry>
+				<entry key="wishBuyerCountrySales" value="/common?path=wish/wishBuyerCountrySales"></entry>
+				<entry key="wishDailyOutNetProfit" value="/common?path=wish/wishDailyOutNetProfit"></entry>
+				<entry key="wishDailyOutAccount" value="/common?path=wish/wishDailyOutAccount"></entry>
+				
+				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
+				<entry key="lazadaSkuSales" value="/common?path=lazada/lazadaSkuSales"></entry>
+				<entry key="lazadaCategorySales" value="/common?path=lazada/lazadaCategorySales"></entry>
+				<entry key="lazadaDailyOut" value="/common?path=lazada/lazadaDailyOut"></entry>
+				<entry key="lazadaBuyerCountrySales" value="/common?path=lazada/lazadaBuyerCountrySales"></entry>
+				<entry key="lazadaDailyOutNetProfit" value="/common?path=lazada/lazadaDailyOutNetProfit"></entry>
+				<entry key="lazadaDailyOutAccount" value="/common?path=lazada/lazadaDailyOutAccount"></entry>
+				
+				<entry key="newplatformDailySales" value="/common?path=newplatform/newplatformDailySales"></entry>
+				<entry key="newplatformSkuSales" value="/common?path=newplatform/newplatformSkuSales"></entry>
+				<entry key="newplatformCategorySales" value="/common?path=newplatform/newplatformCategorySales"></entry>
+				<entry key="newplatformDailyOut" value="/common?path=newplatform/newplatformDailyOut"></entry>
+				<entry key="newplatformBuyerCountrySales" value="/common?path=newplatform/newplatformBuyerCountrySales"></entry>
+				<entry key="newplatformDailyOutNetProfit" value="/common?path=newplatform/newplatformDailyOutNetProfit"></entry>
+				<entry key="newplatformDailyOutAccount" value="/common?path=newplatform/newplatformDailyOutAccount"></entry>
+				
+				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
+				<entry key="walmartSkuSales" value="/common?path=walmart/walmartSkuSales"></entry>
+				<entry key="walmartCategorySales" value="/common?path=walmart/walmartCategorySales"></entry>
+				<entry key="walmartDailyOut" value="/common?path=walmart/walmartDailyOut"></entry>
+				<entry key="walmartBuyerCountrySales" value="/common?path=walmart/walmartBuyerCountrySales"></entry>
+				<entry key="walmartDailyOutNetProfit" value="/common?path=walmart/walmartDailyOutNetProfit"></entry>
+				<entry key="walmartDailyOutAccount" value="/common?path=walmart/walmartDailyOutAccount"></entry>
+				
+				<entry key="neweggDailySales" value="/common?path=newegg/neweggDailySales"></entry>
+				<entry key="neweggSkuSales" value="/common?path=newegg/neweggSkuSales"></entry>
+				<entry key="neweggCategorySales" value="/common?path=newegg/neweggCategorySales"></entry>
+				<entry key="neweggDailyOut" value="/common?path=newegg/neweggDailyOut"></entry>
+				<entry key="neweggBuyerCountrySales" value="/common?path=newegg/neweggBuyerCountrySales"></entry>
+				<entry key="neweggDailyOutNetProfit" value="/common?path=newegg/neweggDailyOutNetProfit"></entry>
+				<entry key="neweggDailyOutAccount" value="/common?path=newegg/neweggDailyOutAccount"></entry>
+			</map>
+		</property>
+	</bean>
+	<!--数据库连接 https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="minIdle" value="${minIdle}" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${maxWait}" />
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="${filters}" />
+		<!-- <property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${publickey}" /> -->
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+	</bean>
+	<!-- mybatis配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/spring-mybatis.xml" />
+		<property name="mapperLocations" value="classpath*:mapper/**/*Mapper.xml" />
+		<property name="typeAliasesPackage" value="com.yks.bi.dao" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+							pageSizeZero=true
+							supportMethodsArguments=true
+							rowBoundsWithCount=true
+							params=pageNum=start;pageSize=limit;
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<!-- mapper扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+		<property name="basePackage" value="com.yks.bi.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!--注解事物处理 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 配置事务的传播特性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置事务拦截器拦截哪些类的哪些方法,一般设置成拦截Service -->
+	<aop:config>
+		<aop:pointcut id="serviceMethod" expression="execution(* com.yks.bi.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod" />
+	</aop:config>
+
+
+	<!-- 配置映射器与适配器 -->
+	<mvc:annotation-driven />
+	<!-- 设置使用注解的类所在的jar包 -->
+	<context:component-scan base-package="com.yks.bi.service" />
+	<context:component-scan base-package="com.yks.bi.web" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/index" />
+			<mvc:mapping path="/common" />
+			<mvc:mapping path="/report/**" />
+			<bean class="com.yks.bi.web.interceptors.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/index" />
+			<mvc:mapping path="/common" />
+			<bean class="com.yks.bi.web.interceptors.PermissionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 视图解析器:定义跳转的文件的前后缀 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/jsp/" />
+		<!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 对静态资源文件的访问，交给default servlet handler处理 -->
+	<!-- <mvc:default-servlet-handler /> -->
+	<!--对静态资源文件的访问 -->
+	<mvc:resources location="/WEB-INF/view/img/" mapping="/img/**" />
+	<mvc:resources location="/WEB-INF/view/js/" mapping="/js/**" />
+	<mvc:resources location="/WEB-INF/view/css/" mapping="/css/**" />
+	<mvc:resources location="/WEB-INF/view/echarts/" mapping="/echarts/**" />
+	<mvc:resources location="/WEB-INF/view/jsLoad/" mapping="/jsLoad/**" />
+	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/fonts/**" />
+	<mvc:resources location="/WEB-INF/view/tatol/" mapping="/tatol/**" />
+	<mvc:resources location="/WEB-INF/view/jsp/error/" mapping="/error/**" />
+
+</beans>

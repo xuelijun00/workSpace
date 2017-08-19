@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutSkuReprotsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutSkuReprots" >
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="sales_account" property="salesAccount" jdbcType="VARCHAR" />
+    <result column="sku" property="sku" jdbcType="VARCHAR" />
+    <result column="sku_cnname" property="skuCnName" jdbcType="VARCHAR" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="manager" property="manager" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="REAL" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="zhuzhandian" property="zhuzhandian" jdbcType="VARCHAR" />
+    <result column="erp_orders_id" property="erpOrdersId" jdbcType="BIGINT" />
+    <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    `platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
+    `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
+    `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, 
+    `operating_cost`, `profit_margin`, `profit`, `net_profit`,`zhuzhandian`
+  </sql>
+  
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from dailyoutskureprots_new
+	where 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform.length() > 0" >
+       and platform = #{platform,jdbcType=VARCHAR}
+    </if>
+    <if test="zhuzhandian != null and zhuzhandian > 0" >
+       and zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
+    </if>
+    <if test="salesAccount != null and salesAccount.length() > 0" >
+       and sales_account = #{salesAccount,jdbcType=VARCHAR}
+    </if>
+    <if test="sku != null and sku.length() > 0" >
+       and sku = #{sku,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectPlatform" resultType="String" >
+    SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
+  </select>
+  
+   <select id="selectAccount" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `sales_account` 
+    FROM `dailyoutskureprots_new` 
+    WHERE 1=1 
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `sales_account`
+  </select>
+  
+   <select id="selectZhuzhandian" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `zhuzhandian` 
+    FROM `dailyoutskureprots_new` 
+    WHERE 1=1 
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `zhuzhandian`
+  </select>
+  
+ 
+  <select id="selectNewPlatformAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	   from dailyoutskureprots_new
+	   where platform like 'new\_%' 
+	   and platform != "new_newegg"
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform.length() > 0" >
+       and platform = #{platform,jdbcType=VARCHAR}
+    </if>
+    <if test="salesAccount != null and salesAccount.length() > 0" >
+       and sales_account = #{salesAccount,jdbcType=VARCHAR}
+    </if>
+    <if test="sku != null and sku.length() > 0" >
+       and sku = #{sku,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectNewPlatform" resultType="String" >
+    SELECT `platform` 
+    FROM `dailyoutskureprots_new` 
+    WHERE platform like 'new\_%' 
+		AND platform != "new_newegg"
+    GROUP by `platform`
+  </select>
+  
+   <select id="selectNewPlatformAccount" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `sales_account` 
+    FROM `dailyoutskureprots_new` 
+    WHERE `platform` like 'new\_%' 
+	   AND `platform` != "new_newegg"
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `sales_account`
+  </select>
+  
+  <select id="selectNewEggAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	SELECT 
+  	<include refid="Base_Column_List" /> 
+  	FROM dailyoutskureprots_new
+	WHERE 1=1
+	<choose>
+		<when test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			AND (platform like '%overstock' 
+				OR platform = 'new_newegg'
+				OR platform = 'tophatter')
+		</otherwise>
+	</choose>
+	<if test="startDate != null and startDate.length() > 0" >
+       AND report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="salesAccount != null and salesAccount.length() > 0" >
+       AND sales_account = #{salesAccount,jdbcType=VARCHAR}
+    </if>
+    <if test="sku != null and sku.length() > 0" >
+       AND sku = #{sku,jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+  <select id="selectNewEggAccount" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `sales_account` 
+    FROM `dailyoutskureprots_new` 
+    WHERE 1=1
+    <choose>
+		<when test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			AND (platform like '%overstock' 
+				OR platform = 'new_newegg'
+				OR platform = 'tophatter')
+		</otherwise>
+	</choose>
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `sales_account`
+  </select>
+  
+   <select id="selectWalmartAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	select `platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
+		   `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
+		   `product_shipping`, `platform_cost`, `material_cost`,`order_execution_fee`,
+		   `operating_cost`, `profit_margin`, `profit`, `net_profit`,
+		   `erp_orders_id`, `buyer_id`
+  	from walmartdailyoutskureprots
+	where 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="erpOrdersId != null and erpOrdersId > 0" >
+       and erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}
+    </if>   
+    <if test="salesAccount != null and salesAccount.length() > 0" >
+       and sales_account = #{<![CDATA[salesAccount]]>,jdbcType=VARCHAR}
+    </if> 
+    <if test="sku != null and sku.length() > 0" >
+       and sku = #{sku,jdbcType=VARCHAR}
+    </if>
+  </select>
+   
+   <select id="selectWalmartAccount" resultType="String" >
+    SELECT `sales_account` FROM `walmartdailyoutskureprots` WHERE 1 GROUP by `sales_account`
+  </select>
+  
+   <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+    insert into dailyoutskureprots (platform, sales_account, sku, sku_cnname, 
+      report_date, manager, order_num, 
+      unit_price, product_total_cny, product_refund, 
+      order_price, gross_profit, product_shipping, 
+      platform_cost, material_cost, order_execution_fee, 
+      operating_cost, profit_margin, net_profit, profit, zhuzhandian
+      )
+    values (#{platform,jdbcType=VARCHAR}, #{salesAccount,jdbcType=VARCHAR}, #{sku,jdbcType=VARCHAR}, 
+      #{skuCnName,jdbcType=VARCHAR},#{reportDate,jdbcType=DATE}, #{manager,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, 
+      #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=DOUBLE}, #{productRefund,jdbcType=DOUBLE}, 
+      #{orderPrice,jdbcType=DOUBLE}, #{grossProfit,jdbcType=DOUBLE}, #{productShipping,jdbcType=DOUBLE}, 
+      #{platformCost,jdbcType=DOUBLE}, #{materialCost,jdbcType=DOUBLE}, #{orderExecutionFee,jdbcType=DOUBLE}, 
+      #{operatingCost,jdbcType=DOUBLE}, #{profitMargin,jdbcType=DOUBLE}, #{netProfit,jdbcType=DOUBLE},
+      #{profit,jdbcType=DOUBLE}, #{zhuzhandian,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+    insert into dailyoutskureprots_new
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="salesAccount != null" >
+        sales_account,
+      </if>
+      <if test="sku != null" >
+        sku,
+      </if>
+      <if test="skuCnName != null" >
+        sku_cnname,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny,
+      </if>
+      <if test="productRefund != null" >
+        product_refund,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit,
+      </if>
+      <if test="productShipping != null" >
+        product_shipping,
+      </if>
+      <if test="platformCost != null" >
+        platform_cost,
+      </if>
+      <if test="materialCost != null" >
+        material_cost,
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee,
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost,
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin,
+      </if>
+      <if test="netProfit != null" >
+        net_profit,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+      <if test="zhuzhandian != null" >
+        zhuzhandian,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAccount != null" >
+        #{salesAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCnName != null" >
+        #{skuCnName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="zhuzhandian != null" >
+        #{zhuzhandian,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

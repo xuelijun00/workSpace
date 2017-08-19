@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasReturnRateMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasReturnRate">
+    <result column="sku" jdbcType="VARCHAR" property="a_sku" />
+    <result column="return_rate" jdbcType="VARCHAR" property="returnRate" />
+    <result column="warehouse" jdbcType="VARCHAR" property="c_warehouse" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sku, return_rate, warehouse
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_return_rate
+    where sku = #{sku,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_return_rate
+    where sku = #{sku,jdbcType=VARCHAR}
+  </delete>
+  <!--批量新增  -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="list" >
+     insert into yks_overseas_return_rate (sku, return_rate, warehouse)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_sku,jdbcType=VARCHAR}, #{item.returnRate,jdbcType=VARCHAR}, #{item.c_warehouse,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasReturnRate">
+    insert into yks_overseas_return_rate (sku, return_rate, warehouse
+      )
+    values (#{sku,jdbcType=VARCHAR}, #{returnRate,jdbcType=VARCHAR}, #{warehouse,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasReturnRate">
+    insert into yks_overseas_return_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="returnRate != null">
+        return_rate,
+      </if>
+      <if test="warehouse != null">
+        warehouse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="returnRate != null">
+        #{returnRate,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null">
+        #{warehouse,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasReturnRate">
+    update yks_overseas_return_rate
+    <set>
+      <if test="returnRate != null">
+        return_rate = #{returnRate,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouse != null">
+        warehouse = #{warehouse,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sku = #{sku,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasReturnRate">
+    update yks_overseas_return_rate
+    set return_rate = #{returnRate,jdbcType=VARCHAR},
+      warehouse = #{warehouse,jdbcType=VARCHAR}
+    where sku = #{sku,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

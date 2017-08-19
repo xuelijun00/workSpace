@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasAccountMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasAccount">
+    <result column="account" jdbcType="VARCHAR" property="a_account" />
+    <result column="platform" jdbcType="VARCHAR" property="b_platform" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    account, platform
+  </sql>
+  
+  <!--批量新增  -->
+  <insert id="insertBatch" parameterType="list" >
+    insert into yks_overseas_account (account, platform)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_account,jdbcType=VARCHAR}, #{item.b_platform,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_account
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_account
+    where account = #{account,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasAccount">
+    insert into yks_overseas_account (account, platform)
+    values (#{account,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasAccount">
+    insert into yks_overseas_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        account,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasAccount">
+    update yks_overseas_account
+    <set>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account = #{account,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasAccount">
+    update yks_overseas_account
+    set platform = #{platform,jdbcType=VARCHAR}
+    where account = #{account,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

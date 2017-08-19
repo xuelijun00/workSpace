@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutEbayGroupLeaderReprotsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprots" >
+    <id column="zhandian" property="zhandian" jdbcType="VARCHAR" />
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="salesorder_num" property="salesorderNum" jdbcType="INTEGER" />
+    <result column="salesorder_total" property="salesorderTotal" jdbcType="REAL" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="REAL" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="INTEGER" />
+    <result column="product_refund" property="productRefund" jdbcType="INTEGER" />
+    <result column="order_price" property="orderPrice" jdbcType="INTEGER" />
+    <result column="gross_profit" property="grossProfit" jdbcType="INTEGER" />
+    <result column="product_shipping" property="productShipping" jdbcType="INTEGER" />
+    <result column="platform_cost" property="platformCost" jdbcType="INTEGER" />
+    <result column="material_cost" property="materialCost" jdbcType="INTEGER" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="INTEGER" />
+    <result column="operating_cost" property="operatingCost" jdbcType="INTEGER" />
+    <result column="profit_margin" property="profitMargin" jdbcType="INTEGER" />
+    <result column="net_profit" property="netProfit" jdbcType="INTEGER" />
+    <result column="profit" property="profit" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zhandian, report_date, platform, salesorder_num, salesorder_total, order_num, 
+    unit_price, product_total_cny, product_refund, order_price, gross_profit, product_shipping, 
+    platform_cost, material_cost, order_execution_fee, operating_cost, profit_margin, 
+    net_profit, profit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutebaygroupleaderreprots
+    where zhandian = #{zhandian,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+  </select>
+  <!-- 根据条件查询 -->
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutebaygroupleaderreprots
+    where 1=1
+    <if test="zhandian != null">
+    	and zhandian = #{zhandian,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+  <!-- 根据条件查询组长每周业绩 -->
+  <select id="selectLeaderDailyOutByWeek" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutEbayGroupLeaderReprotsKey" >
+    select YEARWEEK(report_date,1) startDate,zhandian,sum(salesorder_num) salesorder_num,sum(order_num) order_num,sum(salesorder_total) salesorder_total,sum(product_total_cny)product_total_cny,sum(net_profit)net_profit
+	from dailyoutebaygroupleaderreprots
+	where 1=1
+    <if test="zhandian != null">
+    	and zhandian = #{zhandian,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
+    GROUP BY startDate,zhandian
+  </select>
+  <!--查询站点  -->
+  <select id="selectSite" resultType="String">
+  	select distinct zhandian from dailyoutebaygroupleaderreprots
+  </select>
+  
+</mapper>

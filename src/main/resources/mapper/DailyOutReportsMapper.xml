@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutReportsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutReports" >
+    <id column="platform" property="platform" jdbcType="VARCHAR" />
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="REAL" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    platform, report_date, order_num, unit_price, product_total_cny, product_refund, 
+    order_price, gross_profit, product_shipping, platform_cost, material_cost, order_execution_fee, 
+    operating_cost, profit_margin, net_profit, profit, net_profit_margin
+  </sql>
+  
+  <select id="selectPlatforms" resultType="String">
+    select platform from dailyoutreprots
+    where 1=1
+    <if test="platform != null">
+    	and platform like concat('%',#{platform,jdbcType=VARCHAR},'%')
+    </if>
+    order by platform 
+  </select>
+  
+  <!--国内仓发货汇总   -->
+  <select id="selectSumDomesticWarehouseShipment" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from dailyoutreprots
+	where platform = 'a_ll'
+	<if test="startDate != null and startDate.length() > 0" >
+       and report_date >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[and report_date <= #{endDate}]]>
+    </if>
+	ORDER BY report_date DESC 
+  </select>
+  
+  <!--国内仓各平台发货汇总数据  表格 -->
+  <select id="selectPlatformWarehouseShipmentCount" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from dailyoutreprots
+	where 1=1
+	<if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=DATE} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform != 'all'" >
+       and platform = #{platform , jdbcType=VARCHAR}
+    </if>
+	ORDER BY report_date 
+  </select>
+  
+  <!--国内仓各平台发货汇总数据  曲线图 -->
+  <select id="selectPlatformWarehouseShipmentCountChart" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
+  	select platform, SUM(order_num) as orderNum, SUM(unit_price) as unitPrice, 
+  	SUM(product_total_cny) as productTotalCny, SUM(gross_profit) as grossProfit, 
+  	SUM(profit) as profit, SUM(net_profit_margin) as netProfitMargin
+  	from dailyoutreprots
+	where 1=1
+	<if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=DATE} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="platform != null and platform != 'all'" >
+       and platform = #{platform , jdbcType=VARCHAR}
+    </if>
+    GROUP BY platform
+    ORDER BY platform DESC
+  </select>
+  
+  <!--各平台国内仓发货汇总数据  -->
+  <select id="selectPlatformDomesticWarehouseShipment" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey">
+  	select platform,report_date,order_num,product_total_cny,profit,net_profit_margin from dailyoutreprots
+	where platform != 'a_ll' and platform != ''
+	<if test="reportDate != null " >
+       and report_date = #{reportDate}
+    </if>
+	ORDER BY report_date 
+  </select>
+  
+  <!-- 通过开始时间、结束时间、平台查询发货数据 -->
+  <select id="selectByTimesAndPlatform" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutreprots
+    where
+    <choose>
+    	<when test="platform == 'newAndAll'"><!--新平台每日发货数据 去掉new_newegg的数据  -->
+    		platform like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
+    	</when>
+    	<otherwise>
+    		platform = #{platform,jdbcType=VARCHAR}
+    	</otherwise>
+    </choose>
+    <!-- and platform = #{platform,jdbcType=VARCHAR} -->
+    <if test="startDate != null">
+    	and report_date >= #{startDate,jdbcType=VARCHAR} 
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate,jdbcType=VARCHAR}]]>
+    </if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutReportsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from dailyoutreprots
+    where platform = #{platform,jdbcType=VARCHAR}
+    and report_date = #{reportDate,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.DailyOutReportsKey" >
+    delete from dailyoutreprots
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutReports" >
+    insert into dailyoutreprots (platform, report_date, order_num, 
+      unit_price, product_total_cny, product_refund, 
+      order_price, gross_profit, product_shipping, 
+      platform_cost, material_cost, order_execution_fee, 
+      operating_cost, profit_margin, net_profit, profit, 
+      net_profit_margin)
+    values (#{platform,jdbcType=VARCHAR}, #{reportDate,jdbcType=DATE}, #{orderNum,jdbcType=INTEGER}, 
+      #{unitPrice,jdbcType=REAL}, #{productTotalCny,jdbcType=DOUBLE}, #{productRefund,jdbcType=DOUBLE}, 
+      #{orderPrice,jdbcType=DOUBLE}, #{grossProfit,jdbcType=DOUBLE}, #{productShipping,jdbcType=DOUBLE}, 
+      #{platformCost,jdbcType=DOUBLE}, #{materialCost,jdbcType=DOUBLE}, #{orderExecutionFee,jdbcType=DOUBLE}, 
+      #{operatingCost,jdbcType=DOUBLE}, #{profitMargin,jdbcType=DOUBLE}, #{netProfit,jdbcType=DOUBLE}, 
+      #{profit,jdbcType=DOUBLE}, #{netProfitMargin,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.DailyOutReports" >
+    insert into dailyoutreprots
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny,
+      </if>
+      <if test="productRefund != null" >
+        product_refund,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit,
+      </if>
+      <if test="productShipping != null" >
+        product_shipping,
+      </if>
+      <if test="platformCost != null" >
+        platform_cost,
+      </if>
+      <if test="materialCost != null" >
+        material_cost,
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee,
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost,
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin,
+      </if>
+      <if test="netProfit != null" >
+        net_profit,
+      </if>
+      <if test="netProfitMargin != null" >
+        net_profit_margin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfitMargin != null" >
+        #{netProfitMargin,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.DailyOutReports" >
+    update dailyoutreprots
+    <set >
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        product_refund = #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        product_shipping = #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        platform_cost = #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        material_cost = #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        net_profit = #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfitMargin != null" >
+        net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      </if>
+    </set>
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.DailyOutReports" >
+    update dailyoutreprots
+    set order_num = #{orderNum,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=REAL},
+      product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      product_refund = #{productRefund,jdbcType=DOUBLE},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      product_shipping = #{productShipping,jdbcType=DOUBLE},
+      platform_cost = #{platformCost,jdbcType=DOUBLE},
+      material_cost = #{materialCost,jdbcType=DOUBLE},
+      order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      net_profit = #{netProfit,jdbcType=DOUBLE},
+      profit = #{profit,jdbcType=DOUBLE},
+      net_profit_margin = #{netProfitMargin,jdbcType=REAL}
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+  </update>
+</mapper>

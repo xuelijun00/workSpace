@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>YKSUI框架 - 需求管理</title>
+    <style>
+        #datatable {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 12px;
+        }
+
+        td, th {
+            border: 1px solid #ccc;
+            padding: 4px 20px;
+        }
+    </style>
+    <script src="../jsLoad/code/load.js?20170503" include="../top.html"></script>
+    <!--加css-->
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="ibox-title"><h5>表格</h5></div>
+    <div class="ibox-content">
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <p>数据表格</p>
+        <table id="datatable" class="table table-border">
+            <thead>
+            <tr>
+                <th align="left" data-index="0">平台</th>
+                <th align="left" data-index="2">发货单数</th>
+                <th align="left" data-index="3">发货收入</th>
+                <th align="left" data-index="4">税前综合净利</th>
+                <th align="left" data-index="5">税前综合利润率</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-index="0">
+                <td align="left">ebay</td>
+                <td align="left">14688.0</td>
+                <td align="left">713622.0</td>
+                <td align="left">57096.0</td>
+                <td align="left">0.080009</td>
+            </tr>
+            <tr data-index="1">
+                <td align="left">smt</td>
+                <td align="left">13915.0</td>
+                <td align="left">561491.0</td>
+                <td align="left">15166.0</td>
+                <td align="left">0.02701</td>
+            </tr>
+            <tr data-index="2">
+                <td align="left">wish
+                </td>
+                <td align="left">13420.0</td>
+                <td align="left">450042.0</td>
+                <td align="left">34360.0</td>
+                <td
+                        align="left">0.076349
+                </td>
+            </tr>
+            <tr data-index="3">
+                <td align="left">alazada</td>
+                <td align="left">1788.0</td>
+                <td
+                        align="left">119645.0
+                </td>
+                <td align="left">25244.0</td>
+                <td align="left">0.210988</td>
+            </tr>
+            <tr data-index="4">
+                <td
+                        align="left">new_SHOPEE
+                </td>
+                <td align="left">1013.0</td>
+                <td align="left">78718.0</td>
+                <td
+                        align="left">-1031.0
+                </td>
+                <td align="left">-0.013096</td>
+            </tr>
+            <tr data-index="5">
+                <td align="left">new_LINIO</td>
+                <td
+                        align="left">93.0
+                </td>
+                <td align="left">7248.0</td>
+                <td align="left">921.0</td>
+                <td align="left">0.127077</td>
+            </tr>
+            <tr
+                    data-index="6">
+                <td align="left">new_Newegg</td>
+                <td align="left">68.0</td>
+                <td align="left">4620.0</td>
+                <td
+                        align="left">1056.0
+                </td>
+                <td align="left">0.228654</td>
+            </tr>
+            <tr data-index="7">
+                <td align="left">new_CDISCOUNT</td>
+                <td
+                        align="left">65.0
+                </td>
+                <td align="left">3847.0</td>
+                <td align="left">682.0</td>
+                <td align="left">0.177237</td>
+            </tr>
+            <tr
+                    data-index="8">
+                <td align="left">new_PriceMinister</td>
+                <td align="left">84.0</td>
+                <td align="left">3223.0</td>
+                <td
+                        align="left">382.0
+                </td>
+                <td align="left">0.118439</td>
+            </tr>
+            <tr data-index="9">
+                <td align="left">new_joom</td>
+                <td
+                        align="left">48.0
+                </td>
+                <td align="left">2502.0</td>
+                <td align="left">313.0</td>
+                <td align="left">0.125021</td>
+            </tr>
+            <tr
+                    data-index="10">
+                <td align="left">new_Lelong</td>
+                <td align="left">35.0</td>
+                <td align="left">2416.0</td>
+                <td
+                        align="left">648.0
+                </td>
+                <td align="left">0.268018</td>
+            </tr>
+            <tr data-index="11">
+                <td align="left">new_Tanga</td>
+                <td
+                        align="left">67.0
+                </td>
+                <td align="left">1793.0</td>
+                <td align="left">224.0</td>
+                <td align="left">0.124957</td>
+            </tr>
+            <tr
+                    data-index="12">
+                <td align="left">new_11street</td>
+                <td align="left">10.0</td>
+                <td align="left">802.0</td>
+                <td
+                        align="left">191.0
+                </td>
+                <td align="left">0.2377</td>
+            </tr>
+            <tr data-index="13">
+                <td align="left">amazon</td>
+                <td
+                        align="left">13.0
+                </td>
+                <td align="left">768.0</td>
+                <td align="left">73.0</td>
+                <td align="left">0.095548</td>
+            </tr>
+            <tr
+                    data-index="14">
+                <td align="left">new_NoPlatform</td>
+                <td align="left">13.0</td>
+                <td align="left">749.0</td>
+                <td
+                        align="left">258.0
+                </td>
+                <td align="left">0.344835</td>
+            </tr>
+            <tr data-index="15">
+                <td
+                        align="left">new_Mataharimall
+                </td>
+                <td align="left">2.0</td>
+                <td align="left">436.0</td>
+                <td align="left">69.0</td>
+                <td
+                        align="left">0.157795
+                </td>
+            </tr>
+            <tr data-index="16">
+                <td align="left">new_kilimall</td>
+                <td align="left">1.0</td>
+                <td
+                        align="left">51.0
+                </td>
+                <td align="left">38.0</td>
+                <td align="left">0.733155</td>
+            </tr>
+            <tr data-index="17">
+                <td
+                        align="left">new_jingdong
+                </td>
+                <td align="left">1.0</td>
+                <td align="left">27.0</td>
+                <td align="left">-3.0</td>
+                <td
+                        align="left">-0.11601
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <form class="form-inline">
+            <div class="form-group">
+                <label>报关状态</label>
+                <select class="form-control w120" name="">
+                    <option>待发货</option>
+                    <option>已发货</option>
+                    <option>报关材料已生成</option>
+                    <option>已申报</option>
+                    <option>报关成功</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>公司主体</label>
+                <select class="form-control w120" name="">
+                    <option>深圳市有棵树科技股份有限公司</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <option>选项 4</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>仓库</label>
+                <select class="form-control w120" name="">
+                    <option>选项 1</option>
+                    <option>选项 2</option>
+                    <option>选项 3</option>
+                    <option>选项 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">查询</button>
+            </div>
+        </form>
+        <div class="hr-line-dashed"></div>
+    </div>
+    <div class="ibox-content tablecon">
+        <table id="list2" class="tablegrid"></table>
+        <div id="pager2"></div>
+    </div>
+</div>
+<script src="../jsLoad/code/load.js?20170503" include="../js.html"></script>
+
+<!--加本页面 的js文件与js代码-->
+<script type="text/javascript" src="../js/plugins/highcharts/data.js"></script>
+<script>
+    $(function () {
+        $('#container').highcharts({
+            data: {
+                table: 'datatable'
+            },
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '从 HTML 表格中提取数据并生成图表'
+            },
+            yAxis: {
+                allowDecimals: false,
+                title: {
+                    text: '个',
+                    rotation: 0
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                            this.point.y + ' 个' + this.point.name.toLowerCase();
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

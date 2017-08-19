@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.EbayDailyOutZhuanXianReprotsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprots" >
+    <id column="platform" property="platform" jdbcType="VARCHAR" />
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <id column="channel_name" property="channelName" jdbcType="VARCHAR" />
+    <result column="orders_type" property="ordersType" jdbcType="INTEGER" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="REAL" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    platform, report_date, channel_name, orders_type, order_num, unit_price, product_total_cny, 
+    product_refund, order_price, gross_profit, product_shipping, platform_cost, material_cost, 
+    order_execution_fee, operating_cost, profit_margin, net_profit, net_profit_margin, profit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprotsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ebaydailyoutzhuanxianreprots
+    where 1=1
+    <if test="startDate != null">
+    	and report_date >= #{startDate}
+    </if>
+    <if test="endDate != null">
+    	<![CDATA[and report_date <= #{endDate}]]>
+    </if>
+    <if test="channelName != null and channelName.length() > 0">
+    	and channel_name = #{channelName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <!-- 查询物流通道 -->
+  <select id="selectChannel" resultType="String">
+  	select  distinct channel_name from ebaydailyoutzhuanxianreprots 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprotsKey" >
+    delete from ebaydailyoutzhuanxianreprots
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+      and channel_name = #{channelName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprots" >
+    insert into ebaydailyoutzhuanxianreprots (platform, report_date, channel_name, 
+      orders_type, order_num, unit_price, 
+      product_total_cny, product_refund, order_price, 
+      gross_profit, product_shipping, platform_cost, 
+      material_cost, order_execution_fee, operating_cost, 
+      profit_margin, net_profit, net_profit_margin, profit
+      )
+    values (#{platform,jdbcType=VARCHAR}, #{reportDate,jdbcType=DATE}, #{channelName,jdbcType=VARCHAR}, 
+      #{ordersType,jdbcType=INTEGER}, #{orderNum,jdbcType=INTEGER}, #{unitPrice,jdbcType=REAL}, 
+      #{productTotalCny,jdbcType=DOUBLE}, #{productRefund,jdbcType=DOUBLE}, #{orderPrice,jdbcType=DOUBLE}, 
+      #{grossProfit,jdbcType=DOUBLE}, #{productShipping,jdbcType=DOUBLE}, #{platformCost,jdbcType=DOUBLE}, 
+      #{materialCost,jdbcType=DOUBLE}, #{orderExecutionFee,jdbcType=DOUBLE}, #{operatingCost,jdbcType=DOUBLE}, 
+      #{profitMargin,jdbcType=DOUBLE}, #{netProfit,jdbcType=DOUBLE}, #{netProfitMargin,jdbcType=REAL},
+      #{profit,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprots" >
+    insert into ebaydailyoutzhuanxianreprots
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="reportDate != null" >
+        report_date,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="ordersType != null" >
+        orders_type,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny,
+      </if>
+      <if test="productRefund != null" >
+        product_refund,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit,
+      </if>
+      <if test="productShipping != null" >
+        product_shipping,
+      </if>
+      <if test="platformCost != null" >
+        platform_cost,
+      </if>
+      <if test="materialCost != null" >
+        material_cost,
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee,
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost,
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin,
+      </if>
+      <if test="netProfit != null" >
+        net_profit,
+      </if>
+      <if test="netProfitMargin != null" >
+        net_profit_margin,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersType != null" >
+        #{ordersType,jdbcType=INTEGER},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfitMargin != null" >
+        #{netProfitMargin,jdbcType=REAL},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprots" >
+    update ebaydailyoutzhuanxianreprots
+    <set >
+      <if test="ordersType != null" >
+        orders_type = #{ordersType,jdbcType=INTEGER},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        product_refund = #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        product_shipping = #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        platform_cost = #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        material_cost = #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        net_profit = #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfitMargin != null" >
+        net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+      and channel_name = #{channelName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.EbayDailyOutZhuanXianReprots" >
+    update ebaydailyoutzhuanxianreprots
+    set orders_type = #{ordersType,jdbcType=INTEGER},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=REAL},
+      product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      product_refund = #{productRefund,jdbcType=DOUBLE},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      product_shipping = #{productShipping,jdbcType=DOUBLE},
+      platform_cost = #{platformCost,jdbcType=DOUBLE},
+      material_cost = #{materialCost,jdbcType=DOUBLE},
+      order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      net_profit = #{netProfit,jdbcType=DOUBLE},
+      net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      profit = #{profit,jdbcType=DOUBLE}
+    where platform = #{platform,jdbcType=VARCHAR}
+      and report_date = #{reportDate,jdbcType=DATE}
+      and channel_name = #{channelName,jdbcType=VARCHAR}
+  </update>
+</mapper>

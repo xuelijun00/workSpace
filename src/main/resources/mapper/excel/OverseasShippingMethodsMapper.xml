@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yks.bi.dao.excel.OverseasShippingMethodsMapper">
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.excel.OverseasShippingMethods">
+    <id column="country_english" jdbcType="VARCHAR" property="a_countryEnglish" />
+    <result column="country_chinese" jdbcType="VARCHAR" property="b_countryChinese" />
+    <result column="partition" jdbcType="VARCHAR" property="c_partition" />
+    <result column="freight" jdbcType="DOUBLE" property="d_freight" />
+    <result column="per_kg_price" jdbcType="DOUBLE" property="e_perKgPrice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    country_english, country_chinese, partition, freight, per_kg_price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yks_overseas_shipping_methods
+    where country_english = #{countryEnglish,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from yks_overseas_shipping_methods
+    where country_english = #{countryEnglish,jdbcType=VARCHAR}
+  </delete>
+  <!--批量新增  -->
+  <insert id="insertBatch" useGeneratedKeys="true" parameterType="list" >
+     insert into yks_overseas_shipping_methods (country_english, country_chinese, partition, 
+      freight, per_kg_price)
+    values 
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{item.a_countryEnglish,jdbcType=VARCHAR}, #{item.b_countryChinese,jdbcType=VARCHAR}, #{item.c_partition,jdbcType=VARCHAR}, 
+      #{item.d_freight,jdbcType=DOUBLE}, #{item.e_perKgPrice,jdbcType=DOUBLE})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.yks.bi.dto.excel.OverseasShippingMethods">
+    insert into yks_overseas_shipping_methods (country_english, country_chinese, partition, 
+      freight, per_kg_price)
+    values (#{countryEnglish,jdbcType=VARCHAR}, #{countryChinese,jdbcType=VARCHAR}, #{partition,jdbcType=VARCHAR}, 
+      #{freight,jdbcType=DOUBLE}, #{perKgPrice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yks.bi.dto.excel.OverseasShippingMethods">
+    insert into yks_overseas_shipping_methods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countryEnglish != null">
+        country_english,
+      </if>
+      <if test="countryChinese != null">
+        country_chinese,
+      </if>
+      <if test="partition != null">
+        partition,
+      </if>
+      <if test="freight != null">
+        freight,
+      </if>
+      <if test="perKgPrice != null">
+        per_kg_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countryEnglish != null">
+        #{countryEnglish,jdbcType=VARCHAR},
+      </if>
+      <if test="countryChinese != null">
+        #{countryChinese,jdbcType=VARCHAR},
+      </if>
+      <if test="partition != null">
+        #{partition,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null">
+        #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="perKgPrice != null">
+        #{perKgPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yks.bi.dto.excel.OverseasShippingMethods">
+    update yks_overseas_shipping_methods
+    <set>
+      <if test="countryChinese != null">
+        country_chinese = #{countryChinese,jdbcType=VARCHAR},
+      </if>
+      <if test="partition != null">
+        partition = #{partition,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null">
+        freight = #{freight,jdbcType=DOUBLE},
+      </if>
+      <if test="perKgPrice != null">
+        per_kg_price = #{perKgPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where country_english = #{countryEnglish,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.excel.OverseasShippingMethods">
+    update yks_overseas_shipping_methods
+    set country_chinese = #{countryChinese,jdbcType=VARCHAR},
+      partition = #{partition,jdbcType=VARCHAR},
+      freight = #{freight,jdbcType=DOUBLE},
+      per_kg_price = #{perKgPrice,jdbcType=DOUBLE}
+    where country_english = #{countryEnglish,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>
