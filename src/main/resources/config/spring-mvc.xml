@@ -81,7 +81,7 @@
 				<entry key="smtDailyOut" value="/common?path=smt/smtDailyOut"></entry>
 				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtBuyerCountrySales"></entry>
 				<entry key="smtDailyOutNetProfit" value="/common?path=smt/smtDailyOutNetProfit"></entry>
-				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtDailyOutAccount"></entry>
+				<entry key="smtDailyOutAccount" value="/common?path=smt/smtDailyOutAccount"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
 				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
