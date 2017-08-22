@@ -51,6 +51,11 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	}
 
 	@Override
+	public List<String> selectNewPlatformZhuzhandian(String platform) {
+		return dailyout.selectNewPlatformZhuzhandian(platform);
+	}
+	
+	@Override
 	public List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key) {
 		return dailyout.selectNewEggAll(key);
 	}
@@ -58,6 +63,11 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	@Override
 	public List<String> selectNewEggAccount(String platform) {
 		return dailyout.selectNewEggAccount(platform);
+	}
+	
+	@Override
+	public List<String> selectNewEggZhuzhandian(String platform) {
+		return dailyout.selectNewEggZhuzhandian(platform);
 	}
 	
 	@Override
@@ -70,5 +80,7 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	public List<String> selectWalmartAccount() {
 		return dailyout.selectWalmartAccount();
 	}
+
+	
 
 }

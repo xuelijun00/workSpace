@@ -2,8 +2,6 @@ package com.yks.bi.dto.report;
 
 import java.util.Date;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DailyOutSkuReprots {
@@ -52,7 +50,7 @@ public class DailyOutSkuReprots {
     
 	private String endDate;
     
-    private String zhuzhandian;      //eBay的主站点
+    private String zhuzhandian;      //主站点
     
 /*	private String reportDate1;*/
 	

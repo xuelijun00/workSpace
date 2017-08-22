@@ -26,9 +26,14 @@ public interface DailyOutSkuReprotsMapper {
     
     List<String> selectNewPlatformAccount(@Param("platform")String platform);
     
+    List<String> selectNewPlatformZhuzhandian(@Param("platform")String platform);
+ 
     List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key);
 
     List<String> selectNewEggAccount(@Param("platform")String platform);
+    
+    List<String> selectNewEggZhuzhandian(@Param("platform")String platform);
+    
     /**
      * 用于“walmart发货订单净利”页面
      * @param key

@@ -38,9 +38,13 @@ public interface INetProfitDetailsService {
      */
     List<String> selectNewPlatformAccount(String platform);
     
+    List<String> selectNewPlatformZhuzhandian(String platform);
+    
     List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key);
     
     List<String> selectNewEggAccount(String platform);
+    
+    List<String> selectNewEggZhuzhandian(String platform);
     
     /**
      * 用于“walmart发货订单净利”页面

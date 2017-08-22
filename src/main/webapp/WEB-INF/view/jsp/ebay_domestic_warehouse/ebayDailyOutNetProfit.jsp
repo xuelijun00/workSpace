@@ -63,12 +63,17 @@ var domesticData = [];
 function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
+	var zhuzhandian = $("#zhuzhandian").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
 	var url = "";
 	
 		url = contextPath + '/report/profit_details/grid?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
 	
+	if(zhuzhandian !== 'all'){
+		url += "&zhuzhandian=" + zhuzhandian;
+	}
+		
 	if(sku !== ''){
 		url += "&sku=" + sku;
 	}
@@ -157,10 +162,10 @@ function exportData(){
 		,url:getUrl()
 		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
-					{name : 'manager',index : 'manager',sortable : "true",width : 100},
+					{name : 'manager',index : 'manager',sortable : "true",width : 80},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
-		            {name : 'skuCnName',index : 'skuCnName',width : 100},
+		            {name : 'skuCnName',index : 'skuCnName',width : 210},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -177,7 +182,7 @@ function exportData(){
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
-		             ]	      
+		             ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true

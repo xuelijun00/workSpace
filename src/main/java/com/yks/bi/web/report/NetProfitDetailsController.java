@@ -35,12 +35,9 @@ public class NetProfitDetailsController {
 	 */
 	@RequestMapping(value="/profit_details/grid")
 	public GridModel selectAccountAchievementServiceGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
-		/*if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
-			filter.setSidx("report_date");
-		}*/
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<DailyOutSkuReprots> list = NetProfit.selectAll(key);
+		List<DailyOutSkuReprots> list = NetProfit.selectAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
@@ -100,6 +97,16 @@ public class NetProfitDetailsController {
 		return NetProfit.selectNewPlatformAccount(platform);
 	}
 	
+	/**
+	 * 查询新平台主站点
+	 * @param platform
+	 * @return
+	 */
+	@RequestMapping("/profit_details/newPlatform/zhuzhandian")
+	public List<String> selectNewPlatformZhuzhandian(String platform) {
+		return NetProfit.selectNewPlatformZhuzhandian(platform);
+	}
+	
 	@RequestMapping(value="/profit_details/newEgg/grid")
 	public GridModel selectNewEggformGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -116,6 +123,16 @@ public class NetProfitDetailsController {
 	@RequestMapping("/profit_details/newEgg/account")
 	public List<String> selectNewEggAccount(String platform) {
 		return NetProfit.selectNewEggAccount(platform);
+	}
+	
+	/**
+	 * 查询新蛋主站点
+	 * @param platform
+	 * @return
+	 */
+	@RequestMapping("/profit_details/newEgg/zhuzhandian")
+	public List<String> selectNewEggZhuzhandian(String platform) {
+		return NetProfit.selectNewEggZhuzhandian(platform);
 	}
 	
 	/**

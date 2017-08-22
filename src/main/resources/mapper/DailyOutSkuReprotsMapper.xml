@@ -34,21 +34,14 @@
     `operating_cost`, `profit_margin`, `profit`, `net_profit`,`zhuzhandian`
   </sql>
   
-   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	select 
-  	<include refid="Base_Column_List" /> 
-  	from dailyoutskureprots_new
-	where 1=1
-	<if test="startDate != null and startDate.length() > 0" >
+  <sql id="Base_If" >
+    <if test="startDate != null and startDate.length() > 0" >
        and report_date >= #{startDate,jdbcType=DATE}
     </if>
     <if test="endDate != null and endDate.length() > 0" >
        <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
     </if>
-    <if test="platform != null and platform.length() > 0" >
-       and platform = #{platform,jdbcType=VARCHAR}
-    </if>
-    <if test="zhuzhandian != null and zhuzhandian > 0" >
+    <if test="zhuzhandian != null and zhuzhandian.length() > 0" >
        and zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
     </if>
     <if test="salesAccount != null and salesAccount.length() > 0" >
@@ -56,6 +49,30 @@
     </if>
     <if test="sku != null and sku.length() > 0" >
        and sku = #{sku,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  
+  <sql id="Base_NewEgg_Choose" >
+    <choose>
+		<when test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			AND (platform like '%overstock' 
+				OR platform = 'new_newegg'
+				OR platform = 'tophatter')
+		</otherwise>
+	</choose>
+  </sql>
+  
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from dailyoutskureprots_new
+	where 1=1
+	<include refid="Base_If" /> 
+    <if test="platform != null and platform.length() > 0" >
+       and platform = #{platform,jdbcType=VARCHAR}
     </if>
   </select>
   
@@ -85,26 +102,15 @@
   
  
   <select id="selectNewPlatformAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	select 
+  	SELECT 
   	<include refid="Base_Column_List" /> 
-  	   from dailyoutskureprots_new
-	   where platform like 'new\_%' 
-	   and platform != "new_newegg"
-	<if test="startDate != null and startDate.length() > 0" >
-       and report_date >= #{startDate,jdbcType=DATE}
-    </if>
-    <if test="endDate != null and endDate.length() > 0" >
-       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
-    </if>
+  	   FROM `dailyoutskureprots_new`
+	   WHERE platform like 'new\_%' 
+	   AND platform != "new_newegg"
+	<include refid="Base_If" />
     <if test="platform != null and platform.length() > 0" >
        and platform = #{platform,jdbcType=VARCHAR}
-    </if>
-    <if test="salesAccount != null and salesAccount.length() > 0" >
-       and sales_account = #{salesAccount,jdbcType=VARCHAR}
-    </if>
-    <if test="sku != null and sku.length() > 0" >
-       and sku = #{sku,jdbcType=VARCHAR}
-    </if>
+    </if> 
   </select>
   
   <select id="selectNewPlatform" resultType="String" >
@@ -126,53 +132,46 @@
     GROUP by `sales_account`
   </select>
   
+  <select id="selectNewPlatformZhuzhandian" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `zhuzhandian` 
+    FROM `dailyoutskureprots_new` 
+    WHERE `platform` like 'new\_%' 
+	   AND `platform` != "new_newegg" 
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `zhuzhandian`
+  </select>
+  
   <select id="selectNewEggAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
   	SELECT 
   	<include refid="Base_Column_List" /> 
   	FROM dailyoutskureprots_new
 	WHERE 1=1
-	<choose>
-		<when test="platform != null and platform.length() > 0">
-			AND platform = #{platform,jdbcType=VARCHAR}
-		</when>
-		<otherwise>
-			AND (platform like '%overstock' 
-				OR platform = 'new_newegg'
-				OR platform = 'tophatter')
-		</otherwise>
-	</choose>
-	<if test="startDate != null and startDate.length() > 0" >
-       AND report_date >= #{startDate,jdbcType=DATE}
-    </if>
-    <if test="endDate != null and endDate.length() > 0" >
-       <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
-    </if>
-    <if test="salesAccount != null and salesAccount.length() > 0" >
-       AND sales_account = #{salesAccount,jdbcType=VARCHAR}
-    </if>
-    <if test="sku != null and sku.length() > 0" >
-       AND sku = #{sku,jdbcType=VARCHAR}
-    </if>
+	<include refid="Base_NewEgg_Choose" />
+	<include refid="Base_If" />
   </select>
   
   <select id="selectNewEggAccount" resultType="java.lang.String" parameterType="java.lang.String">
     SELECT `sales_account` 
     FROM `dailyoutskureprots_new` 
     WHERE 1=1
-    <choose>
-		<when test="platform != null and platform.length() > 0">
-			AND platform = #{platform,jdbcType=VARCHAR}
-		</when>
-		<otherwise>
-			AND (platform like '%overstock' 
-				OR platform = 'new_newegg'
-				OR platform = 'tophatter')
-		</otherwise>
-	</choose>
+    <include refid="Base_NewEgg_Choose" />
     <if test="platform != null and platform.length() > 0" >
        AND `platform` = #{platform,jdbcType=VARCHAR}
     </if>
     GROUP by `sales_account`
+  </select>
+  
+  <select id="selectNewEggZhuzhandian" resultType="java.lang.String" parameterType="java.lang.String">
+    SELECT `zhuzhandian` 
+    FROM `dailyoutskureprots_new` 
+    WHERE 1=1
+   <include refid="Base_NewEgg_Choose" />
+    <if test="platform != null and platform.length() > 0" >
+       AND `platform` = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP by `zhuzhandian`
   </select>
   
    <select id="selectWalmartAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
@@ -181,23 +180,12 @@
 		   `product_shipping`, `platform_cost`, `material_cost`,`order_execution_fee`,
 		   `operating_cost`, `profit_margin`, `profit`, `net_profit`,
 		   `erp_orders_id`, `buyer_id`
-  	from walmartdailyoutskureprots
+  	from `walmartdailyoutskureprots`
 	where 1=1
-	<if test="startDate != null and startDate.length() > 0" >
-       and report_date >= #{startDate,jdbcType=DATE}
-    </if>
-    <if test="endDate != null and endDate.length() > 0" >
-       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
-    </if>
+	<include refid="Base_If" />	
     <if test="erpOrdersId != null and erpOrdersId > 0" >
        and erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}
     </if>   
-    <if test="salesAccount != null and salesAccount.length() > 0" >
-       and sales_account = #{<![CDATA[salesAccount]]>,jdbcType=VARCHAR}
-    </if> 
-    <if test="sku != null and sku.length() > 0" >
-       and sku = #{sku,jdbcType=VARCHAR}
-    </if>
   </select>
    
    <select id="selectWalmartAccount" resultType="String" >
