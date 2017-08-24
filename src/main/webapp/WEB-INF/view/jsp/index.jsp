@@ -106,6 +106,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtBuyerCountrySales">SMT买家国家数据</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutNetProfit">SMT发货订单净利</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutAccount">SMT账号每日发货数据</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesSkuReports_Recycle">SMT SKU环比增长</a></li>
                     </ul>
                 </li>
                 <li>
@@ -118,6 +119,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishBuyerCountrySales">Wish买家国家数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutNetProfit">Wish发货订单净利</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutAccount">Wish账号每日发货数据</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySalesSkuReports_Recycle">Wish SKU环比增长</a></li>
                     </ul>
                 </li>
                 <li>
@@ -154,6 +156,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartBuyerCountrySales">沃尔玛买家国家数据</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutNetProfit">沃尔玛发货订单净利</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutAccount">沃尔玛账号每日发货数据</a> </li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySalesSkuReports_Recycle">沃尔玛SKU环比增长</a> </li>
                     </ul>
                 </li>
                 <li>

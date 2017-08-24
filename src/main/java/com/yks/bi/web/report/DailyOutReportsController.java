@@ -90,7 +90,6 @@ public class DailyOutReportsController {
 	    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 	    	List<DailyOutReports> list = dailyOutReportsService.selectPlatformWarehouseShipmentCount(key);
 	    	PageInfo<?> pageInfo = new PageInfo<>(list);
-	    	
 	        return new GridModel(pageInfo);
 	    }
 	

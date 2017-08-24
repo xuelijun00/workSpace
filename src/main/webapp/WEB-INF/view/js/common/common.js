@@ -56,11 +56,19 @@ var common = {
 			        type: 'slider',
 			        xAxisIndex: 0,
 			        filterMode: 'empty',
+			        startValue: 0,
+			        endValue: 100
+			    }, {
+			        type: 'slider',
+			        yAxisIndex: 0,
+			        left: '3%',
+			        filterMode: 'empty',
 			        start: 0,
 			        end: 100
 			    }, {
 			        type: 'slider',
-			        yAxisIndex: 0,
+			        yAxisIndex: 1,
+			        left: '94%',
 			        filterMode: 'empty',
 			        start: 0,
 			        end: 100
@@ -73,6 +81,12 @@ var common = {
 			    }, {
 			        type: 'inside',
 			        yAxisIndex: 0,
+			        filterMode: 'empty',
+			        start: 0,
+			        end: 100
+			    }, {
+			        type: 'inside',
+			        yAxisIndex: 1,
 			        filterMode: 'empty',
 			        start: 0,
 			        end: 100
@@ -90,7 +104,7 @@ var common = {
 			        }
 			    ],
 			    yAxis: operation.y,
-			    series: operation.series
+			    series: operation.series,
 			};
 			return option;
 		},

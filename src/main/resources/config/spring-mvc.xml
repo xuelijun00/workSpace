@@ -82,6 +82,7 @@
 				<entry key="smtBuyerCountrySales" value="/common?path=smt/smtBuyerCountrySales"></entry>
 				<entry key="smtDailyOutNetProfit" value="/common?path=smt/smtDailyOutNetProfit"></entry>
 				<entry key="smtDailyOutAccount" value="/common?path=smt/smtDailyOutAccount"></entry>
+				<entry key="smtDailySalesSkuReports_Recycle" value="/common?path=smt/smtDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
 				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
@@ -90,6 +91,7 @@
 				<entry key="wishBuyerCountrySales" value="/common?path=wish/wishBuyerCountrySales"></entry>
 				<entry key="wishDailyOutNetProfit" value="/common?path=wish/wishDailyOutNetProfit"></entry>
 				<entry key="wishDailyOutAccount" value="/common?path=wish/wishDailyOutAccount"></entry>
+				<entry key="wishDailySalesSkuReports_Recycle" value="/common?path=wish/wishDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
 				<entry key="lazadaSkuSales" value="/common?path=lazada/lazadaSkuSales"></entry>
@@ -114,6 +116,7 @@
 				<entry key="walmartBuyerCountrySales" value="/common?path=walmart/walmartBuyerCountrySales"></entry>
 				<entry key="walmartDailyOutNetProfit" value="/common?path=walmart/walmartDailyOutNetProfit"></entry>
 				<entry key="walmartDailyOutAccount" value="/common?path=walmart/walmartDailyOutAccount"></entry>
+				<entry key="walmartDailySalesSkuReports_Recycle" value="/common?path=walmart/walmartDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="neweggDailySales" value="/common?path=newegg/neweggDailySales"></entry>
 				<entry key="neweggSkuSales" value="/common?path=newegg/neweggSkuSales"></entry>
