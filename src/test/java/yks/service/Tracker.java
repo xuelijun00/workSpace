@@ -24,7 +24,7 @@ import com.yks.bi.common.ResponseData;
 public class Tracker {
 
 	/** Apikey my */
-	private static final String Apikey = "c7cdeb1d-7fa2-4fe2-97a6-73a7c64768a7";
+	private static final String Apikey = "769dc19d-e517-4bf4-b318-959751eaf7f0";
 	//private static final String Apikey = "c6e70625-7a26-4373-9d5d-49f119d79a65";
 	
 	public static void main(String[] args) throws Exception{
@@ -33,9 +33,9 @@ public class Tracker {
 		String result = new Tracker().orderOnlineByJson(requestData,urlStr,"realtime");
 		System.out.println(result);
 		
-		/*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+00:00");
-		System.out.println(format.format(new Date()));
-		System.out.println(format.parse("2017-06-12T06:50:42+00:00").getYear() + 1900);*/
+		/*String urlStr ="?page=1&limit=100";
+		String result = new Tracker().orderOnlineByJson(null,urlStr,"get");
+		System.out.println(result);*/
 	}
 
 	/**
@@ -60,9 +60,8 @@ public class Tracker {
 		} else if (type.equals("get")) {
 			String ReqURL = "http://api.trackingmore.com/v2/trackings/get";
 			String RelUrl = ReqURL + urlStr;
-			ResponseData data = HttpRequestUtils.sendHttpGet(RelUrl, null, header);
-			//result = sendPost(RelUrl, headerparams, bodyParams, "GET");
-			result = data.getResponseText();
+			//ResponseData data = HttpRequestUtils.sendHttpGet(RelUrl, null, header);
+			result = sendPost(RelUrl, headerparams, bodyParams, "GET");
 		} else if (type.equals("batch")) {
 			String ReqURL = "http://api.trackingmore.com/v2/trackings/batch";
 			bodyParams.add(requestData);
@@ -110,9 +109,11 @@ public class Tracker {
 			out.write(sbBody.toString());
 			out.flush();
 			in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-			String line;
-			while ((line = in.readLine()) != null) {
-				result.append(line);
+			int BUFFER_SIZE=1024;
+			char[] buffer = new char[BUFFER_SIZE]; // or some other size, 
+			int charsRead = 0;
+			while ( (charsRead  = in.read(buffer, 0, BUFFER_SIZE)) != -1) {
+				result.append(buffer, 0, charsRead);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

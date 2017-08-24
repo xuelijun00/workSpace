@@ -25,6 +25,11 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
+            <div class="form-group">
+                <label>主站点：</label>
+                <select class="form-control w120" id="zhuzhandian">
+                </select>
+            </div>
             <br/>
             <div class="form-group">
                 <label>平台：</label>
@@ -63,6 +68,7 @@ var domesticData = [];
 function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
+	var zhuzhandian = $("#zhuzhandian").val();
 	var platform = $("#platform").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
@@ -70,6 +76,10 @@ function getUrl(){
 	
 		url = contextPath + '/report/profit_details/grid?startDate=' + startDate + "&endDate=" + endDate;
 	
+	if(zhuzhandian !== 'all'){
+		url += "&zhuzhandian=" + zhuzhandian;
+	}			
+
 	if(platform !== 'all'){
 		url += "&platform=" + platform;
 	}
@@ -108,8 +118,6 @@ function exportData(){
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
 	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
-	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入（元）','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
-	var column = ['reportDate','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit']; */
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -150,6 +158,22 @@ function palAndAcc(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
+	
+	$.ajax({
+		url : contextPath + "/report/profit_details/zhuzhandian",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#zhuzhandian").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#zhuzhandian").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
+	});
+	
 	$.ajax({
 		url : contextPath + "/report/profit_details/platform",
 		cache : false,

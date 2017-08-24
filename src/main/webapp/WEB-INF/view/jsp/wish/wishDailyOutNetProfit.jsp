@@ -24,6 +24,12 @@
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+            </div>    
+            <br/>
+            <div class="form-group">
+                <label>主站点：</label>
+                <select class="form-control w120" id="zhuzhandian">
+                </select>
             </div>
              <div class="form-group">
 	            <label>SKU：</label>
@@ -33,7 +39,8 @@
                 <label>账号：</label>
                 <input id="account_input" list="account" />
 				<datalist id="account"></datalist>
-            </div>       
+            </div>
+            
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
@@ -57,11 +64,16 @@ var domesticData = [];
 function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
+	var zhuzhandian = $("#zhuzhandian").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
 	var url = "";
 	
 		url = contextPath + '/report/profit_details/grid?platform=wish&startDate=' + startDate + "&endDate=" + endDate;
+	
+	if(zhuzhandian !== 'all'){
+		url += "&zhuzhandian=" + zhuzhandian;
+	}
 	
 	if(sku !== ''){
 		url += "&sku=" + sku;
@@ -93,9 +105,9 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var fileName = "Wish发货订单净利明细" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间'];
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
 	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate'];
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -117,6 +129,21 @@ function exportData(){
     });
 	
 	$.ajax({
+		url : contextPath + "/report/profit_details/zhuzhandian?platform=wish",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#zhuzhandian").append("<option value='all'>全部</option>");
+				for(var i=0;i<data.length;i++){
+					$("#zhuzhandian").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+				}
+			}
+		}
+	});
+	
+	$.ajax({
 		url : contextPath + "/report/profit_details/account?platform=wish",
 		cache : false,
 		type:"get",
@@ -134,12 +161,12 @@ function exportData(){
 	common.grid({
 		title:"Wish发货订单净利明细"
 		,url:getUrl()
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间']
+		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
-					{name : 'manager',index : 'manager',sortable : "true",width : 100},
+					{name : 'manager',index : 'manager',sortable : "true",width : 80},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
-		            {name : 'skuCnName',index : 'skuCnName',width : 100},
+		            {name : 'skuCnName',index : 'skuCnName',width : 210},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -154,8 +181,9 @@ function exportData(){
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'reportDate',index : 'reportDate',width : 110}
-		             ]	      
+		            {name : 'reportDate',index : 'reportDate',width : 110},
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
+		             ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true
