@@ -50,6 +50,7 @@
 				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
 				<entry key="ebayDailyOutNetProfit" value="/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit"></entry>
 				<entry key="ebayDailyOutAccount" value="/common?path=ebay_domestic_warehouse/ebayDailyOutAccount"></entry>
+				<entry key="ebayDailySalesSkuReports_Recycle" value="/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="account_achievement" value="/common?path=account_achievement/account_achievement"></entry>
 				<entry key="manager_account_achievement" value="/common?path=account_achievement/manager_account_achievement"></entry>
@@ -74,6 +75,7 @@
 				<entry key="amazonBuyerCountrySales" value="/common?path=amazon/amazonBuyerCountrySales"></entry>
 				<entry key="amazonDailyOutNetProfit" value="/common?path=amazon/amazonDailyOutNetProfit"></entry>
 				<entry key="amazonDailyOutAccount" value="/common?path=amazon/amazonDailyOutAccount"></entry>
+				<entry key="amazonDailySalesSkuReports_Recycle" value="/common?path=amazon/amazonDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
 				<entry key="smt/smtSkuSales" value="/common?path=smt/smtSkuSales"></entry>
@@ -100,6 +102,7 @@
 				<entry key="lazadaBuyerCountrySales" value="/common?path=lazada/lazadaBuyerCountrySales"></entry>
 				<entry key="lazadaDailyOutNetProfit" value="/common?path=lazada/lazadaDailyOutNetProfit"></entry>
 				<entry key="lazadaDailyOutAccount" value="/common?path=lazada/lazadaDailyOutAccount"></entry>
+				<entry key="lazadaDailySalesSkuReports_Recycle" value="/common?path=lazada/lazadaDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="newplatformDailySales" value="/common?path=newplatform/newplatformDailySales"></entry>
 				<entry key="newplatformSkuSales" value="/common?path=newplatform/newplatformSkuSales"></entry>
@@ -108,6 +111,7 @@
 				<entry key="newplatformBuyerCountrySales" value="/common?path=newplatform/newplatformBuyerCountrySales"></entry>
 				<entry key="newplatformDailyOutNetProfit" value="/common?path=newplatform/newplatformDailyOutNetProfit"></entry>
 				<entry key="newplatformDailyOutAccount" value="/common?path=newplatform/newplatformDailyOutAccount"></entry>
+				<entry key="newplatformDailySalesSkuReports_Recycle" value="/common?path=newplatform/newplatformDailySalesSkuReports_Recycle"></entry>
 				
 				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
 				<entry key="walmartSkuSales" value="/common?path=walmart/walmartSkuSales"></entry>
@@ -125,6 +129,7 @@
 				<entry key="neweggBuyerCountrySales" value="/common?path=newegg/neweggBuyerCountrySales"></entry>
 				<entry key="neweggDailyOutNetProfit" value="/common?path=newegg/neweggDailyOutNetProfit"></entry>
 				<entry key="neweggDailyOutAccount" value="/common?path=newegg/neweggDailyOutAccount"></entry>
+				<entry key="neweggDailySalesSkuReports_Recycle" value="/common?path=newegg/neweggDailySalesSkuReports_Recycle"></entry>
 			</map>
 		</property>
 	</bean>

@@ -15,6 +15,21 @@ public class DailySalesSkuReports_RecycleServiceImpl implements IDailySalesSkuRe
 
 	@Autowired
 	private DailySalesSkuReports_RecycleMapper dssrrm;
+
+	@Override
+	public List<DailySalesSkuReports_Recycle> selectAmazonAll(DailySalesSkuReports_RecycleKey key) {
+		return dssrrm.selectAmazonAll(key);
+	}
+
+	@Override
+	public List<DailySalesSkuReports_Recycle> selectEbayAll(DailySalesSkuReports_RecycleKey key) {
+		return dssrrm.selectEbayAll(key);
+	}
+
+	@Override
+	public List<DailySalesSkuReports_Recycle> selectLazadaAll(DailySalesSkuReports_RecycleKey key) {
+		return dssrrm.selectLazadaAll(key);
+	}
 	
 	@Override
 	public List<DailySalesSkuReports_Recycle> selectSmtAll(DailySalesSkuReports_RecycleKey key) {
@@ -31,11 +46,11 @@ public class DailySalesSkuReports_RecycleServiceImpl implements IDailySalesSkuRe
 		return dssrrm.selectWishAll(key);
 	}
 
-	@Override
+/*	@Override
 	public List<String> selectBusiness() {
 		return dssrrm.selectBusiness();
 	}
-
+*/
 	@Override
 	public List<DailySalesSkuReports_Recycle> selectNewPlatformAll(DailySalesSkuReports_RecycleKey key) {
 		return dssrrm.selectNewPlatformAll(key);
@@ -51,8 +66,9 @@ public class DailySalesSkuReports_RecycleServiceImpl implements IDailySalesSkuRe
 		return dssrrm.selectNewEggAll(key);
 	}
 
-
-
-
+	@Override
+	public List<String> selectNewEggBusiness() {
+		return dssrrm.selectNewEggBusiness();
+	}
 
 }

@@ -39,6 +39,68 @@ public class DailySalesSkuReports_RecycleController {
 		key.setEndDate(endDate1);
 	}
 
+	@RequestMapping(value="/sku_recycle/amazon/grid",method=RequestMethod.GET)
+	public GridModel selectAmazonAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+		List<DailySalesSkuReports_Recycle> list = idssrrs.selectAmazonAll(key);
+		PageInfo<?> pageInfo = new PageInfo<>(list);
+		return new GridModel(pageInfo);
+	}
+	
+	@RequestMapping(value="/sku_recycle/amazon/chart",method=RequestMethod.GET)
+	public List<DailySalesSkuReports_Recycle> selectAmazonAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+		return idssrrs.selectAmazonAll(key);
+	}
+	
+	@RequestMapping(value="/sku_recycle/ebay/grid",method=RequestMethod.GET)
+	public GridModel selectEbayAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+		List<DailySalesSkuReports_Recycle> list = idssrrs.selectEbayAll(key);
+		PageInfo<?> pageInfo = new PageInfo<>(list);
+		return new GridModel(pageInfo);
+	}
+	
+	@RequestMapping(value="/sku_recycle/ebay/chart",method=RequestMethod.GET)
+	public List<DailySalesSkuReports_Recycle> selectEbayAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+		return idssrrs.selectEbayAll(key);
+	}
+	
+	@RequestMapping(value="/sku_recycle/lazada/grid",method=RequestMethod.GET)
+	public GridModel selectLazadaAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+
+		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+		List<DailySalesSkuReports_Recycle> list = idssrrs.selectLazadaAll(key);
+		PageInfo<?> pageInfo = new PageInfo<>(list);
+		return new GridModel(pageInfo);
+	}
+	
+	@RequestMapping(value="/sku_recycle/lazada/chart",method=RequestMethod.GET)
+	public List<DailySalesSkuReports_Recycle> selectLazadaAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
+
+		dateAddOne(key);
+		return idssrrs.selectLazadaAll(key);
+	}
+	
+	
+	
 	@RequestMapping(value="/sku_recycle/smt/grid",method=RequestMethod.GET)
 	public GridModel selectSmtAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
 
@@ -100,10 +162,10 @@ public class DailySalesSkuReports_RecycleController {
 		return idssrrs.selectWishAll(key);
 	}
 
-	@RequestMapping(value="/sku_recycle/business",method=RequestMethod.GET)
+/*	@RequestMapping(value="/sku_recycle/business",method=RequestMethod.GET)
 	public List<String> selectBusiness(){
 		return idssrrs.selectBusiness();
-	}
+	}*/
 
 	@RequestMapping(value="/sku_recycle/newPlatform/grid",method=RequestMethod.GET)
 	public GridModel selectNewPlatformAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
@@ -127,6 +189,7 @@ public class DailySalesSkuReports_RecycleController {
 
 	@RequestMapping(value="/sku_recycle/newPlatform/business",method=RequestMethod.GET)
 	public List<String> selectNewPlatformBusiness(){
+		System.out.println(idssrrs.selectNewPlatformBusiness()+"************");
 		return idssrrs.selectNewPlatformBusiness();
 	}
 
@@ -150,4 +213,9 @@ public class DailySalesSkuReports_RecycleController {
 		return idssrrs.selectNewEggAll(key);
 	}
 
+	@RequestMapping(value="/sku_recycle/newEgg/business",method=RequestMethod.GET)
+	public List<String> selectNewEggBusiness(){
+		return idssrrs.selectNewEggBusiness();
+	}
+	
 }
