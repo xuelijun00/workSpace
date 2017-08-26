@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailySalesSkuReports_RecycleMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailySalesSkuReports_Recycle" >
+    <id column="report_date" property="reportDate" jdbcType="VARCHAR" />
+    <id column="business" property="business" jdbcType="VARCHAR" />
+    <id column="sku" property="sku" jdbcType="VARCHAR" />
+    <result column="sku_old" property="skuOld" jdbcType="VARCHAR" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    report_date, business, sku, sku_old, orders, quantity, sales
+  </sql>
+  
+  <sql id="Base_If">
+  	<if test="startDate != null and startDate.length() > 0">
+    	AND report_date >= #{startDate,jdbcType=VARCHAR}
+    </if>
+	 <if test="endDate != null and endDate.length() > 0">
+	 <![CDATA[AND report_date < #{endDate,jdbcType=VARCHAR}]]>
+	</if>
+    <if test="sku != null and sku.length() > 0">
+    	AND  sku = #{sku,jdbcType=VARCHAR}
+    </if>
+    <if test="skuOld != null and skuOld.length() > 0">
+    	AND sku_old = #{skuOld,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <!-- 这个维度的数据量很大，所以每个平台对应的表都是不同的 -->
+  <select id="selectAmazonAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `amazondailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+  <select id="selectEbayAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `ebaydailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+  <select id="selectLazadaAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `lazadadailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+  <select id="selectSmtAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `smtdailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+  <select id="selectWalmartAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `walmartdailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+  <select id="selectWishAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `wishdailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+  </select>
+
+<!--   <select id="selectBusiness" resultType="java.lang.String" >
+  	SELECT business
+    FROM `wishdailysalesskureports_recycle`
+    GROUP BY business
+  </select>
+ -->
+  <select id="selectNewPlatformAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `new1dailysalesskureports_recycle`
+    WHERE 1=1
+    <include refid="Base_If" />
+    <if test="business != null and business.length() > 0">
+    	AND business = #{business,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectNewPlatformBusiness" resultType="java.lang.String" >
+  	SELECT business
+    FROM `new1dailysalesskureports_recycle`
+    GROUP BY business
+  </select>
+
+  <select id="selectNewEggAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailySalesSkuReports_RecycleKey">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM `neweggdailysalesskureports_recycle`
+    WHERE 1=1 
+    <!-- <choose>
+		<when test="business != null and business.length() > 0">
+			AND business = #{business,jdbcType=VARCHAR}
+		</when>
+		<otherwise>
+			AND (business LIKE '%overstock' 
+				OR business = 'new_newegg'
+				OR business = 'tophatter')
+		</otherwise>
+	</choose> -->
+    <include refid="Base_If" />
+    <if test="business != null and business.length() > 0">
+    	AND business = #{business,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="selectNewEggBusiness" resultType="java.lang.String" >
+  	SELECT business
+    FROM `neweggdailysalesskureports_recycle`
+    GROUP BY business
+  </select>
+
+</mapper>
