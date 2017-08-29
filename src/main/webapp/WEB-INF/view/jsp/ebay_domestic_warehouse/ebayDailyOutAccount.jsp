@@ -34,7 +34,7 @@
                 <label>账号：</label>
                 <input id="account_input" list="account" />
 				<datalist id="account"></datalist>
-            </div>       
+            </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>

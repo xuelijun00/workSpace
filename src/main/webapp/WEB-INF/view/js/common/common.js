@@ -97,7 +97,7 @@ var common = {
 			        {
 			            type: 'category',
 			            data: operation.categories,
-			            axisLine: { onZero: false },
+			            axisLine: { onZero: common.axisLine(operation)},
 			            axisPointer: {
 			                type: 'shadow'
 			            }
@@ -107,6 +107,13 @@ var common = {
 			    series: operation.series,
 			};
 			return option;
+		},
+		axisLine:function(operation){
+			if(operation.title.text == "eBay发货订单净利明细"){
+				return true;
+			}else{
+				return false;
+			}
 		},
 		echarts:function(operation){
 			var chart = echarts.init(document.getElementById('container'));

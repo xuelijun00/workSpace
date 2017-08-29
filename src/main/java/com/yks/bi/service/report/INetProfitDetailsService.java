@@ -24,6 +24,8 @@ public interface INetProfitDetailsService {
     
     List<String> selectZhuzhandian(String platform);
     
+    List<DailyOutSkuReprots> selectProfit(DailyOutSkuReprots key);
+    
     List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key);
 	
 	/**

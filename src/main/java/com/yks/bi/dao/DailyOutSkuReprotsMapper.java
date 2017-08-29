@@ -20,6 +20,8 @@ public interface DailyOutSkuReprotsMapper {
     
     List<String> selectZhuzhandian(@Param("platform")String platform);
     
+    List<DailyOutSkuReprots> selectProfit(DailyOutSkuReprots key);
+    
     List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key);
     
     List<String> selectNewPlatform();

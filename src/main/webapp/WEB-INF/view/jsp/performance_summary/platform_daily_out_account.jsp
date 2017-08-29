@@ -115,10 +115,10 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var	platform = $("#platform").val();
 	var fileName = "各平台账号维度每日发货数据" + startDate +"-"+ endDate +"-"+ platform + ".csv";
-	var title = [ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类/主站点'];
-	var column = [ 'platform', 'salesAccount', 'manager', 'reportDate','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','category'];
+	var title = [ '平台名称', '账号', '管理员', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '分类/主站点'];
+	var column = [ 'platform', 'salesAccount', 'manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','category'];
 	/* var title = [ '报表时间', '平台名称', '账号', 'sku','管理员','发货数量','平均价','发货收入（元）','退款','成本','毛利','运费','平台费用','包材费','订单执行费','运营费','边际利润','税后综合净利'];
 	var column = ['reportDate','platform','salesAccount','sku','manager','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit','productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit']; */
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -173,12 +173,11 @@ function exportData(){
 	common.grid({
 		title:"各平台账号维度每日发货数据"
 		,url:getUrl()
-		,colNames:[ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类/主站点']
+		,colNames:[ '平台名称', '账号', '管理员', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '分类/主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'salesAccount',index : 'sales_account',width : 145}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},
-					{name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -193,6 +192,7 @@ function exportData(){
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'category',index : 'category',width : 100} 
 		             ]	      
 		,sortname:"reportDate"
