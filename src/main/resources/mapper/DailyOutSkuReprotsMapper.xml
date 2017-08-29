@@ -36,19 +36,19 @@
   
   <sql id="Base_If" >
     <if test="startDate != null and startDate.length() > 0" >
-       and report_date >= #{startDate,jdbcType=DATE}
+       AND report_date >= #{startDate,jdbcType=DATE}
     </if>
     <if test="endDate != null and endDate.length() > 0" >
-       <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+       <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
     </if>
     <if test="zhuzhandian != null and zhuzhandian.length() > 0" >
-       and zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
+       AND zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
     </if>
     <if test="salesAccount != null and salesAccount.length() > 0" >
-       and sales_account = #{salesAccount,jdbcType=VARCHAR}
+       AND sales_account = #{salesAccount,jdbcType=VARCHAR}
     </if>
     <if test="sku != null and sku.length() > 0" >
-       and sku = #{sku,jdbcType=VARCHAR}
+       AND sku = #{sku,jdbcType=VARCHAR}
     </if>
   </sql>
   
@@ -66,16 +66,27 @@
   </sql>
   
    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	select 
+  	SELECT 
   	<include refid="Base_Column_List" /> 
-  	from dailyoutskureprots_new
-	where 1=1
+  	FROM `dailyoutskureprots_new`
+	WHERE 1=1
 	<include refid="Base_If" /> 
     <if test="platform != null and platform.length() > 0" >
-       and platform = #{platform,jdbcType=VARCHAR}
+       AND platform = #{platform,jdbcType=VARCHAR}
     </if>
   </select>
-  
+
+  <select id="selectProfit" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+  	SELECT report_date, sum(profit) profit
+  	FROM `dailyoutskureprots_new`
+	WHERE 1=1
+	<include refid="Base_If" /> 
+    <if test="platform != null and platform.length() > 0" >
+       AND platform = #{platform,jdbcType=VARCHAR}
+    </if>
+    GROUP BY `report_date`
+  </select> 
+
   <select id="selectPlatform" resultType="String" >
     SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
   </select>

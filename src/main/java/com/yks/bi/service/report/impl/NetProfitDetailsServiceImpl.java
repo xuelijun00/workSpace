@@ -34,6 +34,11 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	public List<String> selectZhuzhandian(String platform) {
 		return dailyout.selectZhuzhandian(platform);
 	}
+	
+	@Override
+	public List<DailyOutSkuReprots> selectProfit(DailyOutSkuReprots key) {
+		return dailyout.selectProfit(key);
+	}
 
 	@Override
 	public List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key) {

@@ -48,6 +48,10 @@
             </div>
         </form> 
 		</div>
+		<div class="hr-line-dashed"></div>  
+        <h2 class="text-center">eBay发货订单税后综合净利（按日期汇总）</h2>
+		<div class="hr-line-dashed"></div>
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
@@ -60,15 +64,19 @@
 var chart;
 var operation;
 var domesticData = [];
-function getUrl(){
+function getUrl(type){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var zhuzhandian = $("#zhuzhandian").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
 	var url = "";
-	
+	if(type === 1){
 		url = contextPath + '/report/profit_details/grid?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
+	}else{
+		url = contextPath + '/report/profit_details/chart?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
+	}
+		
 	
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
@@ -84,11 +92,12 @@ function getUrl(){
 	return url;
 }
 function queryData(){
-	common.refreshData(getUrl(),chart,operation);
+	operation = getChartData(getUrl());
+	common.refreshData1(getUrl(1),chart,operation);
 }
 function exportData(){
     
-	chartUrl = getUrl(); 
+	chartUrl = getUrl(1); 
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -108,6 +117,58 @@ function exportData(){
 	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
+}
+
+function getChartData(chartUrl){
+	var profitSum = [];
+	var categories = [];
+	var ordersSum = [];
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+				for(var i=0;i<data.length;i++){
+				  categories.push(data[i].reportDate);
+				  profitSum.push(data[i].profit);
+	            }
+			}
+		}
+	});
+	var y = [{
+        type: 'value',
+        name: '',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    } ,{
+        type: 'value',
+        name: '税后综合净利',       
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '税后综合净利',style: {color: Highcharts.getOptions().colors[1]}}}
+	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];  */
+	/* return {
+		title:{text:"smt业务线时间段sku销售数据"}
+		,categories:sku
+		,y:y
+		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
+	}; */
+	return {
+		title:{text:"eBay发货订单净利明细"}
+		,categories:categories
+		,y:y
+		,series:[{name:'',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
+			{name: '税后综合净利',type: 'bar',yAxisIndex: 1,data:profitSum,tooltip: {valueSuffix: ''}}]
+	};
 }
 
 (function(){
@@ -156,10 +217,12 @@ function exportData(){
 			}
 		}
 	});
-		
+	
+  	chart = common.echarts(getChartData(getUrl()));//chart 
+	
 	common.grid({
 		title:"eBay发货订单净利明细"
-		,url:getUrl()
+		,url:getUrl(1)
 		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},

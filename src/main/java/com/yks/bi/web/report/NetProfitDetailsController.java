@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -68,6 +69,11 @@ public class NetProfitDetailsController {
 	@RequestMapping("/profit_details/zhuzhandian")
 	public List<String> selectZhuzhandian(String platform) {
 		return NetProfit.selectZhuzhandian(platform);
+	}
+	
+	@RequestMapping("/profit_details/chart")
+	public List<DailyOutSkuReprots> selectProfitChart(DailyOutSkuReprots key) {
+		return NetProfit.selectProfit(key);
 	}
 	
 	@RequestMapping(value="/profit_details/newPlatform/grid")
