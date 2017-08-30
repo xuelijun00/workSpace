@@ -3,9 +3,9 @@
 <mapper namespace="com.yks.bi.dao.DailyBuyerCountrySalesReportsMapper">
 	<resultMap id="BaseResultMap"
 		type="com.yks.bi.dto.report.DailyBuyerCountrySalesReports">
-		<result column="platform" property="platform" jdbcType="VARCHAR" />
-		<result column="report_date" property="reportDate" jdbcType="DATE" />
-		<result column="buyer_country" property="buyerCountry"
+		<id column="platform" property="platform" jdbcType="VARCHAR" />
+		<id column="report_date" property="reportDate" jdbcType="DATE" />
+		<id column="buyer_country" property="buyerCountry"
 			jdbcType="VARCHAR" />
 		<result column="orders" property="orders" jdbcType="INTEGER" />
 		<result column="sales" property="sales" jdbcType="REAL" />
@@ -14,7 +14,7 @@
 	<sql id="Base_Column_List">
 		`report_date`, `platform`, `buyer_country`, `orders`, `quantity`, `sales`
 	</sql>
-	
+
 	<select id="selectSalesGroupcountry" resultMap="BaseResultMap">
 		select buyer_country,sum(sales) sales from dailybuyer_countrysalesreports
 		group by buyer_country
@@ -62,10 +62,15 @@
 		ORDER BY `report_date` DESC
 	</select>
 
+	<select id="selectPlatforms" resultType="String">
+		SELECT `platform` FROM `dailybuyer_countrysalesreports` GROUP BY `platform`
+	</select>
+
 	<select id="selectNewPlatforms" resultType="String">
-		SELECT `platform` FROM `dailybuyer_countrysalesreports` 
+		SELECT `platform` 
+		FROM `dailybuyer_countrysalesreports` 
 		WHERE `platform` like 'new\_%' and platform != 'new_newegg' and platform != 'new_overstock'
-		GROUP by `platform`
+		GROUP BY `platform`
 	</select>
 
 	<select id="selectBuyerCountry" resultType="String" 

@@ -27,6 +27,11 @@ public class DailyBuyerCountrySalesServiceImpl implements IDailyBuyerCountrySale
 	}
 	
 	@Override
+	public List<String> selectPlatforms() {
+		return iBuyerCountry.selectPlatforms();
+	}
+	
+	@Override
 	public List<String> selectNewPlatforms() {
 		return iBuyerCountry.selectNewPlatforms();
 	}

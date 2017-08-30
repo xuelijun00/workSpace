@@ -18,7 +18,7 @@ public interface DailysalescategoryreportsMapper {
 
     List<Dailysalescategoryreports> selectnewAll(DailysalescategoryreportsKey key);
     
-    
+    List<String> selectBusiness();   
     
     List<String> selectnewPlatforms();
     

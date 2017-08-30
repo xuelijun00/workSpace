@@ -30,15 +30,26 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
    @Override
     public List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key) {
        	 
-           return isalescategory.selectAll(key);
-        }
-    
+       return isalescategory.selectAll(key);
+    }
+
     @Override
     public List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key) {
     	
-           return isalescategory.selectnewAll(key);
-        }  
-    
+        return isalescategory.selectnewAll(key);
+    }  
+
+	@Override
+	public List<String> selectBusiness() {
+		return isalescategory.selectBusiness();
+	}
+
+	@Override
+	public List<String> selectnewPlatforms() {
+		return isalescategory.selectnewPlatforms();
+	}
+
+
     //查询ebaydailysalesskureports表中的所有信息
     @Override
     public List<Dailysalesskureports> selectEbay(Dailysalesskureports record) {
@@ -64,19 +75,13 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
     
         return isalessku.selectAll(record);
     }
-    
+
     @Override
     public List<Dailysalesskureports> selectskunewAll(Dailysalesskureports record) {
     
         return isalessku.selectskuAll(record);
     }
-    
-	@Override
-	public List<String> selectnewPlatforms() {
-		return isalescategory.selectnewPlatforms();
-	}
 
-	  
 	@Override
 	public List<String> selectskuPlatforms() {
 		return isalessku.selectskuPlatforms();

@@ -57,6 +57,8 @@ public class DailyOutSkuReprots {
 	private Long erpOrdersId;        //在walmartdailyoutskureprots表中，表示“内订单号”
 	
 	private String 	buyerId;         //在walmartdailyoutskureprots表中，表示“（买家id）平台订单号”
+	
+	private Float netProfitMargin;
 
 	/*public String getReportDate1() {
 		if(this.getReportDate() != null){
@@ -300,6 +302,14 @@ public class DailyOutSkuReprots {
 
 	public void setBuyerId(String buyerId) {
 		this.buyerId = buyerId == null ? null : buyerId.trim();
+	}
+
+	public Float getNetProfitMargin() {
+		return netProfitMargin;
+	}
+
+	public void setNetProfitMargin(Float netProfitMargin) {
+		this.netProfitMargin = netProfitMargin;
 	}
 
 }
