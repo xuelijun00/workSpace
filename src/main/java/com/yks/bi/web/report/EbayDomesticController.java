@@ -134,8 +134,7 @@ public class EbayDomesticController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo); 
     }
-    
-    
+
     @RequestMapping(value = "/ebay_domestic/categorynew/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethodnew(DailysalescategoryreportsKey key,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -144,9 +143,14 @@ public class EbayDomesticController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }
-    
+
+    @RequestMapping(value = "/ebay_domestic/category/business" ,method = RequestMethod.GET)
+    public List<String> selectCategoryBusiness(){
+        return isale.selectBusiness();
+    }
+
     @RequestMapping(value = "/ebay_domestic/platforms/platformnew" ,method = RequestMethod.GET)
-    public List<String> newplatforms(){
+    public List<String> selectCategoryNewPlatformBusiness(){
         return isale.selectnewPlatforms();
     }
     

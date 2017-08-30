@@ -10,6 +10,8 @@ public interface IDailyBuyerCountrySalesService {
 	List<DailyBuyerCountrySalesReports> selectByPrimaryKey(DailyBuyerCountrySalesReportsKey key);
 
 	List<DailyBuyerCountrySalesReports> selectNewPlatformAll(DailyBuyerCountrySalesReportsKey key);
+
+	List<String> selectPlatforms();
 	
 	List<String> selectNewPlatforms();
 

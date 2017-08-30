@@ -12,23 +12,27 @@ import com.yks.bi.dto.report.Dailysalesskureports;
 public interface IEbayDomesticService {
 	
 	 /**
-     *  销售业绩整体报表 
+     *  品类
      */
 	List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key);
 	
-	List<Dailysalesskureports> selectskuAll(Dailysalesskureports record);
-	
-	 //查询ebaydailysalesskureports表中的所有信息
-	List<Dailysalesskureports> selectEbay(Dailysalesskureports record);
-	List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record);
-
-	List<Dailysalesskureports> selectWishSku(Dailysalesskureports record);
-
-	
 	List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key);
+
+    List<String> selectBusiness(); 	
 
 	List<String> selectnewPlatforms();
 	
+	/**
+	 * sku
+	 */
+	List<Dailysalesskureports> selectskuAll(Dailysalesskureports record);
+	
+	//查询ebaydailysalesskureports表中的所有信息
+	List<Dailysalesskureports> selectEbay(Dailysalesskureports record);
+	
+	List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record);
+
+	List<Dailysalesskureports> selectWishSku(Dailysalesskureports record);
 	
 	List<Dailysalesskureports> selectskunewAll(Dailysalesskureports record);
 

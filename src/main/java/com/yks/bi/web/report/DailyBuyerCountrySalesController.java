@@ -22,7 +22,7 @@ public class DailyBuyerCountrySalesController {
 
 	@Autowired
 	private IDailyBuyerCountrySalesService idbcss;
-	
+
 	/**
      * 表格数据
      * 各国买家国家数据报表
@@ -41,7 +41,7 @@ public class DailyBuyerCountrySalesController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }
-    
+
     @RequestMapping(value = "/dailyBuyerCountrySales/newPlatform/grid" ,method = RequestMethod.GET)
     public GridModel dailyBuyerCountrySalesNewPlatformMethod(DailyBuyerCountrySalesReportsKey key, FilterDto filter) throws Exception{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -50,16 +50,25 @@ public class DailyBuyerCountrySalesController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }
-    
+
     /**
-     * 新平台
+     * 查询新平台的平台
+     * @return
+     */
+    @RequestMapping(value = "/dailyBuyerCountrySales/platform" ,method = RequestMethod.GET)
+    public List<String> platforms(){
+        return idbcss.selectPlatforms();
+    }
+
+    /**
+     * 查询新平台的平台
      * @return
      */
     @RequestMapping(value = "/dailyBuyerCountrySales/newPlatform" ,method = RequestMethod.GET)
     public List<String> newplatforms(){
         return idbcss.selectNewPlatforms();
     }
-    
+
     /**
      * 查询买家国家
      * @return
@@ -68,7 +77,7 @@ public class DailyBuyerCountrySalesController {
     public List<String> buyerCountry(DailyBuyerCountrySalesReportsKey key){
         return idbcss.selectBuyerCountry(key);    
     }
-    
+
     /**
      * 查询新平台买家国家
      * @return
@@ -77,7 +86,7 @@ public class DailyBuyerCountrySalesController {
     public List<String> newPlamformbuyerCountry(DailyBuyerCountrySalesReportsKey key){
         return idbcss.selectNewPlatformBuyerCountry(key);
     }
-    
+
     /**
      * 查询新平台买家国家
      * @return
