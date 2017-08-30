@@ -19,39 +19,74 @@
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date"class="form-control" placeholder=""  readonly="readonly">
+              <input type="text" id="start_date2"class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
               <label>结束时间</label>
-              <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+              <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
             </div>
             <br/>
             <div class="form-group">
                 <label>主站点：</label>
-                <select class="form-control w120" id="zhuzhandian">
+                <select class="form-control w120" id="zhuzhandian2">
                 </select>
             </div>
              <div class="form-group">
 	            <label>SKU：</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku" value=""/> 
+	            <input type="text" class="form-control" placeholder="请输入内容" id="sku2" name="sku" value=""/> 
             </div>
             <div class="form-group">
                 <label>账号：</label>
-                <input id="account_input" list="account" />
-				<datalist id="account"></datalist>
+                <input id="account_input2" list="account2" />
+				<datalist id="account2"></datalist>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="queryData(2)" class="btn btn-primary">查询</button>
+            </div>
+<!--             <div class="form-group">
+                <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
+            </div> -->
+        </form> 
+		</div>
+		<div class="hr-line-dashed"></div>  
+        <h2 class="text-center">eBay发货收入和税后综合利润率（按日期汇总）</h2>
+		<div class="hr-line-dashed"></div>
+		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<!-- 表格 -->
+		<div class="ibox-content">
+    	<form class="form-inline">
+            <div class="form-group">
+              <label>开始时间</label>
+              <input type="text" id="start_date1"class="form-control" placeholder=""  readonly="readonly">
+            </div>
+            <div class="form-group">
+              <label>结束时间</label>
+              <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>主站点：</label>
+                <select class="form-control w120" id="zhuzhandian1">
+                </select>
+            </div>
+             <div class="form-group">
+	            <label>SKU：</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="sku1" name="sku" value=""/> 
+            </div>
+            <div class="form-group">
+                <label>账号：</label>
+                <input id="account_input1" list="account1" />
+				<datalist id="account1"></datalist>
             </div>       
             <div class="form-group">
-                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+                <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
                 <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
         </form> 
 		</div>
-		<div class="hr-line-dashed"></div>  
-        <h2 class="text-center">eBay发货订单税后综合净利（按日期汇总）</h2>
-		<div class="hr-line-dashed"></div>
-        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        <div class="hr-line-dashed"></div>  
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
@@ -65,11 +100,11 @@ var chart;
 var operation;
 var domesticData = [];
 function getUrl(type){
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var zhuzhandian = $("#zhuzhandian").val();
-	var account = $("#account_input").val();
-	var sku = $("#sku").val();
+	var startDate = $("#start_date" + type).val();
+	var endDate = $("#end_date" + type).val();
+	var zhuzhandian = $("#zhuzhandian" + type).val();
+	var account = $("#account_input" + type).val();
+	var sku = $("#sku" + type).val();
 	var url = "";
 	if(type === 1){
 		url = contextPath + '/report/profit_details/grid?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
@@ -91,9 +126,12 @@ function getUrl(type){
 	}
 	return url;
 }
-function queryData(){
-	operation = getChartData(getUrl());
-	common.refreshData1(getUrl(1),chart,operation);
+function queryData(type){
+	if(type === 1){
+		common.refreshData(getUrl(1),chart,operation);
+	}else{
+		common.echarts(getChartData(getUrl(2)));
+	}
 }
 function exportData(){
     
@@ -109,8 +147,8 @@ function exportData(){
 			}
 		}
 	});
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
 	var fileName = "eBay发货订单净利明细" + startDate +"-"+ endDate + ".csv";
 	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
@@ -120,9 +158,9 @@ function exportData(){
 }
 
 function getChartData(chartUrl){
-	var profitSum = [];
+	var netProfitMarginSum = [];
+	var productTotalCnySum = [];
 	var categories = [];
-	var ordersSum = [];
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -133,46 +171,38 @@ function getChartData(chartUrl){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
 				  categories.push(data[i].reportDate);
-				  profitSum.push(data[i].profit);
+				  netProfitMarginSum.push(data[i].netProfitMargin *100);
+				  productTotalCnySum.push(data[i].productTotalCny);
 	            }
 			}
 		}
 	});
 	var y = [{
         type: 'value',
-        name: '',
+        name: '发货收入',
         position: 'left',
         axisLabel: {
             formatter: '{value} '
         }
     } ,{
         type: 'value',
-        name: '税后综合净利',       
+        name: '税后综合利润率(百分比)',       
         position: 'right',
         axisLabel: {
             formatter: '{value} '
         }
     }];
-	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '税后综合净利',style: {color: Highcharts.getOptions().colors[1]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}];  */
-	/* return {
-		title:{text:"smt业务线时间段sku销售数据"}
-		,categories:sku
-		,y:y
-		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
-	}; */
 	return {
 		title:{text:"eBay发货订单净利明细"}
 		,categories:categories
 		,y:y
-		,series:[{name:'',type: 'bar',data:ordersSum,tooltip: {valueSuffix: '' }},
-			{name: '税后综合净利',type: 'bar',yAxisIndex: 1,data:profitSum,tooltip: {valueSuffix: ''}}]
+		,series:[{name: '发货收入',type: 'bar',data:productTotalCnySum,tooltip: {valueSuffix: ''}},
+			{name:'税后综合利润率(百分比)',type: 'line',yAxisIndex: 1,data:netProfitMarginSum,tooltip: {valueSuffix: '' }}]
 	};
 }
 
 (function(){
-	$("#start_date").jeDate({
+	$("#start_date1").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-7"},
         isTime:false,
@@ -180,7 +210,23 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	$("#end_date").jeDate({
+	$("#end_date1").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	
+	$("#start_date2").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-7"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date2").jeDate({
         isinitVal: true,
         isTime:false,
         ishmsVal: false,
@@ -195,9 +241,11 @@ function getChartData(chartUrl){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#zhuzhandian").append("<option value='all'>全部</option>");
+				$("#zhuzhandian1").append("<option value='all'>全部</option>");
+				$("#zhuzhandian2").append("<option value='all'>全部</option>");
 				for(var i=0;i<data.length;i++){
-					$("#zhuzhandian").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#zhuzhandian1").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#zhuzhandian2").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}
@@ -210,15 +258,17 @@ function getChartData(chartUrl){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#account").empty();
+				$("#account1").empty();
+				$("#account2").empty();
 				for(var i=0;i<data.length;i++){
-					$("#account").append("<option value='"+ data[i] +"'> </option>");
+					$("#account1").append("<option value='"+ data[i] +"'> </option>");
+					$("#account2").append("<option value='"+ data[i] +"'> </option>");
 				}
 			}
 		}
 	});
 	
-  	chart = common.echarts(getChartData(getUrl()));//chart 
+  	chart = common.echarts(getChartData(getUrl(2)));//chart 
 	
 	common.grid({
 		title:"eBay发货订单净利明细"

@@ -30,9 +30,13 @@ var common = {
 			            var res = params[0].name;
 			            for (var i = 0, l = params.length; i < l; i++) {
 			                if (params[i].seriesType === 'line') {
-			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
-			                } else {
-			                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+			                	if(params[i].seriesName =='税后综合利润率(百分比)'){
+				                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value.toFixed(4) +'%': '-');
+				                }else{
+				                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
+				                }  
+			                } else{
+			                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
 			                }
 			            }
 			            return res;
@@ -97,7 +101,7 @@ var common = {
 			        {
 			            type: 'category',
 			            data: operation.categories,
-			            axisLine: { onZero: common.axisLine(operation)},
+			            axisLine: { onZero: false},
 			            axisPointer: {
 			                type: 'shadow'
 			            }
@@ -108,13 +112,13 @@ var common = {
 			};
 			return option;
 		},
-		axisLine:function(operation){
+		/*axisLine:function(operation){
 			if(operation.title.text == "eBay发货订单净利明细"){
 				return true;
 			}else{
 				return false;
 			}
-		},
+		},*/
 		echarts:function(operation){
 			var chart = echarts.init(document.getElementById('container'));
 			var option = common.echartsOption(operation);
