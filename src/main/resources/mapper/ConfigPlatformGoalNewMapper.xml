@@ -33,7 +33,7 @@
   	configplatformgoal_new表中的platform为匹配被特殊使用，
 	 在实际页面报表中的“平台名称”是configplatformgoal_new表中的name，
 	 所以这里用name而不是platfrom -->
-  <select id="selectPlatform" resultType="String">
+  <select id="selectPlatform" resultType="java.lang.String">
   	select distinct name from configplatformgoal_new;
   </select>
   

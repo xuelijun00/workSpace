@@ -41,6 +41,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_account">账号维度每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_BuyerCountry_Sales">各平台买家国家数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_Category_Sales">各平台品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_sku_top500">各平台SKU_TOP500报表</a></li>
                     </ul>
                 </li>
                 <li>

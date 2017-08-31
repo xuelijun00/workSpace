@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutSkuTop500Mapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutSkuTop500" >
+    <id column="platform" property="platform" jdbcType="VARCHAR" />
+    <id column="sku" property="sku" jdbcType="VARCHAR" />
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="sku_cnname" property="skuCnName" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="DOUBLE" />
+    <result column="unit_price" property="unitPrice" jdbcType="DOUBLE" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="net_profit_margin" property="netProfitMargin" jdbcType="DOUBLE" />
+  </resultMap>
+
+   <sql id="Base_Column_List" >
+    `platform`, `sku`, sku_cnname, `report_date`, `order_num`, `unit_price`, 
+    `product_total_cny`, `net_profit`, `profit`, `net_profit_margin`
+   </sql>
+
+   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuTop500Key" >
+  	SELECT 
+  	<include refid="Base_Column_List" /> 
+  	FROM `dailyoutsku_top500`
+	WHERE 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       AND report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="sku != null and sku.length() > 0" >
+       AND sku = #{sku,jdbcType=VARCHAR}
+    </if>
+    <if test="platform != null and platform.length() > 0" >
+       AND platform = #{platform,jdbcType=VARCHAR}
+    </if>
+   </select>
+
+   <select id="selectPlatform" resultType="java.lang.String" >
+  	SELECT platform	FROM `dailyoutsku_top500` GROUP BY `platform`
+   </select> 
+
+</mapper>
