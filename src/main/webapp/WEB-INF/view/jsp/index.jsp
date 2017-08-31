@@ -61,7 +61,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/zhiyou">eBay站点直邮发货业绩</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/zhuanxian">eBay站点专线发货业绩</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales">eBay买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit">eBay发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit">eBay SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailyOutAccount">eBay账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle">eBay SKU环比增长</a></li>
                         
@@ -95,7 +95,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonCategorySales">Amazon品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOut">Amazon每日发货报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonBuyerCountrySales">Amazon买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutNetProfit">Amazon发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutNetProfit">Amazon SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutAccount">Amazon账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySalesSkuReports_Recycle">Amazon SKU环比增长</a></li> 
                     </ul>
@@ -108,7 +108,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtCategorySales">SMT品类销售报表</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOut">SMT每日发货报表</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtBuyerCountrySales">SMT买家国家数据</a></li>
-                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutNetProfit">SMT发货订单净利</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutNetProfit">SMT SKU净利明细</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutAccount">SMT账号每日发货数据</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesSkuReports_Recycle">SMT SKU环比增长</a></li>
                     </ul>
@@ -121,7 +121,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishCategorySales">Wish品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOut">Wish每日发货报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishBuyerCountrySales">Wish买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutNetProfit">Wish发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutNetProfit">Wish SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutAccount">Wish账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySalesSkuReports_Recycle">Wish SKU环比增长</a></li>
                     </ul>
@@ -134,7 +134,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaCategorySales">Lazada品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOut">Lazada每日发货报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaBuyerCountrySales">Lazada买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOutNetProfit">Lazada发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOutNetProfit">Lazada SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOutAccount">Lazada账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySalesSkuReports_Recycle">Lazada SKU环比增长</a></li>
                     </ul>
@@ -147,7 +147,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformCategorySales">新平台品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOut">新平台每日发货报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformBuyerCountrySales">新平台买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutNetProfit">新平台发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutNetProfit">新平台SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutAccount">新平台账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySalesSkuReports_Recycle">新平台SKU环比增长</a></li>
                     </ul>
@@ -160,7 +160,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartCategorySales">沃尔玛品类销售报表</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOut">沃尔玛每日发货报表</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartBuyerCountrySales">沃尔玛买家国家数据</a> </li>
-                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutNetProfit">沃尔玛发货订单净利</a> </li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutNetProfit">沃尔玛SKU净利明细</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailyOutAccount">沃尔玛账号每日发货数据</a> </li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=walmart/walmartDailySalesSkuReports_Recycle">沃尔玛SKU环比增长</a> </li>
                     </ul>
@@ -173,7 +173,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggCategorySales">新蛋品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOut">新蛋每日发货报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggBuyerCountrySales">新蛋买家国家数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutNetProfit">新蛋发货订单净利</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutNetProfit">新蛋SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutAccount">新蛋账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySalesSkuReports_Recycle">新蛋SKU环比增长</a></li>
                     </ul>

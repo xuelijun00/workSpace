@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>eBay发货订单净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
+    <div class="ibox-title"><h5>eBay SKU净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -63,6 +63,10 @@
               <label>结束时间</label>
               <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
             </div>
+            <div class="form-group">
+	            <label>内订单号：</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId1" name="erpOrdersId" value=""/> 
+            </div>
             <br/>
             <div class="form-group">
                 <label>主站点：</label>
@@ -105,6 +109,7 @@ function getUrl(type){
 	var zhuzhandian = $("#zhuzhandian" + type).val();
 	var account = $("#account_input" + type).val();
 	var sku = $("#sku" + type).val();
+	var erpOrdersId = $("#erpOrdersId1").val();
 	var url = "";
 	if(type === 1){
 		url = contextPath + '/report/profit_details/grid?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
@@ -112,6 +117,9 @@ function getUrl(type){
 		url = contextPath + '/report/profit_details/chart?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
 	}
 		
+	if(erpOrdersId !== '' && type === 1){
+		url += "&erpOrdersId=" + erpOrdersId;
+	}
 	
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
@@ -149,18 +157,20 @@ function exportData(){
 	});
 	var startDate = $("#start_date1").val();
 	var endDate = $("#end_date1").val();
-	var fileName = "eBay发货订单净利明细" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
-	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
+	var fileName = "eBay SKU净利明细" + startDate +"-"+ endDate + ".csv";
+	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', 
+		'边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
+	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','netProfitMargin','zhuzhandian','reportDate','buyerId'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
 function getChartData(chartUrl){
 	var netProfitMarginSum = [];
+	var profitSum = [];
 	var productTotalCnySum = [];
 	var categories = [];
+	var netProfitMargin = 0;
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -170,8 +180,9 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  categories.push(data[i].reportDate);
-				  netProfitMarginSum.push(data[i].netProfitMargin *100);
+				  netProfitMargin = data[i].profit / data[i].productTotalCny * 100;
+				  categories.push(data[i].reportDate); 
+				  netProfitMarginSum.push(netProfitMargin);
 				  productTotalCnySum.push(data[i].productTotalCny);
 	            }
 			}
@@ -193,7 +204,7 @@ function getChartData(chartUrl){
         }
     }];
 	return {
-		title:{text:"eBay发货订单净利明细"}
+		title:{text:"eBay SKU净利明细"}
 		,categories:categories
 		,y:y
 		,series:[{name: '发货收入',type: 'bar',data:productTotalCnySum,tooltip: {valueSuffix: ''}},
@@ -271,10 +282,11 @@ function getChartData(chartUrl){
   	chart = common.echarts(getChartData(getUrl(2)));//chart 
 	
 	common.grid({
-		title:"eBay发货订单净利明细"
+		title:"eBay SKU净利明细"
 		,url:getUrl(1)
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
-		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
+		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号']
+		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
+					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
@@ -293,8 +305,10 @@ function getChartData(chartUrl){
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
+		            {name : 'buyerId',index : 'buyerId',width : 200}
 		             ]
 		,sortname:"reportDate"
 		,sortorder:"desc"

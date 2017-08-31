@@ -27,14 +27,14 @@
     <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
     <result column="net_profit_margin" property="netProfitMargin" jdbcType="REAL" />
   </resultMap>
-  
+
    <sql id="Base_Column_List" >
-    `platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
+    `erp_orders_id`,`platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
     `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
-    `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, 
-    `operating_cost`, `profit_margin`, `profit`, `net_profit`,`zhuzhandian`
+    `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, `operating_cost`, 
+    `profit_margin`, `net_profit`, `profit`,`net_profit_margin`,`zhuzhandian`,`buyer_id`
   </sql>
-  
+
   <sql id="Base_If" >
     <if test="startDate != null and startDate.length() > 0" >
        AND report_date >= #{startDate,jdbcType=DATE}
@@ -51,8 +51,11 @@
     <if test="sku != null and sku.length() > 0" >
        AND sku = #{sku,jdbcType=VARCHAR}
     </if>
+    <if test="erpOrdersId != null">
+       AND erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}
+    </if>
   </sql>
-  
+
   <sql id="Base_NewEgg_Choose" >
     <choose>
 		<when test="platform != null and platform.length() > 0">
@@ -65,7 +68,7 @@
 		</otherwise>
 	</choose>
   </sql>
-  
+
    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
   	SELECT 
   	<include refid="Base_Column_List" /> 
@@ -78,7 +81,7 @@
   </select>
 
   <select id="selectProfit" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	SELECT report_date, sum(net_profit_margin) net_profit_margin, sum(product_total_cny) product_total_cny
+  	SELECT report_date, sum(profit) profit, sum(product_total_cny) product_total_cny
   	FROM `dailyoutskureprots_new`
 	WHERE 1=1
 	<include refid="Base_If" /> 
@@ -91,7 +94,7 @@
   <select id="selectPlatform" resultType="String" >
     SELECT `platform` FROM `dailyoutskureprots_new` WHERE 1 GROUP by `platform`
   </select>
-  
+
    <select id="selectAccount" resultType="java.lang.String" parameterType="java.lang.String">
     SELECT `sales_account` 
     FROM `dailyoutskureprots_new` 
@@ -101,7 +104,7 @@
     </if>
     GROUP by `sales_account`
   </select>
-  
+
    <select id="selectZhuzhandian" resultType="java.lang.String" parameterType="java.lang.String">
     SELECT `zhuzhandian` 
     FROM `dailyoutskureprots_new` 
@@ -111,8 +114,7 @@
     </if>
     GROUP by `zhuzhandian`
   </select>
-  
- 
+
   <select id="selectNewPlatformAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
   	SELECT 
   	<include refid="Base_Column_List" /> 
@@ -122,9 +124,9 @@
 	<include refid="Base_If" />
     <if test="platform != null and platform.length() > 0" >
        and platform = #{platform,jdbcType=VARCHAR}
-    </if> 
+    </if>
   </select>
-  
+
   <select id="selectNewPlatform" resultType="String" >
     SELECT `platform` 
     FROM `dailyoutskureprots_new` 
@@ -132,7 +134,7 @@
 		AND platform != "new_newegg"
     GROUP by `platform`
   </select>
-  
+
    <select id="selectNewPlatformAccount" resultType="java.lang.String" parameterType="java.lang.String">
     SELECT `sales_account` 
     FROM `dailyoutskureprots_new` 
@@ -143,7 +145,7 @@
     </if>
     GROUP by `sales_account`
   </select>
-  
+
   <select id="selectNewPlatformZhuzhandian" resultType="java.lang.String" parameterType="java.lang.String">
     SELECT `zhuzhandian` 
     FROM `dailyoutskureprots_new` 
@@ -169,9 +171,6 @@
     FROM `dailyoutskureprots_new` 
     WHERE 1=1
     <include refid="Base_NewEgg_Choose" />
-    <if test="platform != null and platform.length() > 0" >
-       AND `platform` = #{platform,jdbcType=VARCHAR}
-    </if>
     GROUP by `sales_account`
   </select>
   
@@ -180,9 +179,6 @@
     FROM `dailyoutskureprots_new` 
     WHERE 1=1
    <include refid="Base_NewEgg_Choose" />
-    <if test="platform != null and platform.length() > 0" >
-       AND `platform` = #{platform,jdbcType=VARCHAR}
-    </if>
     GROUP by `zhuzhandian`
   </select>
   
@@ -190,20 +186,17 @@
   	select `platform`, `sales_account`, `sku`, sku_cnname, `report_date`, `manager`, `order_num`, 
 		   `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
 		   `product_shipping`, `platform_cost`, `material_cost`,`order_execution_fee`,
-		   `operating_cost`, `profit_margin`, `profit`, `net_profit`,
+		   `operating_cost`, `profit_margin`, `profit`, `net_profit`, `net_profit_margin`,
 		   `erp_orders_id`, `buyer_id`
   	from `walmartdailyoutskureprots`
 	where 1=1
 	<include refid="Base_If" />	
-    <if test="erpOrdersId != null and erpOrdersId > 0" >
-       and erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}
-    </if>   
   </select>
-   
+
    <select id="selectWalmartAccount" resultType="String" >
     SELECT `sales_account` FROM `walmartdailyoutskureprots` WHERE 1 GROUP by `sales_account`
   </select>
-  
+
    <insert id="insert" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
     insert into dailyoutskureprots (platform, sales_account, sku, sku_cnname, 
       report_date, manager, order_num, 
