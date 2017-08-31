@@ -30,6 +30,10 @@
                 <select class="form-control w120" id="zhuzhandian">
                 </select>
             </div>
+            <div class="form-group">
+	            <label>内订单号：</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId" name="erpOrdersId" value=""/> 
+            </div>
             <br/>
             <div class="form-group">
                 <label>平台：</label>
@@ -72,9 +76,14 @@ function getUrl(){
 	var platform = $("#platform").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
+	var erpOrdersId = $("#erpOrdersId").val();
 	var url = "";
 	
 		url = contextPath + '/report/profit_details/grid?startDate=' + startDate + "&endDate=" + endDate;
+	
+	if(erpOrdersId !== 'all'){
+		url += "&erpOrdersId=" + erpOrdersId;
+	}	
 	
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
@@ -114,10 +123,10 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var	platform = $("#platform").val();
 	var fileName = "净利导出明细" + startDate +"-"+ endDate +"-"+ platform + ".csv";
-	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
-	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
+	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', 
+		'边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
+	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','netProfitMargin','zhuzhandian','reportDate','buyerId'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -207,12 +216,13 @@ function palAndAcc(){
 	common.grid({
 		title:"净利导出明细"
 		,url:getUrl()
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
-		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
-					{name : 'manager',index : 'manager',sortable : "true",width : 100},
+		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号']
+		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
+					{name : 'platform',index : 'platform',width : 100}, 
+					{name : 'manager',index : 'manager',sortable : "true",width : 80},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
-		            {name : 'skuCnName',index : 'skuCnName',width : 100},
+		            {name : 'skuCnName',index : 'skuCnName',width : 210},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -227,8 +237,10 @@ function palAndAcc(){
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
+		            {name : 'buyerId',index : 'buyerId',width : 200}
 		             ]	      
 		,sortname:"reportDate"
 		,sortorder:"desc"

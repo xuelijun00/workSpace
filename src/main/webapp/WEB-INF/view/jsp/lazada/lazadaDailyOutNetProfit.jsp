@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>Lazada发货订单净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
+    <div class="ibox-title"><h5>Lazada SKU净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -24,6 +24,10 @@
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+            </div>
+            <div class="form-group">
+	            <label>内订单号：</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId" name="erpOrdersId" value=""/> 
             </div>
             <br/>
             <div class="form-group">
@@ -66,10 +70,15 @@ function getUrl(){
 	var zhuzhandian = $("#zhuzhandian").val();
 	var account = $("#account_input").val();
 	var sku = $("#sku").val();
+	var erpOrdersId = $("#erpOrdersId").val();
 	var url = "";
 
 		url = contextPath + '/report/profit_details/grid?platform=lazada&startDate=' + startDate + "&endDate=" + endDate;
 
+	if(erpOrdersId !== ''){
+		url += "&erpOrdersId=" + erpOrdersId;
+	}
+	
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
 	}
@@ -102,11 +111,11 @@ function exportData(){
 	});
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "Lazada发货订单净利明细" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '管理员', '账号', 'sku', 'sku中文名','发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利',
-		'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点'];
-	var column = [ 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
-			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','reportDate','zhuzhandian'];
+	var fileName = "Lazada SKU净利明细" + startDate +"-"+ endDate + ".csv";
+	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', 
+		'边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
+	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
+			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','netProfitMargin','zhuzhandian','reportDate','buyerId'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
@@ -158,10 +167,11 @@ function exportData(){
 	});
 		
 	common.grid({
-		title:"Lazada发货订单净利明细"
+		title:"Lazada SKU净利明细"
 		,url:getUrl()
-		,colNames:[ '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '报表时间', '主站点']
-		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
+		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号']
+		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'Long'},
+					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},
 		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
@@ -180,8 +190,10 @@ function exportData(){
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100}
+		            {name : 'buyerId',index : 'buyerId',width : 200}
 		             ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
