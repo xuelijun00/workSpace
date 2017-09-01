@@ -31,7 +31,7 @@ var common = {
 			            for (var i = 0, l = params.length; i < l; i++) {
 			                if (params[i].seriesType === 'line') {
 			                	if(params[i].seriesName =='税后综合利润率(百分比)'){
-				                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value.toFixed(4) +'%': '-');
+				                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value.toFixed(2) +'%': '-');
 				                }else{
 				                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
 				                }  
@@ -96,7 +96,7 @@ var common = {
 			        end: 100
 			    }]
 			   /* ,color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']*/
-			    ,color:['#434343','#7BB5EC', '#c23531', '#d48265', '#61a0a8','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']
+			    ,color: common.selectColors(operation)
 			    ,xAxis: [
 			        {
 			            type: 'category',
@@ -112,13 +112,24 @@ var common = {
 			};
 			return option;
 		},
-		/*axisLine:function(operation){
-			if(operation.title.text == "eBay发货订单净利明细"){
+/*		axisLine:function(operation){
+			if(operation.title.text == "eBay SKU净利明细"){
 				return true;
 			}else{
 				return false;
 			}
 		},*/
+		
+		/*自己定义的（颜色）*/
+		selectColors:function(operation){
+			var colors =[];
+			if(operation.series[0].customColors === 1){
+				colors=['#7BB5EC','#434343', '#c23531', '#d48265', '#61a0a8','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3'];
+			}else{
+				colors=['#434343','#7BB5EC', '#c23531', '#d48265', '#61a0a8','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3'];
+			}
+			return colors;
+		},
 		echarts:function(operation){
 			var chart = echarts.init(document.getElementById('container'));
 			var option = common.echartsOption(operation);

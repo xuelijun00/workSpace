@@ -49,7 +49,7 @@
         </form> 
 		</div>
 		<div class="hr-line-dashed"></div>  
-        <h2 class="text-center">eBay发货收入和税后综合利润率（按日期汇总）</h2>
+        <h2 class="text-center">eBay税后综合净利和税后综合利润率（按日期汇总）</h2>
 		<div class="hr-line-dashed"></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<!-- 表格 -->
@@ -168,7 +168,6 @@ function exportData(){
 function getChartData(chartUrl){
 	var netProfitMarginSum = [];
 	var profitSum = [];
-	var productTotalCnySum = [];
 	var categories = [];
 	var netProfitMargin = 0;
 	$.ajax({
@@ -183,14 +182,14 @@ function getChartData(chartUrl){
 				  netProfitMargin = data[i].profit / data[i].productTotalCny * 100;
 				  categories.push(data[i].reportDate); 
 				  netProfitMarginSum.push(netProfitMargin);
-				  productTotalCnySum.push(data[i].productTotalCny);
+				  profitSum.push(data[i].profit.toFixed(2));
 	            }
 			}
 		}
 	});
 	var y = [{
         type: 'value',
-        name: '发货收入',
+        name: '税后综合净利',
         position: 'left',
         axisLabel: {
             formatter: '{value} '
@@ -207,7 +206,7 @@ function getChartData(chartUrl){
 		title:{text:"eBay SKU净利明细"}
 		,categories:categories
 		,y:y
-		,series:[{name: '发货收入',type: 'bar',data:productTotalCnySum,tooltip: {valueSuffix: ''}},
+		,series:[{name: '税后综合净利',type: 'bar',data:profitSum,tooltip: {valueSuffix: ''},customColors: 1},
 			{name:'税后综合利润率(百分比)',type: 'line',yAxisIndex: 1,data:netProfitMarginSum,tooltip: {valueSuffix: '' }}]
 	};
 }
@@ -215,7 +214,7 @@ function getChartData(chartUrl){
 (function(){
 	$("#start_date1").jeDate({
         isinitVal: true,
-        initAddVal:{DD:"-7"},
+        initAddVal:{DD:"-3"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
@@ -231,7 +230,7 @@ function getChartData(chartUrl){
 	
 	$("#start_date2").jeDate({
         isinitVal: true,
-        initAddVal:{DD:"-7"},
+        initAddVal:{DD:"-3"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
@@ -288,28 +287,28 @@ function getChartData(chartUrl){
 		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
 					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},
-		            {name : 'salesAccount',index : 'sales_account',width : 145}, 
-		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
-		            {name : 'skuCnName',index : 'skuCnName',width : 210},
-		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'productRefund',index : 'productRefund',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'grossProfit',index : 'grossProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'productShipping',index : 'productShipping',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'platformCost',index : 'platformCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'materialCost',index : 'materialCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
-		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
-		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'buyerId',index : 'buyerId',width : 200}
-		             ]
+			        {name : 'salesAccount',index : 'sales_account',width : 145}, 
+			        {name : 'sku',index : 'sku',sortable : "true",width : 135},
+			        {name : 'skuCnName',index : 'skuCnname',width : 210},
+			        {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+			        {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 135,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'productRefund',index : 'productRefund',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'grossProfit',index : 'grossProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'productShipping',index : 'productShipping',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'platformCost',index : 'platformCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'materialCost',index : 'materialCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 110,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'netProfit',index : 'netProfit',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'profit',index : 'profit',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+			        {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
+			        {name : 'zhuzhandian',index : 'zhuzhandian',width : 100},
+			        {name : 'reportDate',index : 'reportDate',width : 110},
+			        {name : 'buyerId',index : 'buyerId',width : 200}
+	         ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true
