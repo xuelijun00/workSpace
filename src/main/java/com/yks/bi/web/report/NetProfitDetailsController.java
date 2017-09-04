@@ -73,6 +73,7 @@ public class NetProfitDetailsController {
 	
 	@RequestMapping("/profit_details/chart")
 	public List<DailyOutSkuReprots> selectProfitChart(DailyOutSkuReprots key) {
+		PageHelper.orderBy("report_date");
 		return NetProfit.selectProfit(key);
 	}
 	

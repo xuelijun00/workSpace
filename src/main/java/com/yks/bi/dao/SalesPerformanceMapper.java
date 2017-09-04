@@ -27,11 +27,25 @@ public interface SalesPerformanceMapper {
      */
     List<SalesPerformance> selectAllCount(SalesPerformanceKey key);
    
-    /**
-     * 查询所有平台
-     * @return
-     */
-    List<String> selectPlatforms(SalesPerformanceKey key);
+	/**
+	 * 用于业绩汇总的“各平台销售业绩报表”查询平台
+	 * @return
+	 */
+	List<String> selectPlatforms(SalesPerformanceKey key);
+	
+	/**
+	 * 用于业绩汇总的“各平台销售业绩报表”的柱状及曲线图的查询
+	 * @param key
+	 * @return
+	 */
+	List<SalesPerformance> selectAllChartSum(SalesPerformanceKey key);
+	
+	/**
+	 * 用于业绩汇总的各平台销售业绩报表查询和导出
+	 * @param key
+	 * @return
+	 */
+	List<SalesPerformance> selectAllGridAndExport(SalesPerformanceKey key);
      
     List<String> selectnewPlatforms();
     

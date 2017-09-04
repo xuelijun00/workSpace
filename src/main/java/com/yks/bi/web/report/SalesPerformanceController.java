@@ -35,6 +35,7 @@ public class SalesPerformanceController {
     @Autowired
     private ISalespPerformanceService isale;
     private static final String YYYYMMDD = "yyyy-MM-dd";
+
     /**
      * 表格数据  柱状图
      * 销售业绩整体报表
@@ -63,7 +64,7 @@ public class SalesPerformanceController {
     	userdata.put("sales", sumSales);
         return new GridModel(pageInfo,userdata);
     }
-    
+
     /**
      * 销售业绩整体报表
      * @param business
@@ -74,9 +75,10 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> chart(SalesPerformanceKey key) throws Exception{
+    	PageHelper.orderBy("report_date");
     	return isale.selectAll(key);
     }
-    
+
     /**
      * 表格数据  汇总
      * 销售业绩整体报表
@@ -105,7 +107,7 @@ public class SalesPerformanceController {
     	userdata.put("sales", sumSales);
         return new GridModel(pageInfo,userdata);
     }
-    
+
     /**
      * 销售业绩整体报表
      * 柱状图汇总
@@ -121,14 +123,41 @@ public class SalesPerformanceController {
     }
     
     /**
-     * 查询平台
+     * 用于业绩汇总的各平台销售业绩报表查询平台
      * @return
      */
     @RequestMapping(value = "/sales_performance/platforms" ,method = RequestMethod.GET)
     public List<String> platforms(SalesPerformanceKey key){
         return isale.selectPlatforms(key);
     }
-    
+
+    /**
+     * 用于业绩汇总的各平台销售业绩报表查询和导出 
+     * @param key
+     * @param filter
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/sales_performance/performanceSummary/grid" ,method = RequestMethod.GET)
+    public GridModel performanceSummaryGrid(SalesPerformanceKey key,FilterDto filter) throws Exception{
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<SalesPerformance> list = isale.selectAllGridAndExport(key);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+    }
+
+    /**
+     * 用于业绩汇总的各平台销售业绩报表的柱状及曲线图的查询
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/sales_performance/performanceSummary/chart" ,method = RequestMethod.GET)
+    public List<SalesPerformance> performanceSummaryChart(SalesPerformanceKey key) throws Exception{
+    	return isale.selectAllChartSum(key);
+    }
+
     /**
      * 查询国内仓平台
      * @return
@@ -174,6 +203,7 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/new/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> newchart(SalesPerformanceKey key) throws Exception{
+    	PageHelper.orderBy("report_date");
     	return isale.selectnewAllSum(key);
     }
     /**

@@ -40,6 +40,7 @@ public class DailyOutReportsController {
 	}
 	@RequestMapping(value="/daily_out_report/domesticsum/chart",method=RequestMethod.GET)
 	public List<DailyOutReports> selectSumDomesticWarehouseShipmentChart(DailyOutReportsKey key){
+		PageHelper.orderBy("report_date");
 		return dailyOutReportsService.selectSumDomesticWarehouseShipment(key);
 	}
 	

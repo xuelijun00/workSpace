@@ -166,8 +166,8 @@ function getChartData(chartUrl){
 		title:"国内仓发货汇总数据"
 		,url:getUrl(1)
 		,colNames:[ '日期','平台', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利', '运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税后综合净利', '税后综合利润率']
-	,colModel:[ {name : 'platform',index : 'platform',width : 100},
-				{name : 'reportDate',index : 'reportDate',width : 120}, 
+	,colModel:[ {name : 'reportDate',index : 'reportDate',width : 120}, 
+				{name : 'platform',index : 'platform',width : 100},
 	            {name : 'orderNum',index : 'orderNum',width : 100,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ','}}, 
 	            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,align:"right",formatter:'float', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},
 	            {name : 'productTotalCny',index : 'productTotalCny',width : 120,align:"right",formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2}},

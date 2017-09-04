@@ -25,16 +25,27 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
     public List<SalesPerformance> selectAll(SalesPerformanceKey key) {
     	return isales.selectAll(key);
     }
-     
+
 	 @Override
 	 public List<SalesPerformance> selectnewAll(SalesPerformanceKey key) {
 	 	return isales.selectnewAll(key);
 	 }
+
 	@Override
 	public List<String> selectPlatforms(SalesPerformanceKey key) {
 		return isales.selectPlatforms(key);
 	}
-	 
+
+	@Override
+	public List<SalesPerformance> selectAllChartSum(SalesPerformanceKey key) {
+		return isales.selectAllChartSum(key);
+	}
+
+	@Override
+	public List<SalesPerformance> selectAllGridAndExport(SalesPerformanceKey key) {
+		return isales.selectAllGridAndExport(key);
+	}
+	
 	@Override
 	public List<String> selectnewPlatforms() {
 		return isales.selectnewPlatforms();
@@ -54,6 +65,5 @@ public class SalespPerformanceServiceImpl implements ISalespPerformanceService {
 	public List<SalesPerformance> selectnewAllSum(SalesPerformanceKey key) {
 		return isales.selectnewAllSum(key);
 	}
-	
 
 }

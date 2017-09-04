@@ -57,9 +57,9 @@ function getUrl(type){
 	var platform = $("#platform").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/sales_performance/grid?startDate=' + startDate + "&endDate=" + endDate;
+		url = contextPath + '/report/sales_performance/performanceSummary/grid?startDate=' + startDate + "&endDate=" + endDate;
 	}else{
-		url = contextPath + '/report/sales_performance/chart?startDate=' + startDate + "&endDate=" + endDate;
+		url = contextPath + '/report/sales_performance/performanceSummary/chart?startDate=' + startDate + "&endDate=" + endDate;
 	}
 	if(platform !== 'all'){
 		url += "&business=" + platform;

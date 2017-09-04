@@ -31,13 +31,13 @@ public class EbayDomesticController {
 
     @Autowired
     IEbayDomesticService isale;
+
     /**
      * 表格数据  柱状图
      * @param month
      * @param platform
      * @return
      */
-   
     @RequestMapping(value = "/ebay_domestic/sku/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseasMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	if(StringUtils.isNotEmpty(filter.getSidx()) && filter.getSidx().equals("report_date1")){
@@ -49,12 +49,13 @@ public class EbayDomesticController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/sku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> ebayoverseasMethodChart(Dailysalesskureports record) throws Exception{
-        return isale.selectAllSum(record);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectAllSum(record);
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/smtSku/grid" ,method = RequestMethod.GET)
     public GridModel smtSkuMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -77,12 +78,13 @@ public class EbayDomesticController {
         return new GridModel(pageInfo,userdata);
       
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/smtSku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> smtSkuMethodChart(Dailysalesskureports record) throws Exception{
-        return isale.selectSmtSkuSum(record);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectSmtSkuSum(record);
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/wishSku/grid" ,method = RequestMethod.GET)
     public GridModel WishSkuMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -105,12 +107,13 @@ public class EbayDomesticController {
         return new GridModel(pageInfo,userdata);
       
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/wishSku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> WishSkuMethodChart(Dailysalesskureports record) throws Exception{
-        return isale.selectWishSkuSum(record);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectWishSkuSum(record);
     }
-    
+
     //用于ebay的 sku销售报表
     @RequestMapping(value = "/ebay_domestic/sku/gridEbay" ,method = RequestMethod.GET)
     public GridModel ebayDomesticMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
@@ -120,10 +123,11 @@ public class EbayDomesticController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo); 
     }
-     
+
     @RequestMapping(value = "/ebay_domestic/sku/chartEbay" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> ebayDomesticMethodChart(Dailysalesskureports record) throws Exception{
-        return isale.selectEbaySum(record);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectEbaySum(record);
     }
     
     @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
@@ -153,7 +157,7 @@ public class EbayDomesticController {
     public List<String> selectCategoryNewPlatformBusiness(){
         return isale.selectnewPlatforms();
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/skunew/grid" ,method = RequestMethod.GET)
     public GridModel newPlatformSkuGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -162,15 +166,16 @@ public class EbayDomesticController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo); 
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/skunew/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> newPlatformSkuChart(Dailysalesskureports record) throws Exception{
-        return isale.selectskuNewAllSum(record);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectskuNewAllSum(record);
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/skuplatforms/platformnew" ,method = RequestMethod.GET)
     public List<String> newskuplatforms(){
         return isale.selectskuPlatforms();
     }
-    
+
 }
