@@ -10,6 +10,7 @@
 	<sql id="Base_Column_List">
 		report_date, business, orders, sales
 	</sql>
+
 	<select id="selectByPrimaryKey" parameterType="com.yks.bi.dto.report.SalesPerformanceKey"
 		resultMap="BaseResultMap">
 		select
@@ -18,15 +19,7 @@
 		where report_date = #{reportDate,jdbcType=DATE}
 		and business = #{business,jdbcType=VARCHAR}
 	</select>
-	<!--查询所有平台 -->
-	<select id="selectPlatforms" resultType="String">
-		select distinct business from dailysalesreports
-		where 1=1
-		<if test="business != null">
-			and business like concat('%',#{business,jdbcType=VARCHAR},'%')
-		</if>
-		order by business
-	</select>
+
 
 	<select id="selectDomesticPlatforms" resultType="String">
 		select distinct business from dailysalesreports
@@ -35,7 +28,6 @@
 		select distinct business from dailysalesreports
 		where 1=1 and business like 'cn_%'
 	</select>
-
 
 	<select id="selectAllCount" resultMap="BaseResultMap">
 		select business, sum(orders) orders, sum(sales) sales
@@ -61,7 +53,7 @@
 	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
 		select
 		<include refid="Base_Column_List" />
-		from dailysalesreports
+		from `dailysalesreports`
 		where 1=1
 		<if test="business != null">
 			and business = #{business,jdbcType=VARCHAR}
@@ -73,12 +65,67 @@
 			<![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 	</select>
-	
-	<select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
-		select
+
+	<!--用于业绩汇总的各平台销售业绩报表查询平台 -->
+	<select id="selectPlatforms" resultType="java.lang.String">
+		SELECT DISTINCT business 
+		FROM `dailysalesreports`
+		WHERE business != "a_ll" 
+		AND business != "amazon" 
+		AND business != "new_all" 
+		AND business != "ebay"
+		<if test="business != null">
+			AND business like concat('%',#{business,jdbcType=VARCHAR},'%')
+		</if>
+		ORDER BY business
+	</select>
+
+	<!--用于业绩汇总的各平台销售业绩报表的柱状及曲线图的查询-->
+	<select id="selectAllChartSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
+		SELECT report_date, business, sum(orders) orders, sum(sales) sales
+		FROM `dailysalesreports`
+		WHERE business != "a_ll" 
+		AND business != "amazon" 
+		AND business != "new_all" 
+		AND business != "ebay"
+		<if test="business != null">
+			AND business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			AND report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null">
+			<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		GROUP BY business
+	</select>
+
+	<!--用于业绩汇总的各平台销售业绩报表查询和导出 -->
+	<select id="selectAllGridAndExport" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
+		SELECT 
 		<include refid="Base_Column_List" />
-		from dailysalesreports
-		where business like 'new\_%' and business not in( 'new_newegg','new_overstock')
+		FROM `dailysalesreports`
+		WHERE business != "a_ll"
+		AND business != "amazon"
+		AND business != "new_all"
+		AND business != "ebay"
+		<if test="business != null">
+			AND business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			AND report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null">
+			<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		GROUP BY business
+	</select>
+
+	<select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM dailysalesreports
+		WHERE business like 'new\_%' and business not in( 'new_newegg','new_overstock')
 		<if test="business != null">
 			and business = #{business,jdbcType=VARCHAR}
 		</if>
@@ -110,7 +157,7 @@
 	<!--查询平台 -->
 	<select id="selectnewPlatforms" resultMap="BaseResultMap">
 		SELECT business FROM dailysalesreports 
-		where business like 'new\_%' and business not in( 'new_newegg','new_overstock') 
+		WHERE business like 'new\_%' and business not in( 'new_newegg','new_overstock') 
 		GROUP by business
 	</select>
 
