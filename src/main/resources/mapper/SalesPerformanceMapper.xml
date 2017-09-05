@@ -80,7 +80,7 @@
 		ORDER BY business
 	</select>
 
-	<!--用于业绩汇总的各平台销售业绩报表的柱状及曲线图的查询-->
+<!-- 	用于业绩汇总的各平台销售业绩报表的柱状及曲线图的查询
 	<select id="selectAllChartSum" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
 		SELECT report_date, business, sum(orders) orders, sum(sales) sales
 		FROM `dailysalesreports`
@@ -98,9 +98,9 @@
 			<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		GROUP BY business
-	</select>
+	</select> -->
 
-	<!--用于业绩汇总的各平台销售业绩报表查询和导出 -->
+	<!--用于业绩汇总的各平台销售业绩报表查询、导出和图形的查询 -->
 	<select id="selectAllGridAndExport" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">
 		SELECT 
 		<include refid="Base_Column_List" />
@@ -118,7 +118,6 @@
 		<if test="endDate != null">
 			<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
 		</if>
-		GROUP BY business
 	</select>
 
 	<select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.SalesPerformanceKey">

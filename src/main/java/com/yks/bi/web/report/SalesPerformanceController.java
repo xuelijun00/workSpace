@@ -155,7 +155,8 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/performanceSummary/chart" ,method = RequestMethod.GET)
     public List<SalesPerformance> performanceSummaryChart(SalesPerformanceKey key) throws Exception{
-    	return isale.selectAllChartSum(key);
+    	PageHelper.orderBy("report_date");
+    	return isale.selectAllGridAndExport(key);
     }
 
     /**

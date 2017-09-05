@@ -102,7 +102,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-				  reportDate.push(data[i].business);
+				  reportDate.push(data[i].reportDate+ "\n" + data[i].business);
             	  salesAmount.push(data[i].sales);
             	  orders.push(data[i].orders);
 	            }
@@ -135,7 +135,8 @@ function getChartData(chartUrl){
 	}; */
 	return {
 		title:{text:"各平台每日销售报表"}
-		,categories:reportDate,y:y
+		,categories:reportDate
+		,y:y
 		,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }}
 				,{name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 		};
@@ -143,7 +144,7 @@ function getChartData(chartUrl){
 (function(){
 	$("#start_date").jeDate({
         isinitVal: true,
-        initAddVal:{DD:"-7"},
+        initAddVal:{DD:"-1"},
         isTime:false,
         ishmsVal: false,
         format: "YYYY-MM-DD",
