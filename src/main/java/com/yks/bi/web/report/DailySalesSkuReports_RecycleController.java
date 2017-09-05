@@ -1,7 +1,5 @@
 package com.yks.bi.web.report;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,19 +29,17 @@ public class DailySalesSkuReports_RecycleController {
 	 * @param key
 	 * @throws Exception
 	 */
-	public void dateAddOne(DailySalesSkuReports_RecycleKey key) throws Exception{
+	/*public void dateAddOne(DailySalesSkuReports_RecycleKey key) throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date endDate = format.parse(key.getEndDate());
 		long lon = endDate.getTime() + 24*60*60*1000;
 		String endDate1 = format.format(new Date(lon));
 		key.setEndDate(endDate1);
-	}
+	}*/
 
 	@RequestMapping(value="/sku_recycle/amazon/grid",method=RequestMethod.GET)
 	public GridModel selectAmazonAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
-
+		
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
@@ -54,15 +50,12 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/amazon/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectAmazonAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectAmazonAll(key);
 	}
 	
 	@RequestMapping(value="/sku_recycle/ebay/grid",method=RequestMethod.GET)
 	public GridModel selectEbayAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -74,15 +67,12 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/ebay/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectEbayAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectEbayAll(key);
 	}
 	
 	@RequestMapping(value="/sku_recycle/lazada/grid",method=RequestMethod.GET)
 	public GridModel selectLazadaAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -94,8 +84,7 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/lazada/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectLazadaAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectLazadaAll(key);
 	}
 	
@@ -103,8 +92,6 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/smt/grid",method=RequestMethod.GET)
 	public GridModel selectSmtAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -116,15 +103,12 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/smt/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectSmtAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectSmtAll(key);
 	}
 	
 	@RequestMapping(value="/sku_recycle/walmart/grid",method=RequestMethod.GET)
 	public GridModel selectWalmartAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -136,16 +120,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/walmart/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectWalmartAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectWalmartAll(key);
 	}
 	
 	
 	@RequestMapping(value="/sku_recycle/wish/grid",method=RequestMethod.GET)
 	public GridModel selectWishAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
@@ -157,8 +138,7 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/wish/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectWishAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectWishAll(key);
 	}
 
@@ -170,8 +150,6 @@ public class DailySalesSkuReports_RecycleController {
 	@RequestMapping(value="/sku_recycle/newPlatform/grid",method=RequestMethod.GET)
 	public GridModel selectNewPlatformAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
 
-		dateAddOne(key);
-
 		PageHelper.startPage(filter.getPage(), filter.getRows(),true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx()) ? filter.getSidx() + " " + filter.getSord() : "");
 
@@ -182,21 +160,17 @@ public class DailySalesSkuReports_RecycleController {
 
 	@RequestMapping(value="/sku_recycle/newPlatform/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectNewPlatformAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectNewPlatformAll(key);
 	}
 
 	@RequestMapping(value="/sku_recycle/newPlatform/business",method=RequestMethod.GET)
 	public List<String> selectNewPlatformBusiness(){
-		System.out.println(idssrrs.selectNewPlatformBusiness()+"************");
 		return idssrrs.selectNewPlatformBusiness();
 	}
 
 	@RequestMapping(value="/sku_recycle/newEgg/grid")
 	public GridModel selectNewEggAllGrid(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-
-		dateAddOne(key);
 
 		PageHelper.startPage(filter.getPage(), filter.getRows(),true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx()) ? filter.getSidx() + " " + filter.getSord() : "");
@@ -208,8 +182,7 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/newEgg/chart")
 	public List<DailySalesSkuReports_Recycle> selectNewEggAllChart(DailySalesSkuReports_RecycleKey key) throws Exception{		
-
-		dateAddOne(key);
+		PageHelper.orderBy("report_date");
 		return idssrrs.selectNewEggAll(key);
 	}
 

@@ -2,30 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yks.bi.dao.DailySalesSkuReports_RecycleMapper" >
   <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailySalesSkuReports_Recycle" >
-    <id column="report_date" property="reportDate" jdbcType="VARCHAR" />
+    <id column="recycle_date" property="recycleDate" jdbcType="VARCHAR" />
     <id column="business" property="business" jdbcType="VARCHAR" />
     <id column="sku" property="sku" jdbcType="VARCHAR" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
     <result column="sku_old" property="skuOld" jdbcType="VARCHAR" />
     <result column="orders" property="orders" jdbcType="INTEGER" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="sales" property="sales" jdbcType="REAL" />
+    <result column="recycle_orders" property="recycleOrders" jdbcType="INTEGER" />
+    <result column="recycle_quantity" property="recycleQuantity" jdbcType="INTEGER" />
+    <result column="recycle_sales" property="recycleSales" jdbcType="REAL" />
+    <result column="recycle_rate" property="recycleRate" jdbcType="REAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    report_date, business, sku, sku_old, orders, quantity, sales
+    recycle_date, business, sku, report_date, orders, quantity, sales, recycle_orders,
+    recycle_quantity, recycle_sales, recycle_rate
   </sql>
   
   <sql id="Base_If">
   	<if test="startDate != null and startDate.length() > 0">
-    	AND report_date >= #{startDate,jdbcType=VARCHAR}
+    	AND report_date >= #{startDate,jdbcType=DATE}
     </if>
 	 <if test="endDate != null and endDate.length() > 0">
-	 <![CDATA[AND report_date < #{endDate,jdbcType=VARCHAR}]]>
+	 <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
 	</if>
     <if test="sku != null and sku.length() > 0">
     	AND  sku = #{sku,jdbcType=VARCHAR}
-    </if>
-    <if test="skuOld != null and skuOld.length() > 0">
-    	AND sku_old = #{skuOld,jdbcType=VARCHAR}
     </if>
   </sql>
 

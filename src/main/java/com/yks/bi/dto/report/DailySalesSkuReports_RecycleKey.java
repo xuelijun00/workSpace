@@ -1,25 +1,32 @@
 package com.yks.bi.dto.report;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class DailySalesSkuReports_RecycleKey {
 
-    private String reportDate;
+    private String recycleDate;      //环比增长日期
 
-    private String business;
+    private String business;         //业务线
 
-    private String sku;
+    private String sku;              //sku
     
-    private String skuOld;
+    private String skuOld;           //原始sku
     
-    private String startDate;
+    private String startDate;        //开始时间
     
-    private String endDate;
+    private String endDate;          //结束时间
+    
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+    private Date reportDate;         //日期
 
-	public String getReportDate() {
-		return reportDate;
+	public String getRecycleDate() {
+		return recycleDate;
 	}
 
-	public void setReportDate(String reportDate) {
-		this.reportDate = reportDate;
+	public void setRecycleDate(String recycleDate) {
+		this.recycleDate = recycleDate;
 	}
 
 	public String getBusiness() {
@@ -61,5 +68,13 @@ public class DailySalesSkuReports_RecycleKey {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-    
+
+	public Date getReportDate() {
+		return reportDate;
+	}
+
+	public void setReportDate(Date reportDate) {
+		this.reportDate = reportDate;
+	}
+
 }

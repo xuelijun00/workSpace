@@ -59,11 +59,6 @@
                 <input type="text" class="form-control" placeholder="请输入内容" id="sku1" name="sku"
                 	_value=""/>
             </div>
-            <div class="form-group">
-            <label>原始SKU：</label>
-                <input type="text" class="form-control" placeholder="请输入内容" id="oldsku1" name="oldsku"
-                	_value=""/>
-        	</div>
         	<div class="form-group">
               <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
            </div>
@@ -86,11 +81,10 @@ var domesticData = [];
 
 function getUrl(type){//拼接url
 	var sku = encodeURIComponent($('#sku' + type).val());
-	var oldsku = encodeURIComponent($('#oldsku' + type).val());
 	var startDate = $("#start_date" + type).val();
 	var endDate = $("#end_date" + type).val();
 	if(type === 1){ 	
-		return contextPath + '/report/sku_recycle/amazon/grid?&startDate=' + startDate + "&endDate=" + endDate+ "&skuOld=" + oldsku+ "&sku=" + sku;
+		return contextPath + '/report/sku_recycle/amazon/grid?&startDate=' + startDate + "&endDate=" + endDate+ "&sku=" + sku;
 	}else{
 		return contextPath + '/report/sku_recycle/amazon/chart?&startDate=' + startDate + "&endDate=" + endDate+ "&sku=" + sku;
 	}
@@ -114,8 +108,6 @@ function queryData(type){
 	}else {
 		common.echarts(getChartData(getUrl(2)));
 	}
-/* 	var operation = getChartData(getUrl());
-	common.refreshData1(getUrl(1),chart,operation); */
 }
 
 function exportData(){
@@ -123,8 +115,8 @@ function exportData(){
 	var startDate = $("#start_date1").val();
 	var endDate = $("#end_date1").val();
 	var fileName = "Amazon业务线sku环比增长数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台/业务线', 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元'];
-	var column = [ 'business', 'sku','skuOld','reportDate','orders','quantity','sales'];
+	var title = [ '平台/业务线', 'sku', '日期', '订单数' , '数量' , '订单金额_美元', '环比增长单数', '环比增长个数', '环比增长销售额_美元', '	环比增长率（美元）'];
+	var column = [ 'business', 'sku', 'reportDate', 'orders', 'quantity', 'sales', 'recycleOrders', 'recycleQuantity', 'recycleSales', 'recycleRate'];
 	$.ajax({
 		url : getUrl(1),
 		cache : false,
@@ -140,8 +132,8 @@ function exportData(){
 }
 
 function getChartData(chartUrl){
-	var sales = [];
-	var orders = [];
+	var recycleSales = [];
+	var recycleRate = [];
 	var categories = [];
 	$.ajax({
 		url : chartUrl,
@@ -153,22 +145,22 @@ function getChartData(chartUrl){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
 				  categories.push(data[i].reportDate + '\n' +data[i].sku);
-				  sales.push(data[i].sales);
-            	  orders.push(data[i].orders);
+				  recycleSales.push(data[i].recycleSales);
+				  recycleRate.push(data[i].recycleRate * 100);
 	            }
 			}
 		}
 	});
 	var y = [{
         type: 'value',
-        name: '订单金额_美元',
+        name: '环比增长销售额（美元）',
         position: 'left',
         axisLabel: {
             formatter: '{value} '
         }
     }, {
         type: 'value',
-        name: '订单数',       
+        name: '环比增长率（美元）',       
         position: 'right',
         axisLabel: {
             formatter: '{value} '
@@ -178,8 +170,8 @@ function getChartData(chartUrl){
 		title:{text:'Amazon业务线sku环比增长数据'}
 		,categories:categories
 		,y:y
-		,series:[{name:'订单金额_美元',type: 'line',data:sales,tooltip: {valueSuffix: '' }},
-			{name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }}]
+		,series:[{name:'环比增长销售额（美元）',type: 'bar',data:recycleSales,tooltip: {valueSuffix: '' }, customColors : 1, customOnZero : 1},
+			 {name: '环比增长率（美元）',type: 'line',yAxisIndex: 1,data:recycleRate,tooltip: {valueSuffix: '' }}]
 	};
 }
 
@@ -220,18 +212,23 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"Amazon业务线sku环比增长数据"
 		,url:getUrl(1)
-		,colNames:[ '平台/业务线', 'sku', '原始sku', '日期（day）', '订单数' ,'数量' ,'订单金额_美元']
+		,colNames:[ '平台/业务线', 'sku', '日期', '订单数' , '数量' , '订单金额_美元', '环比增长单数', '环比增长个数', '环比增长销售额_美元', '	环比增长率（美元）']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-			{name : 'business',index : 'business',width : 135},
-			{name : 'sku',index : 'sku',width : 255}, 
-            {name : 'skuOld',index : 'skuOld',width : 205}, 
-            {name : 'reportDate',index : 'reportDate',align : "right",width : 275}, 
-            {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-            {name : 'quantity',index : 'quantity',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-            {name : 'sales',index : 'sales',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}
-		           ]
+			{name : 'business',index : 'business',width : 115},
+			{name : 'sku',index : 'sku',width : 155}, 
+	        {name : 'reportDate',index : 'reportDate',width : 125}, 
+	        {name : 'orders',index : 'orders',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+	        {name : 'quantity',index : 'quantity',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+	        {name : 'sales',index : 'sales',sortable : "true",width : 150,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+	        {name : 'recycleOrders',index : 'recycleOrders',sortable : "true",width : 150,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+	        {name : 'recycleQuantity',index : 'recycleQuantity',sortable : "true",width : 150,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
+	        {name : 'recycleSales',index : 'recycleSales',sortable : "true",width : 195,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+	        {name : 'recycleRate',index : 'recycleRate',sortable : "true",width : 185,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
+	        ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
+		,shrinkToFit:true
+		,autoScroll:true
 	});
 })();
 </script>

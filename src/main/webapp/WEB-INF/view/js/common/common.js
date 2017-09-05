@@ -1,4 +1,7 @@
 var common = {
+		testFun:function(a,b,c){
+			debugger;
+		},
 		chart:function(operation){
 			var chart1 = new Highcharts.Chart('container',{
 				credits:{enabled:false},//去除版权信息
@@ -19,6 +22,7 @@ var common = {
 			return chart1;
 		},
 		echartsOption :function (operation){
+			var common1 = common;
 			var legenddata = [];
 			for(var i=0;i<operation.series.length;i++){
 				legenddata.push(operation.series[i].name);
@@ -30,9 +34,9 @@ var common = {
 			            var res = params[0].name;
 			            for (var i = 0, l = params.length; i < l; i++) {
 			                if (params[i].seriesType === 'line') {
-			                	if(params[i].seriesName =='税后综合利润率(百分比)'){
+			                	if(params[i].seriesName == '环比增长率（美元）' || params[i].seriesName == '税后综合利润率(百分比)'){
 				                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value.toFixed(2) +'%': '-');
-				                }else{
+			                	}else{
 				                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
 				                }  
 			                } else{
@@ -101,7 +105,7 @@ var common = {
 			        {
 			            type: 'category',
 			            data: operation.categories,
-			            axisLine: { onZero: false},
+			            axisLine: { onZero: common.axisLine(operation)},
 			            axisPointer: {
 			                type: 'shadow'
 			            }
@@ -112,13 +116,14 @@ var common = {
 			};
 			return option;
 		},
-/*		axisLine:function(operation){
-			if(operation.title.text == "eBay SKU净利明细"){
+		/*自定义（图形的onZero的显示方式）*/
+		axisLine:function(operation){
+			if(operation.series[0].customOnZero === 1){
 				return true;
 			}else{
 				return false;
 			}
-		},*/
+		},
 		
 		/*自己定义的（颜色）*/
 		selectColors:function(operation){
