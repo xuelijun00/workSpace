@@ -46,12 +46,12 @@
 				
 				<entry key="ebayDailySales" value="/common?path=ebay_domestic_warehouse/ebayDailySales"></entry>
 				<entry key="ebayServiceLineSales" value="/common?path=ebay_domestic_warehouse/ebayServiceLineSales"></entry>
+				<entry key="ebayDailyOutNetProfit" value="/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit"></entry>
 				<entry key="ebaySkuSales" value="/common?path=ebay_domestic_warehouse/ebaySkuSales"></entry>
 				<entry key="ebayCategorySales" value="/common?path=ebay_domestic_warehouse/ebayCategorySales"></entry>
 				<entry key="zhiyou" value="/common?path=ebay_domestic_warehouse/zhiyou"></entry>
 				<entry key="zhuanxian" value="/common?path=ebay_domestic_warehouse/zhuanxian"></entry>
 				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
-				<entry key="ebayDailyOutNetProfit" value="/common?path=ebay_domestic_warehouse/ebayDailyOutNetProfit"></entry>
 				<entry key="ebayDailyOutAccount" value="/common?path=ebay_domestic_warehouse/ebayDailyOutAccount"></entry>
 				<entry key="ebayDailySalesSkuReports_Recycle" value="/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle"></entry>
 				
