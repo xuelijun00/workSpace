@@ -22,29 +22,20 @@
 
 
 	<select id="selectDomesticPlatforms" resultType="String">
-		select distinct business from dailysalesreports
-		where business = 'ebay'
-		union
-		select distinct business from dailysalesreports
-		where 1=1 and business like 'cn_%'
+		SELECT DISTINCT zhuzhandian FROM config_ebayzhandian
 	</select>
 
 	<select id="selectAllCount" resultMap="BaseResultMap">
-		select business, sum(orders) orders, sum(sales) sales
-		from dailysalesreports
-		where 1=1
-		<choose>
-			<when test="business != null">
-				and business = #{business,jdbcType=VARCHAR}
-			</when>
-			<otherwise>
-				and (business like 'cn_%' or business ='ebay')
-			</otherwise>
-		</choose>
-		<if test="startDate != null">
+		SELECT business, sum(orders) orders, sum(sales) sales 
+		FROM `dailysalesreports` 
+	    WHERE business IN (SELECT zhuzhandian FROM config_ebayzhandian)  
+		<if test="business != null and business.length() > 0">
+			and business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null and startDate.length() > 0">
     			<![CDATA[and report_date >= #{startDate,jdbcType=DATE}]]>
 		</if>
-		<if test="endDate != null">
+		<if test="endDate != null and endDate.length() > 0">
 	  		 	 <![CDATA[and report_Date <= #{endDate,jdbcType=DATE}]]>
 		</if>
 		GROUP BY business

@@ -56,19 +56,18 @@ function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var business = $("#business").val();
+	var url = "";
 	if(type === 1){
-		if(business != "all"){
-			return contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate + "&business=" + business;
-		}else{
-			return contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate
-		}
+		url = contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate
 	}else{
-		if(business != "all"){
-			return contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate + "&business=" + business;
-		}else{
-			return contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate
-		}
+		url = contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate
 	}
+
+	if(business != "all"){
+		url += "&business=" + business;
+	}
+
+	return url;
 }
 function queryData(){
 	var operation = getChartData(getUrl());
@@ -143,8 +142,8 @@ function getChartData(chartUrl){
 		title:{text:"Ebay业务线销售数据"}
 	,categories:businessDate
 	,y:y
-	,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
-	         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+	,series:[{name:'销售额_美元',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' },customColors: 1},
+	         {name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 };
 }
 (function(){
