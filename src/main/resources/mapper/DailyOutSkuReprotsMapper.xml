@@ -81,9 +81,11 @@
   </select>
 
   <select id="selectProfit" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
-  	SELECT report_date, sum(profit) profit, sum(product_total_cny) product_total_cny
-  	FROM `dailyoutskureprots_new`
-	WHERE 1=1
+  	SELECT report_date, 
+  	sum(profit)/b.currency_value profit, 
+  	sum(product_total_cny)/b.currency_value product_total_cny
+  	FROM `dailyoutskureprots_new`,`configcurrency` b
+	WHERE b.currency='USD' and b.currency_type='\$'
 	<include refid="Base_If" /> 
     <if test="platform != null and platform.length() > 0" >
        AND platform = #{platform,jdbcType=VARCHAR}

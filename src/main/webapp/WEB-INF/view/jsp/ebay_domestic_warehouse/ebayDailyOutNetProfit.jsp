@@ -14,7 +14,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>eBay SKU净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
+    <div class="ibox-title"><h5>eBay SKU净利明细(注意：本页面货币的单位，只有柱状图（税后综合净利）是美元，其他均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -49,7 +49,7 @@
         </form> 
 		</div>
 		<div class="hr-line-dashed"></div>  
-        <h2 class="text-center">eBay税后综合净利和税后综合利润率（按日期汇总）</h2>
+        <h2 class="text-center">eBay税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
 		<div class="hr-line-dashed"></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<!-- 表格 -->
@@ -159,7 +159,7 @@ function exportData(){
 	var endDate = $("#end_date1").val();
 	var fileName = "eBay SKU净利明细" + startDate +"-"+ endDate + ".csv";
 	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', 
-		'边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
+		'边际利润', '税前综合净利', '税后综合净利（元）', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
 	var column = [ 'erpOrdersId', 'platform', 'manager', 'salesAccount', 'sku','skuCnName','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','netProfitMargin','zhuzhandian','reportDate','buyerId'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
@@ -179,6 +179,7 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
+				  /* 这里得到的profit和productTotalCny是美元，其他地方的是元 */
 				  netProfitMargin = data[i].profit / data[i].productTotalCny * 100;
 				  categories.push(data[i].reportDate); 
 				  netProfitMarginSum.push(netProfitMargin);
@@ -189,7 +190,7 @@ function getChartData(chartUrl){
 	});
 	var y = [{
         type: 'value',
-        name: '税后综合净利',
+        name: '税后综合净利（美元）',
         position: 'left',
         axisLabel: {
             formatter: '{value} '
@@ -206,7 +207,7 @@ function getChartData(chartUrl){
 		title:{text:"eBay SKU净利明细"}
 		,categories:categories
 		,y:y
-		,series:[{name: '税后综合净利',type: 'bar',data:profitSum,tooltip: {valueSuffix: ''},customColors: 1},
+		,series:[{name: '税后综合净利（美元）',type: 'bar',data:profitSum,tooltip: {valueSuffix: ''},customColors: 1},
 			{name:'税后综合利润率(百分比)',type: 'line',yAxisIndex: 1,data:netProfitMarginSum,tooltip: {valueSuffix: '' }}]
 	};
 }
@@ -283,7 +284,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"eBay SKU净利明细"
 		,url:getUrl(1)
-		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号']
+		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利（元）', '税后综合利润率', '主站点', '报表时间', '平台订单号']
 		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
 					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},
