@@ -210,7 +210,7 @@ function Modify(platform)
 		,url:contextPath + "/report/targetcompletioncrate/grid?month=" + $("#date").val()
 		,colNames:[ '月份', '平台名称','目标销售额', '实际销售额', '目标净利','实际利润','销售额完成率','净利完成率']  //
 		,colModel:[ {name : 'reportMonth',index : 'reportMonth',width : 120}, 
-		             {name : 'platform',index : 'platform',width : 120}, 
+		             {name : 'name',index : 'name',width : 120}, 
 		             {name : 'performanceTargets',index : 'performanceTargets',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
 		             {name : 'sales',index : 'sales' ,width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		             {name : 'targetProfit',index : 'targetProfit',width : 120,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -233,7 +233,7 @@ function Modify(platform)
 		for(var i=0;i<array.length / 6;i++){
 			if(array[i*6].value == "B2B"){
 				if(reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim()) && reg.test(array[i*6+3].value.trim()) && reg.test(array[i*6+4].value.trim())){
-					var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"reportMonth":month};
+					var record = {"name":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"sales":array[i*6+3].value,"actualProfit":array[i*6+4].value,"reportMonth":month};
 					$.ajax({
 						url : contextPath + "/report/targetcompletioncrate/update",
 						cache : false,
@@ -247,7 +247,7 @@ function Modify(platform)
 				}
 			}else{
 				if(array[i*6].value != "" && reg.test(array[i*6+1].value.trim()) && reg.test(array[i*6+2].value.trim())){
-					var record = {"platform":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"reportMonth":month};
+					var record = {"name":array[i*6].value,"performanceTargets":array[i*6+1].value,"targetProfit":array[i*6+2].value,"reportMonth":month};
 					$.ajax({
 						url : contextPath + "/report/targetcompletioncrate/update",
 						cache : false,

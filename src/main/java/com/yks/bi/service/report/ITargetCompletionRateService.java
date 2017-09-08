@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface ITargetCompletionRateService {
 	
-	List<ConfigPlatformGoalNew> selectAll(String month,String platform);
+	List<ConfigPlatformGoalNew> selectAll(String month,String name);
 	
 	List<String> selectPlatform();
 	
