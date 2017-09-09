@@ -113,6 +113,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutNetProfit">SMT SKU净利明细</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutAccount">SMT账号每日发货数据</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesSkuReports_Recycle">SMT SKU环比增长</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesCategoryReports_account">SMT账号品类销售报表</a></li>
                     </ul>
                 </li>
                 <li>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
@@ -22,7 +23,7 @@ public class DailyOutSkuTop500Controller {
 	@Autowired
 	private IDailyOutSkuTop500Service idosts;
 	
-	@RequestMapping(value="/sku_top/grid")
+	@RequestMapping(value="/sku_top/grid", method=RequestMethod.GET)
 	public GridModel selectAllGrid(DailyOutSkuTop500Key key, FilterDto filter){
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNoneEmpty(filter.getSidx()) ? filter.getSidx() + " " +filter.getSord() : "");
@@ -31,7 +32,7 @@ public class DailyOutSkuTop500Controller {
 		return new GridModel(pageInfo);
 	}
 	
-	@RequestMapping(value="/sku_top/platform")
+	@RequestMapping(value="/sku_top/platform", method=RequestMethod.GET)
 	public List<String> platform(){
 		return idosts.selectPlatform();
 	}

@@ -89,6 +89,7 @@
 				<entry key="smtDailyOutNetProfit" value="/common?path=smt/smtDailyOutNetProfit"></entry>
 				<entry key="smtDailyOutAccount" value="/common?path=smt/smtDailyOutAccount"></entry>
 				<entry key="smtDailySalesSkuReports_Recycle" value="/common?path=smt/smtDailySalesSkuReports_Recycle"></entry>
+				<entry key="smtDailySalesCategoryReports_account" value="/common?path=smt/smtDailySalesCategoryReports_account"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
 				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
