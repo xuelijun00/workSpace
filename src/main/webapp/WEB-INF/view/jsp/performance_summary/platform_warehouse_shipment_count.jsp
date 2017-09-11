@@ -177,7 +177,7 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/sales_performance/platforms",
+		url : contextPath + "/report/daily_out_report/platforms",
 		cache : false,
 		type:"get",
 		async: false,

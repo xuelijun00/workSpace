@@ -26,8 +26,8 @@
             </div>
               <div class="form-group">
              <label>分类</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
-                               _value=""/>
+               <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
+                 _value=""/>
             </div>
             <div class="form-group">
                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>

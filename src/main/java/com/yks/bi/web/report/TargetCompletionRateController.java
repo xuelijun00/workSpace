@@ -35,10 +35,10 @@ public class TargetCompletionRateController {
      * @throws Exception 
      */
     @RequestMapping(value = "/targetcompletioncrate/grid" ,method = RequestMethod.GET)
-    public GridModel targetCompletionRate(String month,String platform,FilterDto filter){
+    public GridModel targetCompletionRate(String month,String name,FilterDto filter){
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<ConfigPlatformGoalNew> list = targetCompletionRateService.selectAll(month,platform);
+    	List<ConfigPlatformGoalNew> list = targetCompletionRateService.selectAll(month,name);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
     }

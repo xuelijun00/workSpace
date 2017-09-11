@@ -1,7 +1,4 @@
 var common = {
-		testFun:function(a,b,c){
-			debugger;
-		},
 		chart:function(operation){
 			var chart1 = new Highcharts.Chart('container',{
 				credits:{enabled:false},//去除版权信息
@@ -22,7 +19,6 @@ var common = {
 			return chart1;
 		},
 		echartsOption :function (operation){
-			var common1 = common;
 			var legenddata = [];
 			for(var i=0;i<operation.series.length;i++){
 				legenddata.push(operation.series[i].name);
@@ -38,7 +34,7 @@ var common = {
 				                    res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value.toFixed(2) +'%': '-');
 			                	}else{
 				                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
-				                }  
+				                }
 			                } else{
 			                	res += '<br/>' + params[i].seriesName + ' : ' + (params[i].value ? params[i].value : '-');
 			                }
@@ -99,7 +95,6 @@ var common = {
 			        start: 0,
 			        end: 100
 			    }]
-			   /* ,color:['#c23531','#2f4554', '#61a0a8', '#d48265', '#91c7ae','#749f83', '#FF6E97','#212122', '#546570', '#c4ccd3']*/
 			    ,color: common.selectColors(operation)
 			    ,xAxis: [
 			        {
@@ -115,6 +110,31 @@ var common = {
 			    series: operation.series,
 			};
 			return option;
+		},
+		/*设置饼图的option*/
+		echartsPieOption :function (operation){
+			var option1 = {
+				title : operation.title,
+				tooltip: {
+					trigger: 'item',
+					formatter: operation.tooltipFormatter
+				},
+				legend: operation.legend,
+				label: operation.label,
+				toolbox: {
+			        feature: {
+			            restore: {show: true},
+			            saveAsImage: {show: true}
+			        }
+			    },
+				color: ['#32DADD','#C8B2F4', '#63C2FF', '#FFCB8C', '#ED868C','#E5CF0D', '#A6C75A',
+					'#A37B77', '#F273BB', '#07B2B4','#A98BE5','#609BEA','#FFA855','#D35858','#61719A',
+					'#8AC10B','#7A5D5B','#D44696','#32DADD','#C8B2F4','#63C2FF'],
+				series: operation.series,
+				
+			};
+		
+			return option1;
 		},
 		/*自定义（图形的onZero的显示方式）*/
 		axisLine:function(operation){
@@ -140,6 +160,12 @@ var common = {
 			var option = common.echartsOption(operation);
 			chart.setOption(option);
 			return chart;
+		},
+		echartsPie:function(operation){
+			var chartPie = echarts.init(document.getElementById('container'));
+			var option = common.echartsPieOption(operation);
+			chartPie.setOption(option);
+			return chartPie;
 		},
 		grid:function(opation){
 			$(opation.id?opation.id:"#list2").jqGrid({
@@ -189,6 +215,16 @@ var common = {
 			if(chart){
 				var option = common.echartsOption(operation);
 				chart.setOption(option);
+			}
+			$('#list2').jqGrid('clearGridData');
+			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');
+			//$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
+			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
+		},
+		refreshData2:function(gridUrl,chart,operation){
+			if(chart){
+				var optionPie = common.echartsPieOption(operation);
+				chart.setOption(optionPie);
 			}
 			$('#list2').jqGrid('clearGridData');
 			$('#list2').jqGrid('setGridParam', {url: gridUrl}).trigger('reloadGrid');

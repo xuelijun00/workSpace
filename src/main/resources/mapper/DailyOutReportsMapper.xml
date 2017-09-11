@@ -27,12 +27,12 @@
   </sql>
   
   <select id="selectPlatforms" resultType="String">
-    select platform from dailyoutreprots
-    where 1=1
+    SELECT platform FROM dailyoutreprots
+    WHERE 1=1
     <if test="platform != null">
-    	and platform like concat('%',#{platform,jdbcType=VARCHAR},'%')
+    	AND platform like concat('%',#{platform,jdbcType=VARCHAR},'%')
     </if>
-    order by platform 
+    GROUP BY platform 
   </select>
   
   <!--国内仓发货汇总   -->

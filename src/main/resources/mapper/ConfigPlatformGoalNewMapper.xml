@@ -50,8 +50,8 @@
     <if test="month != null and month.length() > 0">
     	and report_month = #{month,jdbcType=VARCHAR}
     </if>
-    <if test="platform != null and platform.length() > 0">
-      and name = #{platform,jdbcType=VARCHAR}
+    <if test="name != null and name.length() > 0">
+      	and name = #{name,jdbcType=VARCHAR}
     </if>
   </select>
   
@@ -245,7 +245,7 @@
         modify_date = #{modifyDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where platform = #{platform,jdbcType=VARCHAR} and report_month = #{reportMonth,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR} and report_month = #{reportMonth,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.yks.bi.dto.report.ConfigPlatformGoalNew" >
     update configplatformgoal_new

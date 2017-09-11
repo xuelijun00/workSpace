@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailySalesCategoryReports_accountMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailySalesCategoryReports_account" >
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <id column="category" property="category" jdbcType="VARCHAR" />
+    <id column="categorySupervisor" property="categorySupervisor" jdbcType="VARCHAR" />
+    <id column="account" property="account" jdbcType="VARCHAR" />
+    <result column="business" property="business" jdbcType="VARCHAR" />
+    <result column="orders" property="orders" jdbcType="INTEGER" />
+    <result column="sales" property="sales" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+  	report_date, category, categorySupervisor, account, business, orders, sales
+  </sql>
+
+  <select id="selectSmtCategory" resultType="java.lang.String">
+    SELECT category FROM `smtdailysalescategoryreports` GROUP BY category 
+  </select>
+
+  <select id="selectSmtCategorySupervisor" resultType="java.lang.String">
+    SELECT categorySupervisor FROM `smtdailysalescategoryreports` GROUP BY categorySupervisor 
+  </select>
+
+  <select id="selectSmtAccount" resultType="java.lang.String">
+    SELECT account FROM `smtdailysalescategoryreports` GROUP BY account 
+  </select>
+
+  <!--国内仓发货汇总   -->
+  <select id="selectSmtAll" resultMap="BaseResultMap">
+  	SELECT 
+  	<include refid="Base_Column_List" /> 
+  	FROM `smtdailysalescategoryreports`
+	WHERE 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       AND report_date >= #{startDate, jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[AND report_date <= #{endDate, jdbcType=DATE}]]>
+    </if>
+    <if test="category != null and category.length() > 0" >
+       AND category = #{category, jdbcType=VARCHAR}
+    </if>
+    <if test="categorySupervisor != null and categorySupervisor.length() > 0" >
+       AND categorySupervisor = #{categorySupervisor, jdbcType=VARCHAR}
+    </if>
+    <if test="account != null and account.length() > 0" >
+       AND account = #{account, jdbcType=VARCHAR}
+    </if>
+  </select>
+  
+</mapper>

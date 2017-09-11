@@ -25,7 +25,7 @@ public interface ConfigPlatformGoalNewMapper {
      */
     int updateByPrimaryKeySelective(ConfigPlatformGoalNew record);
     
-    List<ConfigPlatformGoalNew> selectByPrimaryKey(@Param("month") String month,@Param("platform") String platform);
+    List<ConfigPlatformGoalNew> selectByPrimaryKey(@Param("month") String month,@Param("name") String name);
 
 	List<String> selectPlatform();
     

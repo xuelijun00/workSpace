@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.EbayDailyOutReprotsMapper" >
+  <resultMap id="BaseResultMap" type="com.yks.bi.dto.report.EbayDailyOutReprots" >
+    <id column="platform" property="platform" jdbcType="VARCHAR" />
+    <id column="report_date" property="reportDate" jdbcType="DATE" />
+    <id column="zhuzhandian" property="zhuzhandian" jdbcType="VARCHAR" />
+    <result column="orders_type" property="ordersType" jdbcType="INTEGER" />
+    <result column="order_num" property="orderNum" jdbcType="INTEGER" />
+    <result column="unit_price" property="unitPrice" jdbcType="DOUBLE" />
+    <result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+    <result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+    <result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+    <result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+    <result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+    <result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+    <result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+    <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+    <result column="profit" property="profit" jdbcType="DOUBLE" />
+    <result column="net_profit_margin" property="netProfitMargin" jdbcType="DOUBLE" />
+  </resultMap>
+
+   <sql id="Base_Column_List" >
+    `platform`, `report_date`,`zhuzhandian`, `orders_type`, `order_num`, 
+    `unit_price`, `product_total_cny`, `product_refund`, `order_price`, `gross_profit`,
+    `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, `operating_cost`, 
+    `profit_margin`, `net_profit`, `profit`,`net_profit_margin`
+  </sql>
+
+   <select id="selectProfit" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.EbayDailyOutReprotsKey" >
+  	SELECT `zhuzhandian`,sum(order_num) order_num , sum(product_total_cny)/sum(order_num) unit_price, 
+  	sum(product_total_cny) product_total_cny, sum(profit) profit, sum(profit)/sum(product_total_cny) net_profit_margin
+  	FROM `ebaydailyoutreprots`
+	WHERE 1=1
+	<if test="startDate != null and startDate.length() > 0" >
+       AND report_date >= #{startDate,jdbcType=DATE}
+    </if>
+    <if test="endDate != null and endDate.length() > 0" >
+       <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+    </if>
+    <if test="zhuzhandian != null and zhuzhandian.length() > 0" >
+       AND zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR}
+    </if>
+    GROUP BY zhuzhandian
+  </select>
+
+   <select id="selectZhuzhandian" resultType="java.lang.String" >
+    SELECT `zhuzhandian` FROM `ebaydailyoutreprots` GROUP BY `zhuzhandian`
+  </select>
+
+</mapper>

@@ -20,8 +20,8 @@ public class TargetCompletionRateServiceImpl implements ITargetCompletionRateSer
      * 表格数据
      */
     @Override
-    public List<ConfigPlatformGoalNew> selectAll(String month, String platform) {
-        return configPlatformGoalNewMapper.selectByPrimaryKey(month,platform);
+    public List<ConfigPlatformGoalNew> selectAll(String month, String name) {
+        return configPlatformGoalNewMapper.selectByPrimaryKey(month,name);
     }
     
 	@Override

@@ -119,6 +119,7 @@ public class SalesPerformanceController {
      */
     @RequestMapping(value = "/sales_performance/chartCount" ,method = RequestMethod.GET)
     public List<SalesPerformance> chartCount(SalesPerformanceKey key) throws Exception{
+    	PageHelper.orderBy("sales desc");
     	return isale.selectAllCount(key);
     }
     

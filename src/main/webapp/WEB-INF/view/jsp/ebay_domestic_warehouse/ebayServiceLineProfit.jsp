@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label>业务线：</label>
-                <select class="form-control w120" id="business" >
+                <select class="form-control w120" id="zhuzhandian" >
                 </select>
             </div>
             <div class="form-group">
@@ -55,16 +55,16 @@ var domesticData = [];
 function getUrl(type){//拼接url
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var business = $("#business").val();
+	var zhuzhandian = $("#zhuzhandian").val();
 	var url = "";
 	if(type === 1){
-		url = contextPath + '/report/sales_performance/gridCount?startDate=' + startDate + "&endDate=" + endDate
+		url = contextPath + '/report/ebay_profit_sum/grid?startDate=' + startDate + "&endDate=" + endDate
 	}else{
-		url = contextPath + '/report/sales_performance/chartCount?startDate=' + startDate + "&endDate=" + endDate
+		url = contextPath + '/report/ebay_profit_sum/chart?startDate=' + startDate + "&endDate=" + endDate
 	}
 
-	if(business != "all"){
-		url += "&business=" + business;
+	if(zhuzhandian != "all"){
+		url += "&zhuzhandian=" + zhuzhandian;
 	}
 
 	return url;
@@ -76,9 +76,9 @@ function queryData(){
 function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
-	var fileName = "Ebay业务线销售汇总数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '销售额_美元', '订单数'];
-	var column = ['business','sales','orders'];
+	var fileName = "Ebay业务线净利汇总数据" + startDate +"-"+ endDate + ".csv";
+	var title = [ '业务线', '发货数量', '客单价', '发货收入','税后综合净利','税后综合利润率'];
+	var column = [ 'zhuzhandian', 'orderNum',  'unitPrice', 'productTotalCny', 'profit', 'netProfitMargin'];
 	$.ajax({
 		url : getUrl(1),
 		cache : false,
@@ -92,15 +92,17 @@ function exportData(){
 	});
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
-
 function getChartData(chartUrl){
-	var salesSum = new Array();
-	var businessData = [];
-	var salesSumSum = 0;          //出去eBay的所有业务线的汇总
-	var zhuanxianSum = 0;         //所有专线的汇总
+	var profitSum = new Array();
+	var netProfitMarginSum = '';
+	var zhuzhandianData = [];
+	var zhuzhandianToString = '';
+	var profitSumSum = 0;          //出去eBay的所有业务线的汇总
+	var zhuanxianSum = 0;          //所有专线的汇总
 	var zhuanxianzZhanbi = 0;     //专线占比
 	var zhiyouZhanbi = 0;         //直邮占比
 	var title = '';
+	
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -110,21 +112,23 @@ function getChartData(chartUrl){
 			if(data != null && data.length > 0){
 				domesticData = data;
 				for(var i=0;i<data.length;i++){
-					if(data[i].business !== 'ebay'){
-						businessData.push(data[i].business);
-		            	salesSum.push({'value': data[i].sales, 'name': data[i].business});
-		            	salesSumSum += data[i].sales;
-					}
-					if(data[i].business.indexOf('专线') > 0){
-						zhuanxianSum += data[i].sales;
+					if(data[i].zhuzhandian !== 'ebay'){
+						netProfitMarginSum = (data[i].netProfitMargin *100).toFixed(2) + '%';
+						zhuzhandianToString = data[i].zhuzhandian + ':\n' + '净利率:' +netProfitMarginSum+ '\n' + '净利:' +data[i].profit;
+						zhuzhandianData.push(zhuzhandianToString);
+						profitSum.push({'value': data[i].profit, 'name': zhuzhandianToString});
+						profitSumSum += data[i].profit;
+						if(data[i].zhuzhandian.indexOf('专线') > 0){
+							zhuanxianSum += data[i].profit;
+						}
 					}
 	            }
 			}
 		}
 	});
 
-	zhuanxianzZhanbi = (zhuanxianSum/salesSumSum * 100).toFixed(2);
-	zhiyouZhanbi = ((1 - zhuanxianSum/salesSumSum) * 100).toFixed(2);
+	zhuanxianzZhanbi = (zhuanxianSum/profitSumSum * 100).toFixed(2);
+	zhiyouZhanbi = ((1 - zhuanxianSum/profitSumSum) * 100).toFixed(2);
 	title = '专线占比为(' + zhuanxianzZhanbi + '%),' + '直邮占比为(' + zhiyouZhanbi + '%)';
 
 	var series = [
@@ -133,24 +137,49 @@ function getChartData(chartUrl){
 			type: 'pie',
 			radius:'60%',
 			center:['50%', '45%'],
-			data: salesSum,
+			data: profitSum,
+			itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	               }
+			}
 		}
 	];
 	return {
 		legend: {
 			orient: 'vertical',
 			left: 'left',
-			data: businessData,
+			data: zhuzhandianData,
+			formatter: function (name) {
+				name = name.substr(0,name.indexOf(':'));
+			    return name;
+			}
 		}
 		,label: {
 	        normal: {
-	      		formatter: "{b}({d}%)"
-	        }
+	    		formatter: function(params, ticket, callback) {
+	    			var res = '';
+		            var name = params.name;
+		            	name = name.substr(0,name.indexOf(':'));
+		                res = name + '(' + params.percent + '%)';
+		            return res;
+		        }
+	        },
+		        emphasis:{
+		        	formatter: function(params, ticket, callback) {
+		    			var res = '';
+			            var name = params.name;
+			            	name = name.substr(0,name.indexOf(':'));
+			                res = name + '(' + params.percent + '%)';
+			            return res;
+			        }
+		        }
 	    }
-		,title: {text: title, left: '32%', top: '85%'}  
-		,series: series
-		,tooltipFormatter: "{a} <br/> {b} <br/> 销售额 : {c} ({d}%)"
-		,
+	,title: {text: title, left: '32%', top: '85%'} 
+	,series: series
+	,tooltipFormatter: "{a} <br/> {b}({d}%)"
 };
 }
 
@@ -171,30 +200,33 @@ function getChartData(chartUrl){
         zIndex:3000
     });
 	$.ajax({
-		url : contextPath + "/report/sales_performance/domestic/platforms",
+		url : contextPath + "/report/ebay_profit_sum/zhuzhandian",
 		cache : false,
 		type:"get",
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#business").append("<option value='all'>"+ "全部" +"</option>");
+				$("#zhuzhandian").append("<option value='all'>"+ "全部" +"</option>");
 				for(var i=0;i<data.length;i++){
-					$("#business").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#zhuzhandian").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}
 	});
 	chart = common.echartsPie(getChartData(getUrl()));//chart */
 	common.grid({
-		title:"Ebay业务线销售汇总数据"
+		title:"Ebay业务线净利汇总数据"
 		,url:getUrl(1)
-		,colNames:[  '平台名称', '销售额_美元', '订单数']
+		,colNames:[ '业务线', '发货数量', '客单价', '发货收入','税后综合净利','税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-		             {name : 'business',index : 'business',width : 205}, 
-		             {name : 'sales',index : 'sales',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
-		             {name : 'orders',index : 'orders',sortable : "true",width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"}
+		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 205,sortable : "true"}, 
+		            {name : 'orderNum',index : 'orderNum',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:""},align:"right"}, 
+		            {name : 'unitPrice',index : 'unitPrice',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'productTotalCny',index : 'productTotalCny',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
+		            {name : 'profit',index : 'profit',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"}, 
+		            {name : 'netProfitMargin',index : 'netProfitMargin',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"}, 
 		           ]
-		,sortname:"business"
+		,sortname:"zhuzhandian"
 		,sortorder:"asc"  //可选desc和asc
 		,footerrow:true
 		,userDataOnFooter:true
