@@ -32,4 +32,9 @@ public class TargetCompletionRateServiceImpl implements ITargetCompletionRateSer
 	public int updateSelective(ConfigPlatformGoalNew record) {
 		return configPlatformGoalNewMapper.updateByPrimaryKeySelective(record);
 	}
+	
+    @Override
+    public List<ConfigPlatformGoalNew> selectBranchAll(String name, String startMonth,String endMonth) {
+        return configPlatformGoalNewMapper.selectBranchAll(name, startMonth, endMonth);
+    }
 }

@@ -28,7 +28,7 @@ public class TargetCompletionRateController {
     ITargetCompletionRateService targetCompletionRateService;
     /**
      * 表格数据
-     * 各平台各月业绩完成率 
+     * 各平台各月业绩完成率 （总）
      * @param month
      * @param platform
      * @return
@@ -44,14 +44,14 @@ public class TargetCompletionRateController {
     }
     /**
      * 柱状图
-     * 各平台各月业绩完成率 
+     * 各平台各月业绩完成率 （总）
      * @param month
      * @param platform
      * @return
      */
     @RequestMapping(value = "/targetcompletioncrate/histogram" ,method = RequestMethod.GET)
-    public List<ConfigPlatformGoalNew> targetCompletionRate1(String platform,String month){
-        return targetCompletionRateService.selectAll(month,platform);
+    public List<ConfigPlatformGoalNew> targetCompletionRate1(String month,String name){
+        return targetCompletionRateService.selectAll(month,name);
     }
     
     /**
@@ -78,4 +78,32 @@ public class TargetCompletionRateController {
     	}
     }
 
+    /**
+     * 表格数据
+     * 各平台各月业绩完成率 
+     * @param month
+     * @param platform
+     * @return
+     * @throws Exception 
+     */
+    @RequestMapping(value = "/targetcompletioncrate/branch/grid" ,method = RequestMethod.GET)
+    public GridModel grid(String name, String startMonth,String endMonth,FilterDto filter){
+    	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
+    	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+    	List<ConfigPlatformGoalNew> list = targetCompletionRateService.selectBranchAll(name, startMonth, endMonth);
+    	PageInfo<?> pageInfo = new PageInfo<>(list);
+        return new GridModel(pageInfo);
+    }
+    /**
+     * 柱状图
+     * 各平台各月业绩完成率 
+     * @param month
+     * @param platform
+     * @return
+     */
+    @RequestMapping(value = "/targetcompletioncrate/branch/histogram" ,method = RequestMethod.GET)
+    public List<ConfigPlatformGoalNew> chart(String name, String startMonth, String endMonth){
+    	PageHelper.orderBy("name");
+    	return targetCompletionRateService.selectBranchAll(name, startMonth, endMonth);
+    }
 }

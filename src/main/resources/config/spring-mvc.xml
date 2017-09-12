@@ -55,6 +55,7 @@
 				<entry key="ebayBuyerCountrySales" value="/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales"></entry>
 				<entry key="ebayDailyOutAccount" value="/common?path=ebay_domestic_warehouse/ebayDailyOutAccount"></entry>
 				<entry key="ebayDailySalesSkuReports_Recycle" value="/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle"></entry>
+				<entry key="ebay_target_completion_rate" value="/common?path=ebay_domestic_warehouse/ebay_target_completion_rate"></entry>
 				
 				<entry key="account_achievement" value="/common?path=account_achievement/account_achievement"></entry>
 				<entry key="manager_account_achievement" value="/common?path=account_achievement/manager_account_achievement"></entry>
@@ -62,15 +63,19 @@
 				<entry key="usebayDailySales" value="/common?path=ebay_overseas_warehouse/usebayDailySales"></entry>
 				<entry key="usebaySkuSales" value="/common?path=ebay_overseas_warehouse/usebaySkuSales"></entry>
 				<entry key="usebayCategorySales" value="/common?path=ebay_overseas_warehouse/usebayCategorySales"></entry>
+				<entry key="usebay_target_completion_rate" value="/common?path=ebay_overseas_warehouse/usebay_target_completion_rate"></entry>
 				<entry key="ukebayDailySales" value="/common?path=ebay_overseas_warehouse/ukebayDailySales"></entry>
 				<entry key="ukebaySkuSales" value="/common?path=ebay_overseas_warehouse/ukebaySkuSales"></entry>
 				<entry key="ukebayCategorySales" value="/common?path=ebay_overseas_warehouse/ukebayCategorySales"></entry>
+				<entry key="ukebay_target_completion_rate" value="/common?path=ebay_overseas_warehouse/ukebay_target_completion_rate"></entry>
 				<entry key="deebayDailySales" value="/common?path=ebay_overseas_warehouse/deebayDailySales"></entry>
 				<entry key="deebaySkuSales" value="/common?path=ebay_overseas_warehouse/deebaySkuSales"></entry>
 				<entry key="deebayCategorySales" value="/common?path=ebay_overseas_warehouse/deebayCategorySales"></entry>
+				<entry key="deebay_target_completion_rate" value="/common?path=ebay_overseas_warehouse/deebay_target_completion_rate"></entry>
 				<entry key="auebayDailySales" value="/common?path=ebay_overseas_warehouse/auebayDailySales"></entry>
 				<entry key="auebaySkuSales" value="/common?path=ebay_overseas_warehouse/auebaySkuSales"></entry>
 				<entry key="auebayCategorySales" value="/common?path=ebay_overseas_warehouse/auebayCategorySales"></entry>
+				<entry key="auebay_target_completion_rate" value="/common?path=ebay_overseas_warehouse/auebay_target_completion_rate"></entry>
 				
 				<entry key="amazonDailySales" value="/common?path=amazon/amazonDailySales"></entry>
 				<entry key="amazonSkuSales" value="/common?path=amazon/amazonSkuSales"></entry>
@@ -80,6 +85,7 @@
 				<entry key="amazonDailyOutNetProfit" value="/common?path=amazon/amazonDailyOutNetProfit"></entry>
 				<entry key="amazonDailyOutAccount" value="/common?path=amazon/amazonDailyOutAccount"></entry>
 				<entry key="amazonDailySalesSkuReports_Recycle" value="/common?path=amazon/amazonDailySalesSkuReports_Recycle"></entry>
+				<entry key="amazon_target_completion_rate" value="/common?path=amazon/amazon_target_completion_rate"></entry>
 				
 				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
 				<entry key="smt/smtSkuSales" value="/common?path=smt/smtSkuSales"></entry>
@@ -90,6 +96,7 @@
 				<entry key="smtDailyOutAccount" value="/common?path=smt/smtDailyOutAccount"></entry>
 				<entry key="smtDailySalesSkuReports_Recycle" value="/common?path=smt/smtDailySalesSkuReports_Recycle"></entry>
 				<entry key="smtDailySalesCategoryReports_account" value="/common?path=smt/smtDailySalesCategoryReports_account"></entry>
+				<entry key="smt_target_completion_rate" value="/common?path=smt/smt_target_completion_rate"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
 				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
@@ -99,6 +106,7 @@
 				<entry key="wishDailyOutNetProfit" value="/common?path=wish/wishDailyOutNetProfit"></entry>
 				<entry key="wishDailyOutAccount" value="/common?path=wish/wishDailyOutAccount"></entry>
 				<entry key="wishDailySalesSkuReports_Recycle" value="/common?path=wish/wishDailySalesSkuReports_Recycle"></entry>
+				<entry key="wish_target_completion_rate" value="/common?path=wish/wish_target_completion_rate"></entry>
 				
 				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
 				<entry key="lazadaSkuSales" value="/common?path=lazada/lazadaSkuSales"></entry>
@@ -108,6 +116,7 @@
 				<entry key="lazadaDailyOutNetProfit" value="/common?path=lazada/lazadaDailyOutNetProfit"></entry>
 				<entry key="lazadaDailyOutAccount" value="/common?path=lazada/lazadaDailyOutAccount"></entry>
 				<entry key="lazadaDailySalesSkuReports_Recycle" value="/common?path=lazada/lazadaDailySalesSkuReports_Recycle"></entry>
+				<entry key="lazada_target_completion_rate" value="/common?path=lazada/lazada_target_completion_rate"></entry>
 				
 				<entry key="newplatformDailySales" value="/common?path=newplatform/newplatformDailySales"></entry>
 				<entry key="newplatformSkuSales" value="/common?path=newplatform/newplatformSkuSales"></entry>
@@ -117,6 +126,7 @@
 				<entry key="newplatformDailyOutNetProfit" value="/common?path=newplatform/newplatformDailyOutNetProfit"></entry>
 				<entry key="newplatformDailyOutAccount" value="/common?path=newplatform/newplatformDailyOutAccount"></entry>
 				<entry key="newplatformDailySalesSkuReports_Recycle" value="/common?path=newplatform/newplatformDailySalesSkuReports_Recycle"></entry>
+				<entry key="newplatform_target_completion_rate" value="/common?path=newplatform/newplatform_target_completion_rate"></entry>
 				
 				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
 				<entry key="walmartSkuSales" value="/common?path=walmart/walmartSkuSales"></entry>
@@ -135,6 +145,7 @@
 				<entry key="neweggDailyOutNetProfit" value="/common?path=newegg/neweggDailyOutNetProfit"></entry>
 				<entry key="neweggDailyOutAccount" value="/common?path=newegg/neweggDailyOutAccount"></entry>
 				<entry key="neweggDailySalesSkuReports_Recycle" value="/common?path=newegg/neweggDailySalesSkuReports_Recycle"></entry>
+				<entry key="newegg_target_completion_rate" value="/common?path=newegg/newegg_target_completion_rate"></entry>
 			</map>
 		</property>
 	</bean>

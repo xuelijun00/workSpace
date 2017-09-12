@@ -2,6 +2,8 @@ package com.yks.bi.dto.report;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ConfigPlatformGoalNew {
     private Integer id;
 
@@ -11,6 +13,7 @@ public class ConfigPlatformGoalNew {
 
     private Date reportDate;
 
+    @JsonFormat(pattern = "yyyy-MM")
     private String reportMonth;
 
     private double performanceTargets;

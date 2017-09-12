@@ -121,8 +121,8 @@ function getChartData(chartUrl){
 		title:{text:"各平台各账号业绩"}
 		,categories:account
 		,y:y
-		,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'销售额_美元',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }, customColors: 1},
+		         {name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){

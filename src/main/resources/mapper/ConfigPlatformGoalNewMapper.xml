@@ -41,20 +41,42 @@
   	没使用<include refid="Base_Column_List" /> 是因为 
   	前台注释了“季度业绩目标”、“季度销售额”、“季度预计百分比”-->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" >
-    select 
+    SELECT 
     id, platform, name, report_date, report_month, performance_targets, 
     sales, estimated_sales, sales_percentage, estimated_sales_percentage, 
     target_profit, actual_profit, net_profit_completion_rate
-    from configplatformgoal_new
-    where 1=1
+    FROM `configplatformgoal_new`
+    WHERE 1=1
     <if test="month != null and month.length() > 0">
-    	and report_month = #{month,jdbcType=VARCHAR}
+    	AND report_month = #{month,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name.length() > 0">
-      	and name = #{name,jdbcType=VARCHAR}
+      	AND name = #{name,jdbcType=VARCHAR}
     </if>
   </select>
-  
+
+    <select id="selectBranchAll" resultMap="BaseResultMap" >
+    SELECT 
+    id, platform, name, report_date, report_month, performance_targets, 
+    sales, estimated_sales, sales_percentage, estimated_sales_percentage, 
+    target_profit, actual_profit, net_profit_completion_rate
+    FROM `configplatformgoal_new`
+    WHERE 1=1
+    <if test="startMonth != null and startMonth.length() > 0">
+    	AND report_month >= #{startMonth,jdbcType=VARCHAR}
+    </if>
+    <if test="endMonth != null and endMonth.length() > 0">
+    	<![CDATA[AND report_month <= #{endMonth,jdbcType=VARCHAR}]]>
+    </if>
+    <choose>
+    	<when test="name == '亚马逊'">
+    		AND name like CONCAT(#{name,jdbcType=VARCHAR}, '%')
+    	</when>
+    	<otherwise>
+    		AND name = #{name,jdbcType=VARCHAR}
+    	</otherwise>
+    </choose>
+  </select>
   <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from configplatformgoal_new
     where id = #{id,jdbcType=INTEGER}

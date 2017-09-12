@@ -132,21 +132,12 @@ function getChartData(chartUrl){
             formatter: '{value} '
         }
     }];
-	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[0]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单金额_美元',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}]; */
-	/* return {
-		title:{text:"Ebay业务线英仓时间段sku销售数据"}
-		,categories:sku
-		,y:y
-		,series:[{name: '订单数',type: 'column',data:ordersSum,tooltip: {valueSuffix: '' }},
-			{name:'订单金额_美元',type: 'spline',yAxis: 1,data:salesSum,tooltip: {valueSuffix: '' }},]
-	}; */
 	return {
 		title:{text:"Ebay业务线英仓时间段sku销售数据"}
 		,categories:categories
 		,y:y
-		,series:[{name:'订单金额_美元',type: 'line',data:salesSum,tooltip: {valueSuffix: '' }},
-			{name: '订单数',type: 'bar',yAxisIndex: 1,data:ordersSum,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'订单金额_美元',type: 'bar',data:salesSum,tooltip: {valueSuffix: '' }, customColors: 1},
+			{name: '订单数',type: 'line',yAxisIndex: 1,data:ordersSum,tooltip: {valueSuffix: '' }},]
 	};
 }
 

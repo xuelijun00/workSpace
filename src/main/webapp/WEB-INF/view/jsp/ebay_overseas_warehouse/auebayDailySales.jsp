@@ -127,8 +127,8 @@ function getChartData(chartUrl){
 		title:{text:"Ebay海外仓澳洲仓业绩数据"}
 		,categories:reportDate
 		,y:y
-		,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'销售额_美元',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }, customColors: 1},
+	         {name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){

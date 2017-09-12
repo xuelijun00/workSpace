@@ -114,21 +114,12 @@ function getChartData(chartUrl){
             formatter: '{value} '
         }
     }];
-	/* var y = [{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[0]}},title: {text: '销售额_美元',style: {color: Highcharts.getOptions().colors[0]}}}
-	,{labels: {format: '{value}',style: { color: Highcharts.getOptions().colors[1]}},title: {text: '订单数',style: {color: Highcharts.getOptions().colors[1]}},opposite: true}]; */
-	/* return {
-		title:{text:"lazada业务线每日销售数据"}
-		,categories:reportDate
-		,y:y
-		,series:[{name:'销售额_美元',type: 'column',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'spline',yAxis: 1,data:orders,tooltip: {valueSuffix: '' }},]
-	}; */
 	return {
 		title:{text:"lazada业务线每日销售数据"}
 		,categories:reportDate
 		,y:y
-		,series:[{name:'销售额_美元',type: 'line',data:salesAmount,tooltip: {valueSuffix: '' }},
-		         {name: '订单数',type: 'bar',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
+		,series:[{name:'销售额_美元',type: 'bar',data:salesAmount,tooltip: {valueSuffix: '' }, customColors: 1},
+		         {name: '订单数',type: 'line',yAxisIndex: 1,data:orders,tooltip: {valueSuffix: '' }},]
 	};
 }
 (function(){

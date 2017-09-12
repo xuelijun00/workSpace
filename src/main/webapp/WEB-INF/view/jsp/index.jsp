@@ -66,6 +66,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayBuyerCountrySales">eBay买家国家数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailyOutAccount">eBay账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle">eBay SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebay_target_completion_rate">eBay各月业绩完成率</a></li>
                         
                     </ul>
                 </li>
@@ -77,15 +78,19 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebay_target_completion_rate">美仓各月业绩完成率</a>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
+                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebay_target_completion_rate">英仓各月业绩完成率</a>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a></li>
+                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebay_target_completion_rate">德仓各月业绩完成率</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayDailySales">澳洲仓销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebaySkuSales">澳洲仓SKU销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayCategorySales">澳洲仓品类销售报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebay_target_completion_rate">澳洲仓各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -99,7 +104,8 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonBuyerCountrySales">Amazon买家国家数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutNetProfit">Amazon SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutAccount">Amazon账号每日发货数据</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySalesSkuReports_Recycle">Amazon SKU环比增长</a></li> 
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySalesSkuReports_Recycle">Amazon SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazon_target_completion_rate">Amazon各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -114,6 +120,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailyOutAccount">SMT账号每日发货数据</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesSkuReports_Recycle">SMT SKU环比增长</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesCategoryReports_account">SMT账号品类销售报表</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smt_target_completion_rate">SMT各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -127,6 +134,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutNetProfit">Wish SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutAccount">Wish账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySalesSkuReports_Recycle">Wish SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wish_target_completion_rate">Wish各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -140,6 +148,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOutNetProfit">Lazada SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailyOutAccount">Lazada账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazadaDailySalesSkuReports_Recycle">Lazada SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=lazada/lazada_target_completion_rate">Lazada各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -153,6 +162,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutNetProfit">新平台SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutAccount">新平台账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySalesSkuReports_Recycle">新平台SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatform_target_completion_rate">新平台各月业绩完成率</a></li>
                     </ul>
                 </li>
                 <li>
@@ -179,6 +189,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutNetProfit">新蛋SKU净利明细</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutAccount">新蛋账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySalesSkuReports_Recycle">新蛋SKU环比增长</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/newegg_target_completion_rate">新蛋各月业绩完成率</a></li>
                     </ul>
                 </li>
             </ul>
