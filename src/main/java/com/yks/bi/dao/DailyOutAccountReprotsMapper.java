@@ -38,6 +38,13 @@ public interface DailyOutAccountReprotsMapper {
 	List<DailyOutAccountReprots> selectAllByPrimaryKey(DailyOutAccountReprotsKey key);
 
 	/**
+	 * 暂时用来查询dailyoutaccountreprots表中smt的品类和按品类和时间段汇总的税后综合净利
+	 * @param key
+	 * @return
+	 */
+	List<DailyOutAccountReprots> selectProfitSum(DailyOutAccountReprotsKey key);
+	
+	/**
 	 * 查询dailyoutaccountreprots表中新平台的平台
 	 * @param platform
 	 * @return

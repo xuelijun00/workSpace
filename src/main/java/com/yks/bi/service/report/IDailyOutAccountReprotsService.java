@@ -10,20 +10,22 @@ import com.yks.bi.dto.report.DailyOutAccountReprotsKey;
 public interface IDailyOutAccountReprotsService {
 
 	List<String> selectPlatforms();
-	
+
 	List<String> selectSalesAccounts(String platform);
-	
+
 	List<String> selectCategorys();
-	
+
 	List<DailyOutAccountReprots> selectAllByPrimaryKey(DailyOutAccountReprotsKey key);
-	
+
+	List<DailyOutAccountReprots> selectProfitSum(DailyOutAccountReprotsKey key);
+
 	List<String> selectNewPlatforms();
 	
 	List<String> selectNewPlatformSalesAccounts(String platform);
-	
+
 	List<DailyOutAccountReprots> selectNewPlatformAllByPrimaryKey(DailyOutAccountReprotsKey key);
-	
+
 	List<String> selectNewEggSalesAccounts(String platform);
-	
+
 	List<DailyOutAccountReprots> selectNewEggAllByPrimaryKey(DailyOutAccountReprotsKey key);
 }

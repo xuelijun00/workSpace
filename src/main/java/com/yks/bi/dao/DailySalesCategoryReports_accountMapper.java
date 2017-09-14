@@ -14,4 +14,6 @@ public interface DailySalesCategoryReports_accountMapper {
 	List<String> selectSmtAccount();
 	
 	List<DailySalesCategoryReports_account> selectSmtAll(DailySalesCategoryReports_accountKey key);
+	
+	List<DailySalesCategoryReports_account> selectCategorySum(DailySalesCategoryReports_accountKey key);
 }

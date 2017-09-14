@@ -80,6 +80,25 @@
 		</if>
 	</select>
 
+	<!-- 暂时用来查询smt的品类和按品类和时间段汇总的税后综合净利-->
+	<select id="selectProfitSum" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyOutAccountReprotsKey">
+		SELECT a.category, SUM(a.profit)/b.currency_value profit
+		FROM `dailyoutaccountreprots` a, `configcurrency` b
+		WHERE b.currency='USD' and b.currency_type='\$'
+		<if test="startDate != null and startDate.length() > 0">
+			AND a.report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[AND a.report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		<if test="category != null and category.length() > 0">
+			AND a.category = #{category,jdbcType=VARCHAR}
+		</if>
+		GROUP BY a.category
+		ORDER By SUM(a.profit) DESC
+	</select>
+
 	<!-- 查询表中新平台的平台 -->
 	<select id="selectNewPlatforms" resultType="java.lang.String" >
 		select platform 

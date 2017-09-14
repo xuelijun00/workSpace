@@ -48,4 +48,10 @@ public class DailySalesCategoryReports_accountController {
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
 	}
+	
+	@RequestMapping(value="/daily_sales_category_account/smt/chart", method=RequestMethod.GET)
+	public List<DailySalesCategoryReports_account>  smtChart(DailySalesCategoryReports_accountKey key){
+		PageHelper.orderBy("SUM(sales) desc");
+		return idscras.selectCategorySum(key);
+	}
 }

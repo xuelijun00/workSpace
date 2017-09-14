@@ -38,6 +38,11 @@ public class DailyOutAccountReprotsServiceImpl implements IDailyOutAccountReprot
 	}
 
 	@Override
+	public List<DailyOutAccountReprots> selectProfitSum(DailyOutAccountReprotsKey key) {
+		return doarm.selectProfitSum(key);
+	}
+
+	@Override
 	public List<String> selectNewPlatforms() {
 		return doarm.selectNewPlatforms();
 	}
@@ -62,5 +67,4 @@ public class DailyOutAccountReprotsServiceImpl implements IDailyOutAccountReprot
 		return doarm.selectNewEggAllByPrimaryKey(key);
 	}
 
-	
 }
