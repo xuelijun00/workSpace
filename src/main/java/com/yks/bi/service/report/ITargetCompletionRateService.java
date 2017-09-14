@@ -15,4 +15,6 @@ public interface ITargetCompletionRateService {
 	
 	int updateSelective(ConfigPlatformGoalNew record);
 	
+	List<ConfigPlatformGoalNew> selectBranchAll(String name, String startMonth,String endMonth);
+
 }

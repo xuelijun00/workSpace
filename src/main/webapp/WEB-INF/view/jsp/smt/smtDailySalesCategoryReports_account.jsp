@@ -14,19 +14,42 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
+	<div class="ibox-content">
+   	<form class="form-inline">
+           <div class="form-group">
+             <label>开始时间</label>
+             <input type="text" id="start_date2" class="form-control" placeholder="" readonly="readonly">
+           </div>
+           <div class="form-group">
+             <label>结束时间</label>
+             <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
+           </div>
+           <div class="form-group">
+           	<label>分类:</label>
+              	<select class="form-control w120" id="category2" name="category">
+               </select>
+           </div>
+           <div class="form-group">
+              <button type="button" onclick="queryData(2)" class="btn btn-primary">查询</button>
+           </div>
+       </form>
+	</div>
+	<div class="hr-line-dashed"></div>
+    <div id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date" class="form-control" placeholder="" readonly="readonly">
+              <input type="text" id="start_date1" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
               <label>结束时间</label>
-              <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+              <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
             	<label>分类:</label>
-               	<select class="form-control w120" id="category" name="category">
+               	<select class="form-control w120" id="category1" name="category">
                 </select>
             </div>
             <div class="form-group">
@@ -40,7 +63,7 @@
 				<datalist id="account"></datalist>
             </div> 
             <div class="form-group">
-               <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+               <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
              <div class="form-group">
                 <button type="button" id="export" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -61,41 +84,49 @@ var chart;
 var operation;
 var domesticData = [];
 
-function getUrl(){
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var category = encodeURIComponent($('#category').val());
+function getUrl(type){
+	var startDate = $('#start_date' + type).val();
+	var endDate = $('#end_date' + type).val();
+	var category = encodeURIComponent($('#category' +type).val());
 	var categorySupervisor = $('#categorySupervisor').val();
-	var account = $("#account_input").val();
-	var url = contextPath + '/report/daily_sales_category_account/smt/grid?startDate=' + startDate + "&endDate=" + endDate;
+	var account = $('#account_input').val();
+	url = '';
+	if(type === 1){
+		url = contextPath + '/report/daily_sales_category_account/smt/grid?startDate=' + startDate + "&endDate=" + endDate;
+		if(categorySupervisor !== 'all' && categorySupervisor !== null){
+			url+= '&categorySupervisor=' + categorySupervisor
+		}
+
+		if(account !== null){
+			url+= '&account=' + account
+		}
+	}else{
+		url = contextPath + '/report/daily_sales_category_account/smt/chart?startDate=' + startDate + "&endDate=" + endDate;
+	}
 
 	if(category !== 'all' && category !== null){
-		url+= "&category=" + category
+		url+= '&category=' + category
 	}
-
-	if(categorySupervisor !== 'all' && categorySupervisor !== null){
-		url+= "&categorySupervisor=" + categorySupervisor
-	}
-
-	if(account !== null){
-		url+= "&account=" + account
-	}
-
+	
 	return url;
 }
 
-function queryData(){
-	common.refreshData(getUrl(),chart,operation);
+function queryData(type){
+	if(type === 1){
+		common.refreshData(getUrl(1),chart,operation);
+	}else{
+		common.echartsPie(getChartData(getUrl(2)));
+	}
 }
 function exportData(){
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
 	var fileName = "smt业务线账号品类销售数据" + startDate +"-"+ endDate + ".csv";
 	var title = [ '分类', '日期（day）', '品类主管', '账号', '订单数' , '订单金额_美元'];
 	var column = ['category','reportDate','categorySupervisor','account','orders','sales'];
 
 	$.ajax({
-		url : getUrl(),
+		url : getUrl(1),
 		cache : false,
 		type:"get",
 		async: false,
@@ -108,8 +139,54 @@ function exportData(){
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
+function getChartData(chartUrl){
+	var salesSum = new Array();
+	var categoryData = [];
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+				for(var i=0;i<data.length;i++){
+					categoryData.push(data[i].category);
+	            	salesSum.push({'value': data[i].sales.toFixed(2), 'name': data[i].category});
+	            }
+			}
+		}
+	});
+
+	var series = [
+		{
+			name: '品类',
+			type: 'pie',
+			radius:'60%',
+			center:['50%', '45%'],
+			data: salesSum,
+		}
+	];
+	return {
+		legend: {
+			orient: 'vertical',
+			left: 'left',
+			data: categoryData,
+		}
+		,label: {
+	        normal: {
+	      		formatter: "{b}({d}%)"
+	        }
+	    }
+		,title: {text: 'SMT订单金额汇总（按时间段和品类汇总）', x: 'center'}  
+		,series: series
+		,tooltipFormatter: "{a} <br/> {b} <br/> 订单金额 （美元）: {c} ({d}%)"
+		,
+};
+}
+
 (function(){
-	$("#start_date").jeDate({
+	$("#start_date1").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-14"},
         isTime:false,
@@ -117,7 +194,23 @@ function exportData(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	$("#end_date").jeDate({
+	$("#end_date1").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	
+	$("#start_date2").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-14"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date2").jeDate({
         isinitVal: true,
         isTime:false,
         ishmsVal: false,
@@ -132,9 +225,11 @@ function exportData(){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#category").append("<option value='all'>全部</option>");
+				$("#category1").append("<option value='all'>全部</option>");
+				$("#category2").append("<option value='all'>全部</option>");
 				for(var i=0;i<data.length;i++){
-					$("#category").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#category1").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#category2").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}
@@ -170,10 +265,11 @@ function exportData(){
 		}
 	});
 	/* var series = []; */
+	chart = common.echartsPie(getChartData(getUrl(2)));
 	
 	common.grid({
 		title:"smt业务线账号品类销售数据"
-		,url:getUrl()
+		,url:getUrl(1)
 		,colNames:[ '分类', '日期（day）', '品类主管', '账号', '订单数' , '订单金额_美元']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 			{name : 'category',index : 'category',width : 215}, 

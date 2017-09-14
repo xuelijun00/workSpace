@@ -14,20 +14,43 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>速卖通账号维度每日发货数据(注意：本页面货币的单位，均为人民币（元）)</h5></div>
+    <div class="ibox-title"><h5>SMT账号维度每日发货数据(注意：本页面只有饼图的“税后综合净利”的货币的单位为（美元），其他均为人民币（元）)</h5></div>
+    	<div class="ibox-content">
+    	<form class="form-inline">
+           <div class="form-group">
+             <label>开始时间</label>
+             <input type="text" id="start_date2" class="form-control" placeholder="" readonly="readonly">
+           </div>
+           <div class="form-group">
+             <label>结束时间</label>
+             <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
+           </div>
+           <div class="form-group">
+           	<label>分类:</label>
+              	<select class="form-control w120" id="category2" name="category">
+               </select>
+           </div>
+           <div class="form-group">
+              <button type="button" onclick="queryData(2)" class="btn btn-primary">查询</button>
+           </div>
+       </form>
+	</div>
+	<div class="hr-line-dashed"></div>
+    <div id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+    
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date"class="form-control" placeholder=""  readonly="readonly">
+              <input type="text" id="start_date1"class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
               <label>结束时间</label>
-              <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+              <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
                 <label>分类：</label>
-                <select class="form-control w120" id="category">
+                <select class="form-control w120" id="category1">
                 </select>
             </div>
             <div class="form-group">
@@ -36,7 +59,7 @@
 				<datalist id="account"></datalist>
             </div>       
             <div class="form-group">
-                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+                <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
                 <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
@@ -48,36 +71,46 @@
 			<div id="pager2"></div>
 		</div>
 </div>
-
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
 var chart;
 var operation;
 var domesticData = [];
-function getUrl(){
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var category = $("#category").val();
+function getUrl(type){
+	var startDate = $("#start_date" + type).val();
+	var endDate = $("#end_date" + type).val();
+	var categoryType = $('#category' +type).val();
+	var category = encodeURIComponent(categoryType);
 	var account = $("#account_input").val();
 	var url = "";
+
+	if(type === 1){
 		url = contextPath + '/report/daily_out_account/grid?platform=smt&startDate=' + startDate + "&endDate=" + endDate;
-	
-	if(category !== 'all'){
-		url += "&category=" + category;
+		if(account !== ''){
+			url += "&salesAccount=" + account;
+		}
+	}else{
+		url = contextPath + '/report/daily_out_account/chart?platform=smt&startDate=' + startDate + "&endDate=" + endDate;
 	}
-	if(account !== ''){
-		url += "&salesAccount=" + account;
+
+	if(category !== 'all' && category !== null){
+		url+= '&category=' + category
 	}
+
 	return url;
 }
 
-function queryData(){
-	common.refreshData(getUrl(),chart,operation);
+function queryData(type){
+	if(type === 1){
+		common.refreshData(getUrl(1),chart,operation);
+	}else{
+		common.echartsPie(getChartData(getUrl(2)));
+	}
 }
+
 function exportData(){
-    
-	chartUrl = getUrl(); 
+	chartUrl = getUrl(1); 
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -89,19 +122,65 @@ function exportData(){
 			}
 		}
 	});
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var category = $("#category").val();
-	var fileName = "速卖通账号维度每日发货数据" + startDate +"-"+ endDate + "-" + category +".csv";
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
+	var category = encodeURIComponent($('#category1').val());
+	var fileName = "SMT账号维度每日发货数据" + startDate +"-"+ endDate + "-" + category +".csv";
 	var title = [ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类'];
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利（元）', '分类'];
 	var column = [ 'platform', 'salesAccount', 'manager', 'reportDate','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit','category'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
+function getChartData(chartUrl){
+	var profitSum = new Array();
+	var categoryData = [];
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+				for(var i=0;i<data.length;i++){
+					categoryData.push(data[i].category);
+					profitSum.push({'value': data[i].profit.toFixed(2), 'name': data[i].category});
+	            }
+			}
+		}
+	});
+
+	var series = [
+		{
+			name: '品类',
+			type: 'pie',
+			radius:'60%',
+			center:['50%', '45%'],
+			data: profitSum,
+		}
+	];
+	return {
+		legend: {
+			orient: 'vertical',
+			left: 'left',
+			data: categoryData,
+		}
+		,label: {
+	        normal: {
+	      		formatter: "{b}({d}%)"
+	        }
+	    }
+		,title: {text: 'SMT净利（美元）汇总（按时间段和品类汇总）', x: 'center'}  
+		,series: series
+		,tooltipFormatter: "{a} <br/> {b} <br/> 税后综合净利（美元） : {c} ({d}%)"
+		,
+};
+}
+
 (function(){
-	$("#start_date").jeDate({
+	$("#start_date1").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-7"},
         isTime:false,
@@ -109,7 +188,23 @@ function exportData(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	$("#end_date").jeDate({
+	$("#end_date1").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	
+	$("#start_date2").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-7"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date2").jeDate({
         isinitVal: true,
         isTime:false,
         ishmsVal: false,
@@ -124,9 +219,11 @@ function exportData(){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#category").append("<option value='all'>全部</option>");
+				$("#category1").append("<option value='all'>全部</option>");
+				$("#category2").append("<option value='all'>全部</option>");
 				for(var i=0;i<data.length;i++){
-					$("#category").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#category1").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#category2").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}
@@ -146,19 +243,21 @@ function exportData(){
 			}
 		}
 	});
-		
+
+	chart = common.echartsPie(getChartData(getUrl(2)));
+	
 	common.grid({
-		title:"速卖通账号维度每日发货数据"
-		,url:getUrl()
+		title:"SMT账号维度每日发货数据"
+		,url:getUrl(1)
 		,colNames:[ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
-			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '分类']
+			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利（元）', '分类']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'salesAccount',index : 'sales_account',width : 145}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 100},
 					{name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'unitPrice',index : 'unitPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productRefund',index : 'productRefund',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'grossProfit',index : 'grossProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -168,8 +267,8 @@ function exportData(){
 		            {name : 'orderExecutionFee',index : 'orderExecutionFee',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'operatingCost',index : 'operatingCost',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'profitMargin',index : 'profitMargin',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
-		            {name : 'profit',index : 'profit',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 150,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'profit',index : 'profit',sortable : "true",width : 150,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'category',index : 'category',width : 100}
 		             ]	      
 		,sortname:"reportDate"

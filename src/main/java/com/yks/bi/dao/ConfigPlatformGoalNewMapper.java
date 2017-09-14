@@ -28,5 +28,7 @@ public interface ConfigPlatformGoalNewMapper {
     List<ConfigPlatformGoalNew> selectByPrimaryKey(@Param("month") String month,@Param("name") String name);
 
 	List<String> selectPlatform();
+	
+	List<ConfigPlatformGoalNew> selectBranchAll(@Param("name") String name, @Param("startMonth") String startMonth,@Param("endMonth") String endMonth);
     
 }

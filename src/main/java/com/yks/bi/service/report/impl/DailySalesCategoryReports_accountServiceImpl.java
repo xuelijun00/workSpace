@@ -36,5 +36,9 @@ public class DailySalesCategoryReports_accountServiceImpl implements IDailySales
 		return dscram.selectSmtAll(key);
 	}
 
-	
+	@Override
+	public List<DailySalesCategoryReports_account> selectCategorySum(DailySalesCategoryReports_accountKey key) {
+		return dscram.selectCategorySum(key);
+	}
+
 }

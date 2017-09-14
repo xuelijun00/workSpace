@@ -8,10 +8,12 @@ import com.yks.bi.dto.report.DailySalesCategoryReports_accountKey;
 public interface IDailySalesCategoryReports_accountService {
 
 	List<String> selectSmtCategory();
-	
+
 	List<String> selectSmtCategorySupervisor();
-	
+
 	List<String> selectSmtAccount();
-	
+
 	List<DailySalesCategoryReports_account> selectSmtAll(DailySalesCategoryReports_accountKey key);
+
+	List<DailySalesCategoryReports_account> selectCategorySum(DailySalesCategoryReports_accountKey key);
 }

@@ -29,12 +29,14 @@
     `product_shipping`, `platform_cost`, `material_cost`, `order_execution_fee`, `operating_cost`, 
     `profit_margin`, `net_profit`, `profit`,`net_profit_margin`
   </sql>
-
+  
+   <!-- 这里的金额全部转换为美元了 -->
    <select id="selectProfit" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.EbayDailyOutReprotsKey" >
-  	SELECT `zhuzhandian`,sum(order_num) order_num , sum(product_total_cny)/sum(order_num) unit_price, 
-  	sum(product_total_cny) product_total_cny, sum(profit) profit, sum(profit)/sum(product_total_cny) net_profit_margin
-  	FROM `ebaydailyoutreprots`
-	WHERE 1=1
+  	SELECT `zhuzhandian`,SUM(order_num) order_num , (SUM(product_total_cny)/b.currency_value)/SUM(order_num) unit_price, 
+  	SUM(product_total_cny)/b.currency_value product_total_cny, SUM(profit)/b.currency_value profit,
+  	SUM(profit)/SUM(product_total_cny) net_profit_margin
+  	FROM `ebaydailyoutreprots`, `configcurrency` b
+	WHERE b.currency='USD' and b.currency_type='\$'
 	<if test="startDate != null and startDate.length() > 0" >
        AND report_date >= #{startDate,jdbcType=DATE}
     </if>

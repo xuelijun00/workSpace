@@ -18,7 +18,7 @@
 		<form class="form-inline" id="form">
             <div class="form-group">
                 <label>平台：</label>
-                <select class="form-control w120" name="platform" id="platform">
+                <select class="form-control w120" name="name" id="name">
                     
                 </select>
             </div>
@@ -27,7 +27,7 @@
               <input type="text" id="month" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
-                <button type="button" id="platform_query" onclick="targetCompletionRate.refreshData('platform')" class="btn btn-primary">查询</button>
+                <button type="button" id="platform_query" onclick="targetCompletionRate.refreshData()" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
                 <button type="button" id="export" onclick="targetCompletionRate.exportData()" class="btn btn-primary">导出</button>

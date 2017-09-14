@@ -15,6 +15,7 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
+<div class="ibox-title"><h5>Ebay业务线净利汇总数据(注意：本页面货币的单位均为（美元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
@@ -77,7 +78,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Ebay业务线净利汇总数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '业务线', '发货数量', '客单价', '发货收入','税后综合净利','税后综合利润率'];
+	var title = [ '业务线', '发货数量', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率'];
 	var column = [ 'zhuzhandian', 'orderNum',  'unitPrice', 'productTotalCny', 'profit', 'netProfitMargin'];
 	$.ajax({
 		url : getUrl(1),
@@ -114,9 +115,9 @@ function getChartData(chartUrl){
 				for(var i=0;i<data.length;i++){
 					if(data[i].zhuzhandian !== 'ebay'){
 						netProfitMarginSum = (data[i].netProfitMargin *100).toFixed(2) + '%';
-						zhuzhandianToString = data[i].zhuzhandian + ':\n' + '净利率:' +netProfitMarginSum+ '\n' + '净利:' +data[i].profit;
+						zhuzhandianToString = data[i].zhuzhandian + ':\n' + '净利率:' +netProfitMarginSum+ '\n' + '净利（美元）:' +data[i].profit.toFixed(2);
 						zhuzhandianData.push(zhuzhandianToString);
-						profitSum.push({'value': data[i].profit, 'name': zhuzhandianToString});
+						profitSum.push({'value': data[i].profit.toFixed(2), 'name': zhuzhandianToString});
 						profitSumSum += data[i].profit;
 						if(data[i].zhuzhandian.indexOf('专线') > 0){
 							zhuanxianSum += data[i].profit;
@@ -217,7 +218,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"Ebay业务线净利汇总数据"
 		,url:getUrl(1)
-		,colNames:[ '业务线', '发货数量', '客单价', '发货收入','税后综合净利','税后综合利润率']
+		,colNames:[ '业务线', '发货数量', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 205,sortable : "true"}, 
 		            {name : 'orderNum',index : 'orderNum',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:""},align:"right"}, 

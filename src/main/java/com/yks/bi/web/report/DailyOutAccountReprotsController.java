@@ -68,7 +68,18 @@ public class DailyOutAccountReprotsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+
+	/**
+	 * 饼图数据
+	 * 暂时用来查询smt的品类和按品类和时间段汇总的税后综合净利
+	 * @param key
+	 * @return
+	 */
+	@RequestMapping(value="/daily_out_account/chart",method=RequestMethod.GET)
+	public List<DailyOutAccountReprots> profitSumChart(DailyOutAccountReprotsKey key){
+		return idoars.selectProfitSum(key);
+	}
+
 	/**
 	 * 查询dailyoutaccountreprots表中新平台的平台
 	 * @param platform
