@@ -213,7 +213,7 @@ function getChartData(chartUrl){
     });
 
 	$.ajax({
-		url : contextPath + "/report/daily_out_account/categorys",
+		url : contextPath + "/report/daily_out_account/categorys?platform=smt",
 		cache : false,
 		type:"get",
 		async: false,

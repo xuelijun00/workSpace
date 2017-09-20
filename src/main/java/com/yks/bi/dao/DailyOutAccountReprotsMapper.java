@@ -28,7 +28,7 @@ public interface DailyOutAccountReprotsMapper {
 	 * @param category
 	 * @return
 	 */
-	List<String> selectCategorys();
+	List<String> selectCategorys(@Param("platform")String platform);
 	
 	/**
 	 * 查询dailyoutaccountreprots表中所有的数据
