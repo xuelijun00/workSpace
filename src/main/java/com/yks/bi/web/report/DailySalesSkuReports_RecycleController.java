@@ -43,6 +43,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectAmazonAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -50,7 +55,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/amazon/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectAmazonAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectAmazonAll(key);
 	}
 	
@@ -60,6 +71,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectEbayAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -67,7 +83,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/ebay/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectEbayAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectEbayAll(key);
 	}
 	
@@ -77,6 +99,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectLazadaAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -84,7 +111,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/lazada/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectLazadaAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectLazadaAll(key);
 	}
 	
@@ -96,6 +129,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectSmtAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -103,7 +141,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/smt/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectSmtAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectSmtAll(key);
 	}
 	
@@ -113,6 +157,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectWalmartAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -120,7 +169,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/walmart/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectWalmartAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectWalmartAll(key);
 	}
 	
@@ -131,6 +186,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectWishAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -138,7 +198,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/wish/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectWishAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectWishAll(key);
 	}
 
@@ -153,6 +219,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(),true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx()) ? filter.getSidx() + " " + filter.getSord() : "");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectNewPlatformAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -160,7 +231,13 @@ public class DailySalesSkuReports_RecycleController {
 
 	@RequestMapping(value="/sku_recycle/newPlatform/chart",method=RequestMethod.GET)
 	public List<DailySalesSkuReports_Recycle> selectNewPlatformAllChart(DailySalesSkuReports_RecycleKey key,FilterDto filter) throws Exception{
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectNewPlatformAll(key);
 	}
 
@@ -175,6 +252,11 @@ public class DailySalesSkuReports_RecycleController {
 		PageHelper.startPage(filter.getPage(), filter.getRows(),true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx()) ? filter.getSidx() + " " + filter.getSord() : "");
 
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailySalesSkuReports_Recycle> list = idssrrs.selectNewEggAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
@@ -182,7 +264,13 @@ public class DailySalesSkuReports_RecycleController {
 	
 	@RequestMapping(value="/sku_recycle/newEgg/chart")
 	public List<DailySalesSkuReports_Recycle> selectNewEggAllChart(DailySalesSkuReports_RecycleKey key) throws Exception{		
-		PageHelper.orderBy("report_date");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("SKU ASC, report_date ASC");
 		return idssrrs.selectNewEggAll(key);
 	}
 

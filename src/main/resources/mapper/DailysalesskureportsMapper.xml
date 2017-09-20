@@ -20,16 +20,16 @@
   
   <sql id="Base_If_Sql">
   <if test="startDate != null">
-    	and report_date >= #{startDate,jdbcType=DATE}
+    	AND report_date >= #{startDate,jdbcType=DATE}
     </if>
 	 <if test="endDate != null">
-	 <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+	 <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
 	</if>
     <if test="sku != null and sku.length() > 0">
-    	and  sku = #{sku,jdbcType=VARCHAR}
+    	AND sku in (${sku})
     </if>
     <if test="skuOld != null and skuOld.length() > 0">
-    	and sku_old = #{skuOld,jdbcType=VARCHAR}
+    	AND sku_old = #{skuOld,jdbcType=VARCHAR}
     </if>
   </sql>
   

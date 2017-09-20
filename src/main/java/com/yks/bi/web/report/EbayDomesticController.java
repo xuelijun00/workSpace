@@ -31,6 +31,29 @@ public class EbayDomesticController {
 
     @Autowired
     IEbayDomesticService isale;
+    
+    /**
+     * 页面表格表脚的合计行
+     * 用于计算页面该页面展示出的数据的合计
+     * @param list
+     * @return
+     */
+    public Map<String,Object> total(List<Dailysalesskureports> list){
+    	Map<String,Object> userdata = new HashMap<String,Object>();
+    	int sumOrders = 0;
+    	int sumQuantity = 0;
+    	double sumSales = 0;
+    	for (Dailysalesskureports dailysalesskureports : list) {
+    		sumOrders += dailysalesskureports.getOrders();
+    		sumQuantity += dailysalesskureports.getQuantity();
+    		sumSales += dailysalesskureports.getSales();
+		}
+    	userdata.put("reportDate", "合计：");
+    	userdata.put("orders", sumOrders);
+    	userdata.put("quantity", sumQuantity);
+    	userdata.put("sales", sumSales);
+    	return userdata;
+    }
 
     /**
      * 表格数据  柱状图
@@ -45,13 +68,27 @@ public class EbayDomesticController {
 		}
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	List<Dailysalesskureports> list = isale.selectskuAll(record);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo);
+
+    	Map<String,Object> userdata = total(list);
+        return new GridModel(pageInfo,userdata);
     }
 
     @RequestMapping(value = "/ebay_domestic/sku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> ebayoverseasMethodChart(Dailysalesskureports record) throws Exception{
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	PageHelper.orderBy("report_date");
     	return isale.selectAllSum(record);
     }
@@ -60,27 +97,27 @@ public class EbayDomesticController {
     public GridModel smtSkuMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	List<Dailysalesskureports> list = isale.selectSmtSku(record);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-    	Map<String,Object> userdata = new HashMap<String,Object>();
-    	int sumOrders = 0;
-    	int sumQuantity = 0;
-    	double sumSales = 0;
-    	for (Dailysalesskureports Dailysalesskureports : list) {
-    		sumOrders += Dailysalesskureports.getOrders();
-    		sumQuantity += Dailysalesskureports.getQuantity();
-    		sumSales += Dailysalesskureports.getSales();
-		}
-    	userdata.put("reportDate1", "合计：");
-    	userdata.put("orders", sumOrders);
-    	userdata.put("quantity", sumQuantity);
-    	userdata.put("sales", sumSales);
+
+    	Map<String,Object> userdata = total(list);
         return new GridModel(pageInfo,userdata);
-      
     }
 
     @RequestMapping(value = "/ebay_domestic/smtSku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> smtSkuMethodChart(Dailysalesskureports record) throws Exception{
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	PageHelper.orderBy("report_date");
     	return isale.selectSmtSkuSum(record);
     }
@@ -89,27 +126,27 @@ public class EbayDomesticController {
     public GridModel WishSkuMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	List<Dailysalesskureports> list = isale.selectWishSku(record);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-    	Map<String,Object> userdata = new HashMap<String,Object>();
-    	int sumOrders = 0;
-    	int sumQuantity = 0;
-    	double sumSales = 0;
-    	for (Dailysalesskureports Dailysalesskureports : list) {
-    		sumOrders += Dailysalesskureports.getOrders();
-    		sumQuantity += Dailysalesskureports.getQuantity();
-    		sumSales += Dailysalesskureports.getSales();
-		}
-    	userdata.put("reportDate1", "合计：");
-    	userdata.put("orders", sumOrders);
-    	userdata.put("quantity", sumQuantity);
-    	userdata.put("sales", sumSales);
+
+    	Map<String,Object> userdata = total(list);
         return new GridModel(pageInfo,userdata);
-      
     }
 
     @RequestMapping(value = "/ebay_domestic/wishSku/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> WishSkuMethodChart(Dailysalesskureports record) throws Exception{
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	PageHelper.orderBy("report_date");
     	return isale.selectWishSkuSum(record);
     }
@@ -119,17 +156,31 @@ public class EbayDomesticController {
     public GridModel ebayDomesticMethodGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	List<Dailysalesskureports> list = isale.selectEbay(record);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo); 
+
+    	Map<String,Object> userdata = total(list);
+        return new GridModel(pageInfo, userdata);
     }
 
     @RequestMapping(value = "/ebay_domestic/sku/chartEbay" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> ebayDomesticMethodChart(Dailysalesskureports record) throws Exception{
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	PageHelper.orderBy("report_date");
     	return isale.selectEbaySum(record);
     }
-    
+
     @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
     public GridModel ebayoverseascategoryMethod(DailysalescategoryreportsKey key,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
@@ -162,13 +213,27 @@ public class EbayDomesticController {
     public GridModel newPlatformSkuGrid(Dailysalesskureports record,FilterDto filter) throws ParseException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	List<Dailysalesskureports> list = isale.selectskunewAll(record);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo); 
+
+    	Map<String,Object> userdata = total(list);
+        return new GridModel(pageInfo,userdata);
     }
 
     @RequestMapping(value = "/ebay_domestic/skunew/chart" ,method = RequestMethod.GET)
     public List<Dailysalesskureports> newPlatformSkuChart(Dailysalesskureports record) throws Exception{
+
+    	if (record.getSku() != null && record.getSku().length() > 0) {
+			String [] skuArray = record.getSku().split(",");
+			record.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
     	PageHelper.orderBy("report_date");
     	return isale.selectskuNewAllSum(record);
     }

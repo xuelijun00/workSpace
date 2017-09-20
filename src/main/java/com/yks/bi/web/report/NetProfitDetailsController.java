@@ -38,6 +38,12 @@ public class NetProfitDetailsController {
 	public GridModel selectAccountAchievementServiceGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailyOutSkuReprots> list = NetProfit.selectAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
@@ -73,6 +79,12 @@ public class NetProfitDetailsController {
 	
 	@RequestMapping("/profit_details/chart")
 	public List<DailyOutSkuReprots> selectProfitChart(DailyOutSkuReprots key) {
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		PageHelper.orderBy("report_date");
 		return NetProfit.selectProfit(key);
 	}
@@ -81,7 +93,13 @@ public class NetProfitDetailsController {
 	public GridModel selectNewPlatformGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<DailyOutSkuReprots> list = NetProfit.selectNewPlatformAll(key);
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		List<DailyOutSkuReprots> list = NetProfit.selectNewPlatformAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
@@ -94,7 +112,7 @@ public class NetProfitDetailsController {
 	public List<String> selectNewPlatform() {
 		return NetProfit.selectNewPlatform();
 	}
-	
+
 	/**
 	 * 查询新平台的账号
 	 * @return
@@ -103,7 +121,7 @@ public class NetProfitDetailsController {
 	public List<String> selectNewPlatformAccount(String platform) {
 		return NetProfit.selectNewPlatformAccount(platform);
 	}
-	
+
 	/**
 	 * 查询新平台主站点
 	 * @param platform
@@ -118,7 +136,13 @@ public class NetProfitDetailsController {
 	public GridModel selectNewEggformGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<DailyOutSkuReprots> list = NetProfit.selectNewEggAll(key);
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		List<DailyOutSkuReprots> list = NetProfit.selectNewEggAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
@@ -154,7 +178,13 @@ public class NetProfitDetailsController {
 	public GridModel selectWalmartAllGrid(DailyOutSkuReprots key,FilterDto filter) throws ParseException {
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
-    	List<DailyOutSkuReprots> list = NetProfit.selectWalmartAll(key);
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}		
+
+		List<DailyOutSkuReprots> list = NetProfit.selectWalmartAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}

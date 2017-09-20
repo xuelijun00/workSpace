@@ -31,22 +31,20 @@
                 <select class="form-control w120" id="zhuzhandian2">
                 </select>
             </div>
-             <div class="form-group">
-	            <label>SKU：</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="sku2" name="sku" value=""/> 
-            </div>
             <div class="form-group">
                 <label>账号：</label>
                 <input id="account_input2" list="account2" />
 				<datalist id="account2"></datalist>
             </div>
             <div class="form-group">
+	            <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku2" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(2)" ></textarea>
+            </div>
+            <div class="form-group">
                 <button type="button" onclick="queryData(2)" class="btn btn-primary">查询</button>
             </div>
-<!--             <div class="form-group">
-                <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
-            </div> -->
-        </form> 
+        </form>
 		</div>
 		<div class="hr-line-dashed"></div>  
         <h2 class="text-center">eBay税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
@@ -67,21 +65,22 @@
 	            <label>内订单号：</label>
 	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId1" name="erpOrdersId" value=""/> 
             </div>
-            <br/>
+            <br/><br/>
             <div class="form-group">
                 <label>主站点：</label>
                 <select class="form-control w120" id="zhuzhandian1">
                 </select>
             </div>
-             <div class="form-group">
-	            <label>SKU：</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="sku1" name="sku" value=""/> 
-            </div>
             <div class="form-group">
                 <label>账号：</label>
                 <input id="account_input1" list="account1" />
 				<datalist id="account1"></datalist>
-            </div>       
+            </div>
+            <div class="form-group">
+	            <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku1" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(1)" ></textarea>
+            </div>     
             <div class="form-group">
                 <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
@@ -108,7 +107,8 @@ function getUrl(type){
 	var endDate = $("#end_date" + type).val();
 	var zhuzhandian = $("#zhuzhandian" + type).val();
 	var account = $("#account_input" + type).val();
-	var sku = $("#sku" + type).val();
+	var skuType = $("#sku" + type).val();
+	var sku = encodeURIComponent(skuType);
 	var erpOrdersId = $("#erpOrdersId1").val();
 	var url = "";
 	if(type === 1){

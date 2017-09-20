@@ -25,16 +25,11 @@
              <label>结束时间</label>
              <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
            </div>
-             <div class="form-group">
-            <label>*SKU：</label>
-               <input type="text" class="form-control" placeholder="不填这里不给图" id="sku2" name="sku"
-               	_value=""/>
+           <div class="form-group">
+	           <label class="control-label">*SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku2" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(2)" ></textarea>
            </div>
-           <!-- <div class="form-group">
-           <label>原始SKU：</label>
-               <input type="text" class="form-control" placeholder="请输入内容" id="oldsku2" name="oldsku"
-               	_value=""/>
-           </div> -->
            <div class="form-group">
               <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
            </div>
@@ -46,18 +41,18 @@
         
        <!--  表格的查询条件 -->
        <form class="form-inline">
-        <div class="form-group">
-              <label>开始时间</label>
-              <input type="text" id="start_date1" class="form-control" placeholder="" readonly="readonly">
-            </div>
+           <div class="form-group">
+            <label>开始时间</label>
+            <input type="text" id="start_date1" class="form-control" placeholder="" readonly="readonly">
+           </div>
             <div class="form-group">
               <label>结束时间</label>
               <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
             </div>
-              <div class="form-group">
-             <label>SKU：</label>
-                <input type="text" class="form-control" placeholder="请输入内容" id="sku1" name="sku"
-                	_value=""/>
+            <div class="form-group">
+	           <label class="control-label">SKU：</label>
+	           <textarea class="form-control" rows="3" cols="40" id="sku1" name="sku"  
+	           placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(1)" ></textarea>
             </div>
         	<div class="form-group">
               <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>

@@ -27,11 +27,17 @@ public class DailyOutSkuTop500Controller {
 	public GridModel selectAllGrid(DailyOutSkuTop500Key key, FilterDto filter){
 		PageHelper.startPage(filter.getPage(), filter.getRows(), true);
 		PageHelper.orderBy(StringUtils.isNoneEmpty(filter.getSidx()) ? filter.getSidx() + " " +filter.getSord() : "");
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
 		List<DailyOutSkuTop500> list = idosts.selectAll(key);
 		PageInfo<?> pageInfo = new PageInfo<>(list);
 		return new GridModel(pageInfo);
 	}
-	
+
 	@RequestMapping(value="/sku_top/platform", method=RequestMethod.GET)
 	public List<String> platform(){
 		return idosts.selectPlatform();
