@@ -31,7 +31,7 @@
        <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
     </if>
     <if test="sku != null and sku.length() > 0" >
-       AND sku = #{sku,jdbcType=VARCHAR}
+       AND sku in (${sku})
     </if>
     <if test="platform != null and platform.length() > 0" >
        AND platform = #{platform,jdbcType=VARCHAR}

@@ -49,7 +49,7 @@
        AND sales_account = #{salesAccount,jdbcType=VARCHAR}
     </if>
     <if test="sku != null and sku.length() > 0" >
-       AND sku = #{sku,jdbcType=VARCHAR}
+       AND sku in (${sku})
     </if>
     <if test="erpOrdersId != null">
        AND erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}

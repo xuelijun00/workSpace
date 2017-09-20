@@ -29,22 +29,22 @@
 	            <label>内订单号：</label>
 	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId" name="erpOrdersId" value=""/> 
             </div>
-            <br/>
+            <br/><br/>
             <div class="form-group">
                 <label>主站点：</label>
                 <select class="form-control w120" id="zhuzhandian">
                 </select>
-            </div>
-             <div class="form-group">
-	            <label>SKU：</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku" value=""/>
             </div>
             <div class="form-group">
                 <label>账号：</label>
                 <input id="account_input" list="account" />
 				<datalist id="account"></datalist>
             </div>
-            
+            <div class="form-group">
+	           <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma()" ></textarea>
+            </div>  
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>

@@ -194,6 +194,29 @@ var common = {
 			jQuery(opation.id?opation.id:"#list2").jqGrid('navGrid', opation.pager?opation.pager:"#pager2", {edit : false,add : false,del : false,search:false});
 			//$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
 			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
+		},
+		skuAddComma:function(str){
+			var regStr = /\s+(?=[0-9A-Za-z]+)/g;      //将看不见的字符替换为逗号
+			var firstComma = /^\,/;                   //去除字符串首部的逗号
+			var illegalComma = /，/g;                  //替换不合法的逗号
+			var extraCommas = /,{2,}/g;               //去除多余的逗号
+			var removeSpaces = /\s/g;                 //去除多余的看不见的字符
+
+			var strArray = str.replace(regStr, ',')
+
+			if(illegalComma.test(strArray)){
+				strArray = strArray.replace(illegalComma, ',');
+			}
+			if(firstComma.test(strArray)){
+				strArray = strArray.replace(firstComma, '');
+			}
+			if(extraCommas.test(strArray)){
+				strArray = strArray.replace(extraCommas, ',');
+			}
+			if(removeSpaces.test(strArray)){
+				strArray = strArray.replace(removeSpaces, '');
+			}
+			return strArray;
 		}
 		,refreshData:function(gridUrl,chart,operation){
 			if(chart != null && operation != null){
@@ -231,6 +254,16 @@ var common = {
 			//$(".ui-jqgrid-bdiv").css("overflow-x","hidden");
 			$(".ui-jqgrid-bdiv").width($(".ui-jqgrid-bdiv").width() + 3);
 		},
+		addComma:function(){
+			var str = $("#sku").val();
+			var strArray = common.skuAddComma(str);
+			$("#sku").val(strArray);
+		},
+		addComma1:function(type){
+			var str = $("#sku" + type).val();
+			var strArray = common.skuAddComma(str);
+			$("#sku" + type).val(strArray);
+		}
 };
 
 $(function(){

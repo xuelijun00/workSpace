@@ -26,15 +26,17 @@
               <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
             </div>
             <br/>
+            <br/>
             <div class="form-group">
                 <label>平台：</label>
                 <select class="form-control w120" id="platform" >
                 </select>
             </div>
-             <div class="form-group">
-	            <label>SKU：</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="sku" name="sku" value=""/>
-            </div>     
+            <div class="form-group">
+	           <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma()" ></textarea>
+            </div>
             <div class="form-group">
                 <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
@@ -77,7 +79,6 @@ function queryData(){
 	common.refreshData(getUrl(),chart,operation);
 }
 function exportData(){
-    
 	chartUrl = getUrl(); 
 	$.ajax({
 		url : chartUrl,
