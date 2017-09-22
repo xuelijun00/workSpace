@@ -103,7 +103,19 @@ public class NetProfitDetailsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+
+	@RequestMapping("/profit_details/newPlatform/chart")
+	public List<DailyOutSkuReprots> selectNewPlatformProfitChart(DailyOutSkuReprots key) {
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("report_date");
+		return NetProfit.selectNewPlatformProfit(key);
+	}
+
 	/**
 	 * 查询新平台的平台
 	 * @return
@@ -146,7 +158,19 @@ public class NetProfitDetailsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+
+	@RequestMapping("/profit_details/newEgg/chart")
+	public List<DailyOutSkuReprots> selectNewEggProfitChart(DailyOutSkuReprots key) {
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("report_date");
+		return NetProfit.selectNewEggProfit(key);
+	}
+
 	/**
 	 * 查询新蛋的账号
 	 * @return
@@ -188,7 +212,19 @@ public class NetProfitDetailsController {
     	PageInfo<?> pageInfo = new PageInfo<>(list);
         return new GridModel(pageInfo);
 	}
-	
+
+	@RequestMapping("/profit_details/walmart/chart")
+	public List<DailyOutSkuReprots> selectWalmartProfitChart(DailyOutSkuReprots key) {
+
+		if (key.getSku() != null && key.getSku().length() > 0) {
+			String [] skuArray = key.getSku().split(",");
+			key.setSku("'" + StringUtils.join(skuArray, "','") + "'");
+		}
+
+		PageHelper.orderBy("report_date");
+		return NetProfit.selectWalmartProfit(key);
+	}
+
 	/**
 	 * 用于“walmart发货订单净利”页面
 	 * 查询账号

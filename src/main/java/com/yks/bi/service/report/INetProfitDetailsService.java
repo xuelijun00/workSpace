@@ -27,6 +27,8 @@ public interface INetProfitDetailsService {
     List<DailyOutSkuReprots> selectProfit(DailyOutSkuReprots key);
     
     List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key);
+    
+    List<DailyOutSkuReprots> selectNewPlatformProfit(DailyOutSkuReprots key);
 	
 	/**
      * 查询新平台的平台
@@ -44,6 +46,8 @@ public interface INetProfitDetailsService {
     
     List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key);
     
+    List<DailyOutSkuReprots> selectNewEggProfit(DailyOutSkuReprots key);
+    
     List<String> selectNewEggAccount(String platform);
     
     List<String> selectNewEggZhuzhandian(String platform);
@@ -54,6 +58,8 @@ public interface INetProfitDetailsService {
      * @return
      */
     List<DailyOutSkuReprots> selectWalmartAll(DailyOutSkuReprots key);
+    
+    List<DailyOutSkuReprots> selectWalmartProfit(DailyOutSkuReprots key);
     
     /**
      * 用于“walmart发货订单净利”页面

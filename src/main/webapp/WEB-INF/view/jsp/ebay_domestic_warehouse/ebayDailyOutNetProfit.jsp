@@ -46,7 +46,7 @@
             </div>
         </form>
 		</div>
-		<div class="hr-line-dashed"></div>  
+		<div class="hr-line-dashed"></div>
         <h2 class="text-center">eBay税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
 		<div class="hr-line-dashed"></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
@@ -80,16 +80,16 @@
 	            <label class="control-label">SKU：</label>
 	           	<textarea class="form-control" rows="3" cols="40" id="sku1" name="sku"  
 	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(1)" ></textarea>
-            </div>     
+            </div>
             <div class="form-group">
                 <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
                 <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
-        </form> 
+        </form>
 		</div>
-        <div class="hr-line-dashed"></div>  
+        <div class="hr-line-dashed"></div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
@@ -116,19 +116,19 @@ function getUrl(type){
 	}else{
 		url = contextPath + '/report/profit_details/chart?platform=ebay&startDate=' + startDate + "&endDate=" + endDate;
 	}
-		
+
 	if(erpOrdersId !== '' && type === 1){
 		url += "&erpOrdersId=" + erpOrdersId;
 	}
-	
+
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
 	}
-		
+
 	if(sku !== ''){
 		url += "&sku=" + sku;
 	}
-	
+
 	if(account !== ''){
 		url += "&salesAccount=" + account;
 	}
@@ -142,7 +142,6 @@ function queryData(type){
 	}
 }
 function exportData(){
-    
 	chartUrl = getUrl(1); 
 	$.ajax({
 		url : chartUrl,
@@ -228,7 +227,7 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	
+
 	$("#start_date2").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-3"},
@@ -244,7 +243,7 @@ function getChartData(chartUrl){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	
+
 	$.ajax({
 		url : contextPath + "/report/profit_details/zhuzhandian?platform=ebay",
 		cache : false,
@@ -261,7 +260,7 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	
+
 	$.ajax({
 		url : contextPath + "/report/profit_details/account?platform=ebay",
 		cache : false,
@@ -278,9 +277,9 @@ function getChartData(chartUrl){
 			}
 		}
 	});
-	
-  	chart = common.echarts(getChartData(getUrl(2)));//chart 
-	
+
+  	chart = common.echarts(getChartData(getUrl(2)));//chart
+
 	common.grid({
 		title:"eBay SKU净利明细"
 		,url:getUrl(1)

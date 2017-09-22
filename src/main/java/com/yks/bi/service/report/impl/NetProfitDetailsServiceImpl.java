@@ -14,7 +14,7 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 
 	@Autowired
 	private DailyOutSkuReprotsMapper dailyout;
-	
+
 	@Override
 	public List<DailyOutSkuReprots> selectAll(DailyOutSkuReprots key) {
 		return dailyout.selectAll(key);
@@ -29,12 +29,12 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	public List<String> selectAccount(String platform) {
 		return dailyout.selectAccount(platform);
 	}
-	
+
 	@Override
 	public List<String> selectZhuzhandian(String platform) {
 		return dailyout.selectZhuzhandian(platform);
 	}
-	
+
 	@Override
 	public List<DailyOutSkuReprots> selectProfit(DailyOutSkuReprots key) {
 		return dailyout.selectProfit(key);
@@ -43,6 +43,11 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	@Override
 	public List<DailyOutSkuReprots> selectNewPlatformAll(DailyOutSkuReprots key) {
 		return dailyout.selectNewPlatformAll(key);
+	}
+
+	@Override
+	public List<DailyOutSkuReprots> selectNewPlatformProfit(DailyOutSkuReprots key) {
+		return dailyout.selectNewPlatformProfit(key);
 	}
 
 	@Override
@@ -59,22 +64,27 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	public List<String> selectNewPlatformZhuzhandian(String platform) {
 		return dailyout.selectNewPlatformZhuzhandian(platform);
 	}
-	
+
 	@Override
 	public List<DailyOutSkuReprots> selectNewEggAll(DailyOutSkuReprots key) {
 		return dailyout.selectNewEggAll(key);
 	}
 
 	@Override
+	public List<DailyOutSkuReprots> selectNewEggProfit(DailyOutSkuReprots key) {
+		return dailyout.selectNewEggProfit(key);
+	}
+
+	@Override
 	public List<String> selectNewEggAccount(String platform) {
 		return dailyout.selectNewEggAccount(platform);
 	}
-	
+
 	@Override
 	public List<String> selectNewEggZhuzhandian(String platform) {
 		return dailyout.selectNewEggZhuzhandian(platform);
 	}
-	
+
 	@Override
 	public List<DailyOutSkuReprots> selectWalmartAll(DailyOutSkuReprots key) {
 		
@@ -82,10 +92,13 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 	}
 
 	@Override
+	public List<DailyOutSkuReprots> selectWalmartProfit(DailyOutSkuReprots key) {
+		return dailyout.selectWalmartProfit(key);
+	}
+
+	@Override
 	public List<String> selectWalmartAccount() {
 		return dailyout.selectWalmartAccount();
 	}
-
-	
 
 }
