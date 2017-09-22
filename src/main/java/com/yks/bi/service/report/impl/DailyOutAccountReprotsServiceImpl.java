@@ -27,9 +27,9 @@ public class DailyOutAccountReprotsServiceImpl implements IDailyOutAccountReprot
 	}
 
 	@Override
-	public List<String> selectCategorys() {
+	public List<String> selectCategorys(String platform) {
 		
-		return doarm.selectCategorys();
+		return doarm.selectCategorys(platform);
 	}
 
 	@Override

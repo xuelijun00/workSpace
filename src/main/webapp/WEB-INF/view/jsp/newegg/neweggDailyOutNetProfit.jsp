@@ -14,30 +14,26 @@
 <body class="gray-bg">
 
 <div class="wrapper wrapper-content">
-    <div class="ibox-title"><h5>新蛋SKU净利明细(注意：本页面货币的单位，均为人民币（元）)</h5></div>
+    <div class="ibox-title"><h5>新蛋SKU净利明细(注意：本页面货币的单位，只有柱状图（税后综合净利）是美元，其他均为人民币（元）)</h5></div>
     <div class="ibox-content">
     <form class="form-inline">
             <div class="form-group">
               <label>开始时间</label>
-              <input type="text" id="start_date"class="form-control" placeholder=""  readonly="readonly">
+              <input type="text" id="start_date2"class="form-control" placeholder=""  readonly="readonly">
             </div>
             <div class="form-group">
               <label>结束时间</label>
-              <input type="text" id="end_date" class="form-control" placeholder="" readonly="readonly">
+              <input type="text" id="end_date2" class="form-control" placeholder="" readonly="readonly">
             </div>
             <div class="form-group">
-                <label>主站点</label>
-                <select class="form-control w120" id="zhuzhandian">
+                <label>主站点：</label>
+                <select class="form-control w120" id="zhuzhandian2">
                 </select>
-            </div>
-            <div class="form-group">
-	            <label>内订单号</label>
-	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId" name="erpOrdersId" value=""/> 
             </div>
             <br/><br/>
             <div class="form-group">
                 <label>平台：</label>
-                <select class="form-control w120" id="platform" onchange="palAndAcc()">
+                <select class="form-control w120" id="platform2" onchange="palAndAcc(2)">
                 <option value='all'>全部</option>
                 <option value='new_newegg'>new_newegg</option>
                 <option value='overstock'>overstock</option>
@@ -46,22 +42,72 @@
             </div>
             <div class="form-group">
                 <label>账号：</label>
-                <input id="account_input" list="account" />
-				<datalist id="account"></datalist>
+                <input id="account_input2" list="account2" />
+				<datalist id="account2"></datalist>
             </div>
             <div class="form-group">
-	           <label class="control-label">SKU：</label>
-	           	<textarea class="form-control" rows="3" cols="40" id="sku" name="sku"  
-	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma()" ></textarea>
-            </div>         
+	            <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku2" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(2)" ></textarea>
+            </div>
             <div class="form-group">
-                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
+                <button type="button" onclick="queryData(2)" class="btn btn-primary">查询</button>
+            </div>
+        </form>
+	</div>
+	<div class="hr-line-dashed"></div>
+	      <h2 class="text-center">eBay税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
+	<div class="hr-line-dashed"></div>
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <!-- 表格 -->
+    <div class="ibox-content">
+    	<form class="form-inline">
+            <div class="form-group">
+              <label>开始时间</label>
+              <input type="text" id="start_date1"class="form-control" placeholder=""  readonly="readonly">
+            </div>
+            <div class="form-group">
+              <label>结束时间</label>
+              <input type="text" id="end_date1" class="form-control" placeholder="" readonly="readonly">
+            </div>
+            <div class="form-group">
+	            <label>内订单号：</label>
+	            <input type="text" class="form-control" placeholder="请输入内容" id="erpOrdersId1" name="erpOrdersId" value=""/> 
+            </div>
+            <div class="form-group">
+                <label>主站点：</label>
+                <select class="form-control w120" id="zhuzhandian1">
+                </select>
+            </div>
+            <br/><br/>
+            <div class="form-group">
+                <label>平台：</label>
+                <select class="form-control w120" id="platform1" onchange="palAndAcc(1)">
+                <option value='all'>全部</option>
+                <option value='new_newegg'>new_newegg</option>
+                <option value='overstock'>overstock</option>
+                <option value='tophatter'>tophatter</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>账号：</label>
+                <input id="account_input1" list="account1" />
+				<datalist id="account1"></datalist>
+            </div>
+            <div class="form-group">
+	            <label class="control-label">SKU：</label>
+	           	<textarea class="form-control" rows="3" cols="40" id="sku1" name="sku"  
+	           	placeholder="查询多个sku时，请用逗号或者空格或者换行符（回车）分隔开，支持excel多行粘贴" onblur="common.addComma1(1)" ></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="queryData(1)" class="btn btn-primary">查询</button>
             </div>
             <div class="form-group">
                 <button type="button" onclick="exportData()" class="btn btn-primary">导出</button>
             </div>
-        </form> 
+        </form>
 		</div>
+        <div class="hr-line-dashed"></div>
 		<div class="ibox-content">
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
@@ -74,44 +120,52 @@
 var chart;
 var operation;
 var domesticData = [];
-function getUrl(){
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var zhuzhandian = $("#zhuzhandian").val();
-	var platform = $("#platform").val();
-	var account = $("#account_input").val();
-	var sku = $("#sku").val();
-	var erpOrdersId = $("#erpOrdersId").val();
+function getUrl(type){
+	var startDate = $("#start_date" + type).val();
+	var endDate = $("#end_date" + type).val();
+	var zhuzhandian = $("#zhuzhandian" + type).val();
+	var platform = $("#platform" + type).val();
+	var account = $("#account_input" + type).val();
+	var skuType = $("#sku" + type).val();
+	var sku = encodeURIComponent(skuType);
+	var erpOrdersId = $("#erpOrdersId1").val();
 	var url = "";
+	if(type === 1){
 		url = contextPath + '/report/profit_details/newEgg/grid?startDate=' + startDate + "&endDate=" + endDate;
-	
-	if(erpOrdersId !== ''){
+	}else{
+		url = contextPath + '/report/profit_details/newEgg/chart?startDate=' + startDate + "&endDate=" + endDate;
+	}
+
+	if(erpOrdersId !== '' && type === 1){
 		url += "&erpOrdersId=" + erpOrdersId;
 	}
-		
+
 	if(zhuzhandian !== 'all'){
 		url += "&zhuzhandian=" + zhuzhandian;
-	}	
-	
+	}
+
 	if(platform !== 'all'){
 		url += "&platform=" + platform;
 	}
-	
+
 	if(sku !== ''){
 		url += "&sku=" + sku;
 	}
-	
+
 	if(account !== ''){
 		url += "&salesAccount=" + account;
 	}
 	return url;
 }
-function queryData(){
-	common.refreshData(getUrl(),chart,operation);
+function queryData(type){
+	if(type === 1){
+		common.refreshData(getUrl(1),chart,operation);
+	}else{
+		common.echarts(getChartData(getUrl(2)));
+	}
 }
 function exportData(){
-    
-	chartUrl = getUrl(); 
+	chartUrl = getUrl(1); 
 	$.ajax({
 		url : chartUrl,
 		cache : false,
@@ -123,9 +177,9 @@ function exportData(){
 			}
 		}
 	});
-	var startDate = $("#start_date").val();
-	var endDate = $("#end_date").val();
-	var	platform = $("#platform").val();
+	var startDate = $("#start_date1").val();
+	var endDate = $("#end_date1").val();
+	var	platform = $("#platform1").val();
 	var fileName = "新蛋SKU净利明细" + startDate +"-"+ endDate +"-"+ platform + ".csv";
 	var title = [ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', 
 		'边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号'];
@@ -134,8 +188,8 @@ function exportData(){
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
 
-function palAndAcc(){
-	var	platform = $("#platform").val();
+function palAndAcc(type){
+	var	platform = $("#platform" + type).val();
 	if(platform == 'all'){
 		platform ='';
 	}
@@ -154,9 +208,55 @@ function palAndAcc(){
 		}
 	});
 }
+function getChartData(chartUrl){
+	var netProfitMarginSum = [];
+	var profitSum = [];
+	var categories = [];
+	var netProfitMargin = 0;
+	$.ajax({
+		url : chartUrl,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				domesticData = data;
+				for(var i=0;i<data.length;i++){
+				  /* 这里得到的profit和productTotalCny是美元，其他地方的是元 */
+				  netProfitMargin = data[i].profit / data[i].productTotalCny * 100;
+				  categories.push(data[i].reportDate); 
+				  netProfitMarginSum.push(netProfitMargin);
+				  profitSum.push(data[i].profit.toFixed(2));
+	            }
+			}
+		}
+	});
+	var y = [{
+        type: 'value',
+        name: '税后综合净利（美元）',
+        position: 'left',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    } ,{
+        type: 'value',
+        name: '税后综合利润率(百分比)',       
+        position: 'right',
+        axisLabel: {
+            formatter: '{value} '
+        }
+    }];
+	return {
+		title:{text:"eBay SKU净利明细"}
+		,categories:categories
+		,y:y
+		,series:[{name: '税后综合净利（美元）',type: 'bar',data:profitSum,tooltip: {valueSuffix: ''},customColors: 1},
+			{name:'税后综合利润率(百分比)',type: 'line',yAxisIndex: 1,data:netProfitMarginSum,tooltip: {valueSuffix: '' }}]
+	};
+}
 
 (function(){
-	$("#start_date").jeDate({
+	$("#start_date1").jeDate({
         isinitVal: true,
         initAddVal:{DD:"-3"},
         isTime:false,
@@ -164,7 +264,23 @@ function palAndAcc(){
         format: "YYYY-MM-DD",
         zIndex:3000
     });
-	$("#end_date").jeDate({
+	$("#end_date1").jeDate({
+        isinitVal: true,
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+
+	$("#start_date2").jeDate({
+        isinitVal: true,
+        initAddVal:{DD:"-3"},
+        isTime:false,
+        ishmsVal: false,
+        format: "YYYY-MM-DD",
+        zIndex:3000
+    });
+	$("#end_date2").jeDate({
         isinitVal: true,
         isTime:false,
         ishmsVal: false,
@@ -179,9 +295,11 @@ function palAndAcc(){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#zhuzhandian").append("<option value='all'>全部</option>");
+				$("#zhuzhandian1").append("<option value='all'>全部</option>");
+				$("#zhuzhandian2").append("<option value='all'>全部</option>");
 				for(var i=0;i<data.length;i++){
-					$("#zhuzhandian").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#zhuzhandian1").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
+					$("#zhuzhandian2").append("<option value='"+ data[i] +"'>"+ data[i] +"</option>");
 				}
 			}
 		}
@@ -194,18 +312,22 @@ function palAndAcc(){
 		async: false,
 		success : function(data) {
 			if(data != null && data.length > 0){
-				$("#account").empty();
+				$("#account1").empty();
+				$("#account2").empty();
 				for(var i=0;i<data.length;i++){
-					$("#account").append("<option value='"+ data[i] +"'> </option>");
+					$("#account1").append("<option value='"+ data[i] +"'> </option>");
+					$("#account2").append("<option value='"+ data[i] +"'> </option>");
 				}
 			}
 		}
 	});
-		
+
+	chart = common.echarts(getChartData(getUrl(2)));//chart 
+
 	common.grid({
 		title:"新蛋SKU净利明细"
-		,url:getUrl()
-		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '税后综合利润率', '主站点', '报表时间', '平台订单号']
+		,url:getUrl(1)
+		,colNames:[ '内订单号', '平台名称', '管理员', '账号', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '退款', '成本', '毛利','运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利（元）', '税后综合利润率', '主站点', '报表时间', '平台订单号']
 		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 125,formatter:'long'},
 					{name : 'platform',index : 'platform',width : 100}, 
 					{name : 'manager',index : 'manager',sortable : "true",width : 80},

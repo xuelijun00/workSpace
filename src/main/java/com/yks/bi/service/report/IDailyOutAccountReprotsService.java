@@ -2,8 +2,6 @@ package com.yks.bi.service.report;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.yks.bi.dto.report.DailyOutAccountReprots;
 import com.yks.bi.dto.report.DailyOutAccountReprotsKey;
 
@@ -13,7 +11,7 @@ public interface IDailyOutAccountReprotsService {
 
 	List<String> selectSalesAccounts(String platform);
 
-	List<String> selectCategorys();
+	List<String> selectCategorys(String platform);
 
 	List<DailyOutAccountReprots> selectAllByPrimaryKey(DailyOutAccountReprotsKey key);
 

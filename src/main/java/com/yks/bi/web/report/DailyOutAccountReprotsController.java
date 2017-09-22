@@ -1,11 +1,13 @@
 package com.yks.bi.web.report;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageHelper;
@@ -35,7 +37,7 @@ public class DailyOutAccountReprotsController {
 	
 	/**
 	 * 查询dailyoutaccountreprots表中所有的账号
-	 * @param salesAccounts
+	 * @param platform
 	 * @return
 	 */
 	@RequestMapping(value="/daily_out_account/accounts",method=RequestMethod.GET)
@@ -45,12 +47,12 @@ public class DailyOutAccountReprotsController {
 	
 	/**
 	 * 查询dailyoutaccountreprots表中所有的分类
-	 * @param salesAccounts
+	 * @param platform
 	 * @return
 	 */
 	@RequestMapping(value="/daily_out_account/categorys",method=RequestMethod.GET)
-	public List<String> selectCategorys(){
-        return idoars.selectCategorys();
+	public List<String> selectCategorys(String platform){
+        return idoars.selectCategorys(platform);
 	}
 	
 	/**
