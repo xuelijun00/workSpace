@@ -12,11 +12,12 @@
     <result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
     <result column="profit" property="profit" jdbcType="DOUBLE" />
     <result column="net_profit_margin" property="netProfitMargin" jdbcType="DOUBLE" />
+    <result column="buyer_country" property="buyerCountry" jdbcType="VARCHAR" />
   </resultMap>
 
    <sql id="Base_Column_List" >
     `platform`, `sku`, sku_cnname, `report_date`, `order_num`, `unit_price`, 
-    `product_total_cny`, `net_profit`, `profit`, `net_profit_margin`
+    `product_total_cny`, `net_profit`, `profit`, `net_profit_margin`, `buyer_country`
    </sql>
 
    <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailyOutSkuTop500Key" >
@@ -36,10 +37,23 @@
     <if test="platform != null and platform.length() > 0" >
        AND platform = #{platform,jdbcType=VARCHAR}
     </if>
+    <if test="buyerCountry != null and buyerCountry.length() > 0" >
+       AND buyer_country = #{buyerCountry,jdbcType=VARCHAR}
+    </if>
    </select>
 
    <select id="selectPlatform" resultType="java.lang.String" >
   	SELECT platform	FROM `dailyoutsku_top500` GROUP BY `platform`
+   </select> 
+
+   <select id="selectBuyerCountry" resultType="java.lang.String" parameterType="java.lang.String">
+  	SELECT buyer_country 
+  	FROM `dailyoutsku_top500` 
+  	WHERE 1=1
+  	<if test="platform != null and platform.length() > 0" >
+       AND platform = #{platform,jdbcType=VARCHAR}
+    </if>
+  	GROUP BY `buyer_country`
    </select> 
 
 </mapper>

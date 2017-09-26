@@ -75,22 +75,42 @@
                 <li>
                     <a href="#"><i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">eBay海外仓</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebay_target_completion_rate">美仓各月业绩完成率</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
-                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebay_target_completion_rate">英仓各月业绩完成率</a>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a></li>
-                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebay_target_completion_rate">德仓各月业绩完成率</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayDailySales">澳洲仓销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebaySkuSales">澳洲仓SKU销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayCategorySales">澳洲仓品类销售报表</a></li>
-                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebay_target_completion_rate">澳洲仓各月业绩完成率</a></li>
+                    	<li>
+                    	<a href="#"><span class="nav-label">eBay美仓</span><span class="fa arrow"></span></a>
+	                    	<ul class="nav nav-third-level">
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayDailySales">美仓销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebaySkuSales">美仓SKU销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebayCategorySales">美仓品类销售报表</a>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/usebay_target_completion_rate">美仓各月业绩完成率</a>
+		                    </ul>
+	                    </li>
+	                    <li>
+                    	<a href="#"><span class="nav-label">eBay英仓</span><span class="fa arrow"></span></a>
+		                    <ul class="nav nav-third-level">   
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayDailySales">英仓销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebaySkuSales">英仓SKU销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebayCategorySales">英仓品类销售报表</a>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/ukebay_target_completion_rate">英仓各月业绩完成率</a>
+		                    </ul>
+		                </li>
+		                <li>
+                    	<a href="#"><span class="nav-label">eBay德仓</span><span class="fa arrow"></span></a>
+		                    <ul class="nav nav-third-level">
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayDailySales">德仓销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebaySkuSales">德仓SKU销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebayCategorySales">德仓品类销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/deebay_target_completion_rate">德仓各月业绩完成率</a></li>
+		                    </ul>
+		                </li>
+		                <li>
+                    	<a href="#"><span class="nav-label">eBay澳洲仓</span><span class="fa arrow"></span></a> 
+		                    <ul class="nav nav-third-level">
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayDailySales">澳洲仓销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebaySkuSales">澳洲仓SKU销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayCategorySales">澳洲仓品类销售报表</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebay_target_completion_rate">澳洲仓各月业绩完成率</a></li>
+	                    	</ul>
+                    	</li>
                     </ul>
                 </li>
                 <li>

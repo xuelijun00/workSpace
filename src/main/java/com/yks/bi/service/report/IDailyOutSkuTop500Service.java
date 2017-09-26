@@ -10,4 +10,6 @@ public interface IDailyOutSkuTop500Service {
 	List<DailyOutSkuTop500> selectAll(DailyOutSkuTop500Key key);
 	  
     List<String> selectPlatform();
+    
+    List<String> selectBuyerCountry(String platform);
 }

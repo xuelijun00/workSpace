@@ -26,4 +26,9 @@ public class IDailyOutSkuTop500ServiceImpl implements IDailyOutSkuTop500Service 
 		return dostm.selectPlatform();
 	}
 
+	@Override
+	public List<String> selectBuyerCountry(String platform) {
+		return dostm.selectBuyerCountry(platform);
+	}
+
 }
