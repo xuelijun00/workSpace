@@ -13,6 +13,8 @@ public class DailyOutSkuTop500Key {
 	private String startDate;
 
 	private String endDate;
+	
+	private String buyerCountry;
 
 	@JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     private Date reportDate;
@@ -55,6 +57,14 @@ public class DailyOutSkuTop500Key {
 
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
+	}
+
+	public String getBuyerCountry() {
+		return buyerCountry;
+	}
+
+	public void setBuyerCountry(String buyerCountry) {
+		this.buyerCountry = buyerCountry == null ? null : buyerCountry.trim();
 	}
 	
 }

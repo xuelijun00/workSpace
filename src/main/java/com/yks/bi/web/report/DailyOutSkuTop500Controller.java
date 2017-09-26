@@ -1,6 +1,7 @@
 package com.yks.bi.web.report;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class DailyOutSkuTop500Controller {
 	@RequestMapping(value="/sku_top/platform", method=RequestMethod.GET)
 	public List<String> platform(){
 		return idosts.selectPlatform();
+	}
+	
+	@RequestMapping(value="/sku_top/buyerCountry", method=RequestMethod.GET)
+	public List<String> buyerCountry(String platform){
+		return idosts.selectBuyerCountry(platform);
 	}
 }

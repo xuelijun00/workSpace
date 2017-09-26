@@ -29,9 +29,14 @@
             <br/>
             <div class="form-group">
                 <label>平台：</label>
-                <select class="form-control w120" id="platform" >
+                <select class="form-control w120" id="platform" onchange="palChangeCou()">
                 </select>
             </div>
+            <div class="form-group">
+               <label>国家：</label>
+               <input id="buyerCountry_input" list="buyerCountry" />
+			   <datalist id="buyerCountry"></datalist>
+           </div>
             <div class="form-group">
 	           <label class="control-label">SKU：</label>
 	           	<textarea class="form-control" rows="3" cols="40" id="sku" name="sku"  
@@ -61,6 +66,7 @@ function getUrl(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var platform = $("#platform").val();
+	var buyerCountry = $("#buyerCountry_input").val();
 	var sku = $("#sku").val();
 	var url = "";
 		url = contextPath + '/report/sku_top/grid?startDate=' + startDate + "&endDate=" + endDate;
@@ -71,6 +77,10 @@ function getUrl(){
 
 	if(sku !== ''){
 		url += "&sku=" + sku;
+	}
+
+	if(buyerCountry !== ''){
+		url += "&buyerCountry=" + buyerCountry;
 	}
 
 	return url;
@@ -94,10 +104,31 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var	platform = $("#platform").val();
-	var fileName = "各平台每日发货SKU_TOP500" + startDate +"-"+ endDate +"-"+ platform + ".csv";
-	var title = [ '平台名称', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '税后综合净利', '报表时间', '税后综合利润率'];
-	var column = [ 'platform', 'sku', 'skuCnName', 'orderNum', 'unitPrice', 'productTotalCny', 'profit', 'reportDate','netProfitMargin'];
+	var fileName = "各平台每日发货SKU_TOP500" + "-" + startDate +"-"+ endDate +"-"+ platform + ".csv";
+	var title = [ '平台名称', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '税后综合净利', '报表时间', '税后综合利润率', '买家国家'];
+	var column = [ 'platform', 'sku', 'skuCnName', 'orderNum', 'unitPrice', 'productTotalCny', 'profit', 'reportDate','netProfitMargin', 'buyerCountry'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
+}
+
+function palChangeCou(){
+	var platform = $("#platform").val();
+	if(platform == 'all'){
+		platform = '';
+	}
+	$.ajax({
+		url : contextPath + "/report/sku_top/buyerCountry?platform=" + platform,
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#buyerCountry").empty();
+				for(var i=0;i<data.length;i++){
+					$("#buyerCountry").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
 }
 
 (function(){
@@ -131,10 +162,25 @@ function exportData(){
 		}
 	});
 
+	$.ajax({
+		url : contextPath + "/report/sku_top/buyerCountry",
+		cache : false,
+		type:"get",
+		async: false,
+		success : function(data) {
+			if(data != null && data.length > 0){
+				$("#buyerCountry").empty();
+				for(var i=0;i<data.length;i++){
+					$("#buyerCountry").append("<option value='"+ data[i] +"'> </option>");
+				}
+			}
+		}
+	});
+
 	common.grid({
 		title:"各平台每日发货SKU_TOP500"
 		,url:getUrl()
-		,colNames:[ '平台名称', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '税后综合净利', '报表时间', '税后综合利润率']
+		,colNames:[ '平台名称', 'sku', 'sku中文名', '发货数量', '平均价', '发货收入（元）', '税后综合净利', '报表时间', '税后综合利润率', '买家国家']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 		            {name : 'sku',index : 'sku',sortable : "true",width : 135},
 		            {name : 'skuCnName',index : 'skuCnname',width : 210},
@@ -144,7 +190,8 @@ function exportData(){
 		            {name : 'profit',index : 'profit',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'netProfitMargin',index : 'netProfitMargin',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:6},align:"right"},
-		             ]
+		            {name : 'buyerCountry',index : 'buyerCountry',width : 120}, 
+		            ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true
