@@ -47,7 +47,7 @@
         </form>
 		</div>
 		<div class="hr-line-dashed"></div>
-        <h2 class="text-center">eBay税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
+        <h2 class="text-center">SMT税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
 		<div class="hr-line-dashed"></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 		<!-- 表格 -->
