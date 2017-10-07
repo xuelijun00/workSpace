@@ -53,7 +53,7 @@
   <select id="selectCategorySum" resultMap="BaseResultMap">
   	SELECT a.category, SUM(a.sales)/b.currency_value sales
   	FROM `smtdailysalescategoryreports` a, `configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	<if test="startDate != null and startDate.length() > 0" >
        AND a.report_date >= #{startDate, jdbcType=DATE}
     </if>

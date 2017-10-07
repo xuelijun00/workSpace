@@ -89,7 +89,7 @@
 		parameterType="com.yks.bi.dto.report.DailyOutAccountReprotsKey">
 		SELECT a.category, SUM(a.profit)/b.currency_value profit
 		FROM `dailyoutaccountreprots` a, `configcurrency` b
-		WHERE b.currency='USD' and b.currency_type='\$'
+		WHERE b.currency='USD'
 		<if test="startDate != null and startDate.length() > 0">
 			AND a.report_date >= #{startDate,jdbcType=DATE}
 		</if>

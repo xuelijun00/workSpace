@@ -85,7 +85,7 @@
   	SUM(profit)/b.currency_value profit, 
   	SUM(product_total_cny)/b.currency_value product_total_cny
   	FROM `dailyoutskureprots_new`,`configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	<include refid="Base_If" /> 
     <if test="platform != null and platform.length() > 0" >
        AND platform = #{platform,jdbcType=VARCHAR}
@@ -134,7 +134,7 @@
   	SUM(profit)/b.currency_value profit, 
   	SUM(product_total_cny)/b.currency_value product_total_cny
   	FROM `dailyoutskureprots_new`,`configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	   AND platform like 'new\_%' 
 	   AND platform != "new_newegg"
 	<include refid="Base_If" /> 
@@ -188,7 +188,7 @@
   	SUM(profit)/b.currency_value profit,
   	SUM(product_total_cny)/b.currency_value product_total_cny
   	FROM `dailyoutskureprots_new`,`configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	<include refid="Base_NewEgg_Choose" />
 	<include refid="Base_If" />
     GROUP BY `report_date`
@@ -226,7 +226,7 @@
   	SUM(profit)/b.currency_value profit,
   	SUM(product_total_cny)/b.currency_value product_total_cny
   	FROM `walmartdailyoutskureprots`,`configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	<include refid="Base_If" />
     GROUP BY `report_date`
   </select>
