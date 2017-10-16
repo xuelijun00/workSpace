@@ -386,4 +386,87 @@
       </if>
     </trim>
   </insert>
+  
+  <update id="updateSelective" parameterType="com.yks.bi.dto.report.DailyOutSkuReprots" >
+    UPDATE `dailyoutskureprots_new`
+    <set >
+      <if test="erpOrdersId != null" >
+        erp_orders_id = #{erpOrdersId,jdbcType=BIGINT},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="salesAccount != null" >
+        sales_account = #{salesAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="sku != null" >
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCnName != null" >
+        sku_cnname = #{skuCnName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportDate != null" >
+        report_date = #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="zhuzhandian != null" >
+        zhuzhandian = #{zhuzhandian,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=REAL},
+      </if>
+      <if test="productTotalCny != null" >
+        product_total_cny = #{productTotalCny,jdbcType=DOUBLE},
+      </if>
+      <if test="productRefund != null" >
+        product_refund = #{productRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="grossProfit != null" >
+        gross_profit = #{grossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="productShipping != null" >
+        product_shipping = #{productShipping,jdbcType=DOUBLE},
+      </if>
+      <if test="platformCost != null" >
+        platform_cost = #{platformCost,jdbcType=DOUBLE},
+      </if>
+      <if test="materialCost != null" >
+        material_cost = #{materialCost,jdbcType=DOUBLE},
+      </if>
+      <if test="orderExecutionFee != null" >
+        order_execution_fee = #{orderExecutionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="operatingCost != null" >
+        operating_cost = #{operatingCost,jdbcType=DOUBLE},
+      </if>
+      <if test="profitMargin != null" >
+        profit_margin = #{profitMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfit != null" >
+        net_profit = #{netProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="netProfitMargin != null" >
+        net_profit_margin = #{netProfitMargin,jdbcType=REAL},
+      </if>
+      <if test="buyerId != null" >
+        buyer_id = #{buyerId,jdbcType=VARCHAR},
+      </if>
+    </set>
+	    WHERE erp_orders_id = #{erpOrdersId,jdbcType=BIGINT} 
+	      	AND platform = #{platform,jdbcType=VARCHAR}
+	      	AND sales_account = #{salesAccount,jdbcType=VARCHAR}
+	      	AND sku = #{sku,jdbcType=VARCHAR}
+	      	AND report_date = #{reportDate,jdbcType=DATE}
+  </update>
 </mapper>

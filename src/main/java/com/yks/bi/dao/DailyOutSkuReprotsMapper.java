@@ -62,5 +62,8 @@ public interface DailyOutSkuReprotsMapper {
      */
     List<String> selectWalmartAccount();
     
-     
+    /**
+     * sku净利也面批量更新
+     */
+    void updateSelective(DailyOutSkuReprots record);
 }

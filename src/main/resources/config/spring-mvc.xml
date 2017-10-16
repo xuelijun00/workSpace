@@ -76,6 +76,7 @@
 				<entry key="auebaySkuSales" value="/common?path=ebay_overseas_warehouse/auebaySkuSales"></entry>
 				<entry key="auebayCategorySales" value="/common?path=ebay_overseas_warehouse/auebayCategorySales"></entry>
 				<entry key="auebay_target_completion_rate" value="/common?path=ebay_overseas_warehouse/auebay_target_completion_rate"></entry>
+				<entry key="auebay_dailyoutaccount_oversea" value="/common?path=ebay_overseas_warehouse/auebay_dailyoutaccount_oversea"></entry>
 				
 				<entry key="amazonDailySales" value="/common?path=amazon/amazonDailySales"></entry>
 				<entry key="amazonSkuSales" value="/common?path=amazon/amazonSkuSales"></entry>
@@ -86,6 +87,7 @@
 				<entry key="amazonDailyOutAccount" value="/common?path=amazon/amazonDailyOutAccount"></entry>
 				<entry key="amazonDailySalesSkuReports_Recycle" value="/common?path=amazon/amazonDailySalesSkuReports_Recycle"></entry>
 				<entry key="amazon_target_completion_rate" value="/common?path=amazon/amazon_target_completion_rate"></entry>
+				<entry key="amazon_dailyoutaccount_oversea" value="/common?path=amazon/amazon_dailyoutaccount_oversea"></entry>
 				
 				<entry key="smtDailySales" value="/common?path=smt/smtDailySales"></entry>
 				<entry key="smt/smtSkuSales" value="/common?path=smt/smtSkuSales"></entry>
@@ -97,6 +99,7 @@
 				<entry key="smtDailySalesSkuReports_Recycle" value="/common?path=smt/smtDailySalesSkuReports_Recycle"></entry>
 				<entry key="smtDailySalesCategoryReports_account" value="/common?path=smt/smtDailySalesCategoryReports_account"></entry>
 				<entry key="smt_target_completion_rate" value="/common?path=smt/smt_target_completion_rate"></entry>
+				<entry key="smt_dailyoutaccount_oversea" value="/common?path=smt/smt_dailyoutaccount_oversea"></entry>
 				
 				<entry key="wishDailySales" value="/common?path=wish/wishDailySales"></entry>
 				<entry key="wishSkuSales" value="/common?path=wish/wishSkuSales"></entry>
@@ -107,6 +110,7 @@
 				<entry key="wishDailyOutAccount" value="/common?path=wish/wishDailyOutAccount"></entry>
 				<entry key="wishDailySalesSkuReports_Recycle" value="/common?path=wish/wishDailySalesSkuReports_Recycle"></entry>
 				<entry key="wish_target_completion_rate" value="/common?path=wish/wish_target_completion_rate"></entry>
+				<entry key="wish_dailyoutaccount_oversea" value="/common?path=wish/wish_dailyoutaccount_oversea"></entry>
 				
 				<entry key="lazadaDailySales" value="/common?path=lazada/lazadaDailySales"></entry>
 				<entry key="lazadaSkuSales" value="/common?path=lazada/lazadaSkuSales"></entry>
@@ -127,6 +131,7 @@
 				<entry key="newplatformDailyOutAccount" value="/common?path=newplatform/newplatformDailyOutAccount"></entry>
 				<entry key="newplatformDailySalesSkuReports_Recycle" value="/common?path=newplatform/newplatformDailySalesSkuReports_Recycle"></entry>
 				<entry key="newplatform_target_completion_rate" value="/common?path=newplatform/newplatform_target_completion_rate"></entry>
+				<entry key="newplatform_dailyoutaccount_oversea" value="/common?path=newplatform/newplatform_dailyoutaccount_oversea"></entry>
 				
 				<entry key="walmartDailySales" value="/common?path=walmart/walmartDailySales"></entry>
 				<entry key="walmartSkuSales" value="/common?path=walmart/walmartSkuSales"></entry>
@@ -146,6 +151,7 @@
 				<entry key="neweggDailyOutAccount" value="/common?path=newegg/neweggDailyOutAccount"></entry>
 				<entry key="neweggDailySalesSkuReports_Recycle" value="/common?path=newegg/neweggDailySalesSkuReports_Recycle"></entry>
 				<entry key="newegg_target_completion_rate" value="/common?path=newegg/newegg_target_completion_rate"></entry>
+				<entry key="newegg_dailyoutaccount_oversea" value="/common?path=newegg/newegg_dailyoutaccount_oversea"></entry>
 			</map>
 		</property>
 	</bean>
@@ -208,6 +214,13 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>   
+        <property name="maxUploadSize" value="10485760000"></property>  
+        <property name="maxInMemorySize" value="40960"></property>  
+   </bean>
 	<!--注解事物处理 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 配置事务的传播特性 -->

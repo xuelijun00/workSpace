@@ -21,21 +21,27 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 
     @Autowired
     private DailysalescategoryreportsMapper isalescategory;
-    
+
     @Autowired
     private DailysalesskureportsMapper isalessku;
     /**
-     *  ebay国内仓每日销售额  表格数据, 柱状图
+     *  ebay国内仓每日销售额  表格数据
      */
    @Override
     public List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key) {
-       	 
        return isalescategory.selectAll(key);
     }
 
+   /**
+    *  ebay国内仓每日销售额  柱状图
+    */
+  @Override
+   public List<Dailysalescategoryreports> selectcategoryAllChart(DailysalescategoryreportsKey key) {
+      return isalescategory.selectAllChart(key);
+   }
+   
     @Override
     public List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key) {
-    	
         return isalescategory.selectnewAll(key);
     }  
 
@@ -53,32 +59,27 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
     //查询ebaydailysalesskureports表中的所有信息
     @Override
     public List<Dailysalesskureports> selectEbay(Dailysalesskureports record) {
-    
         return isalessku.selectEbay(record);
         
     }
     
     @Override
 	public List<Dailysalesskureports> selectSmtSku(Dailysalesskureports record) {
-	
     	return isalessku.selectSmtSku(record);
 	}
     
     @Override
    	public List<Dailysalesskureports> selectWishSku(Dailysalesskureports record) {
-   	
        	return isalessku.selectWishSku(record);
    	}
     
     @Override
     public List<Dailysalesskureports> selectskuAll(Dailysalesskureports record) {
-    
         return isalessku.selectAll(record);
     }
 
     @Override
     public List<Dailysalesskureports> selectskunewAll(Dailysalesskureports record) {
-    
         return isalessku.selectskuAll(record);
     }
 
@@ -104,13 +105,11 @@ public class IEbayDomesticServiceImpl implements IEbayDomesticService {
 
 	@Override
 	public List<Dailysalesskureports> selectAllSum(Dailysalesskureports record) {
-		
 		return isalessku.selectAllSum(record);
 	}
 
 	@Override
 	public List<Dailysalesskureports> selectEbaySum(Dailysalesskureports record) {
-		
 		return isalessku.selectEbaySum(record);
 	}
 	

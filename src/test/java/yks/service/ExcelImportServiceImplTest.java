@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.yks.bi.common.excelutil.CSVParseUtil;
 import com.yks.bi.common.excelutil.ExcelUtil;
 import com.yks.bi.common.excelutil.OrderWeight;
+import com.yks.bi.dto.excel.DailyOutSkuReprotsExcel;
+import com.yks.bi.dto.report.DailyOutSkuReprots;
 import com.yks.bi.service.report.IExcelImportService;
+import com.yks.bi.service.report.INetProfitDetailsService;
+import com.yks.bi.web.vo.ErrorLogVo;
 
 import yks.dto.AmzAccount;
 
@@ -28,6 +34,9 @@ public class ExcelImportServiceImplTest {
 	@Autowired
 	private IExcelImportService service;
 
+	@Autowired
+	private INetProfitDetailsService inpds;
+
 	@Test
 	public void testInsertBatch() throws Exception {
 		File file = new File("f:\\test\\9002.xls");
@@ -37,6 +46,23 @@ public class ExcelImportServiceImplTest {
 		//ExcelUtil.writeExcel("f:\\test\\test9002.xlsx", list);
 		List<OrderWeight> ow = OrderWeight.objToDto(list);
 		service.insertBatchByOrderWeight(ow);
+	}
+	
+	@Test
+	public void testUpdate() throws Exception {
+		File file = new File("f:\\test\\9002.csv");
+		String csvString = IOUtils.toString(new FileInputStream(file), "GBK");
+		Map<Integer,String> column = ExcelUtil.generateColumn(DailyOutSkuReprotsExcel.class,"set");
+		ErrorLogVo errorLogVo = CSVParseUtil.splitProfitCsv(csvString, column, DailyOutSkuReprotsExcel.class);
+		List<Object> list = errorLogVo.getObjectList();
+		System.out.println(list.size()+"******");
+		System.out.println(errorLogVo.getMessageArray()+"******");
+		List<DailyOutSkuReprots> dosrList = DailyOutSkuReprotsExcel.objToDto(list);
+		for(DailyOutSkuReprots dosr : dosrList){
+			System.out.println("ProductTotalCny:" + dosr.getProductTotalCny()+ "####");
+		}
+		/*inpds.updateSelective(ow);
+		service.insertBatchByOrderWeight(ow);*/
 	}
 	
 	@Test

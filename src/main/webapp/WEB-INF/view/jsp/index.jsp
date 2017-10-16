@@ -109,6 +109,7 @@
 		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebaySkuSales">澳洲仓SKU销售报表</a></li>
 		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebayCategorySales">澳洲仓品类销售报表</a></li>
 		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebay_target_completion_rate">澳洲仓各月业绩完成率</a></li>
+		                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_overseas_warehouse/auebay_dailyoutaccount_oversea">澳洲仓账号每日发货OS</a></li>
 	                    	</ul>
                     	</li>
                     </ul>
@@ -126,6 +127,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailyOutAccount">Amazon账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazonDailySalesSkuReports_Recycle">Amazon SKU环比增长</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazon_target_completion_rate">Amazon各月业绩完成率</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=amazon/amazon_dailyoutaccount_oversea">Amazon账号每日发货OS</a></li>
                     </ul>
                 </li>
                 <li>
@@ -141,6 +143,7 @@
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesSkuReports_Recycle">SMT SKU环比增长</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smtDailySalesCategoryReports_account">SMT账号品类销售报表</a></li>
                     	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smt_target_completion_rate">SMT各月业绩完成率</a></li>
+                    	<li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=smt/smt_dailyoutaccount_oversea">SMT账号每日发货OS</a></li>
                     </ul>
                 </li>
                 <li>
@@ -155,6 +158,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailyOutAccount">Wish账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wishDailySalesSkuReports_Recycle">Wish SKU环比增长</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wish_target_completion_rate">Wish各月业绩完成率</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=wish/wish_dailyoutaccount_oversea">Wish账号每日发货OS</a></li>
                     </ul>
                 </li>
                 <li>
@@ -183,6 +187,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailyOutAccount">新平台账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatformDailySalesSkuReports_Recycle">新平台SKU环比增长</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatform_target_completion_rate">新平台各月业绩完成率</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newplatform/newplatform_dailyoutaccount_oversea">新平台账号每日发货OS</a></li>
                     </ul>
                 </li>
                 <li>
@@ -210,6 +215,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailyOutAccount">新蛋账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/neweggDailySalesSkuReports_Recycle">新蛋SKU环比增长</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/newegg_target_completion_rate">新蛋各月业绩完成率</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=newegg/newegg_dailyoutaccount_oversea">新蛋账号每日发货OS</a></li>
                     </ul>
                 </li>
             </ul>

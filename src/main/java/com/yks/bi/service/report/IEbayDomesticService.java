@@ -15,7 +15,9 @@ public interface IEbayDomesticService {
      *  品类
      */
 	List<Dailysalescategoryreports> selectcategoryAll(DailysalescategoryreportsKey key);
-	
+
+	List<Dailysalescategoryreports> selectcategoryAllChart(DailysalescategoryreportsKey key);
+
 	List<Dailysalescategoryreports> selectcategorynewAll(DailysalescategoryreportsKey key);
 
     List<String> selectBusiness(); 	

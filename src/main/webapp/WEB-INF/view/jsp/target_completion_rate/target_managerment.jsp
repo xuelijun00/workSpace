@@ -20,10 +20,10 @@
      </form>
      <div class="hr-line-dashed"></div>
 	     <h2 class="text-center bottom20">各平台目标管理</h2>
-	     <div class="mbottom"> 
+	     <div class="mbottom">
 	     <a href="###" data-toggle="modal" id="insert" data-target="#addtarget">
 	     	<i class="fa fa-plus"></i>新增目标
-	     </a> 
+	     </a>
 	     <!--  <a href="javascript:void(0);" data-toggle="modal" data-target=".modifyreport" >修改</a> -->
      </div>
      <!-- <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> -->

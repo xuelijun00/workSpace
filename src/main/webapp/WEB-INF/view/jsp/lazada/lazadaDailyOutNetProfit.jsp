@@ -50,6 +50,7 @@
         <h2 class="text-center">Lazada税后综合净利（美元）和税后综合利润率（按日期汇总）</h2>
 		<div class="hr-line-dashed"></div>
 		<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		<div class="hr-line-dashed"></div>
 		<!-- 表格 -->
 		<div class="ibox-content">
     	<form class="form-inline">
@@ -89,14 +90,27 @@
             </div>
         </form>
 		</div>
-        <div class="hr-line-dashed"></div>
+		<div class="hr-line-dashed"></div>
 		<div class="ibox-content">
+			<div class="mbottom">
+		    	<a href="###" onclick="showUpload()">
+		     		<i class="fa fa-upload"></i>批量更新
+		    	</a>
+			    <!-- <div class="text-center">
+				    <form name="Form2" action="/SpringMVC006/fileUpload2" method="post"  enctype="multipart/form-data">
+						<input type="file" class="form-control">
+						<br/>
+						<input type="submit" value="上传" class="btn btn-primary m-t-n-xs"/>
+					</form>
+			    </div> -->
+	     	</div>
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
 		</div>
 </div>
 
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
+<script type="text/javascript" src="js/plugins/layer/layer.js"></script>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
 var chart;
@@ -208,6 +222,103 @@ function getChartData(chartUrl){
 		,series:[{name: '税后综合净利（美元）',type: 'bar',data:profitSum,tooltip: {valueSuffix: ''},customColors: 1},
 			{name:'税后综合利润率(百分比)',type: 'line',yAxisIndex: 1,data:netProfitMarginSum,tooltip: {valueSuffix: '' }}]
 	};
+}
+
+function showUpload(){
+	var content ='<div class="text-center">' +
+				 '<form id="Form1" name="Form1" action="'+ contextPath + '/report/profit_details/update' +'" enctype="multipart/form-data">' +
+				 '<input id="file" type="file" name="file" class="form-control" >' +
+				 '<br/>' +
+				 '<input type="button" value="上传" class="btn btn-primary" onclick="verifyFileValidity()" />' +
+				 '</form>' +
+				 '<div class="text-left"><pre style="height: 225px; overflow-y: auto;">' +
+				 '<span id="spanMessage" class="text-danger"></span>' +
+				 '</div>' +
+				 '</div>';
+	layer.open({
+	       type: 1,
+	       title: '批量上传更新净利csv',
+	       maxmin: false,
+	       shadeClose: false, //点击遮罩关闭层
+	       area: ['800px', '400px'],
+	       content: content,
+	   });
+}
+
+//验证文件后缀
+function checkFileSuffix(){
+	var fileName =$("#file").val();
+	var fileTypes = ["csv"]; //允许上传的文件后缀
+	var flag = false;
+	var newFileName = fileName.split(".");
+	var suffix = newFileName[newFileName.length-1];
+	for(var i=0; i < fileTypes.length; i++){
+		if(fileTypes[i] == suffix){
+			flag = true;
+		}
+	}
+	if(!flag){
+		showMessage(400,"文件必须为csv格式！")
+		return flag;
+	}
+	return flag;
+}
+
+//异步验证、传值
+function verifyFileValidity(){
+	if(!checkFileSuffix()){
+		return false;
+	}
+	var formData = new FormData($("#Form1")[0]);
+	$.ajax({
+		url : contextPath + "/report/profit_details/update",
+		cache : false,
+		type : "post",
+		async: false,
+		data: formData,
+		//dataType:"json",
+		// 告诉jQuery不要去处理发送的数据
+		processData : false,
+		// 告诉jQuery不要去设置Content-Type请求头
+		contentType : false,
+		success : function(data) {
+			if(data.status == 200){
+                //layer.msg(res.message, {time: 3000});
+               showMessage(data.status,data.message);
+            }else{
+            	if(data.message == null){
+            		showMessage(data.status,data.messageArray);
+            	}else{
+            		showMessage(data.status,data.message);
+            	}
+            }	
+		}
+	});
+}
+
+function showMessage(status, message){
+	 var icon = 6;
+     common.cancel = 0;
+     if(status != 200){
+         icon = 5;
+         common.cancel = 1;
+     }
+     if(Array.isArray(message)){
+    	 if(message != null && message.length > 0){
+    		 $("#spanMessage").empty();
+				for(var i=0;i<message.length;i++){
+					$("#spanMessage").append(message[i] + "<br/>");
+				}
+			}
+     }else{
+    	var messageId = layer.alert(message, {icon: icon,closeBtn: 0}, function(){
+             if(status == 200){
+                 layer.closeAll();
+             }else{
+                 layer.close(messageId);
+             }
+        });
+     }
 }
 
 (function(){
