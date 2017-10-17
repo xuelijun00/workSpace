@@ -36,7 +36,7 @@
   	SUM(product_total_cny)/b.currency_value product_total_cny, SUM(profit)/b.currency_value profit,
   	SUM(profit)/SUM(product_total_cny) net_profit_margin
   	FROM `ebaydailyoutreprots`, `configcurrency` b
-	WHERE b.currency='USD' and b.currency_type='\$'
+	WHERE b.currency='USD'
 	<if test="startDate != null and startDate.length() > 0" >
        AND report_date >= #{startDate,jdbcType=DATE}
     </if>

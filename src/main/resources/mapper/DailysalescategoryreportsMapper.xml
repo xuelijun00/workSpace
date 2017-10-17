@@ -14,23 +14,42 @@
   </sql>
   
   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
-    select 
+    SELECT 
     <include refid="Base_Column_List" />
-    from `dailysalescategoryreports`
-     where 1=1
+    FROM `dailysalescategoryreports`
+    WHERE 1=1
     <if test="business != null and business.length() > 0">
-    	and business = #{business,jdbcType=VARCHAR}
+    	AND business = #{business,jdbcType=VARCHAR}
     </if>
     <if test="startDate != null and startDate.length() > 0">
-    	and report_date >= #{startDate,jdbcType=DATE}
+    	AND report_date >= #{startDate,jdbcType=DATE}
     </if>
 	<if test="endDate != null and endDate.length() > 0">
-	    <![CDATA[and report_date <= #{endDate,jdbcType=DATE}]]>
+	    <![CDATA[AND  report_date <= #{endDate,jdbcType=DATE}]]>
 	</if>
     <if test="category != null and category.length() > 0">
-    	and  category = #{category,jdbcType=VARCHAR}
+    	AND category = #{category,jdbcType=VARCHAR}
     </if>
      ORDER BY  report_date desc
+  </select>
+  
+    <select id="selectAllChart" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >
+    SELECT category, SUM(sales) sales, SUM(orders) orders
+    FROM `dailysalescategoryreports`
+    WHERE 1=1
+    <if test="business != null and business.length() > 0">
+    	AND business = #{business,jdbcType=VARCHAR}
+    </if>
+    <if test="startDate != null and startDate.length() > 0">
+    	AND report_date >= #{startDate,jdbcType=DATE}
+    </if>
+	<if test="endDate != null and endDate.length() > 0">
+	    <![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+	</if>
+    <if test="category != null and category.length() > 0">
+    	AND category = #{category,jdbcType=VARCHAR}
+    </if>
+    GROUP BY category
   </select>
   
    <select id="selectnewAll" resultMap="BaseResultMap" parameterType="com.yks.bi.dto.report.DailysalescategoryreportsKey" >

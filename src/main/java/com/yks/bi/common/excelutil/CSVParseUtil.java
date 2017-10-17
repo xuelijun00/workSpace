@@ -7,11 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.Logger;
+
+import com.yks.bi.dto.report.DailyOutSkuReprots;
+import com.yks.bi.web.vo.ErrorLogVo;
 
 public class CSVParseUtil {
 	
@@ -74,5 +79,39 @@ public class CSVParseUtil {
 		return records;
 	}
 	
+	/**
+	 * 解析要上传到DailyOutSkuReprots表的csv
+	 * @param lines
+	 * @return
+	 * @throws Exception 
+	 */
+	public static ErrorLogVo splitProfitCsv(String csvString,Map<Integer,String> column,Class<?> cls) throws Exception {
+		CSVParser csvParse = CSVParser.parse(csvString, CSVFormat.DEFAULT);
+		List<CSVRecord> recordList = csvParse.getRecords();
+		List<Object> records = new ArrayList<Object>();
+		ErrorLogVo errorLogVo = new ErrorLogVo();
+        List<String> messageArray = new ArrayList<String>();
+		for (int i = 1; i < recordList.size(); i++) {
+			String message = "";
+			String message1 = "";
+			Object obj = ExcelUtil.newInstance(cls);
+			for (Entry<Integer, String> entry : column.entrySet()) {
+				String value = "";
+				try{value = recordList.get(i).get(entry.getKey());}catch(Exception e){}
+				message = ExcelUtil.setFileProfitValue(obj, entry.getValue(), value);
+				if(!("设置成功".equals(message))){
+					message1 += (message + ";");
+				}
+			}
+			if(message1 != null && message1.length() > 0){
+				message1 = "第" + i + "行数据校验失败," + message1;
+				messageArray.add(message1);
+			}
+			records.add(obj);
+		}
+		errorLogVo.setObjectList(records);
+		errorLogVo.setMessageArray(messageArray);
+		return errorLogVo;
+    }
 
 }

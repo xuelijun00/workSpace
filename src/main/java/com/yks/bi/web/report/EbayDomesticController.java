@@ -182,12 +182,17 @@ public class EbayDomesticController {
     }
 
     @RequestMapping(value = "/ebay_domestic/category/grid" ,method = RequestMethod.GET)
-    public GridModel ebayoverseascategoryMethod(DailysalescategoryreportsKey key,FilterDto filter) throws ParseException, UnsupportedEncodingException{
+    public GridModel ebaycategoryMethodGrid(DailysalescategoryreportsKey key,FilterDto filter) throws ParseException, UnsupportedEncodingException{
     	PageHelper.startPage(filter.getPage(), filter.getRows(), true);
     	PageHelper.orderBy(StringUtils.isNotEmpty(filter.getSidx())?filter.getSidx() + " " + filter.getSord():"");
     	List<Dailysalescategoryreports> list = isale.selectcategoryAll(key);
     	PageInfo<?> pageInfo = new PageInfo<>(list);
-        return new GridModel(pageInfo); 
+        return new GridModel(pageInfo);
+    }
+
+    @RequestMapping(value = "/ebay_domestic/category/chart" ,method = RequestMethod.GET)
+    public List<Dailysalescategoryreports> ebaycategoryMethodChart(DailysalescategoryreportsKey key) throws Exception{
+        return isale.selectcategoryAllChart(key);
     }
 
     @RequestMapping(value = "/ebay_domestic/categorynew/grid" ,method = RequestMethod.GET)

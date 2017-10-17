@@ -16,6 +16,8 @@ public interface DailysalescategoryreportsMapper {
     
     List<Dailysalescategoryreports> selectAll(DailysalescategoryreportsKey key);
 
+    List<Dailysalescategoryreports> selectAllChart(DailysalescategoryreportsKey key);
+
     List<Dailysalescategoryreports> selectnewAll(DailysalescategoryreportsKey key);
     
     List<String> selectBusiness();   

@@ -101,4 +101,9 @@ public class NetProfitDetailsServiceImpl implements INetProfitDetailsService {
 		return dailyout.selectWalmartAccount();
 	}
 
+	@Override
+	public void updateSelective(DailyOutSkuReprots record) {
+		dailyout.updateSelective(record);
+	}
+
 }

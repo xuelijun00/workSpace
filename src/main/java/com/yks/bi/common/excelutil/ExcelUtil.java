@@ -5,13 +5,17 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -131,6 +135,55 @@ public class ExcelUtil {
 		}
 		return true;
 	}
+	
+	/**
+	 * 设置要导入dailyOutSkuReprots表的字段 值
+	 * @param cls
+	 * @param methodName
+	 * @param value
+	 */
+	public static String setFileProfitValue(Object cls,String methodName,Object value){
+		//使用该方法要指定参数类型
+		//Method method = ReflectionUtils.findMethod(ExcelPojo.class, "setOrdersNumber",String.class);
+		Method[] method = ReflectionUtils.getAllDeclaredMethods(cls.getClass());
+		String valuestr = value.toString();
+		for (int i = 0; i < method.length; i++) {
+			if(method[i].getName().equals(methodName)){
+				Class<?>[] paramTypes = method[i].getParameterTypes();
+				try{
+					if(valuestr == null || valuestr.length() <= 0){
+						break;
+					}else if("java.lang.Integer".equals(paramTypes[0].getName())){
+						value = Integer.parseInt(valuestr.replaceAll(",", ""));
+					}else if("java.lang.Float".equals(paramTypes[0].getName())){
+						value = Float.parseFloat(valuestr.replaceAll(",", ""));
+					}else if("java.lang.Double".equals(paramTypes[0].getName())){
+						value = Double.parseDouble(valuestr.replaceAll(",", ""));
+					}else if("java.lang.Long".equals(paramTypes[0].getName())){
+						value = Long.parseLong(valuestr.replaceAll(",", ""));
+					}else if("java.util.Date".equals(paramTypes[0].getName())){
+						//日期格式验证正则
+						String reg = "^((\\d{2}(([02468][048])|([13579][26]))[\\/\\/\\s]?((((0?"+"[13578])|(1[02]))[\\/\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))" +"|(((0?[469])|(11))[\\/\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|" +"(0?2[\\/\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][12"+"35679])|([13579][01345789]))[\\/\\/\\s]?((((0?[13578])|(1[02]))" +"[\\/\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))" +"[\\/\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\/\\/\\s]?((0?[" +"1-9])|(1[0-9])|(2[0-8]))))))";
+						Pattern pattern = Pattern.compile(reg);
+					    Matcher matcher = pattern.matcher(valuestr);
+					    // 字符串是否与正则表达式相匹配
+					    boolean rs = matcher.matches();
+						if(!rs){
+							return "当前日期值为:"+ valuestr +"(日期填写或格式错误，日期格式应为yyyy/MM/dd)";
+						}
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+						value = sdf.parse(valuestr);
+					}
+				}catch(Exception ex){
+					return "字段:" + methodName + " 值:" + value;
+				}
+				ReflectionUtils.invokeMethod(method[i], cls, value);
+				break;
+			}
+		}
+		return "设置成功";
+	}
+	
 	/**
 	 * 获取值
 	 * @param cls

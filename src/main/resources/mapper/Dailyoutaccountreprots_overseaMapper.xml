@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.Dailyoutaccountreprots_overseaMapper">
+	<resultMap id="BaseResultMap" type="com.yks.bi.dto.report.Dailyoutaccountreprots_oversea">
+		<id column="platform" property="platform" jdbcType="VARCHAR" />
+		<id column="sales_account" property="salesAccount" jdbcType="VARCHAR" />
+		<id column="report_date" property="reportDate" jdbcType="DATE" />
+		<id column="warehousetype" property="warehouseType" jdbcType="VARCHAR" />
+		<result column="manager" property="manager" jdbcType="VARCHAR" />
+		<result column="warehousename" property="warehouseName" jdbcType="VARCHAR" />
+		<result column="order_num" property="orderNum" jdbcType="INTEGER" />
+		<result column="item_num" property="itemNum" jdbcType="INTEGER" />
+		<result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+		<result column="product_refund" property="productRefund" jdbcType="DOUBLE" />
+		<result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+		<result column="order_headfee" property="orderHeadfee" jdbcType="DOUBLE" />
+		<result column="product_shipping" property="productShipping" jdbcType="DOUBLE" />
+		<result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+		<result column="platform_cost" property="platformCost" jdbcType="DOUBLE" />
+		<result column="material_cost" property="materialCost" jdbcType="DOUBLE" />
+		<result column="order_execution_fee" property="orderExecutionFee" jdbcType="DOUBLE" />
+		<result column="profit_margin" property="profitMargin" jdbcType="DOUBLE" />
+		<result column="operating_cost" property="operatingCost" jdbcType="DOUBLE" />
+		<result column="net_Profit" property="netProfit" jdbcType="DOUBLE" />
+		<result column="profit" property="profit" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		`platform`, `sales_account`, `report_date`, `warehousetype`, `manager`, `warehousename`,
+		`order_num`, `item_num`, `product_total_cny`, `product_refund`, `order_price`, `order_headfee`,
+		`product_shipping`, `gross_profit`, `platform_cost`, `material_cost`, `order_execution_fee`,
+		`operating_cost`, `profit_margin`, `net_Profit`, `profit`
+	</sql>
+
+	<!-- 查询`dailyoutaccountreprots_oversea`表中的所有数据 -->
+	<select id="selectAll" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.Dailyoutaccountreprots_overseaKey">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM `dailyoutaccountreprots_oversea`
+		WHERE 1=1
+		<if test="startDate != null and startDate.length() > 0">
+			and report_date >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[and report_date <= #{endDate}]]>
+		</if>
+		<if test="platform != null and platform.length() > 0">
+			and platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="salesAccount != null and salesAccount.length() > 0">
+			and sales_account = #{salesAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseName != null and warehouseName.length() > 0">
+			and warehousename = #{warehouseName,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseType != null and warehouseType.length() > 0">
+			and warehousetype = #{warehouseType,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<!-- 查询表中各平台的账号 -->
+	<select id="selectSalesAccounts" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT sales_account 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE 1=1
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP BY sales_account
+	</select>
+
+	<!-- 查询表中各平台的仓库类型 -->
+	<select id="selectWarehouseType" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT warehousetype 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE 1=1
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP BY warehousetype
+	</select>
+
+	<!-- 查询表中各平台的原仓库类型可与仓库类型级联 -->
+	<select id="selectWarehouseName" resultType="java.lang.String"
+		parameterType="com.yks.bi.dto.report.Dailyoutaccountreprots_overseaKey">
+		SELECT warehousename 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE 1=1
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseType != null and warehouseType.length() > 0">
+			AND warehousetype = #{warehouseType,jdbcType=VARCHAR}
+		</if>
+		GROUP BY warehousename
+	</select>
+
+	<!-- 新平台 -->
+	<!-- 查询`dailyoutaccountreprots_oversea`表中新平台的所有数据 -->
+	<select id="selectNewPlatformAll" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.Dailyoutaccountreprots_overseaKey">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM `dailyoutaccountreprots_oversea`
+		WHERE platform like "new\_%"
+			AND platform != "new\_Newegg"
+		<if test="startDate != null and startDate.length() > 0">
+			AND report_date >= #{startDate}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[AND report_date <= #{endDate}]]>
+		</if>
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="salesAccount != null and salesAccount.length() > 0">
+			AND sales_account = #{salesAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseName != null and warehouseName.length() > 0">
+			AND warehousename = #{warehouseName,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseType != null and warehouseType.length() > 0">
+			AND warehousetype = #{warehouseType,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<!-- 查询表中新平台的平台 -->
+	<select id="selectNewPlatforms" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT platform 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE platform like "new\_%"
+		AND platform != "new\_Newegg"
+		GROUP BY platform
+	</select>
+
+	<!-- 查询表中新平台的账号 -->
+	<select id="selectNewPlatformSalesAccounts" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT sales_account 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE platform like "new\_%"
+			AND platform != "new\_Newegg"
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP BY sales_account
+	</select>
+
+	<!-- 查询表中新平台的仓库类型 -->
+	<select id="selectNewPlatformWarehouseType" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT warehousetype 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE platform like "new\_%"
+			AND platform != "new\_Newegg"
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		GROUP BY warehousetype
+	</select>
+
+	<!-- 查询表中新平台的原仓库类型可与平台、仓库类型级联 -->
+	<select id="selectNewPlatformWarehouseName" resultType="java.lang.String"
+		parameterType="com.yks.bi.dto.report.Dailyoutaccountreprots_overseaKey">
+		SELECT warehousename 
+		FROM `dailyoutaccountreprots_oversea` 
+		WHERE platform like "new\_%"
+			AND platform != "new\_Newegg"
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseType != null and warehouseType.length() > 0">
+			AND warehousetype = #{warehouseType,jdbcType=VARCHAR}
+		</if>
+		GROUP BY warehousename
+	</select>
+</mapper>

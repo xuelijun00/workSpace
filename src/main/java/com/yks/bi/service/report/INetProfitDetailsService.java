@@ -68,6 +68,10 @@ public interface INetProfitDetailsService {
      * @return
      */
     List<String> selectWalmartAccount();
-    
+
+    /**
+     * sku净利也面批量更新
+     */
+    void updateSelective(DailyOutSkuReprots record);
 
 }

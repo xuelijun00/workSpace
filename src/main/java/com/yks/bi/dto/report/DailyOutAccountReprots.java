@@ -8,9 +8,9 @@ public class DailyOutAccountReprots extends DailyOutAccountReprotsKey{
 
 	private Integer orderNum;          //发货单数
 	
-	private double 	unitPrice;         //客单价
+	private Double 	unitPrice;         //客单价
 	
-	private double 	productTotalCny;   //发货收入
+	private Double 	productTotalCny;   //发货收入
 	
 	private Integer productRefund;     //退款
 	
@@ -32,7 +32,7 @@ public class DailyOutAccountReprots extends DailyOutAccountReprotsKey{
 	
 	private Integer netProfit;         //税前综合净利
 	
-	private double 	profit;            //净利
+	private Double 	profit;            //净利
 
 	public Integer getOrderNum() {
 		return orderNum;
@@ -42,19 +42,19 @@ public class DailyOutAccountReprots extends DailyOutAccountReprotsKey{
 		this.orderNum = orderNum;
 	}
 
-	public double getUnitPrice() {
+	public Double getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
-	public double getProductTotalCny() {
+	public Double getProductTotalCny() {
 		return productTotalCny;
 	}
 
-	public void setProductTotalCny(double productTotalCny) {
+	public void setProductTotalCny(Double productTotalCny) {
 		this.productTotalCny = productTotalCny;
 	}
 
@@ -138,11 +138,11 @@ public class DailyOutAccountReprots extends DailyOutAccountReprotsKey{
 		this.netProfit = netProfit;
 	}
 
-	public double getProfit() {
+	public Double getProfit() {
 		return profit;
 	}
 
-	public void setProfit(double profit) {
+	public void setProfit(Double profit) {
 		this.profit = profit;
 	}
 	
