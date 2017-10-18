@@ -82,7 +82,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Lazada账号维度每日发货数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
+	var title = [ '平台名称', '账号', '管理员', '报表时间', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利',
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利'];
 	var column = [ 'platform', 'salesAccount', 'manager', 'reportDate','orderNum','unitPrice','productTotalCny','productRefund','orderPrice','grossProfit',
 			'productShipping','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','netProfit','profit'];
@@ -124,7 +124,7 @@ function exportData(){
 	common.grid({
 		title:"Lazada账号维度每日发货数据"
 		,url:getUrl()
-		,colNames:[ '平台名称', '账号', '管理员', '报表时间', '发货数量', '客单价', '发货收入（元）', '退款', '成本', '毛利',
+		,colNames:[ '平台名称', '账号', '管理员', '报表时间', '发货单数', '客单价', '发货收入（元）', '退款', '成本', '毛利',
 			'运费', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'salesAccount',index : 'sales_account',width : 145}, 

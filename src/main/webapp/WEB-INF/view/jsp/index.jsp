@@ -42,6 +42,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_BuyerCountry_Sales">各平台买家国家数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_Category_Sales">各平台品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_sku_top500">各平台SKU_TOP500报表</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_logistic">各平台物流发货数据</a></li>
                     </ul>
                 </li>
                 <li>
@@ -67,7 +68,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailyOutAccount">eBay账号每日发货数据</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayDailySalesSkuReports_Recycle">eBay SKU环比增长</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebay_target_completion_rate">eBay各月业绩完成率</a></li>
-                        
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=ebay_domestic_warehouse/ebayCategoryProfit">eBay品类净利报表</a></li>
                     </ul>
                 </li>
                 <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=account_achievement/account_achievement"><i class="fa fa-pie-chart"></i>各平台各账号业绩</a>

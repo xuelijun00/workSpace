@@ -101,7 +101,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Wish账号维度每日发货数据(海外仓)" + startDate +"-"+ endDate + ".csv";
-	var title = [ '平台名称', '账号', '管理员', '原仓库类型', '报表时间', '发货数量', '数量汇总', '发货收入（元）', '退款', '成本', '总头程',
+	var title = [ '平台名称', '账号', '管理员', '原仓库类型', '报表时间', '发货单数', '数量汇总', '发货收入（元）', '退款', '成本', '总头程',
 			'运费', '毛利', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '仓库类型'];
 	var column = [ 'platform', 'salesAccount', 'manager', 'warehouseName', 'reportDate','orderNum','itemNum','productTotalCny','productRefund','orderPrice','orderHeadfee',
 			'productShipping','grossProfit','platformCost','materialCost','orderExecutionFee','operatingCost','profitMargin','profit','netProfit','warehouseType'];
@@ -196,7 +196,7 @@ function typeChangeName(){
 	common.grid({
 		title:"Wish账号维度每日发货数据(海外仓)"
 		,url:getUrl()
-		,colNames:[ '平台名称', '账号', '管理员', '原仓库类型', '报表时间', '发货数量', '数量汇总', '发货收入（元）', '退款', '成本', '总头程',
+		,colNames:[ '平台名称', '账号', '管理员', '原仓库类型', '报表时间', '发货单数', '数量汇总', '发货收入（元）', '退款', '成本', '总头程',
 			'运费', '毛利', '平台费用', '包材费', '订单执行费', '运营费', '边际利润', '税前综合净利', '税后综合净利', '仓库类型']
 		,colModel:[ {name : 'platform',index : 'platform',width : 100}, 
 					{name : 'salesAccount',index : 'sales_account',width : 145}, 
@@ -204,7 +204,7 @@ function typeChangeName(){
 					{name : 'warehouseName',index : 'warehousename',sortable : "true",width : 100},
 					{name : 'reportDate',index : 'reportDate',width : 110},
 		            {name : 'orderNum',index : 'orderNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
-		            {name : 'itemNum',index : 'itemNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
+		            {name : 'itemNum',index : 'itemNum',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ','},align:"right"},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'productRefund',index : 'productRefund',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'orderPrice',index : 'orderPrice',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},

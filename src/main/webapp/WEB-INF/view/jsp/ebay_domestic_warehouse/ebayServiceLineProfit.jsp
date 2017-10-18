@@ -78,7 +78,7 @@ function exportData(){
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var fileName = "Ebay业务线净利汇总数据" + startDate +"-"+ endDate + ".csv";
-	var title = [ '业务线', '发货数量', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率'];
+	var title = [ '业务线', '发货单数', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率'];
 	var column = [ 'zhuzhandian', 'orderNum',  'unitPrice', 'productTotalCny', 'profit', 'netProfitMargin'];
 	$.ajax({
 		url : getUrl(1),
@@ -218,7 +218,7 @@ function getChartData(chartUrl){
 	common.grid({
 		title:"Ebay业务线净利汇总数据"
 		,url:getUrl(1)
-		,colNames:[ '业务线', '发货数量', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率']
+		,colNames:[ '业务线', '发货单数', '客单价_美元', '发货收入_美元','税后综合净利_美元','税后综合利润率']
 		,colModel:[ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
 		            {name : 'zhuzhandian',index : 'zhuzhandian',width : 205,sortable : "true"}, 
 		            {name : 'orderNum',index : 'orderNum',width : 205,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:""},align:"right"}, 
