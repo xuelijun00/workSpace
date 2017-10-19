@@ -129,9 +129,8 @@ function queryData(){
 }
 function exportData(){
     
-	chartUrl = getUrl(); 
 	$.ajax({
-		url : chartUrl,
+		url : getUrl(),
 		cache : false,
 		type:"get",
 		async: false,
@@ -145,11 +144,11 @@ function exportData(){
 	var endDate = $("#end_date").val();
 	var	platform = $("#platform").val();
 	var fileName = "各平台物流每日发货数据" + startDate +"-"+ endDate +"-"+ platform + ".csv";
-	var title = [ '内单号', '平台', '仓库编码', '渠道名称', '日期', '追踪码1', '追踪码2', '渠道编码', '发货收入',
-		'税后综合净利', '运费', '实际运费', 'sku重量', '订单重量', '实际发货重量', '订单类型', 'sku', 'sku中文名', 
+	var title = [ '内单号', '平台', '渠道名称', '发货收入', '税后综合净利', '运费', '实际运费', 'sku重量', '订单重量',
+		'实际发货重量', '订单类型', 'sku', 'sku中文名', '仓库编码', '日期', '追踪码1', '追踪码2', '渠道编码', 
 		'物流属性（数字）', '买家国家', '买家地址1', '买家地址2', '国家编码', '账号', '中文国家'];
-	var column = [ 'erpOrdersId', 'platform', 'warehouseid','channelName','reportDate','ordersShippingCode','ordersMailCode','freightcode','productTotalCny',
-			'netProfit','productShipping','fee','skuWeight','orderWeight','heavi','ordersType','sku','skuCnname',
+	var column = [ 'erpOrdersId', 'platform','channelName','productTotalCny','netProfit','productShipping','fee','skuWeight','orderWeight',
+			'heavi','ordersType','sku','skuCnname','warehouseid','reportDate','ordersShippingCode','ordersMailCode','freightcode',
 			'logicAttr','buyerCountry','buyerAddress1','buyerAddress2','ebayCounycode','salesAccount','countryCn'];
 	exportDataToCSV('#list2',title,domesticData,fileName,column);
 }
@@ -219,17 +218,12 @@ function exportData(){
 	common.grid({
 		title:"各平台物流每日发货数据"
 		,url:getUrl()
-		,colNames:[ '内单号', '平台', '仓库编码', '渠道名称', '日期', '追踪码1', '追踪码2', '渠道编码', '发货收入',
-			'税后综合净利', '运费', '实际运费', 'sku重量', '订单重量', '实际发货重量', '订单类型', 'sku', 'sku中文名', 
-			'物流属性（数字）', '买家国家', '买家地址1', '买家地址2', '国家编码', '账号', '中文国家']
+		,colNames:[ '内单号', '平台', '渠道名称', '发货收入', '税后综合净利', '运费', '实际运费', 'sku重量', '订单重量',
+				'实际发货重量', '订单类型', 'sku', 'sku中文名', '仓库编码', '日期', '追踪码1', '追踪码2', '渠道编码', 
+				'物流属性（数字）', '买家国家', '买家地址1', '买家地址2', '国家编码', '账号', '中文国家']
 		,colModel:[ {name : 'erpOrdersId',index : 'erpOrdersId',sortable : "true",width : 130,formatter:'long'},
 					{name : 'platform',index : 'platform',sortable : "true",width : 120}, 
-					{name : 'warehouseid',index : 'warehouseid',sortable : "true",width : 100,formatter:'integer'},
 		            {name : 'channelName',index : 'channelName',sortable : "true",width : 160},
-		            {name : 'reportDate',index : 'reportDate',width : 110},
-		            {name : 'ordersShippingCode',index : 'ordersShippingCode',sortable : "true",width : 210},
-		            {name : 'ordersMailCode',index : 'ordersMailCode',sortable : "true",width : 200},
-		            {name : 'freightcode',index : 'freightcode',sortable : "true",width : 100},
 		            {name : 'productTotalCny',index : 'productTotalCny',sortable : "true",width : 125,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
 		            {name : 'netProfit',index : 'netProfit',sortable : "true",width : 130,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:4},align:"right"},
 		            {name : 'productShipping',index : 'productShipping',sortable : "true",width : 100,formatter:'integer', formatoptions:{thousandsSeparator: ',', defaulValue:"",decimalPlaces:2},align:"right"},
@@ -240,6 +234,11 @@ function exportData(){
 		            {name : 'ordersType',index : 'ordersType',sortable : "true",width : 100},
 		            {name : 'sku',index : 'sku',sortable : "true",width : 105},
 		            {name : 'skuCnname',index : 'skuCnname',sortable : "true",width : 170},
+		            {name : 'warehouseid',index : 'warehouseid',sortable : "true",width : 100,formatter:'integer'},
+		            {name : 'reportDate',index : 'reportDate',width : 110},
+		            {name : 'ordersShippingCode',index : 'ordersShippingCode',sortable : "true",width : 210},
+		            {name : 'ordersMailCode',index : 'ordersMailCode',sortable : "true",width : 200},
+		            {name : 'freightcode',index : 'freightcode',sortable : "true",width : 100},
 		            {name : 'logicAttr',index : 'logicAttr',sortable : "true",width : 150,formatter:'integer'},
 		            {name : 'buyerCountry',index : 'buyerCountry',sortable : "true",width : 170},
 		            {name : 'buyerAddress1',index : 'buyerAddress_1',width : 200},
@@ -247,7 +246,7 @@ function exportData(){
 		            {name : 'ebayCounycode',index : 'ebayCounycode',width : 110},
 		            {name : 'salesAccount',index : 'salesAccount',width : 170},
 		            {name : 'countryCn',index : 'countryCn',width : 110},
-		             ]	      
+		             ]
 		,sortname:"reportDate"
 		,sortorder:"desc"
 		,shrinkToFit:true

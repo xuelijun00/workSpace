@@ -43,6 +43,7 @@
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_Category_Sales">各平台品类销售报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_sku_top500">各平台SKU_TOP500报表</a></li>
                         <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_daily_out_logistic">各平台物流发货数据</a></li>
+                        <li><a class="J_menuItem" href="${pageContext.request.contextPath }/common?path=performance_summary/platform_dailyoutsku_oversea">各平台SKU净利明细OS</a></li>
                     </ul>
                 </li>
                 <li>

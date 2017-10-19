@@ -95,7 +95,7 @@ function getUrl(type){//拼接url
 		url = contextPath + '/report/sku_recycle/newPlatform/chart?&startDate=' + startDate + "&endDate=" + endDate;
 	}
 
-	if(sku !== 'all'  && sku != null){
+	if(sku !== '' && sku != null){
 		url += "&sku=" + sku;
 	}
 
