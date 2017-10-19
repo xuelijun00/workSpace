@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutLogisticReprotsMapper">
+	<resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutLogisticReprots">
+	<id column="erp_orders_id" property="erpOrdersId" jdbcType="BIGINT" />
+	<id column="platform" property="platform" jdbcType="VARCHAR" />
+	<id column="channel_name" property="channelName" jdbcType="VARCHAR" />
+	<id column="report_date" property="reportDate" jdbcType="DATE" />
+	<id column="sku" property="sku" jdbcType="VARCHAR" />
+	<result column="warehouseid" property="warehouseid" jdbcType="INTEGER" />
+	<result column="orders_shipping_code" property="ordersShippingCode" jdbcType="VARCHAR" />
+	<result column="orders_mail_code" property="ordersMailCode" jdbcType="VARCHAR" />
+	<result column="freightcode" property="freightcode" jdbcType="VARCHAR" />
+	<result column="product_total_cny" property="productTotalCny" jdbcType="REAL" />
+	<result column="net_profit" property="netProfit" jdbcType="REAL" />
+	<result column="product_shipping" property="productShipping" jdbcType="REAL" />
+	<result column="fee" property="fee" jdbcType="REAL" />
+	<result column="sku_weight" property="skuWeight" jdbcType="REAL" />
+	<result column="order_weight" property="orderWeight" jdbcType="REAL" />
+	<result column="heavi" property="heavi" jdbcType="REAL" />
+	<result column="orders_type" property="ordersType" jdbcType="VARCHAR" />
+	<result column="sku_cnname" property="skuCnname" jdbcType="VARCHAR" />
+	<result column="logic_attr" property="logicAttr" jdbcType="INTEGER" />
+	<result column="buyer_country" property="buyerCountry" jdbcType="VARCHAR" />
+	<result column="buyer_address_1" property="buyerAddress1" jdbcType="VARCHAR" />
+	<result column="buyer_address_2" property="buyerAddress2" jdbcType="VARCHAR" />
+	<result column="ebay_counycode" property="ebayCounycode" jdbcType="VARCHAR" />
+	<result column="country_cn" property="countryCn" jdbcType="VARCHAR" />
+	<result column="sales_account" property="salesAccount" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		`erp_orders_id`, `platform`, `warehouseid`, `channel_name`, `report_date`, 
+		`orders_shipping_code`, `orders_mail_code`, `freightcode`, `product_total_cny`, 
+		`net_profit`, `product_shipping`, `fee`, `sku_weight`, `order_weight`, `heavi`, `orders_type`, 
+		`sku`, `sku_cnname`, `logic_attr`, `buyer_country`, `buyer_address_1`, 
+		`buyer_address_2`, `ebay_counycode`, `country_cn`, `sales_account`
+	</sql>
+
+	<!-- 查询dailyoutlogisticreprots表中的所有数据 -->
+	<select id="selectAll" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyOutLogisticReprotsKey">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM `dailyoutlogisticreprots`
+		WHERE 1=1
+		<if test="startDate != null and startDate.length() > 0">
+			AND report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+		<if test="warehouseid != null and warehouseid > 0">
+			AND warehouseid = #{warehouseid,jdbcType=INTEGER}
+		</if>
+		<if test="channelName != null and channelName.length() > 0">
+			AND channel_name = #{channelName,jdbcType=VARCHAR}
+		</if>
+		<if test="erpOrdersId != null and erpOrdersId >= 0">
+			AND erp_orders_id = #{erpOrdersId,jdbcType=BIGINT}
+		</if>
+		<if test="ordersCode != null and ordersCode.length() > 0">
+			AND (orders_shipping_code = #{ordersCode,jdbcType=VARCHAR}
+				OR orders_mail_code = #{ordersCode,jdbcType=VARCHAR})
+		</if>
+	</select>
+
+	<!-- 查询dailyoutlogisticreprots表中的所有平台-->
+	<select id="selectPlatforms" resultType="java.lang.String" >
+    	SELECT `platform` FROM `dailyoutlogisticreprots` GROUP BY `platform`
+  	</select>
+
+	<!-- 查询dailyoutlogisticreprots表中的所有的仓库编码-->
+  	<select id="selectWarehouseIds" resultType="java.lang.Integer" >
+    	SELECT `warehouseid` FROM `dailyoutlogisticreprots` GROUP BY `warehouseid`
+  	</select>
+
+	<!-- 查询dailyoutlogisticreprots表中的所有的渠道名称 -->
+  	<select id="selectChannelNames" resultType="java.lang.String" parameterType="java.lang.String">
+    	SELECT `channel_name` FROM `dailyoutlogisticreprots` 
+    	WHERE 1=1
+    	<if test="platform != null and platform.length() > 0">
+			AND platform = #{platform,jdbcType=VARCHAR}
+		</if>
+    	GROUP BY `channel_name`
+  	</select>
+
+</mapper>

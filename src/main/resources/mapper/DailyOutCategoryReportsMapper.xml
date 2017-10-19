@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yks.bi.dao.DailyOutCategoryReportsMapper">
+	<resultMap id="BaseResultMap" type="com.yks.bi.dto.report.DailyOutCategoryReports">
+	<id column="report_date" property="reportDate" jdbcType="DATE" />
+	<id column="business" property="business" jdbcType="VARCHAR" />
+	<id column="category" property="category" jdbcType="VARCHAR" />
+	<result column="sku" property="sku" jdbcType="VARCHAR" />
+	<result column="sku_cnname" property="skuCnname" jdbcType="VARCHAR" />
+	<result column="order_num" property="orderNum" jdbcType="INTEGER" />
+	<result column="product_total_cny" property="productTotalCny" jdbcType="DOUBLE" />
+	<result column="net_profit" property="netProfit" jdbcType="DOUBLE" />
+	</resultMap>
+
+	<!-- 查询dailyoutcategoryreports表中的所有数据 -->
+	<select id="selectAll" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyOutCategoryReportsKey">
+		SELECT 
+		`report_date`, `business`, `category`, `sku`, `sku_cnname`, `order_num`, 
+		(product_total_cny/b.currency_value) product_total_cny, 
+		(net_profit/b.currency_value) net_profit
+		FROM `dailyoutcategoryreports`, `configcurrency` b
+		WHERE 1=1
+		<if test="startDate != null and startDate.length() > 0">
+			AND report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		<if test="business != null and business.length() > 0">
+			AND business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="category != null and category.length() > 0">
+			AND category LIKE CONCAT(#{category,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="sku != null and sku.length() > 0">
+			AND sku IN (${sku})
+		</if>
+	</select>
+	
+		<!-- 查询dailyoutcategoryreports表中的所有数据 -->
+	<select id="selectAllCount" resultMap="BaseResultMap"
+		parameterType="com.yks.bi.dto.report.DailyOutCategoryReportsKey">
+		SELECT 
+		`category`,
+		(SUM(product_total_cny)/b.currency_value) product_total_cny, 
+		(SUM(net_profit)/b.currency_value) net_profit
+		FROM `dailyoutcategoryreports`, `configcurrency` b
+		WHERE 1=1
+		<if test="startDate != null and startDate.length() > 0">
+			AND report_date >= #{startDate,jdbcType=DATE}
+		</if>
+		<if test="endDate != null and endDate.length() > 0">
+       		<![CDATA[AND report_date <= #{endDate,jdbcType=DATE}]]>
+		</if>
+		<if test="business != null and business.length() > 0">
+			AND business = #{business,jdbcType=VARCHAR}
+		</if>
+		<if test="category != null and category.length() > 0">
+			AND category LIKE CONCAT(#{category,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="sku != null and sku.length() > 0">
+    		AND sku in (${sku})
+    	</if>
+		GROUP BY category
+	</select>
+</mapper>

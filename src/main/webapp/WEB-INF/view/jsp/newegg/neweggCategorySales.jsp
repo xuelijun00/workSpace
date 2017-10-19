@@ -24,12 +24,11 @@
               <label>结束时间</label>
               <input type="text" id="end_date" class="form-control" placeholder=""  readonly="readonly">
             </div>
-              <div class="form-group">
-             <label>分类</label>
-                        <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
-                               _value=""/>
-            </div>
             <div class="form-group">
+            	<label>分类</label>
+                <input type="text" class="form-control" placeholder="请输入内容" id="category" name="category"
+                	_value=""/>
+            </div>
             <div class="form-group">
                <button type="button" onclick="queryData()" class="btn btn-primary">查询</button>
             </div>
@@ -42,10 +41,8 @@
 			<table id="list2" class="tablegrid"></table>
 			<div id="pager2"></div>
 		</div>
-        
 </div>
 
-</div>
 <%@include file="/WEB-INF/view/jsp/include/common.jsp" %>
 <!--加本页面 的js文件与js代码-->
 <script type="text/javascript">
