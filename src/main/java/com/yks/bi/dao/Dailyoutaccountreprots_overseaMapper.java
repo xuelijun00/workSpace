@@ -18,21 +18,21 @@ public interface Dailyoutaccountreprots_overseaMapper {
 
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中所有的账号
-	 * @param salesAccounts
+	 * @param platform
 	 * @return
 	 */
 	List<String> selectSalesAccounts(@Param("platform")String platform);
 
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中各平台的仓库类型
-	 * @param salesAccounts
+	 * @param platform
 	 * @return
 	 */
 	List<String> selectWarehouseType(@Param("platform")String platform);
 	
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中各平台的原仓库类型可与仓库类型级联
-	 * @param salesAccounts
+	 * @param key
 	 * @return
 	 */
 	List<String> selectWarehouseName(Dailyoutaccountreprots_overseaKey key);
@@ -53,21 +53,21 @@ public interface Dailyoutaccountreprots_overseaMapper {
 
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中新平台所有的账号
-	 * @param salesAccounts selectNewPlatforms
+	 * @param platform
 	 * @return
 	 */
 	List<String> selectNewPlatformSalesAccounts(@Param("platform")String platform);
 
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中新平台的仓库类型
-	 * @param salesAccounts
+	 * @param platform
 	 * @return
 	 */
 	List<String> selectNewPlatformWarehouseType(@Param("platform")String platform);
 	
 	/**
 	 * 查询dailyoutaccountreprots_oversea表中新平台的原仓库类型可与平台、仓库类型级联
-	 * @param salesAccounts
+	 * @param key
 	 * @return
 	 */
 	List<String> selectNewPlatformWarehouseName(Dailyoutaccountreprots_overseaKey key);

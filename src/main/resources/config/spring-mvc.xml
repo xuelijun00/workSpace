@@ -41,6 +41,7 @@
 				<entry key="platform_Category_Sales" value="/common?path=performance_summary/platform_Category_Sales"></entry>
 				<entry key="platform_daily_out_sku_top500" value="/common?path=performance_summary/platform_daily_out_sku_top500"></entry>
 				<entry key="platform_daily_out_logistic" value="/common?path=performance_summary/platform_daily_out_logistic"></entry>
+				<entry key="platform_dailyoutsku_oversea" value="/common?path=performance_summary/platform_dailyoutsku_oversea"></entry>
 
 				<entry key="1month" value="/common?path=target_completion_rate/1month"></entry>
 				<entry key="target_managerment" value="/common?path=target_completion_rate/target_managerment"></entry>

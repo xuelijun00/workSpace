@@ -1,6 +1,8 @@
 package com.yks.bi.dto.report;
 
-public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overseaKey{
+public class DailyOutSkuReprots_oversea extends DailyOutSkuReprots_overseaKey{
+
+	private String skuCnname;
 
 	private String 	manager;           //管理员
 
@@ -14,11 +16,11 @@ public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overs
 
 	private Double orderPrice;         //成本
 
-	private Double orderHeadfee;      //总头程
-
-	private Double productShipping;    //运费
+	private Double orderHeadfee;       //总头程
 
 	private Double grossProfit;        //毛利
+
+	private Double productShipping;    //运费
 
 	private Double platformCost;       //平台费用
 
@@ -35,9 +37,21 @@ public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overs
 	 * 但是涉及到太多类，所以前面没有改过来，从这里开始引用正确的词义
 	 * 词义profit:利润, netProfit:净利润
 	 */
+	private Double 	profit;            //税前综合净利
+
 	private Double netProfit;          //税后综合净利
 
-	private Double 	profit;            //税前综合净利
+	private Double netProfitMargin;    //税后综合利润率
+
+	private String 	buyerId;           //平台单号
+
+	public String getSkuCnname() {
+		return skuCnname;
+	}
+
+	public void setSkuCnname(String skuCnname) {
+		this.skuCnname = skuCnname == null ? null : skuCnname.trim();
+	}
 
 	public String getManager() {
 		return manager;
@@ -95,20 +109,20 @@ public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overs
 		this.orderHeadfee = orderHeadfee;
 	}
 
-	public Double getProductShipping() {
-		return productShipping;
-	}
-
-	public void setProductShipping(Double productShipping) {
-		this.productShipping = productShipping;
-	}
-
 	public Double getGrossProfit() {
 		return grossProfit;
 	}
 
 	public void setGrossProfit(Double grossProfit) {
 		this.grossProfit = grossProfit;
+	}
+
+	public Double getProductShipping() {
+		return productShipping;
+	}
+
+	public void setProductShipping(Double productShipping) {
+		this.productShipping = productShipping;
 	}
 
 	public Double getPlatformCost() {
@@ -151,6 +165,14 @@ public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overs
 		this.profitMargin = profitMargin;
 	}
 
+	public Double getProfit() {
+		return profit;
+	}
+
+	public void setProfit(Double profit) {
+		this.profit = profit;
+	}
+
 	public Double getNetProfit() {
 		return netProfit;
 	}
@@ -159,12 +181,20 @@ public class Dailyoutaccountreprots_oversea extends Dailyoutaccountreprots_overs
 		this.netProfit = netProfit;
 	}
 
-	public Double getProfit() {
-		return profit;
+	public Double getNetProfitMargin() {
+		return netProfitMargin;
 	}
 
-	public void setProfit(Double profit) {
-		this.profit = profit;
+	public void setNetProfitMargin(Double netProfitMargin) {
+		this.netProfitMargin = netProfitMargin;
+	}
+
+	public String getBuyerId() {
+		return buyerId;
+	}
+
+	public void setBuyerId(String buyerId) {
+		this.buyerId = buyerId == null ? null : buyerId.trim();
 	}
 
 }
