@@ -19,6 +19,8 @@ var common = {
 			return chart1;
 		},
 		echartsOption :function (operation){
+
+
 			var legenddata = [];
 			for(var i=0;i<operation.series.length;i++){
 				legenddata.push(operation.series[i].name);
@@ -110,6 +112,7 @@ var common = {
 			    series: operation.series,
 			};
 			return option;
+            debugger;
 		},
 		/*设置饼图的option*/
 		echartsPieOption :function (operation){

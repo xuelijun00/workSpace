@@ -61,6 +61,7 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- pageHelper分页依赖包 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -148,6 +149,7 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+
 		<!--3)spring web相关依赖 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
